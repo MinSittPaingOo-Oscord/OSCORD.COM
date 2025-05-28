@@ -22,9 +22,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
         $stmt->send_long_data(2, $fileData);
 
         if ($stmt->execute()) {
-            
+            echo "<script type='text/javascript'>
+            alert('File upload successful !');
+          window.location.href = 'oscord_home.php'</script>";
         } else {
-            echo "Error saving file information to the database!";
+            echo "<script type='text/javascript'>
+            alert('Error saving file information to the database!');
+          window.location.href = 'oscord_home.php'</script>";
         }
         $stmt->close();
     } else {

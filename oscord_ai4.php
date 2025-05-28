@@ -1,14 +1,12 @@
 <?php
     include "connectdb.php";
 
- 	#selecting course name
     $query1 = "SELECT courseID,courseName FROM oscord_course";
     $result1 = $conn->query($query1);
 
 	if( isset($_POST['courseID'])){
 		$id = $_POST['courseID'];
 
-		#echo "Your id is ".$id;
 }
 
 

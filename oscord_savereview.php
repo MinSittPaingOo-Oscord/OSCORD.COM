@@ -3,9 +3,9 @@ include 'connectdb.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
  
-    #echo "Student ID: " . $_POST['student_name'] . "<br>";
-    #echo "Review Text: " . $_POST['review_text'] . "<br>";
-    #echo "Course ID: " . $_POST['courseID'] . "<br>";
+   echo "Student ID: " . $_POST['student_name'] . "<br>";
+    echo "Review Text: " . $_POST['review_text'] . "<br>";
+    echo "Course ID: " . $_POST['courseID'] . "<br>";
 
     $studentID = $_POST['student_name'];
     $reviewText = $_POST['review_text'];
@@ -18,17 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
   if ($stmt->execute()) {
     echo "<script type='text/javascript'>
-            alert('Review submitted successfully!');
-          window.location.href = 'oscord_home.php";
-          </script>";
+    alert('Review submitted successfully!');
+  window.location.href = 'oscord_home.php'</script>";
+
 } else {
     echo "<script type='text/javascript'>
-            alert('Error occurred');
-            window.location.href = 'oscord_home.php";
-
-          </script>";
+    alert('Error Occured submitting review!');
+  window.location.href = 'oscord_home.php'</script>";
 }
-
 
     } else {
         echo "All fields are required!";

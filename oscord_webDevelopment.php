@@ -67,6 +67,7 @@
         .main{
            color : white;
            padding : 30px;
+           line-height : 40px;
          }
         
             .main p div{

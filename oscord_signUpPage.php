@@ -7,7 +7,7 @@ $query1 = "SELECT * FROM oscord_course";
 $result1 = $conn->query($query1);
 
 $query2 = "SELECT * FROM oscord_course";
-$result2 = $conn->query($query2); // Fixed to use $query2
+$result2 = $conn->query($query2);
 ?>
 
 <!DOCTYPE html>
@@ -86,8 +86,15 @@ $result2 = $conn->query($query2); // Fixed to use $query2
         }
 
         .courseDropDown {
-            width: 100%; /* Adjusted for responsiveness */
+            width: 100%;
             padding-left: 10px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
         }
 
         @media (max-width: 1024px) {
@@ -128,8 +135,7 @@ $result2 = $conn->query($query2); // Fixed to use $query2
         <div>
             Oscord မှ Instructor များသည် admin control များ ပြုလုပ်ရန်အတွက် Instructor Account ဖွင့်ရပါမည်
             Student များသည် Enrollment ပြုလုပ်ဖိုအတွက် ပေးထားသော Form တွင် ပြည့်စုံစွာဖြည့်စွက်ပါ
-            သက်ဆိုင်ရာ Course Fee ကို Kpay - 09685417411 Min Sitt Paing Oo Account သိုသင်တန်းကြေးသွင်းပါ
-            Thailand Currency ဖြင့်ပေးသွင်းလိုပါက <a href='https://drive.google.com/file/d/10Q2B1Hh8E2_IOglTjorYLAgOP1YXgcud/view?usp=sharing'>QR</a> မှတစ်ဆင့်ပေးသွင်းနိုင်သည်
+            သက်ဆိုင်ရာ Course Fee ကို Kpay - 09685417411  Min Sitt Paing Oo Account သိုသင်တန်းကြေးသွင်းပါ
             သင်တန်းကြေးသွင်းထားသောအထောက်အထားကို 
             <a href='https://www.facebook.com/share/19u16vW5KQ/?mibextid=wwXIfr'>Oscord-programming & computer science</a> ရဲ့ messanger သိုမဟုတ်
             <a href='https://t.me/oscord_cs'>Telegram Account</a> ကိုပေးပိုပါ
@@ -142,7 +148,7 @@ $result2 = $conn->query($query2); // Fixed to use $query2
     <div class="col-md-6">
         <div class="form-container">
             <h2 class="text-center mb-4">Sign Up</h2>
-            <form action="oscord_signupProcess.php" method="POST">
+            <form id="signupForm" action="oscord_signupProcess.php" method="POST" novalidate>
                 <div class="mb-3">
                     <label for="role" class="form-label">Select Role</label>
                     <select class="form-select" id="role" name="role" required>
@@ -150,28 +156,39 @@ $result2 = $conn->query($query2); // Fixed to use $query2
                         <option value="instructor">Instructor</option>
                         <option value="student">Student</option>
                     </select>
+                    <div id="roleError" class="error-message">Please select a role.</div>
                 </div>
 
                 <div id="instructorFields" class="hidden">
                     <div class="mb-3">
                         <label class="form-label">Instructor Name</label>
                         <input type="text" class="form-control" name="instructor_name" required>
+                        <div class="error-message">Please enter your name.</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Age</label>
-                        <input type="number" class="form-control" name="instructor_age" required>
+                        <label class="form-label">Birthday</label>
+                        <input type="date" class="form-control" name="instructor_birthday" required>
+                        <div class="error-message">Please select your birthday.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Phone Number</label>
                         <input type="text" class="form-control" name="instructor_phone" required>
+                        <div class="error-message">Please enter your phone number.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
                         <input type="email" class="form-control" name="instructor_email" required>
+                        <div class="error-message">Please enter a valid email address.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Passcode</label>
                         <input type="password" class="form-control" name="instructor_passcode" required>
+                        <div class="error-message">Please enter a passcode.</div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Instructor PIN (6 digits)</label>
+                        <input type="number" class="form-control" name="instructor_pin" min="100000" max="999999" required>
+                        <div class="error-message">Please enter a 6-digit PIN (100000–999999).</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Select Responsible Courses</label>
@@ -185,8 +202,8 @@ $result2 = $conn->query($query2); // Fixed to use $query2
                                     while ($row = $result1->fetch_assoc()) {
                                         echo "<li>
                                                 <div class='form-check'>
-                                                    <input class='form-check-input' type='checkbox' name='instructorCourse[]' value='".$row['courseID']."' id='instructor_course_".$row['courseID']."'>
-                                                    <label class='form-check-label' for='instructor_course_".$row['courseID']."'>".$row['courseName']."</label>
+                                                    <input class='form-check-input' type='checkbox' name='instructorCourse[]' value='".htmlspecialchars($row['courseID'])."' id='instructor_course_".htmlspecialchars($row['courseID'])."'>
+                                                    <label class='form-check-label' for='instructor_course_".htmlspecialchars($row['courseID'])."'>".htmlspecialchars($row['courseName'])."</label>
                                                 </div>
                                               </li>";
                                     }
@@ -196,6 +213,7 @@ $result2 = $conn->query($query2); // Fixed to use $query2
                                 ?>
                             </ul>
                         </div>
+                        <div id="instructorCourseError" class="error-message">Please select at least one course.</div>
                     </div>
                 </div>
 
@@ -203,38 +221,47 @@ $result2 = $conn->query($query2); // Fixed to use $query2
                     <div class="mb-3">
                         <label class="form-label">Student Name</label>
                         <input type="text" class="form-control" name="student_name" required>
+                        <div class="error-message">Please enter your name.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Country</label>
                         <input type="text" class="form-control" name="student_country" required>
+                        <div class="error-message">Please enter your country.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email</label>
                         <input type="email" class="form-control" name="student_email" required>
+                        <div class="error-message">Please enter a valid email address.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Passcode</label>
                         <input type="password" class="form-control" name="student_passcode" required>
+                        <div class="error-message">Please enter a passcode.</div>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Age</label>
-                        <input type="number" class="form-control" name="student_age" required>
+                        <label class="form-label">Birthday</label>
+                        <input type="date" class="form-control" name="student_birthday" required>
+                        <div class="error-message">Please select your birthday.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Telegram Account User Name</label>
                         <input type="text" class="form-control" name="student_telegram" required>
+                        <div class="error-message">Please enter your Telegram username.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Phone Number</label>
                         <input type="text" class="form-control" name="student_phone" required>
+                        <div class="error-message">Please enter your phone number.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Have you ever studied Programming? If so, which course have you studied?</label>
                         <textarea class="form-control" rows="3" placeholder="Type your answer here..." name="student_question1" required></textarea>
+                        <div class="error-message">Please provide an answer.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Why do you want to join this class?</label>
                         <textarea class="form-control" rows="3" placeholder="Type your answer here..." name="student_question2" required></textarea>
+                        <div class="error-message">Please provide an answer.</div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Register for Courses</label>
@@ -248,8 +275,8 @@ $result2 = $conn->query($query2); // Fixed to use $query2
                                     while ($row2 = $result2->fetch_assoc()) {
                                         echo "<li>
                                                 <div class='form-check'>
-                                                    <input class='form-check-input' type='checkbox' name='studentCourse[]' value='".$row2['courseID']."' id='student_course_".$row2['courseID']."'>
-                                                    <label class='form-check-label' for='student_course_".$row2['courseID']."'>".$row2['courseName']."</label>
+                                                    <input class='form-check-input' type='checkbox' name='studentCourse[]' value='".htmlspecialchars($row2['courseID'])."' id='student_course_".htmlspecialchars($row2['courseID'])."'>
+                                                    <label class='form-check-label' for='student_course_".htmlspecialchars($row2['courseID'])."'>".htmlspecialchars($row2['courseName'])."</label>
                                                 </div>
                                               </li>";
                                     }
@@ -259,6 +286,7 @@ $result2 = $conn->query($query2); // Fixed to use $query2
                                 ?>
                             </ul>
                         </div>
+                        <div id="studentCourseError" class="error-message">Please select at least one course.</div>
                     </div>
                 </div>
 
@@ -269,16 +297,95 @@ $result2 = $conn->query($query2); // Fixed to use $query2
 </div>
 
 <script>
-
     document.getElementById("role").addEventListener("change", function() {
         const role = this.value;
         document.getElementById("instructorFields").classList.add("hidden");
         document.getElementById("studentFields").classList.add("hidden");
+        document.getElementById("roleError").style.display = "none";
 
         if (role === "instructor") {
             document.getElementById("instructorFields").classList.remove("hidden");
         } else if (role === "student") {
             document.getElementById("studentFields").classList.remove("hidden");
+        }
+    });
+
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let isValid = true;
+        const role = document.getElementById("role").value;
+
+        document.querySelectorAll(".error-message").forEach(function(error) {
+            error.style.display = "none";
+        });
+
+        if (!role) {
+            document.getElementById("roleError").style.display = "block";
+            isValid = false;
+        }
+
+        if (role === "instructor") {
+            const fields = [
+                { id: "instructor_name", error: "Please enter your name." },
+                { id: "instructor_birthday", error: "Please select your birthday." },
+                { id: "instructor_phone", error: "Please enter your phone number." },
+                { id: "instructor_email", error: "Please enter a valid email address." },
+                { id: "instructor_passcode", error: "Please enter a passcode." },
+                { id: "instructor_pin", error: "Please enter a 6-digit PIN (100000–999999)." }
+            ];
+
+            fields.forEach(function(field) {
+                const input = document.querySelector(`[name="${field.id}"]`);
+                if (!input.value.trim()) {
+                    input.nextElementSibling.style.display = "block";
+                    isValid = false;
+                } else if (field.id === "instructor_pin") {
+                    const pin = parseInt(input.value);
+                    if (isNaN(pin) || pin < 100000 || pin > 999999) {
+                        input.nextElementSibling.style.display = "block";
+                        isValid = false;
+                    }
+                }
+            });
+
+            const courseCheckboxes = document.querySelectorAll("input[name='instructorCourse[]']:checked");
+            if (courseCheckboxes.length === 0) {
+                document.getElementById("instructorCourseError").style.display = "block";
+                isValid = false;
+            }
+        } else if (role === "student") {
+            const fields = [
+                { id: "student_name", error: "Please enter your name." },
+                { id: "student_country", error: "Please enter your country." },
+                { id: "student_email", error: "Please enter a valid email address." },
+                { id: "student_passcode", error: "Please enter a passcode." },
+                { id: "student_birthday", error: "Please select your birthday." },
+                { id: "student_telegram", error: "Please enter your Telegram username." },
+                { id: "student_phone", error: "Please enter your phone number." },
+                { id: "student_question1", error: "Please provide an answer." },
+                { id: "student_question2", error: "Please provide an answer." }
+            ];
+
+            fields.forEach(function(field) {
+                const input = document.querySelector(`[name="${field.id}"]`);
+                if (!input.value.trim()) {
+                    input.nextElementSibling.style.display = "block";
+                    isValid = false;
+                }
+            });
+
+            const courseCheckboxes = document.querySelectorAll("input[name='studentCourse[]']:checked");
+            if (courseCheckboxes.length === 0) {
+                document.getElementById("studentCourseError").style.display = "block";
+                isValid = false;
+            }
+        }
+
+        if (isValid) {
+            console.log("Form is valid, submitting...");
+            this.submit();
+        } else {
+            console.log("Form validation failed.");
         }
     });
 </script>
