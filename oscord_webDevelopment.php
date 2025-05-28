@@ -69,8 +69,15 @@
            padding : 30px;
          }
         
-            .main div{
+            .main p div{
                     margin-bottom : 15px;
+                    line-height : 40px;
+                    }
+
+                    
+            .main p div,h3,h4 {
+                  line-height : 40px;
+                  margin-bottom : 15px;
                     }
             
        h3,h4{
@@ -127,7 +134,7 @@
             </li>";  
         ?>
     </ul>
-     <div class='container main' >
+     <div class='container main' ><p>
     		<div><h3>How to start learning Web Development</h3></div>
              
             <div>Web Development ကိုလေ့လာတဲ့အခါမှာ Frontend & Backend ဆိုပြီးနှစ်ပိုင်းလေ့လာရပါတယ်</div>
@@ -223,7 +230,7 @@
          <div>    Backend အတွက်သုံးရမယ့် Languages တွေကိုအကူအနေနဲ့ ထောက်ပံံ့ပေးတာတွေဖြစ်ပါတယ် </div>
              
 		<div>	ဒီလောက်ဆိုရင် နည်းလည်လောက်ပီလို့ထင်ပါတယ် </div>
-			
+                </p>	
      </div>
         
 </body>

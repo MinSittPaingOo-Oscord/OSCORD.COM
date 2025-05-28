@@ -312,7 +312,6 @@
                      <h2>Welcome to Oscord</h2>
                      <br>
                      <p>Study programming basic to software development level at OSCORD. 
-                     OSCORD is an online programming class with face to face class in Bangkok.
                      Online students can join both by one VIP class and group class(if available).
                      For all by one classes, students can negeotitate the class schedule.
                      The video records and lecture files are usually sent in the private telegram channel daily right after the class.</p> 
@@ -334,9 +333,9 @@
         $counter = 0; // Track columns
         while ($row2 = $result2->fetch_assoc()) {
             if ($counter % 2 == 0) {
-                echo "<div class='row'>"; // Start a new row for every two cards
+                echo "<div class='row'>"; 
             }
-            echo "<div class='col-md-6'>"; // Ensure two cards per row
+            echo "<div class='col-md-6'>"; 
             echo "<form method='post' action='oscord_specificCoursePage.php'>
                 <div class='card btn' id='biigerCard'>
                     <div class='card-body'>
@@ -344,7 +343,7 @@
                         <br>
                         <div>" . $row2['courseDescription'] . "</div>
                         <div class='card-text'><br>
-                            <b>Course Fee</b> : <br> video lecture + zoom : " . $row2['courseFee2'] . "<br>   Group Class : " . $row2['courseFee3'] . "<br> VIP By one Class : " . $row2['courseFee'] . "<br> Face to face class in bangkok : ".$row2['courseFee4']."<br><br><b>Course Period</b> : " . $row2['coursePeriod'] ."
+                            <b>Course Fee</b> :  ". $row2['courseFee'] . "<br>Course Period</b> : " . $row2['coursePeriod'] ."
                         </div>
                         <br>
                         <div class='btn-group dropend'>
@@ -370,11 +369,11 @@
                     </div>
                 </div>
             </form>";
-            echo "</div>"; // Close col-md-6
+            echo "</div>"; // Close col-md-
 
             $counter++;
             if ($counter % 2 == 0) {
-                echo "</div>"; // Close row after two cards
+                echo "</div>"; 
             }
         }
         ?>

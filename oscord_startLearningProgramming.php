@@ -71,6 +71,10 @@
         
             .main div{
                     margin-bottom : 15px;
+                    line-height : 40px;
+                    }
+                    .main p div,h3,h4{
+                        line-height : 40px;
                     }
             
        h3{
@@ -134,7 +138,7 @@
             </li>";  
         ?>
     </ul>
-     <div class='container main' >
+     <div class='container main' ><p>
     <div><h3>Programming ကိုစတင်လေ့လာတော့မယ်ဆိုရင်ဘာတွေသိထားဖို့လိုအပ်လဲ</h3></div>
 		
 		<div>အရင်ဆုံးကတော့ ကိုယ်ကဘယ် Developing Field ထဲကိုသွားချင်သလဲဆိုတာစဉ်းစားဖို့လိုပါတယ်</div>
@@ -182,7 +186,8 @@
         <div>ဥပမာ ကိုယ်က Web Development ကို Java နဲ့သွားချင်တာလား ဒါဆို Java Fundamental ကိုအရင်သင်ယူပြီးရင် </div><div> J2EE , Java Spring  စတဲ့ Java ရဲ့ Advanced Technique  တစ်ခုကိုအသုံးပြုလို့ရပါတယ်)</div>
 
 		
-       <div> ဒီလောက်ဆိုသဘောပေါက်လောက်ပြီလို့ထင်ပါတယ် </div>  
+       <div> ဒီလောက်ဆိုသဘောပေါက်လောက်ပြီလို့ထင်ပါတယ် </div> 
+                </p> 
     </div>
     
 </body>

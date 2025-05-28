@@ -370,7 +370,7 @@ $query2 = "SELECT * FROM oscord_course WHERE courseID = ".$id;
              											<div><h1>".$row2['courseName']."</h1></div>
                                         				<div>".$row2['courseDescription']."</div>
                                         				<div>
-     <b>Course Fee</b> : <br> video lecture + zoom : " . $row2['courseFee2'] . "<br>   Group Class : " . $row2['courseFee3'] . "<br> VIP By one Class : " . $row2['courseFee'] . "<br>Face to face class in Bangkok : ".$row2['courseFee4']."<br><br><b>Course Period</b> : " . $row2['coursePeriod'] ."
+     <b>Course Fee</b> : " . $row2['courseFee'] . "<br><b>Course Period</b> : " . $row2['coursePeriod'] ."
                         								</div>
                                         			</div>
                                                     

@@ -1,8 +1,8 @@
 <?php
-$servername		= "fdb1030.awardspace.net";
-$username 		= "4586032_oscord";
+$servername		= "localhost";
+$username 		= "root";
 $password 		= "Thanoswasright@1989";
-$databasename 	= "4586032_oscord";
+$databasename 	= "oscord";
 $port = 3306 ;
 $conn = new mysqli($servername,$username,$password,$databasename,$port);
 if ($conn->connect_error)
