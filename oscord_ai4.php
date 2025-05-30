@@ -69,10 +69,12 @@
         
             .main div{
                     margin-bottom : 15px;
+                    line-height : 40px;
                     }
             
        h3,h4{
-       		padding-bottom : 20px;             
+       		padding-bottom : 20px;    
+            line-height : 40px;         
        }
             
             hr{

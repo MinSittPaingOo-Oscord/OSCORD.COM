@@ -5,8 +5,11 @@
     $query1 = "SELECT courseID,courseName FROM oscord_course";
     $result1 = $conn->query($query1);
 
+
+  
 	if( isset($_POST['courseID'])){
 		$id = $_POST['courseID'];
+
 
 		#echo "Your id is ".$id;
 }
@@ -71,10 +74,12 @@
         
             .main div{
                     margin-bottom : 15px;
+                    line-height : 40px;
                     }
             
        h3,h4{
-       		padding-bottom : 20px;             
+       		padding-bottom : 20px;  
+            line-height : 40px;           
        }
             
             hr{

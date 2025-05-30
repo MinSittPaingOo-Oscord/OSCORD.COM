@@ -1,23 +1,18 @@
 <?php
 include "connectdb.php";
 
-#selecting course name
 $query1 = "SELECT courseID,courseName FROM oscord_course";
 $result1 = $conn->query($query1);
 
-#selecting all courses information
 $query2 = "SELECT * FROM oscord_course";
 $result2 = $conn->query($query2);
 
-#selecting all student reviews
 $query_reviews = "SELECT sr.*, s.studentName FROM oscord_studentreview sr JOIN oscord_student s ON sr.studentID = s.studentID";
 $result_reviews = $conn->query($query_reviews);
 
-#selecting all students for dropdown
 $query_students = "SELECT studentID, studentName FROM oscord_student";
 $result_students = $conn->query($query_students);
 
-#selecting all courses for dropdown
 $query_courses = "SELECT courseID, courseName FROM oscord_course";
 $result_courses = $conn->query($query_courses);
 ?>
@@ -30,283 +25,457 @@ $result_courses = $conn->query($query_courses);
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body, html {
-            height: 100%; 
-            margin: 0;    
-        }
-
-        body {
-            background: linear-gradient(-45deg, #ee7752, rgb(253, 7, 179), #23a6d5, #23d5ab);
-            background-attachment: fixed; 
-            background-size: 400% 400%;  
-            animation: gradient 4s ease infinite;
-            height: 100%;  
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e0eafc, #cfdef3);
+            color: #333;
+            scroll-behavior: smooth;
         }
 
         .navbar-custom {
-            background-color: black;
-            font-size: 18px; 
+            background: rgba(0, 0, 0, 0.95);
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease;
         }
 
         .navbar-custom .nav-link {
-            color: white !important;
+            color: #fff !important;
+            font-weight: 500;
+            padding: 10px 20px;
+            transition: color 0.3s ease;
         }
 
         .navbar-custom .nav-link:hover {
-            color: #ccc !important;
+            color: #00ddeb !important;
         }
-        
+
         .dropdown-menu {
-            background-color: black;
+            background: rgba(0, 0, 0, 0.95);
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-        
+
         .dropdown-item {
-            background-color: black;
-            font-size: 18px;
-            color: white;
+            color: #fff;
+            font-weight: 400;
+            padding: 10px 20px;
+            transition: background 0.3s ease, color 0.3s ease;
+            font-size: 0.9rem;
         }
-        
-        .dropdown-item .coursedetail {
-            font-size: 14px;
-        }
-        
+
         .dropdown-item:hover {
-            color: #ccc !important;
+            background: #00ddeb;
+            color: #000 !important;
         }
-        
+
+        /* Welcome Section */
+        .welcome-container {
+            background: url('./back2.jpg') no-repeat center center/cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+
+        .welcome-container .middle {
+            position: relative;
+            z-index: 2;
+        }
+
+        .welcome-container h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+
+        .welcome-container p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: #fff;
+        }
+
+        .circularImage {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .circularImage:hover {
+            transform: scale(1.05);
+        }
+
+        #titleCourse {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin: 50px 0 30px;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         .card {
-            background-color: black;
-            color: white;
-            border: 0px solid black; 
-            border-radius: 10px; 
-            width: 25em;
-            height: 850px;
-            margin: 8px auto;             
-            box-shadow: none;  
-            text-align: left;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            display: block;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            background: #fff;
+            border: none;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: #333;
+            height: 1000px;
+            max-width: 400px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .card:hover {
-            transform: scale(1.009); 
-            background-color: white; 
-            color: black;
-            z-index: 10; 
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-body {
+            /* Removed flexbox */
         }
 
         .card-title {
-            font-size: 50px; 
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 30px;
         }
 
-        .card:hover .btn-course-detail {
-            font-size: 1.2em; 
-            background-color : white;
-            color: black;
+        #courseDescription {
+            font-size: 1rem;
+            line-height: 1.4;
+            margin-bottom: 30px;
         }
-        
-        .card-body {
-            padding: 20px;               
+
+        .card-text {
+            margin-bottom: 0;
+            line-height: 1.4;
+        }
+
+        .card-text .detail-item {
+            margin-bottom: 10px;
+        }
+
+        .card-text .detail-item:last-child {
+            margin-bottom: 20px;
         }
 
         .btn-course-detail {
-            width: 200px;
-            color: white;
-            background-color: transparent;
-            border: 1px solid white;
+            background: transparent;
+            border: 2px solid #00ddeb;
+            color: #00ddeb;
+            padding: 5px 15px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
             margin-bottom: 20px;
-        }
-        
-        .welcome-container {
-            background: url('./back2.jpg') no-repeat center center;
-            background-size: cover;
-            text-align: center;
-            border-radius: 0;
-            padding-bottom: 100px; 
-            margin-bottom: 100px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            height: 100vh;
-            background-attachment: scroll;
-            display: flex;
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-        }
-        
-        .circularImage {
-            width: 300px; 
-            height: 300px; 
-            border-radius: 50%; 
-            object-fit: cover; 
-            border: 1px solid #000;
-        }
-        
-        .btnSignUp {
-            font-size: 2em;           
-        }
-        
-        .card-container {
-            margin-top: 50px;
-        }
-        
-        .middle {
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .middle .col h2, p {
-            display: flex;   
-            color: white;
+            display: block;
             text-align: left;
         }
-        
-        #titleCourse {
-            text-align: center;
-            padding-bottom: 70px;
-            font-weight: bold;
-            color: white;
-            font-family: Georgia, "Times New Roman", serif;
+
+        .btn-course-detail:hover {
+            background: #00ddeb;
+            color: #000;
+            border-color: #00ddeb;
         }
-        
+
+        .fb-link {
+            color: #00ddeb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .fb-link:hover {
+            color: #008b97;
+        }
+
+        /* Collapsible Course Details */
+        .course-details-content {
+            background: #fff;
+            border-radius: 8px;
+            padding: 5px;
+            margin-bottom: 30px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .course-details-content .course-detail-item {
+            color: #000;
+            font-weight: 400;
+            padding: 2px 5px;
+            font-size: 0.9rem;
+            line-height: 1.2;
+            background: #fff;
+            border-radius: 4px;
+            margin-bottom: 2px;
+        }
+
+        .course-details-content .course-detail-item:hover {
+            background: #00ddeb;
+            color: #000;
+        }
+
+        .review-section {
+            margin: 60px 0;
+            padding: 40px 0;
+        }
+
+        .review-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .review-item h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .review-item p {
+            font-size: 1rem;
+            line-height: 40px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin: 30px auto;
+            /* max-width: 600px;
+             */
+             width : 100%;
+        }
+
+        .form-container h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-select, .form-control {
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 1rem;
+        }
+
+        .form-container .btn {
+            background: #00ddeb;
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: 500;
+            color: #000;
+            transition: background 0.3s ease;
+        }
+
+        .form-container .btn:hover {
+            background: #008b97;
+        }
+
+        .contact-form {
+            max-width: 900px;
+            padding: 50px;
+            margin-right : 150px;
+            margin-bottom : 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-form h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .contact-form label {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: block;
+            color: #333;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        .contact-form .btn {
+            background: #00ddeb;
+            border: none;
+            padding: 12px;
+            border-radius: 25px;
+            font-weight: 500;
+            color: #000;
+            width: 100%;
+            transition: background 0.3s ease;
+        }
+
+        .contact-form .btn:hover {
+            background: #008b97;
+        }
+
+        /* Footer */
+        #homeConclusion {
+            background: #000;
+            padding: 40px 0;
+            color: #fff;
+        }
+
+        #homeConclusion h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        #homeConclusion p, #homeConclusion a {
+            font-size: 1rem;
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+
+        #homeConclusion a:hover {
+            color: #00ddeb;
+        }
+
+        #last {
+            background: #111;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
             .welcome-container {
-                height: auto;
-                padding: 50px 20px;
+                min-height: 80vh;
+                padding: 30px 15px;
             }
-            
+
+            .welcome-container h2 {
+                font-size: 2rem;
+            }
+
+            .welcome-container p {
+                font-size: 1rem;
+            }
+
+            .circularImage {
+                width: 200px;
+                height: 200px;
+            }
+
             .middle {
                 flex-direction: column;
                 text-align: center;
             }
 
             .middle .col {
-                width: 100%;
-                padding-bottom: 20px;
+                margin-bottom: 20px;
             }
 
             .card {
-                width: 100%;
-                margin-bottom: 20px;
+                max-width: 100%;
+                height: auto;
             }
-            
+
             .btn-course-detail {
                 width: 100%;
             }
-        }
-        
-        #homeConclusion {
-            width: 100%;
-            background-color: white;
-            color: black;
-            margin-top: 50px;
-            text-align: left;
+
+            #titleCourse {
+                font-size: 2rem;
+            }
+
+            .review-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .contact-form {
+                padding: 20px;
+                width : 270px;
+                margin-left : 20px;
+            }
         }
 
-        #homeConclusion h4 {
-            font-size: 22px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: black;
-        }
-        
-        #homeConclusion .container .undermiddle .col * {
-            color: black;
-        }
-        
-        #homeConclusion .container .undermiddle .col a {
-            color: #e100ff;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        #homeConclusion .container .undermiddle .col a:hover {
-            font-size: 1.5em;
-        }
+        @media (max-width: 576px) {
+            .navbar-custom .nav-link {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
 
-        #homeConclusion p {
-            color: white;
-        }
-        
-        .undermiddle div {
-            margin-top: 30px;
-        }
-        
-        #last {
-            justify-content: center;
-        }
-        
-        #wel * {
-            color: white;
-        }
-        
-        .fb-link {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .fb-link:hover {
-            color: #ccc;
-        }
-        
-        .card:hover .fb-link {
-            color: #e100ff;
-        }
+            .dropdown-item {
+                font-size: 0.8rem;
+            }
 
-        .review-section {
-            margin-top: 50px;
-            margin-bottom: 50px;
-            color: white;
-        }
+            .card-title {
+                font-size: 1.5rem;
+            }
 
-        .review-section h2 {
-            text-align: center;
-            font-weight: bold;
-            color: white;
-            margin-bottom: 30px;
-        }
+            .form-container h2 {
+                font-size: 1.5rem;
+            }
 
-        .review-section .review-item h1 {
-            font-size: 1.5em;
-            color: white;
-        }
+            .card {
+                height: auto;
+            }
 
-        .review-section .review-item p {
-            font-size: 1em;
-            color: white;
-            line-height: 1.6;
-        }
-
-        .form-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            margin: 20px 0;
-            color: black;
-        }
-
-        #review {
-            line-height: 40px;
-        }
-
-        #titlereviewform{
-            color : black;
-        }
-        #courseDescription{
-            line-height : 40px;
+            .course-detail-item {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -351,7 +520,7 @@ $result_courses = $conn->query($query_courses);
         <?php
             echo "<li class='nav-item ms-auto'>
                     <a class='nav-link' aria-current='page' href='oscord_signUpPage.php'>Sign Up</a>
-                </li>";  
+                </li>";
         ?>
     </ul>
         
@@ -372,34 +541,27 @@ $result_courses = $conn->query($query_courses);
     </div>   
         
     <div class="container">
-        <h1 id="titleCourse"> Courses from OSCORD </h1>
+        <h1 id="titleCourse">Courses from OSCORD</h1>
         <div class="row">
             <?php
-            $counter = 0; // Track columns
             while ($row2 = $result2->fetch_assoc()) {
-                if ($counter % 2 == 0) {
-                    echo "<div class='row'>"; 
-                }
-                echo "<div class='col-md-6'>"; // Ensure two cards per row
+                echo "<div class='col-md-6 col-lg-4'>";
                 echo "<form method='post' action='oscord_specificCoursePage.php'>
-                    <div class='card btn' id='biigerCard'>
+                    <div class='card'>
                         <div class='card-body'>
                             <h5 class='card-title'>" . htmlspecialchars($row2['courseName']) . "</h5>
-                            <br>
                             <div id='courseDescription'>" . htmlspecialchars($row2['courseDescription']) . "</div>
-                            <div class='card-text'><br>
-                                <b>Course Fee</b> :  ". htmlspecialchars($row2['courseFee']) . "<br>
-                                <b>Course Period</b> : " . htmlspecialchars($row2['coursePeriod']) . "<br>";
+                            <div class='card-text'>
+                                <div class='detail-item'><b>Course Fee</b>: " . htmlspecialchars($row2['courseFee']) . "</div>
+                                <div class='detail-item'><b>Course Period</b>: " . htmlspecialchars($row2['coursePeriod']) . "</div>";
                 if (!empty($row2['courseFbLink'])) {
-                    echo "<br> <a class='fb-link' href='" . htmlspecialchars($row2['courseFbLink']) . "' target='_blank'>View on Facebook</a><br>";
+                    echo "<div class='detail-item'><a class='fb-link' href='" . htmlspecialchars($row2['courseFbLink']) . "' target='_blank'>View on Facebook</a></div>";
                 }
                 echo "            </div>
-                            <br>
-                            <div class='btn-group dropend'>
-                                <button type='button' class='btn btn-course-detail dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>
-                                    Course Details
-                                </button>
-                                <ul class='dropdown-menu'>";
+                            <button class='btn btn-course-detail' type='button' data-bs-toggle='collapse' data-bs-target='#courseDetails" . $row2['courseID'] . "' aria-expanded='false' aria-controls='courseDetails" . $row2['courseID'] . "'>
+                                Course Details
+                            </button>
+                            <div class='collapse course-details-content' id='courseDetails" . $row2['courseID'] . "'>";
                                 
                                 $courseID = $row2['courseID'];
                                 $query3 = "SELECT * FROM oscord_coursedetail WHERE courseID = ?";
@@ -409,24 +571,15 @@ $result_courses = $conn->query($query_courses);
                                 $result3 = $stmt3->get_result();
 
                                 while ($row3 = $result3->fetch_assoc()) {
-                                    echo "<li><a class='dropdown-item coursedetail' href='#'>" . htmlspecialchars($row3['coursedetailName']) . "</a></li>";
+                                    echo "<div class='course-detail-item'>" . htmlspecialchars($row3['coursedetailName']) . "</div>";
                                 }
 
-                echo "        </ul>
-                            </div>
-                            <button class='btn btn-light btn-course-detail mx-auto p-2' type='submit' name='courseID' value='".$row2['courseID']."'>Start Learning</button>
+                echo "        </div>
+                            <button class='btn btn-course-detail' type='submit' name='courseID' value='".$row2['courseID']."'>Start Learning</button>
                         </div>
                     </div>
                 </form>";
                 echo "</div>"; 
-
-                $counter++;
-                if ($counter % 2 == 0) {
-                    echo "</div>"; 
-                }
-            }
-            if ($counter % 2 != 0) {
-                echo "</div>";
             }
             ?>
         </div>
@@ -485,16 +638,27 @@ $result_courses = $conn->query($query_courses);
                 </form>
             </div>
         </div>
-        <!-- End Student Review Session -->
     </div>
-        
+
     <footer id="homeConclusion" class='w-100'>
         <div class="container">
             <div class="row undermiddle">
-                <div class="col">
-                    <h4>Contact Us</h4><br>
-                    <p>Email : &nbsp&nbsp<a href="mailto:minsittmandalay137@gmail.com">minsittmandalay137@gmail.com</a></p><br>
-                    <p>Phone Call in Myanmar : &nbsp&nbsp<a href="tel:+959259662272">+959259662272</a></p>
+                <div class="col-9">
+                    <section class="contact-form">
+                        <h2>Contact Us</h2>
+                        <form id="contactForm" method="POST" action="contact.php">
+                            <label for="contact_name">Your Name:</label>
+                            <input type="text" id="contact_name" name="name" required>
+
+                            <label for="contact_email">Your Email:</label>
+                            <input type="email" id="contact_email" name="email" required>
+
+                            <label for="message">Your Message:</label>
+                            <textarea id="message" name="message" required></textarea>
+
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </section>
                 </div>
 
                 <div class="col">
@@ -510,7 +674,7 @@ $result_courses = $conn->query($query_courses);
         </div>
         
         <div class="text-center bg-dark w-100">
-            <p class='text-light' id="last">&copy; Oscord Programming Class All Rights Reserved 2022-2025</p>
+            <p class='text-light' id="last">© Oscord Programming Class All Rights Reserved 2022-2025</p>
         </div>
     </footer>
 

@@ -71,10 +71,12 @@
         
             .main div{
                     margin-bottom : 15px;
+                    line-height : 40px;
                     }
             
        h3,h4{
-       		padding-bottom : 20px;             
+       		padding-bottom : 20px;    
+            line-height : 40px;    
        }
             
             hr{
@@ -152,7 +154,7 @@
 	<div>ဒီမေးခွန်းတွေကို အသေးစိတ်ရှင်းပြပေးသွားပါမယ်</div><br><br>
 
 
-	<div><a href="/oscord_ai1.php">How to be AI engineer? What is AI and DataScience ?</a></div>
+	<div><a href="oscord_ai1.php">How to be AI engineer? What is AI and DataScience ?</a></div>
             
            <div><a href="oscord_ai2.php"> What is Deep Learning? </a></div>
             
