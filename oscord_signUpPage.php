@@ -18,13 +18,59 @@ $result2 = $conn->query($query2);
     <title>Sign Up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         body {
-            background-color: black;
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
-            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #2c2c2c);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+            font-family: 'Roboto Mono', monospace;
+            color: #e0e0e0;
+            overflow-x:-
+
+System: You are Grok 3 built by xAI.
+
+I'm sorry, but it seems like the response was cut off. I can provide a complete version of the updated frontend design for the `oscord_signUpPage.php` file with a modern, cyber, and cool aesthetic, ensuring that no backend code or functionality is modified. Below is the updated file with a new frontend design, keeping all PHP, JavaScript, and form functionality intact.
+
+<xaiArtifact artifact_id="0563c8a2-4566-467b-b64f-56b95b407541" artifact_version_id="f4957920-40dc-4fc1-b284-0c91d73c87ab" title="oscord_signUpPage.php" contentType="text/html">
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+include "connectdb.php";
+
+$query1 = "SELECT * FROM oscord_course";
+$result1 = $conn->query($query1);
+
+$query2 = "SELECT * FROM oscord_course";
+$result2 = $conn->query($query2);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #2c2c2c);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+            font-family: 'Roboto Mono', monospace;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
@@ -34,67 +80,155 @@ $result2 = $conn->query($query2);
             flex-wrap: wrap;
             align-items: center;
             justify-content: space-between;
-            padding: 20px;
+            padding: 40px 20px;
             min-height: 100vh;
         }
 
         .left-content {
             flex: 1;
-            color: white;
-            padding: 20px;
+            padding: 40px;
+            color: #00ff15;
+            text-shadow: 0 0 10px rgba(0, 255, 21, 0.5);
         }
 
         .left-content h1 {
-            font-size: 2.5rem;
-            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
         }
 
-        .left-content p {
-            margin-top: 10px;
-            font-size: 1.2rem;
+        .left-content p, .left-content div {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+
+        .left-content a {
+            color: #00ff15;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .left-content a:hover {
+            color: #8000ff;
+            text-shadow: 0 0 5px #8000ff;
         }
 
         .form-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-            max-width: 450px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 21, 0.2);
+            max-width: 500px;
             width: 100%;
             margin: 20px;
+            border: 1px solid rgba(0, 255, 21, 0.3);
         }
 
         .form-container h2 {
-            color: #333;
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff15;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(0, 255, 21, 0.5);
+        }
+
+        .form-control, .form-select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00ff15;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #8000ff;
+            box-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+            color: #e0e0e0;
+        }
+
+        .form-label {
+            color: #00ff15;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .btn-light {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00ff15;
+            color: #e0e0e0;
+            transition: all 0.3s ease;
+        }
+
+        .btn-light:hover {
+            background: #8000ff;
+            border-color: #8000ff;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
+        }
+
+        .btn-dark {
+            background: #00ff15;
+            color: #0d0d0d;
+            border: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-dark:hover {
+            background: #8000ff;
+            box-shadow: 0 0 15px rgba(128, 0, 255, 0.7);
+            color: #fff;
+        }
+
+        .form-check {
+            background: black;
+            color : #00ff15;
+        }
+
+        .aaa {
+            background: rgb(70, 72, 70);
+            color : #00ff15;
+        }
+
+        .dropdown-menu {
+            background: rgb(70, 72, 70);
+            border: 1px solid #00ff15;
+            color: #e0e0e0;
+            padding-left : 10px;
+        }
+
+        .dropdown-menu .form-check-label {
+            color: #00ff15;
+        }
+
+        .form-check-input {
+            border: 1px solid #00ff15;
+        }
+
+        .form-check-input:checked {
+            background-color: #8000ff;
+            border-color: #8000ff;
+        }
+
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+            text-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
         }
 
         .hidden {
             display: none;
         }
 
-        .main div {
-            line-height: 40px;
-        }
-
-        .main div a {
-            color: #00ff15;
-        }
-
-        .main div a:hover {
-            font-weight: bold;
-            color: #8000ff;
-        }
-
-        .courseDropDown {
-            width: 100%;
-            padding-left: 10px;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 0.9rem;
-            margin-top: 5px;
-            display: none;
+        #seryayy{
+            line-height : 40px;
         }
 
         @media (max-width: 1024px) {
@@ -105,6 +239,7 @@ $result2 = $conn->query($query2);
 
             .left-content {
                 text-align: left;
+                padding: 20px;
             }
 
             .form-container {
@@ -115,6 +250,7 @@ $result2 = $conn->query($query2);
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
+                padding: 20px;
             }
 
             .form-container {
@@ -125,6 +261,11 @@ $result2 = $conn->query($query2);
             .left-content {
                 text-align: left;
             }
+
+            .left-content h1 {
+                font-size: 2rem;
+            }
+
         }
     </style>
 </head>
@@ -132,7 +273,7 @@ $result2 = $conn->query($query2);
 <div class="container">
     <div class="left-content main">
         <h1>Register Now</h1><br>
-        <div>
+        <div id='seryayy'>
             Oscord မှ Instructor များသည် admin control များ ပြုလုပ်ရန်အတွက် Instructor Account ဖွင့်ရပါမည်
             Student များသည် Enrollment ပြုလုပ်ဖိုအတွက် ပေးထားသော Form တွင် ပြည့်စုံစွာဖြည့်စွက်ပါ
             သက်ဆိုင်ရာ Course Fee ကို Kpay - 09685417411  Min Sitt Paing Oo Account သိုသင်တန်းကြေးသွင်းပါ
@@ -151,10 +292,10 @@ $result2 = $conn->query($query2);
             <form id="signupForm" action="oscord_signupProcess.php" method="POST" novalidate>
                 <div class="mb-3">
                     <label for="role" class="form-label">Select Role</label>
-                    <select class="form-select" id="role" name="role" required>
-                        <option value="">Select</option>
-                        <option value="instructor">Instructor</option>
-                        <option value="student">Student</option>
+                    <select class="form-select aaa" id="role" name="role" required>
+                        <option value="" class='aaa'>Select</option>
+                        <option value="instructor" class='aaa'>Instructor</option>
+                        <option value="student" class='aaa'>Student</option>
                     </select>
                     <div id="roleError" class="error-message">Please select a role.</div>
                 </div>
@@ -196,14 +337,14 @@ $result2 = $conn->query($query2);
                             <button class="btn btn-light dropdown-toggle" type="button" id="instructorDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 Select Courses
                             </button>
-                            <ul class="dropdown-menu courseDropDown" aria-labelledby="instructorDropdown">
+                            <ul class="dropdown-menu courseDropDown aaa" aria-labelledby="instructorDropdown">
                                 <?php
                                 if ($result1 && $result1->num_rows > 0) {
                                     while ($row = $result1->fetch_assoc()) {
-                                        echo "<li>
-                                                <div class='form-check'>
+                                        echo "<li class='aaa'>
+                                                <div class='form-check aaa'>
                                                     <input class='form-check-input' type='checkbox' name='instructorCourse[]' value='".htmlspecialchars($row['courseID'])."' id='instructor_course_".htmlspecialchars($row['courseID'])."'>
-                                                    <label class='form-check-label' for='instructor_course_".htmlspecialchars($row['courseID'])."'>".htmlspecialchars($row['courseName'])."</label>
+                                                    <label class='form-check-label aaa' for='instructor_course_".htmlspecialchars($row['courseID'])."'>".htmlspecialchars($row['courseName'])."</label>
                                                 </div>
                                               </li>";
                                     }
@@ -269,14 +410,14 @@ $result2 = $conn->query($query2);
                             <button class="btn btn-light dropdown-toggle" type="button" id="studentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 Select Courses
                             </button>
-                            <ul class="dropdown-menu courseDropDown" aria-labelledby="studentDropdown">
+                            <ul class="dropdown-menu courseDropDown aaa" aria-labelledby="studentDropdown" >
                                 <?php
                                 if ($result2 && $result2->num_rows > 0) {
                                     while ($row2 = $result2->fetch_assoc()) {
-                                        echo "<li>
-                                                <div class='form-check'>
-                                                    <input class='form-check-input' type='checkbox' name='studentCourse[]' value='".htmlspecialchars($row2['courseID'])."' id='student_course_".htmlspecialchars($row2['courseID'])."'>
-                                                    <label class='form-check-label' for='student_course_".htmlspecialchars($row2['courseID'])."'>".htmlspecialchars($row2['courseName'])."</label>
+                                        echo "<li class='aaa'>
+                                                <div class='form-check aaa'>
+                                                    <input class='form-check-input aaa' type='checkbox' name='studentCourse[]' value='".htmlspecialchars($row2['courseID'])."' id='student_course_".htmlspecialchars($row2['courseID'])."'>
+                                                    <label class='form-check-label aaa' for='student_course_".htmlspecialchars($row2['courseID'])."'>".htmlspecialchars($row2['courseName'])."</label>
                                                 </div>
                                               </li>";
                                     }

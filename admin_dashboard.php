@@ -82,8 +82,29 @@ if ($stmt) {
     $message = "Error fetching student data.";
 }
 
+// Handle PIN verification via AJAX
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] == 'verify_pin') {
+    $enteredPin = $_POST['pin'];
+    $query = "SELECT instructorPin FROM oscord_instructor WHERE instructorID = ?";
+    $stmt = $conn->prepare($query);
+    if ($stmt) {
+        $stmt->bind_param("i", $instructorID);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+        if ($result && $result['instructorPin'] == $enteredPin) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Incorrect PIN.']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Database error.']);
+    }
+    exit();
+}
+
 // Handle adding existing courses (register courses)
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_courses'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_courses']) && isset($_POST['pin_verified']) && $_POST['pin_verified'] == 'true') {
     if (!empty($_POST['courses']) && is_array($_POST['courses'])) {
         $stmt = $conn->prepare("INSERT INTO oscord_instructorxcourse (instructorID, courseID) VALUES (?, ?)");
         if ($stmt) {
@@ -129,7 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_courses'])) {
 }
 
 // Handle dropping courses
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['drop_courses'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['drop_courses']) && isset($_POST['pin_verified']) && $_POST['pin_verified'] == 'true') {
     if (!empty($_POST['courses']) && is_array($_POST['courses'])) {
         $stmt = $conn->prepare("DELETE FROM oscord_instructorxcourse WHERE instructorID = ? AND courseID = ?");
         if ($stmt) {
@@ -175,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['drop_courses'])) {
 }
 
 // Handle adding a new course
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['new_course'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['new_course']) && isset($_POST['pin_verified']) && $_POST['pin_verified'] == 'true') {
     $courseName = trim($_POST['course_name']);
     $courseDescription = trim($_POST['course_description']);
     $courseFee = trim($_POST['course_fee']);
@@ -195,7 +216,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['new_course'])) {
     } else {
         try {
             // Insert into oscord_course
-            $query = "INSERT INTO oscord_course (courseName, courseDescription, courseFee, coursePeriod, courseFblink) VALUES (?, ?, ?, ?, ?)";
+            $query = "INSERT INTO oscord_course (courseName, courseDescription, courseFee, coursePeriod, courseFbLink) VALUES (?, ?, ?, ?, ?)";
             $stmt = $conn->prepare($query);
             if (!$stmt) {
                 throw new Exception("Failed to prepare course query: " . $conn->error);
@@ -219,7 +240,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['new_course'])) {
 }
 
 // Handle profile update
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name']) && isset($_POST['pin_verified']) && $_POST['pin_verified'] == 'true') {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -267,9 +288,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name'])) {
             logDebug($error);
             $message = "Error updating profile.";
         }
-        if ($stmt) {
-            $stmt->close();
-        }
+      
     }
 }
 
@@ -468,6 +487,48 @@ $conn->close();
         .checkbox-label {
             color: #e0e0ff;
         }
+        /* PIN Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: rgba(20, 20, 40, 0.9);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 2px solid #ff1493;
+            box-shadow: 0 0 20px rgba(255, 20, 147, 0.5);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .modal-content input {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e0e0ff;
+            border: 2px solid rgba(255, 20, 147, 0.4);
+            border-radius: 0.5rem;
+            padding: 0.8rem;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        .modal-content input:focus {
+            border-color: #00ffea;
+            box-shadow: 0 0 10px rgba(0, 255, 234, 0.5);
+            outline: none;
+        }
+        .modal-content .btn-cyber {
+            width: auto;
+            padding: 0.8rem 2rem;
+            margin: 0.5rem;
+        }
         @media (max-width: 640px) {
             .cyber-card {
                 padding: 1.5rem;
@@ -487,6 +548,19 @@ $conn->close();
 <body>
     <canvas id="particles"></canvas>
     <div class="container mx-auto">
+        <!-- PIN Verification Modal -->
+        <div id="pinModal" class="modal">
+            <div class="modal-content">
+                <h3 class="text-xl font-bold text-white mb-4">Enter Your PIN</h3>
+                <input type="number" id="pinInput" class="input-field" placeholder="Enter 6-digit PIN">
+                <p id="pinError" class="text-red-400 hidden mb-4"></p>
+                <div class="flex justify-center space-x-4">
+                    <button class="btn-cyber" onclick="verifyPin()">Submit</button>
+                    <button class="btn-cyber" onclick="closePinModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Instructor Profile -->
         <div class="cyber-card">
             <div class="profile-header">
@@ -511,7 +585,8 @@ $conn->close();
                         <button onclick="this.parentElement.style.display='none'" class="hover:text-white">×</button>
                     </div>
                 <?php endif; ?>
-                <form method="POST" action="">
+                <form id="profileForm" method="POST" action="">
+                    <input type="hidden" name="pin_verified" id="profilePinVerified" value="false">
                     <div class="input-group">
                         <input type="text" name="name" id="name" required value="<?php echo htmlspecialchars($instructor['instructorName']); ?>" class="input-field">
                         <label for="name" class="input-label">Name</label>
@@ -523,7 +598,7 @@ $conn->close();
                     <div class="input-group">
                         <input type="password" name="password" id="password" placeholder=" " class="input-field">
                         <label for="password" class="input-label">New Password (optional)</label>
-                        <span class="password-toggle" onclick="togglePassword()">⚡️</span>
+                        <span class="password-toggle" onclick="togglePassword()">⚡</span>
                     </div>
                     <div class="input-group">
                         <input type="number" name="pin" id="pin" required value="<?php echo htmlspecialchars($instructor['instructorPin']); ?>" class="input-field">
@@ -538,7 +613,7 @@ $conn->close();
                         <label for="phone" class="input-label">Phone</label>
                     </div>
                     <div class="flex space-x-4">
-                        <button type="submit" class="btn-cyber">Save Changes</button>
+                        <button type="submit" class="btn-cyber" onclick="return showPinModal('profileForm')">Save Changes</button>
                         <button type="button" onclick="toggleEditForm()" class="btn-cyber">Cancel</button>
                     </div>
                 </form>
@@ -562,7 +637,9 @@ $conn->close();
                         <button onclick="this.parentElement.style.display='none'" class="hover:text-white">×</button>
                     </div>
                 <?php endif; ?>
-                <form method="POST" action="">
+                <form id="newCourseFormElement" method="POST" action="">
+                    <input type="hidden" name="new_course" value="true">
+                    <input type="hidden" name="pin_verified" id="newCoursePinVerified" value="false">
                     <h4 class="text-xl font-semibold text-cyan-400 mb-4">Add New Course</h4>
                     <div class="input-group">
                         <input type="text" name="course_name" id="course_name" required class="input-field">
@@ -585,7 +662,7 @@ $conn->close();
                         <label for="course_fblink" class="input-label">Facebook Link</label>
                     </div>
                     <div class="flex space-x-4">
-                        <button type="submit" name="new_course" class="btn-cyber">Add Course</button>
+                        <button type="submit" class="btn-cyber" onclick="return showPinModal('newCourseFormElement')">Add Course</button>
                         <button type="button" onclick="toggleNewCourseForm()" class="btn-cyber">Cancel</button>
                     </div>
                 </form>
@@ -616,7 +693,9 @@ $conn->close();
 
                 <!-- Register Course Form (Hidden by default) -->
                 <div id="addCourseForm" class="mt-6 hidden">
-                    <form method="POST" action="">
+                    <form id="addCourseFormElement" method="POST" action="">
+                        <input type="hidden" name="add_courses" value="true">
+                        <input type="hidden" name="pin_verified" id="addCoursePinVerified" value="false">
                         <h4 class="text-xl font-semibold text-cyan-400 mb-4">Select Courses to Register</h4>
                         <?php if (empty($availableCourses)): ?>
                             <p class="text-gray-400 mb-4">No available courses to register.</p>
@@ -628,7 +707,7 @@ $conn->close();
                                 </div>
                             <?php endforeach; ?>
                             <div class="flex space-x-4">
-                                <button type="submit" name="add_courses" class="btn-cyber">Register Selected Courses</button>
+                                <button type="submit" class="btn-cyber" onclick="return showPinModal('addCourseFormElement')">Register Selected Courses</button>
                                 <button type="button" onclick="toggleAddCourseForm()" class="btn-cyber">Cancel</button>
                             </div>
                         <?php endif; ?>
@@ -637,7 +716,9 @@ $conn->close();
 
                 <!-- Drop Course Form (Hidden by default) -->
                 <div id="dropCourseForm" class="mt-6 hidden">
-                    <form method="POST" action="">
+                    <form id="dropCourseFormElement" method="POST" action="">
+                        <input type="hidden" name="drop_courses" value="true">
+                        <input type="hidden" name="pin_verified" id="dropCoursePinVerified" value="false">
                         <h4 class="text-xl font-semibold text-cyan-400 mb-4">Select Courses to Drop</h4>
                         <?php if (empty($courses)): ?>
                             <p class="text-gray-400 mb-4">No courses to drop.</p>
@@ -649,7 +730,7 @@ $conn->close();
                                 </div>
                             <?php endforeach; ?>
                             <div class="flex space-x-4">
-                                <button type="submit" name="drop_courses" class="btn-cyber">Drop Selected Courses</button>
+                                <button type="submit" class="btn-cyber" onclick="return showPinModal('dropCourseFormElement')">Drop Selected Courses</button>
                                 <button type="button" onclick="toggleDropCourseForm()" class="btn-cyber">Cancel</button>
                             </div>
                         <?php endif; ?>
@@ -668,7 +749,6 @@ $conn->close();
                            class="btn-cyber">
                             <?php echo htmlspecialchars($student['studentName']); ?> 
                             <?php echo htmlspecialchars($student['studentEmail']); ?> 
-                            
                             (<?php echo $student['studentApprove'] ? '✔️' : '❌'; ?>)
                         </a>
                     <?php endforeach; ?>
@@ -752,7 +832,6 @@ $conn->close();
                 return;
             }
             coursesSection.classList.toggle('hidden');
-            // Hide other sections
             document.getElementById('newCourseForm').classList.add('hidden');
             document.getElementById('studentsSection').classList.add('hidden');
             document.getElementById('addCourseForm').classList.add('hidden');
@@ -768,7 +847,6 @@ $conn->close();
                 return;
             }
             addCourseForm.classList.toggle('hidden');
-            // Hide other forms
             document.getElementById('newCourseForm').classList.add('hidden');
             document.getElementById('dropCourseForm').classList.add('hidden');
             document.getElementById('studentsSection').classList.add('hidden');
@@ -783,7 +861,6 @@ $conn->close();
                 return;
             }
             newCourseForm.classList.toggle('hidden');
-            // Hide other sections
             document.getElementById('coursesSection').classList.add('hidden');
             document.getElementById('addCourseForm').classList.add('hidden');
             document.getElementById('dropCourseForm').classList.add('hidden');
@@ -799,7 +876,6 @@ $conn->close();
                 return;
             }
             dropCourseForm.classList.toggle('hidden');
-            // Hide other forms
             document.getElementById('newCourseForm').classList.add('hidden');
             document.getElementById('addCourseForm').classList.add('hidden');
             document.getElementById('studentsSection').classList.add('hidden');
@@ -814,7 +890,6 @@ $conn->close();
                 return;
             }
             studentsSection.classList.toggle('hidden');
-            // Hide other sections
             document.getElementById('coursesSection').classList.add('hidden');
             document.getElementById('newCourseForm').classList.add('hidden');
             document.getElementById('addCourseForm').classList.add('hidden');
@@ -834,6 +909,64 @@ $conn->close();
                 toggleIcon.textContent = '■';
             }
             console.log('Toggled password visibility');
+        }
+
+        // PIN Modal Functions
+        let currentFormId = null;
+
+        function showPinModal(formId) {
+            currentFormId = formId;
+            const modal = document.getElementById('pinModal');
+            const pinInput = document.getElementById('pinInput');
+            const pinError = document.getElementById('pinError');
+            pinInput.value = '';
+            pinError.classList.add('hidden');
+            modal.style.display = 'flex';
+            pinInput.focus();
+            return false; // Prevent form submission
+        }
+
+        function closePinModal() {
+            const modal = document.getElementById('pinModal');
+            modal.style.display = 'none';
+            currentFormId = null;
+        }
+
+        function verifyPin() {
+            const pinInput = document.getElementById('pinInput');
+            const pinError = document.getElementById('pinError');
+            const pin = pinInput.value;
+
+            if (!pin || pin.length !== 6 || !/^\d+$/.test(pin)) {
+                pinError.textContent = 'Please enter a valid 6-digit PIN.';
+                pinError.classList.remove('hidden');
+                return;
+            }
+
+            fetch('', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=verify_pin&pin=${encodeURIComponent(pin)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const form = document.getElementById(currentFormId);
+                    const pinVerifiedInput = form.querySelector('[name="pin_verified"]');
+                    pinVerifiedInput.value = 'true';
+                    form.submit();
+                } else {
+                    pinError.textContent = data.message || 'Incorrect PIN.';
+                    pinError.classList.remove('hidden');
+                }
+            })
+            .catch(error => {
+                pinError.textContent = 'Error verifying PIN. Please try again.';
+                pinError.classList.remove('hidden');
+                console.error('Error:', error);
+            });
         }
     </script>
 </body>

@@ -29,73 +29,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Course</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
         body {
-            background: linear-gradient(145deg, #000, #1a1a1a);
-            color: #fff;
+            background: linear-gradient(135deg, #0a0a0a, #1c2526);
+            color: #e6e6e6;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes neonGlow {
+            0%, 100% { box-shadow: 0 0 5px #00f2ff, 0 0 15px #00f2ff, 0 0 30px #00f2ff; }
+            50% { box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 40px #00f2ff; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
         }
 
         /* Navigation */
-        .upper .navbar-custom {
-            background: rgba(0, 0, 0, 0.8);
+        .navbar-custom {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
-            z-index: 10;
-            padding: 10px 15px;
-            box-shadow: 0 2px 5px rgba(0, 212, 212, 0.2);
+            z-index: 1000;
+            padding: 15px 25px;
+            box-shadow: 0 4px 12px rgba(0, 242, 255, 0.15);
+            animation: slideIn 0.5s ease-out;
         }
 
-        .upper .nav-link {
-            color: #fff !important;
-            font-size: 16px;
-            padding: 8px 12px;
-            transition: color 0.3s ease;
+        .nav-link {
+            color: #e6e6e6 !important;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 10px 20px;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .upper .nav-link:hover {
-            color: #00d4d4 !important;
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: #00f2ff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: #00f2ff !important;
+            transform: translateY(-2px);
         }
 
         .dropdown-menu {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 6px;
-            z-index: 1000;
+            background: #1c2526;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 242, 255, 0.2);
+            animation: fadeIn 0.3s ease-out;
         }
 
         .dropdown-item {
-            color: #fff;
-            font-size: 14px;
-            padding: 6px 12px;
+            color: #e6e6e6;
+            font-size: 0.95rem;
+            padding: 12px 20px;
+            transition: all 0.3s ease;
         }
 
         .dropdown-item:hover {
-            background: #00d4d4;
-            color: #000;
+            background: #00f2ff;
+            color: #0a0a0a;
+            transform: translateX(5px);
         }
 
         /* Welcome Section */
-        .intro {
-            margin-bottom: 20px;
-        }
-
         .welcome-container {
-            background: linear-gradient(135deg, rgba(0, 212, 212, 0.15), rgba(185, 0, 255, 0.15));
-            min-height: 80vh;
+            background: linear-gradient(145deg, rgba(0, 242, 255, 0.12), rgba(200, 0, 255, 0.12));
+            min-height: 85vh;
             display: flex;
             align-items: center;
-            padding: 20px 5%;
+            padding: 50px 5%;
             position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
         }
 
         .welcome-container::before {
@@ -106,124 +145,182 @@
             width: 100%;
             height: 100%;
             background: url('https://via.placeholder.com/1920x1080') no-repeat center/cover;
-            opacity: 0.2;
+            opacity: 0.1;
             z-index: 0;
+            animation: pulse 10s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.15; }
         }
 
         .main {
             position: relative;
             z-index: 1;
-            padding-left: 15px;
         }
 
         #titleCourseTitle {
-            font-size: 2.8rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
             font-weight: 700;
-            color: #fff;
-            margin-bottom: 15px;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+            animation: fadeIn 0.8s ease-out;
         }
 
         #courseDesc {
-            font-size: 1rem;
-            color: #ccc;
-            line-height: 1.6;
-            max-width: 600px;
+            font-size: 1.2rem;
+            color: #d0d0d0;
+            line-height: 1.9;
+            max-width: 750px;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.2s both;
         }
 
-        .main div {
-            margin-bottom: 15px;
+        .course-info {
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out 0.4s both;
         }
 
-        .main div b {
-            color: #00d4d4;
+        .course-info b {
+            color: #00f2ff;
+            font-weight: 600;
+        }
+
+        .course-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            border: 2px solid #00f2ff;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .course-image:hover {
+            transform: scale(1.08) rotate(2deg);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
         }
 
         .fb-link {
-            color: #b900ff;
+            color: #ff00ff;
             text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         .fb-link:hover {
-            color: #fff;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff00ff;
         }
 
         .btn-course-detail {
             background: transparent;
-            border: 2px solid #00d4d4;
-            color: #00d4d4;
-            padding: 8px 20px;
-            font-size: 16px;
-            border-radius: 4px;
+            border: 2px solid #00f2ff;
+            color: #00f2ff;
+            padding: 12px 30px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            border-radius: 50px;
             transition: all 0.3s ease;
+            animation: neonGlow 2s infinite;
         }
 
         .btn-course-detail:hover {
-            background: #00d4d4;
-            color: #000;
+            background: #00f2ff;
+            color: #0a0a0a;
+            transform: scale(1.05);
         }
 
         .coursedetail {
-            font-size: 14px;
-            color: #fff;
-            background: #1a1a1a;
-            padding: 6px;
-            border-radius: 4px;
+            font-size: 0.95rem;
+            color: #ffffff;
+            background: #2a2a2a;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .coursedetail:hover {
+            background: #00f2ff;
+            color: #0a0a0a;
+            transform: translateX(5px);
         }
 
         /* Tabs Section */
         .intro2 {
-            background: #1a1a1a;
-            color: #fff;
+            background: #2a2a2a;
+            color: #ffffff;
             text-align: center;
-            padding: 12px;
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .intro3 {
-            padding: 15px 0;
+            padding: 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+            animation: fadeIn 0.8s ease-out;
         }
 
         .intro3 .nav-tabs {
-            border-bottom: 1px solid #333;
+            border-bottom: 2px solid #444;
+            margin-bottom: 25px;
         }
 
         .intro3 .nav-link {
-            color: #ccc;
-            font-size: 1rem;
-            padding: 8px 15px;
+            color: #d0d0d0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 12px 25px;
             border: none;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
         .intro3 .nav-link.active {
-            color: #00d4d4;
-            border-bottom: 2px solid #00d4d4;
+            color: #00f2ff;
+            border-bottom: 3px solid #00f2ff;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
         }
 
         .intro3 .nav-link:hover {
-            color: #00d4d4;
+            color: #00f2ff;
+            transform: translateY(-2px);
         }
 
         .under {
-            background: rgba(26, 26, 26, 0.85);
-            border-radius: 8px;
-            padding: 15px;
-            margin-top: 10px;
+            background: rgba(20, 20, 20, 0.9);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
         }
 
         /* Video Cards */
         .video-card {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 8px;
-            margin-bottom: 15px;
+            background: #2a2a2a;
+            border-radius: 15px;
+            margin-bottom: 25px;
             overflow: hidden;
+            transition: all 0.4s ease;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
         }
 
         .video-wrapper {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%;
+            border-radius: 15px 15px 0 0;
+            overflow: hidden;
         }
 
         .video-wrapper iframe {
@@ -233,168 +330,210 @@
             width: 100%;
             height: 100%;
             border: none;
-            z-index: 1;
         }
 
         .video-error {
-            color: #ff5555;
-            font-size: 0.9rem;
-            padding: 10px;
+            color: #ff4d4d;
+            font-size: 0.95rem;
+            padding: 15px;
             text-align: center;
         }
 
         .video-card .card-body {
-            padding: 12px;
+            padding: 20px;
         }
 
         .video-card .card-title {
-            font-size: 1.2rem;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
         }
 
         .video-details {
-            font-size: 0.9rem;
-            color: #ccc;
+            font-size: 0.95rem;
+            color: #d0d0d0;
         }
 
         .video-details a {
-            color: #b900ff;
+            color: #ff00ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .video-details a:hover {
-            text-decoration: underline;
+            color: #ffffff;
+            text-shadow: 0 0 10px #ff00ff;
         }
 
         .details-btn {
-            color: #b900ff;
+            color: #ff00ff;
             background: transparent;
-            border: 1px solid #b900ff;
-            padding: 4px 8px;
-            font-size: 0.9rem;
-            border-radius: 4px;
+            border: 1px solid #ff00ff;
+            padding: 8px 15px;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            animation: neonGlow 2s infinite;
         }
 
         .details-btn:hover {
-            background: #b900ff;
-            color: #fff;
+            background: #ff00ff;
+            color: #ffffff;
+            transform: scale(1.05);
         }
 
         /* Lecture Files */
         .fileBox {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 10px 0;
+            background: #2a2a2a;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
+            animation: fadeIn 1s ease-out;
         }
 
         .fileBox h2 {
-            color: #fff;
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+            color: #ffffff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
             text-align: center;
+            text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
         }
 
         .fileBox .list-group-item {
             background: transparent;
             border: none;
-            border-bottom: 1px solid #333;
-            color: #fff;
-            padding: 8px 0;
+            border-bottom: 1px solid #444;
+            color: #e6e6e6;
+            padding: 12px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .fileBox .list-group-item:hover {
+            background: rgba(0, 242, 255, 0.1);
         }
 
         .fileBox .list-group-item a {
-            color: #00f0f0;
+            color: #00f2ff;
             font-size: 1rem;
             text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .fileBox .list-group-item a:hover {
-            color: #fff;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00f2ff;
         }
 
         .fileBox .badge {
-            background: #b900ff;
-            color: #fff;
-            padding: 4px 8px;
-            border-radius: 4px;
+            background: #ff00ff;
+            color: #ffffff;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            animation: neonGlow 2s infinite;
         }
 
         /* Login Modal */
         .modal-content {
-            background: #1a1a1a;
-            border-radius: 8px;
-            color: #fff;
+            background: #1c2526;
+            border-radius: 15px;
+            color: #e6e6e6;
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+            animation: fadeIn 0.5s ease-out;
         }
 
         .modal-header {
-            border-bottom: 1px solid #333;
+            border-bottom: 1px solid #444;
         }
 
         .modal-title {
-            color: #00d4d4;
+            color: #00f2ff;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 600;
         }
 
         .modal .btn-close {
             filter: invert(1);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .modal .btn-close:hover {
+            opacity: 1;
+            transform: rotate(90deg);
         }
 
         .modal .form-label {
-            color: #ccc;
+            color: #d0d0d0;
+            font-weight: 500;
         }
 
         .modal .form-control {
             background: #333;
             border: 1px solid #555;
-            color: #fff;
+            color: #e6e6e6;
+            border-radius: 10px;
+            transition: all 0.3s ease;
         }
 
         .modal .form-control:focus {
-            border-color: #b900ff;
-            box-shadow: none;
+            border-color: #ff00ff;
+            box-shadow: 0 0 0 4px rgba(255, 0, 255, 0.3);
         }
 
         .modal .btn-dark {
-            background: #b900ff;
+            background: #ff00ff;
             border: none;
-            border-radius: 4px;
-            padding: 8px;
+            border-radius: 50px;
+            padding: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            animation: neonGlow 2s infinite;
         }
 
         .modal .btn-dark:hover {
-            background: #00d4d4;
+            background: #00f2ff;
+            color: #0a0a0a;
+            transform: scale(1.05);
         }
 
         /* Responsive */
         @media (max-width: 767px) {
             #titleCourseTitle {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
             #courseDesc {
-                font-size: 0.9rem;
-            }
-            .welcome-container {
-                padding: 15px 3%;
-                min-height: 60vh;
-            }
-            .main {
-                padding-left: 10px;
-            }
-            .video-card .card-title {
                 font-size: 1.1rem;
             }
+            .welcome-container {
+                padding: 30px 5%;
+                min-height: 70vh;
+            }
+            .course-image {
+                margin-top: 25px;
+            }
+            .video-card .card-title {
+                font-size: 1.3rem;
+            }
             .fileBox {
-                padding: 10px;
+                padding: 20px;
             }
             .fileBox .list-group-item a {
-                font-size: 0.9rem;
+                font-size: 0.95rem;
             }
             .btn-course-detail {
-                padding: 6px 15px;
-                font-size: 14px;
+                padding: 10px 25px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -447,18 +586,18 @@
                 while ($row2 = $result2->fetch_assoc()) {
                     echo "
                         <div class='welcome-container'>
-                            <div class='row'>
-                                <div class='col'>
-                                    <div class='main'>
-                                        <div><h1 id='titleCourseTitle'>".htmlspecialchars($row2['courseName'])."</h1></div>
-                                        <div id='courseDesc'>".htmlspecialchars($row2['courseDescription'])."</div>
-                                        <div>
+                            <div class='container'>
+                                <div class='row align-items-center'>
+                                    <div class='col-lg-6 main'>
+                                        <h1 id='titleCourseTitle'>".htmlspecialchars($row2['courseName'])."</h1>
+                                        <p id='courseDesc'>".htmlspecialchars($row2['courseDescription'])."</p>
+                                        <div class='course-info'>
                                             <b>Course Fee</b>: ".htmlspecialchars($row2['courseFee'])."<br>
                                             <b>Course Period</b>: ".htmlspecialchars($row2['coursePeriod'])."<br>";
                     if (!empty($row2['courseFbLink'])) {
                         echo "<br><a class='fb-link' href='".htmlspecialchars($row2['courseFbLink'])."' target='_blank'>View on Facebook</a><br>";
                     }
-                    echo "            </div>
+                    echo "        </div>
                                         <div class='btn-group dropend'>
                                             <button type='button' class='btn btn-course-detail dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>
                                                 Course Details
@@ -479,8 +618,8 @@
                     echo "        </ul>
                                         </div>
                                     </div>
+                                   
                                 </div>
-                                <div class='col'></div>
                             </div>
                         </div>";
                 }
@@ -490,7 +629,7 @@
         ?>
     </div>
         
-    <div class='intro2'>Start</div>
+    <div class='intro2'>Start Learning</div>
         
     <div class='intro3 container'>
         <div class='tab'>
@@ -621,7 +760,7 @@
                                 <form id="loginForm">
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email address</label>
-                                    <input type="email" class="form-control" id="email" required>
+                                        <input type="email" class="form-control" id="email" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Passcode</label>
@@ -640,6 +779,22 @@
                     document.addEventListener('DOMContentLoaded', () => {
                         document.querySelectorAll('.video-wrapper iframe').forEach(iframe => {
                             console.log('Iframe src:', iframe.src);
+                        });
+
+                        // Scroll-triggered animations
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    entry.target.classList.add('animate');
+                                }
+                            });
+                        }, { threshold: 0.1 });
+
+                        document.querySelectorAll('.video-card, .fileBox').forEach(el => {
+                            el.style.opacity = '0';
+                            el.style.transform = 'translateY(20px)';
+                            el.classList.add('animate-on-scroll');
+                            observer.observe(el);
                         });
                     });
 
@@ -683,6 +838,15 @@
                         };
                         xhr.send("email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password) + "&courseID=" + encodeURIComponent(courseID));
                     });
+
+                    // Animation for scroll-triggered elements
+                    const style = document.createElement('style');
+                    style.innerHTML = `
+                        .animate-on-scroll.animate {
+                            animation: fadeIn 0.8s ease-out forwards;
+                        }
+                    `;
+                    document.head.appendChild(style);
                 </script>
             </div>
         </div>

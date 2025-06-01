@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
-        $mail->setFrom('minsittmandalay137@gmail.com', 'Your Website'); // REPLACE THIS with your Gmail address (same as Username)
+        $mail->setFrom($email, 'OSCORD'); // REPLACE THIS with your Gmail address (same as Username)
         $mail->addAddress('minsittmandalay137@gmail.com');
         $mail->addReplyTo($email, $name);
 

@@ -24,11 +24,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
         if ($stmt->execute()) {
             echo "<script type='text/javascript'>
             alert('File upload successful !');
-          window.location.href = 'oscord_home.php'</script>";
+          window.location.href = 'admin_dashboard.php'</script>";
         } else {
             echo "<script type='text/javascript'>
             alert('Error saving file information to the database!');
-          window.location.href = 'oscord_home.php'</script>";
+          window.location.href = 'admin_dashboard.php'</script>";
         }
         $stmt->close();
     } else {
