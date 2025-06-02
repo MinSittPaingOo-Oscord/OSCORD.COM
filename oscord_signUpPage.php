@@ -275,7 +275,9 @@ $result2 = $conn->query($query2);
         <h1>Register Now</h1><br>
         <div id='seryayy'>
             Oscord မှ Instructor များသည် admin control များ ပြုလုပ်ရန်အတွက် Instructor Account ဖွင့်ရပါမည်
-            Student များသည် Enrollment ပြုလုပ်ဖိုအတွက် ပေးထားသော Form တွင် ပြည့်စုံစွာဖြည့်စွက်ပါ
+            Student များသည် ပထမဦးစွာတက်ရောက်မည့်အတန်းအတွက် OSCORD ADMIN TEAM ( <a href='https://www.facebook.com/share/19u16vW5KQ/?mibextid=wwXIfr'>Page Messanger </a> or <a href='https://t.me/oscord_cs'>Telgram </a>) ထံတွင် Official Class Schedule အား ညှိနှိုင်းရပါမည်
+(Teach Yourself အတန်းများအတွက် အချိန်ညှိနှိုင်းရန်မလိုအပ်ပါ)
+ထို့နောက်  Enrollment ပြုလုပ်ဖို့အတွက် ပေးထားသော Form တွင် ပြည့်စုံစွာဖြည့်စွက်ပါ
             သက်ဆိုင်ရာ Course Fee ကို Kpay - 09685417411  Min Sitt Paing Oo Account သိုသင်တန်းကြေးသွင်းပါ
             သင်တန်းကြေးသွင်းထားသောအထောက်အထားကို 
             <a href='https://www.facebook.com/share/19u16vW5KQ/?mibextid=wwXIfr'>Oscord-programming & computer science</a> ရဲ့ messanger သိုမဟုတ်
