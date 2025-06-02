@@ -27,42 +27,6 @@ $result2 = $conn->query($query2);
             animation: gradientShift 15s ease infinite;
             font-family: 'Roboto Mono', monospace;
             color: #e0e0e0;
-            overflow-x:-
-
-System: You are Grok 3 built by xAI.
-
-I'm sorry, but it seems like the response was cut off. I can provide a complete version of the updated frontend design for the `oscord_signUpPage.php` file with a modern, cyber, and cool aesthetic, ensuring that no backend code or functionality is modified. Below is the updated file with a new frontend design, keeping all PHP, JavaScript, and form functionality intact.
-
-<xaiArtifact artifact_id="0563c8a2-4566-467b-b64f-56b95b407541" artifact_version_id="f4957920-40dc-4fc1-b284-0c91d73c87ab" title="oscord_signUpPage.php" contentType="text/html">
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-include "connectdb.php";
-
-$query1 = "SELECT * FROM oscord_course";
-$result1 = $conn->query($query1);
-
-$query2 = "SELECT * FROM oscord_course";
-$result2 = $conn->query($query2);
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #2c2c2c);
-            background-size: 200% 200%;
-            animation: gradientShift 15s ease infinite;
-            font-family: 'Roboto Mono', monospace;
-            color: #e0e0e0;
             overflow-x: hidden;
             margin: 0;
         }
@@ -187,19 +151,19 @@ $result2 = $conn->query($query2);
 
         .form-check {
             background: black;
-            color : #00ff15;
+            color: #00ff15;
         }
 
         .aaa {
             background: rgb(70, 72, 70);
-            color : #00ff15;
+            color: #00ff15;
         }
 
         .dropdown-menu {
             background: rgb(70, 72, 70);
             border: 1px solid #00ff15;
             color: #e0e0e0;
-            padding-left : 10px;
+            padding-left: 10px;
         }
 
         .dropdown-menu .form-check-label {
@@ -227,8 +191,71 @@ $result2 = $conn->query($query2);
             display: none;
         }
 
-        #seryayy{
-            line-height : 40px;
+        #seryayy {
+            line-height: 40px;
+        }
+
+        #tac div {
+            line-height: 40px;
+            margin-bottom: 15px;
+        }
+
+        #tac ul {
+            line-height: 40px;
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid #00ff15;
+            color: #e0e0e0;
+            border-radius: 15px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #00ff15;
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ff15;
+            text-shadow: 0 0 10px rgba(0, 255, 21, 0.5);
+        }
+
+        .modal-body {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #00ff15;
+        }
+
+        .btn-agree {
+            background: #00ff15;
+            color: #0d0d0d;
+            border: none;
+            font-weight: bold;
+        }
+
+        .btn-agree:hover {
+            background: #8000ff;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(128, 0, 255, 0.7);
+        }
+
+        .btn-cancel {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #00ff15;
+            color: #e0e0e0;
+        }
+
+        .btn-cancel:hover {
+            background: #ff4d4d;
+            border-color: #ff4d4d;
+            color: #fff;
         }
 
         @media (max-width: 1024px) {
@@ -265,7 +292,6 @@ $result2 = $conn->query($query2);
             .left-content h1 {
                 font-size: 2rem;
             }
-
         }
     </style>
 </head>
@@ -273,7 +299,7 @@ $result2 = $conn->query($query2);
 <div class="container">
     <div class="left-content main">
         <h1>Register Now</h1><br>
-        <div id='seryayy'>
+        <div id="seryayy">
             Oscord မှ Instructor များသည် admin control များ ပြုလုပ်ရန်အတွက် Instructor Account ဖွင့်ရပါမည်
             Student များသည် ပထမဦးစွာတက်ရောက်မည့်အတန်းအတွက် OSCORD ADMIN TEAM ( <a href='https://www.facebook.com/share/19u16vW5KQ/?mibextid=wwXIfr'>Page Messanger </a> or <a href='https://t.me/oscord_cs'>Telgram </a>) ထံတွင် Official Class Schedule အား ညှိနှိုင်းရပါမည်
 (Teach Yourself အတန်းများအတွက် အချိန်ညှိနှိုင်းရန်မလိုအပ်ပါ)
@@ -412,7 +438,7 @@ $result2 = $conn->query($query2);
                             <button class="btn btn-light dropdown-toggle" type="button" id="studentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 Select Courses
                             </button>
-                            <ul class="dropdown-menu courseDropDown aaa" aria-labelledby="studentDropdown" >
+                            <ul class="dropdown-menu courseDropDown aaa" aria-labelledby="studentDropdown">
                                 <?php
                                 if ($result2 && $result2->num_rows > 0) {
                                     while ($row2 = $result2->fetch_assoc()) {
@@ -435,6 +461,37 @@ $result2 = $conn->query($query2);
 
                 <button type="submit" class="btn btn-dark w-100">Sign Up</button>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- Terms and Conditions Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="tac">
+                    <div>သင်တန်းကြေးပေးသွင်းပြီးပါက သင်တန်းမတတ်ဖြစ်တော့သည်ဖြစ်စေ 
+                    မည်သည့်အကြောင်းကြောင့်မှ ပြန်လည် Refund ပေးအပ်မည်မဟုတ်ပါ</div>
+
+                    <div>သင်တန်းစည်းကမ်းများ</div>
+                    <ul>
+                        <li>Zoom meeting ချိန်အတွင်း အသံ Mute ထားလိုမရပါဖူး</li>
+                        <li>Telegram private channel နှင့် Website ပေါ်တွင်ပေးထားသော သင်ခန်းစာ, Video record  များ ကို မိမိတစ်ဦးတည်းသာဝင်ရောက်ပီး သင်ခန်းလေ့လာလိုရပါမယ်
+                            မည်သူတစ်ဦးတစ်ယောက်ကိုမှ မျှဝေခြင်းကိုခွင့်မပြုပါ</li>
+                        <li>အတန်းစမည့်အချိန်မှာ အမြဲတမ်း Zoom ID & passcode  သိုမဟုတ် Meeting Link ပိုပေးသွားမှာဖြစ်ပြီး 30 minutes အတွင်းဝင်ရောက်လာခြင်းမရှိပါက ပျက်ကွက်သည်ဟုယူဆပြီး Meeting အားရုတ်သိမ်းမှာဖြစ်ပါတယ်</li>
+                    </ul>
+                </div>
+                <p>By clicking "Agree", you confirm that you have read, understood, and agree to be bound by these terms.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-agree" id="agreeTerms">Agree</button>
+            </div>
         </div>
     </div>
 </div>
@@ -496,6 +553,13 @@ $result2 = $conn->query($query2);
                 document.getElementById("instructorCourseError").style.display = "block";
                 isValid = false;
             }
+
+            if (isValid) {
+                console.log("Form is valid, submitting for instructor...");
+                this.submit();
+            } else {
+                console.log("Form validation failed.");
+            }
         } else if (role === "student") {
             const fields = [
                 { id: "student_name", error: "Please enter your name." },
@@ -522,14 +586,22 @@ $result2 = $conn->query($query2);
                 document.getElementById("studentCourseError").style.display = "block";
                 isValid = false;
             }
-        }
 
-        if (isValid) {
-            console.log("Form is valid, submitting...");
-            this.submit();
-        } else {
-            console.log("Form validation failed.");
+            if (isValid) {
+                console.log("Form is valid, showing terms modal for student...");
+                const termsModal = new bootstrap.Modal(document.getElementById('termsModal'), {
+                    keyboard: false
+                });
+                termsModal.show();
+            } else {
+                console.log("Form validation failed.");
+            }
         }
+    });
+
+    document.getElementById("agreeTerms").addEventListener("click", function() {
+        console.log("Terms agreed, submitting form...");
+        document.getElementById("signupForm").submit();
     });
 </script>
 </body>
