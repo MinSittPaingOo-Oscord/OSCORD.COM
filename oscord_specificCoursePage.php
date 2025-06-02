@@ -308,6 +308,7 @@
             overflow: hidden;
             transition: all 0.4s ease;
             animation: fadeIn 1s ease-out;
+            height : 300px;
         }
 
         .video-card:hover {
@@ -646,7 +647,7 @@
                 <div class="tab-pane fade show active" id="simple_lecture_video" role="tabpanel" aria-labelledby="simpleLectureVideo">
                     <div class="row">
                         <?php 
-                            $query4 = "SELECT * FROM oscord_vidlec WHERE videoFree = 1 AND courseID = ".$id;
+                            $query4 = "SELECT * FROM oscord_vidlec  WHERE videoFree = 1 AND courseID = ".$id." ORDER BY CAST(SUBSTRING_INDEX(videoName, '.', 1) AS UNSIGNED)";
                             $result4 = $conn->query($query4);
 
                             if ($result4 && $result4->num_rows > 0) {
@@ -711,7 +712,7 @@
                         <h2 class="text-white mt-4 mb-3">Video Lectures</h2>
                         <div class="row">
                             <?php 
-                                $query9 = "SELECT * FROM oscord_vidlec WHERE courseID = ".$id;
+                                $query9 = "SELECT * FROM oscord_vidlec WHERE courseID = ".$id." ORDER BY CAST(SUBSTRING_INDEX(videoName, '.', 1) AS UNSIGNED)";
                                 $result9 = $conn->query($query9);
 
                                 if ($result9 && $result9->num_rows > 0) {

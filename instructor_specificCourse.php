@@ -58,7 +58,7 @@ if ($course) {
     }
 
     // Fetch video lectures from oscord_vidlec
-    $query = "SELECT videoID, videoName, videoLink, videoFree FROM oscord_vidlec WHERE courseID = ?";
+    $query = "SELECT videoID, videoName, videoLink, videoFree,videoNumber FROM oscord_vidlec WHERE courseID = ? ORDER BY CAST(SUBSTRING_INDEX(videoName, '.', 1) AS UNSIGNED)";
     $stmt = $conn->prepare($query);
     if ($stmt) {
         $stmt->bind_param("i", $courseID);
