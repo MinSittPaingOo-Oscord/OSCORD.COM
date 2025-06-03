@@ -10,11 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $studentID = $_POST['student_name'];
     $reviewText = $_POST['review_text'];
     $courseID = $_POST['courseID']; 
+    $isShwon = 0;
 
     if (!empty($studentID) && !empty($reviewText) && !empty($courseID)) {
-        $query1 = "INSERT INTO oscord_studentreview (studentreview, courseID, studentID) VALUES (?, ?, ?)";
+        $query1 = "INSERT INTO oscord_studentreview (studentreview, courseID, studentID,isShown) VALUES (?, ?, ?,?)";
         $stmt = $conn->prepare($query1);
-        $stmt->bind_param("sii", $reviewText, $courseID, $studentID);  
+        $stmt->bind_param("siii", $reviewText, $courseID, $studentID,$isShwon);  
         
   if ($stmt->execute()) {
     echo "<script type='text/javascript'>

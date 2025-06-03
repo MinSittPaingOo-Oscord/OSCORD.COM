@@ -419,8 +419,8 @@ $step = isset($_SESSION['reset_step']) ? $_SESSION['reset_step'] : 0;
             </div>
         </form>
         <div class="mt-6 text-center text-sm text-gray-400 tracking-wide">
-            <p>Remembered your credentials? <a href="oscord_studentControlLogin.php" class="text-cyan-400 hover:text-cyan-300">Login</a></p>
-            <p class="mt-2"><a href="oscord_home.php" class="text-cyan-400 hover:text-cyan-300">Back to Home</a></p>
+            <p>Remembered your credentials? <a href="oscord_studentControlLogin.php" class="text-cyan-400 hover:text-cyan-300"><u>Login</u></a></p>
+            <p class="mt-2"><a href="oscord_home.php" class="text-cyan-400 hover:text-cyan-300"><u>Back to Home</u></a></p>
         </div>
     </div>
 

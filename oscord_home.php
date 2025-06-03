@@ -7,7 +7,7 @@ $result1 = $conn->query($query1);
 $query2 = "SELECT * FROM oscord_course";
 $result2 = $conn->query($query2);
 
-$query_reviews = "SELECT sr.*, s.studentName FROM oscord_studentreview sr JOIN oscord_student s ON sr.studentID = s.studentID";
+$query_reviews = "SELECT sr.*, s.studentName FROM oscord_studentreview sr JOIN oscord_student s ON sr.studentID = s.studentID WHERE sr.isShown=1";
 $result_reviews = $conn->query($query_reviews);
 
 $query_students = "SELECT studentID, studentName FROM oscord_student";

@@ -259,8 +259,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </button>
         </form>
         <div class="mt-6 text-center text-sm text-gray-400 tracking-wide">
-            <p>Forgot credentials? <a href="student_forgotPasscode.php" class="text-cyan-400 hover:text-cyan-300">Reset Password</a></p>
-            <p class="mt-2"><a href="oscord_home.php" class="text-cyan-400 hover:text-cyan-300">Back to Home</a></p>
+            <p>Forgot credentials? <a href="student_forgotPasscode.php" class="text-cyan-400 hover:text-cyan-300"><u>Reset Password</u></a></p>
+            <p class="mt-2"><a href="oscord_home.php" class="text-cyan-400 hover:text-cyan-300"><u>Back to Home</u></a></p>
         </div>
     </div>
 

@@ -308,7 +308,7 @@
             overflow: hidden;
             transition: all 0.4s ease;
             animation: fadeIn 1s ease-out;
-            height : 300px;
+            height : 360px;
         }
 
         .video-card:hover {
@@ -348,9 +348,10 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 1.4rem;
             font-weight: 600;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
             color: #ffffff;
             text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
+            line-height : 30px;
         }
 
         .video-details {

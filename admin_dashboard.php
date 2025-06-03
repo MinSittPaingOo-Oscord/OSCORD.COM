@@ -82,6 +82,22 @@ if ($stmt) {
     $message = "Error fetching student data.";
 }
 
+// Fetch all student reviews with student and course names
+$query = "SELECT sr.studentreviewID, sr.studentreview, sr.isShown, sr.courseID, sr.studentID, s.studentName, c.courseName 
+          FROM oscord_studentreview sr 
+          JOIN oscord_student s ON sr.studentID = s.studentID 
+          JOIN oscord_course c ON sr.courseID = c.courseID";
+$stmt = $conn->prepare($query);
+if ($stmt) {
+    $stmt->execute();
+    $studentReviews = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+} else {
+    $error = "Failed to prepare student reviews query: " . $conn->error;
+    logDebug($error);
+    $message = "Error fetching student reviews.";
+}
+
 // Handle PIN verification via AJAX
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] == 'verify_pin') {
     $enteredPin = $_POST['pin'];
@@ -101,6 +117,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['a
         echo json_encode(['success' => false, 'message' => 'Database error.']);
     }
     exit();
+}
+
+// Handle updating student review isShown
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_review']) && isset($_POST['pin_verified']) && $_POST['pin_verified'] == 'true') {
+    $reviewID = $_POST['review_id'];
+    $isShown = isset($_POST['is_shown']) ? 1 : 0;
+    
+    $stmt = $conn->prepare("UPDATE oscord_studentreview SET isShown = ? WHERE studentreviewID = ?");
+    if ($stmt) {
+        $stmt->bind_param("ii", $isShown, $reviewID);
+        if ($stmt->execute()) {
+            $message = "Review visibility updated successfully.";
+            // Refresh reviews list
+            $query = "SELECT sr.studentreviewID, sr.studentreview, sr.isShown, sr.courseID, sr.studentID, s.studentName, c.courseName 
+                      FROM oscord_studentreview sr 
+                      JOIN oscord_student s ON sr.studentID = s.studentID 
+                      JOIN oscord_course c ON sr.courseID = c.courseID";
+            $stmt = $conn->prepare($query);
+            if ($stmt) {
+                $stmt->execute();
+                $studentReviews = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                $stmt->close();
+            }
+        } else {
+            $error = "Failed to update review: " . $stmt->error;
+            logDebug($error);
+            $message = "Error updating review visibility.";
+        }
+        
+    } else {
+        $error = "Failed to prepare update review query: " . $conn->error;
+        logDebug($error);
+        $message = "Error preparing review update.";
+    }
 }
 
 // Handle adding existing courses (register courses)
@@ -288,7 +338,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['name']) && isset($_POS
             logDebug($error);
             $message = "Error updating profile.";
         }
-      
     }
 }
 
@@ -395,6 +444,9 @@ $conn->close();
         .input-group {
             position: relative;
             margin-bottom: 1.75rem;
+        }
+        #review{
+            line-height : 40px;
         }
         .input-field {
             background: rgba(255, 255, 255, 0.05);
@@ -529,6 +581,13 @@ $conn->close();
             padding: 0.8rem 2rem;
             margin: 0.5rem;
         }
+        .review-card {
+            background: rgba(40, 40, 60, 0.4);
+            border: 1px solid rgba(0, 255, 234, 0.3);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
         @media (max-width: 640px) {
             .cyber-card {
                 padding: 1.5rem;
@@ -579,7 +638,7 @@ $conn->close();
 
             <!-- Edit Profile Form (Hidden by default) -->
             <div id="editForm" class="mt-6 hidden">
-                <?php if (!empty($message) && !isset($_POST['add_courses']) && !isset($_POST['drop_courses']) && !isset($_POST['new_course'])): ?>
+                <?php if (!empty($message) && !isset($_POST['add_courses']) && !isset($_POST['drop_courses']) && !isset($_POST['new_course']) && !isset($_POST['update_review'])): ?>
                     <div class="alert-cyber">
                         <span><?php echo htmlspecialchars($message); ?></span>
                         <button onclick="this.parentElement.style.display='none'" class="hover:text-white">×</button>
@@ -627,6 +686,7 @@ $conn->close();
                 <button onclick="toggleCourses()" class="btn-cyber">Your Courses</button>
                 <button onclick="toggleNewCourseForm()" class="btn-cyber">Add New Course</button>
                 <button onclick="toggleStudents()" class="btn-cyber">Manage Students</button>
+                <button onclick="toggleReviews()" class="btn-cyber">Manage Reviews</button>
             </div>
 
             <!-- Add New Course Form (Hidden by default) -->
@@ -749,8 +809,43 @@ $conn->close();
                            class="btn-cyber">
                             <?php echo htmlspecialchars($student['studentName']); ?> 
                             <?php echo htmlspecialchars($student['studentEmail']); ?> 
-                            (<?php echo $student['studentApprove'] ? '✔️' : '❌'; ?>)
+                            (<?php echo $student['studentApprove'] ? '✓' : '✗'; ?>)
                         </a>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+
+            <!-- Student Reviews Section (Hidden by default) -->
+            <div id="reviewsSection" class="hidden">
+                <?php if (!empty($message) && isset($_POST['update_review'])): ?>
+                    <div class="alert-cyber">
+                        <span><?php echo htmlspecialchars($message); ?></span>
+                        <button onclick="this.parentElement.style.display='none'" class="hover:text-white">×</button>
+                    </div>
+                <?php endif; ?>
+                <h4 class="text-xl font-semibold text-cyan-400 mb-4">Manage Student Reviews</h4>
+                <?php if (empty($studentReviews)): ?>
+                    <p class="text-gray-400 mb-4">No reviews found.</p>
+                <?php else: ?>
+                    <?php foreach ($studentReviews as $review): ?>
+                        <div class="review-card">
+                            <p><strong>Student Name:</strong> <?php echo htmlspecialchars($review['studentName']); ?></p>
+                            <br>
+                            <p><strong>Course:</strong> <?php echo htmlspecialchars($review['courseName']); ?></p>
+                            <br>
+                            <p id='review'><strong>Review:</strong> <?php echo htmlspecialchars($review['studentreview']); ?></p>
+                            <br>
+                            <form id="reviewForm-<?php echo htmlspecialchars($review['studentreviewID']); ?>" method="POST" action="">
+                                <input type="hidden" name="update_review" value="true">
+                                <input type="hidden" name="review_id" value="<?php echo htmlspecialchars($review['studentreviewID']); ?>">
+                                <input type="hidden" name="pin_verified" id="reviewPinVerified-<?php echo htmlspecialchars($review['studentreviewID']); ?>" value="false">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" name="is_shown" id="is_shown_<?php echo htmlspecialchars($review['studentreviewID']); ?>" class="checkbox-field" <?php echo $review['isShown'] ? 'checked' : ''; ?>>
+                                    <label for="is_shown_<?php echo htmlspecialchars($review['studentreviewID']); ?>" class="checkbox-label"><?php echo $review['isShown'] ? 'Shown' : 'Hidden'; ?></label>
+                                </div>
+                                <button type="submit" class="btn-cyber" onclick="return showPinModal('reviewForm-<?php echo htmlspecialchars($review['studentreviewID']); ?>')">Update Visibility</button>
+                            </form>
+                        </div>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
@@ -836,6 +931,7 @@ $conn->close();
             document.getElementById('studentsSection').classList.add('hidden');
             document.getElementById('addCourseForm').classList.add('hidden');
             document.getElementById('dropCourseForm').classList.add('hidden');
+            document.getElementById('reviewsSection').classList.add('hidden');
             console.log('Toggled courses section, hidden:', coursesSection.classList.contains('hidden'));
         }
 
@@ -850,6 +946,7 @@ $conn->close();
             document.getElementById('newCourseForm').classList.add('hidden');
             document.getElementById('dropCourseForm').classList.add('hidden');
             document.getElementById('studentsSection').classList.add('hidden');
+            document.getElementById('reviewsSection').classList.add('hidden');
             console.log('Toggled add course form, hidden:', addCourseForm.classList.contains('hidden'));
         }
 
@@ -865,6 +962,7 @@ $conn->close();
             document.getElementById('addCourseForm').classList.add('hidden');
             document.getElementById('dropCourseForm').classList.add('hidden');
             document.getElementById('studentsSection').classList.add('hidden');
+            document.getElementById('reviewsSection').classList.add('hidden');
             console.log('Toggled new course form, hidden:', newCourseForm.classList.contains('hidden'));
         }
 
@@ -879,6 +977,7 @@ $conn->close();
             document.getElementById('newCourseForm').classList.add('hidden');
             document.getElementById('addCourseForm').classList.add('hidden');
             document.getElementById('studentsSection').classList.add('hidden');
+            document.getElementById('reviewsSection').classList.add('hidden');
             console.log('Toggled drop course form, hidden:', dropCourseForm.classList.contains('hidden'));
         }
 
@@ -894,7 +993,24 @@ $conn->close();
             document.getElementById('newCourseForm').classList.add('hidden');
             document.getElementById('addCourseForm').classList.add('hidden');
             document.getElementById('dropCourseForm').classList.add('hidden');
+            document.getElementById('reviewsSection').classList.add('hidden');
             console.log('Toggled students section, hidden:', studentsSection.classList.contains('hidden'));
+        }
+
+        // Toggle reviews section visibility
+        function toggleReviews() {
+            const reviewsSection = document.getElementById('reviewsSection');
+            if (!reviewsSection) {
+                console.error('reviewsSection element not found');
+                return;
+            }
+            reviewsSection.classList.toggle('hidden');
+            document.getElementById('coursesSection').classList.add('hidden');
+            document.getElementById('newCourseForm').classList.add('hidden');
+            document.getElementById('addCourseForm').classList.add('hidden');
+            document.getElementById('dropCourseForm').classList.add('hidden');
+            document.getElementById('studentsSection').classList.add('hidden');
+            console.log('Toggled reviews section, hidden:', reviewsSection.classList.contains('hidden'));
         }
 
         // Password toggle
