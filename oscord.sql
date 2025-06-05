@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2025 at 11:40 AM
+-- Generation Time: Jun 05, 2025 at 05:35 PM
 -- Server version: 8.0.33
 -- PHP Version: 8.2.4
 
@@ -73,8 +73,8 @@ CREATE TABLE `oscord_course` (
 --
 
 INSERT INTO `oscord_course` (`courseID`, `courseName`, `courseDescription`, `courseFee`, `coursePeriod`, `courseFbLink`) VALUES
-(1, 'Java Programming (Basic to Advanced)', 'Learn programming with Java from basic level to application development level with Database. In this course, we focus on understanding the programming concept with J2SE, building desktop application with GUI Frameworks, CRUD operations with Database(My SQL).', '500000 MMK     Teach Yourself : 120000 MMK', '4 months to 5 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02LByymgT3wQkUYPq3TgYuDn1xWsJFhdQqEziunA5JdgCPrqWLnnQ6gMNQQkiKr5Hal&id=100088520077343'),
-(2, 'Python Programming (Basic to Advanced)', 'Learn Python Programming(Basic to Advanced) where the industries of Data Science, Machine Learning, Artificial Intelligence, Computer Vision and Web Developement Industry are mainly workly on.\r\nTake database class for free whoever join Python Class', '500000 MMK', '4 months to 5 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02X8iFCML5nQcaMUjRDY1A1jmRrs8R7wcRpzsDyDCz41iyzfXn3GreXqaBrrgWbH7Ml&id=100088520077343'),
+(1, 'Java Programming (Basic to Advanced)', 'Learn programming with Java from basic level to application development level with Database. In this course, we focus on understanding the programming concept with J2SE, building desktop application with GUI Frameworks, CRUD operations with Database(My SQL).', '500000 MMK', '4 months to 5 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02LByymgT3wQkUYPq3TgYuDn1xWsJFhdQqEziunA5JdgCPrqWLnnQ6gMNQQkiKr5Hal&id=100088520077343'),
+(2, 'Python Programming (Basic to Advanced)', 'Learn Python Programming (Basic to CRUD Application Development Level with Database) where the industries of Data Science, Machine Learning, Artificial Intelligence, Computer Vision and Web Developement, are mainly working on.', '500000 MMK', '4 months to 5 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02X8iFCML5nQcaMUjRDY1A1jmRrs8R7wcRpzsDyDCz41iyzfXn3GreXqaBrrgWbH7Ml&id=100088520077343'),
 (3, 'Database Systems and Design(MY SQL)', 'Learn how the database management system works , how to design a physical database starting from Conceptual database design and Logical database design, using it in application', '280000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02gCEMFb7b6oKMxVq3rtYEri8ku7VoS3yDuTJvUSC6kDwtZV3TSEej9MV4eNkf7Hggl&id=100088520077343'),
 (4, 'Frontend Web Development', 'Learn how to design a web page with HTML, CSS, Javascript, Bootstrap and JQuery. ', '280000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343'),
 (5, 'Backend Web Development', 'In backend web development, we will use mainly PHP programming as the backend algorithms will mainly work with Database Management Systems and CRUD operation.', '350000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343'),
@@ -287,15 +287,17 @@ CREATE TABLE `oscord_studentreview` (
   `studentreviewID` int NOT NULL,
   `studentreview` varchar(500) NOT NULL,
   `courseID` int NOT NULL,
-  `studentID` int NOT NULL
+  `studentID` int NOT NULL,
+  `isShown` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `oscord_studentreview`
 --
 
-INSERT INTO `oscord_studentreview` (`studentreviewID`, `studentreview`, `courseID`, `studentID`) VALUES
-(11, 'ဆရာက စေတနာပါပါနဲ့ အားလုံးကို နားလည်လွယ်‌အောင် ရှင်းပြပေးပါတယ်\r\nExercise တွေနဲ့ နားမလည်တာတွေကို စိတ်ရှည်ရှည်နဲ့ရှင်းပြပြီး ရှင်းပြထားတဲ့notes တွေကို\r\nအမြဲပိုပေးတဲ့အတွက် စာပြန်ကြည့်တဲ့အခါအရမ်းကို အထောက်အကူဖြစ်စေပီး အဆင်ပြေပါတယ်', 1, 10);
+INSERT INTO `oscord_studentreview` (`studentreviewID`, `studentreview`, `courseID`, `studentID`, `isShown`) VALUES
+(11, 'ဆရာက စေတနာပါပါနဲ့ အားလုံးကို နားလည်လွယ်‌အောင် ရှင်းပြပေးပါတယ်\r\nExercise တွေနဲ့ နားမလည်တာတွေကို စိတ်ရှည်ရှည်နဲ့ရှင်းပြပြီး ရှင်းပြထားတဲ့notes တွေကို\r\nအမြဲပိုပေးတဲ့အတွက် စာပြန်ကြည့်တဲ့အခါအရမ်းကို အထောက်အကူဖြစ်စေပီး အဆင်ပြေပါတယ်', 1, 10, 1),
+(19, 'dddd', 9, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -316,8 +318,7 @@ CREATE TABLE `oscord_studentxcourse` (
 
 INSERT INTO `oscord_studentxcourse` (`studentxcourseID`, `studentID`, `courseID`, `enrollDate`) VALUES
 (1, 10, 1, '2025-05-31'),
-(2, 10, 9, '2025-05-31'),
-(18, 10, 2, '2025-06-01');
+(2, 10, 9, '2025-05-31');
 
 -- --------------------------------------------------------
 
@@ -330,18 +331,19 @@ CREATE TABLE `oscord_vidlec` (
   `videoName` varchar(100) NOT NULL,
   `videoLink` varchar(200) NOT NULL,
   `courseID` int NOT NULL,
-  `videoFree` tinyint(1) NOT NULL,
-  `videoNumber` int NOT NULL
+  `videoFree` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `oscord_vidlec`
 --
 
-INSERT INTO `oscord_vidlec` (`videoID`, `videoName`, `videoLink`, `courseID`, `videoFree`, `videoNumber`) VALUES
-(1, '1. Introduction to Java Programming', 'https://www.youtube.com/embed/jrb3a7OT4u0', 1, 1, 0),
-(3, '11. CRUD in Java', 'https://www.youtube.com/embed/pQWbUEyUCrk?list=RDeswWzNMwe9Y', 1, 1, 0),
-(10, '2. OOP in Java', 'https://www.youtube.com/embed/eswWzNMwe9Y', 1, 1, 0);
+INSERT INTO `oscord_vidlec` (`videoID`, `videoName`, `videoLink`, `courseID`, `videoFree`) VALUES
+(1, '2. Variables and Datatypes - Part 1', 'https://youtu.be/jlHiIO7x9HI', 1, 1),
+(10, '3. Variables and Datatypes - Part 2', 'https://youtu.be/jnhRq-_QXCg', 1, 1),
+(11, '14. Utility & Collection Class in Java', 'https://youtu.be/RcBFKwTF3BI', 1, 1),
+(12, '6. User Input in Java', 'https://youtu.be/AMw6_h0EFF0', 1, 1),
+(14, '8. Loopings in Java - Part 1', 'https://youtu.be/HbVgRRyF_eE', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -430,43 +432,43 @@ ALTER TABLE `oscord_course`
 -- AUTO_INCREMENT for table `oscord_coursedetail`
 --
 ALTER TABLE `oscord_coursedetail`
-  MODIFY `coursedetailID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `coursedetailID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT for table `oscord_instructor`
 --
 ALTER TABLE `oscord_instructor`
-  MODIFY `instructorID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `instructorID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `oscord_instructorxcourse`
 --
 ALTER TABLE `oscord_instructorxcourse`
-  MODIFY `instrucorxcourseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `instrucorxcourseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `oscord_student`
 --
 ALTER TABLE `oscord_student`
-  MODIFY `studentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `studentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `oscord_studentreview`
 --
 ALTER TABLE `oscord_studentreview`
-  MODIFY `studentreviewID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `studentreviewID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `oscord_studentxcourse`
 --
 ALTER TABLE `oscord_studentxcourse`
-  MODIFY `studentxcourseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `studentxcourseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `oscord_vidlec`
 --
 ALTER TABLE `oscord_vidlec`
-  MODIFY `videoID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `videoID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables

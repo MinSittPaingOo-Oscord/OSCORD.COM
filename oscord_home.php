@@ -640,9 +640,9 @@ $result_courses = $conn->query($query_courses);
             <div class='col' id="wel">
                 <h2>Welcome to Oscord</h2>
                 <br>
-                <p>Study programming basic to software development level at OSCORD. 
-                Online students can join both by one VIP class and group class(if available).
-                For all by one classes, students can negotiate the class schedule.
+                <p>Study programming & Compute Science subjects basic to software development level at OSCORD. 
+                Online students can join both <b> by one VIP class</b> and group class(if available).
+                For all by one classes, students <b> can negotiate </b>the class schedule.
                 The video records and lecture files are usually sent in the private telegram channel daily right after the class.</p> 
             </div>
             <div class='col'>

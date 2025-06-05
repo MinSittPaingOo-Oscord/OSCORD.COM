@@ -17,6 +17,7 @@ if (!isset($_GET['instructorID']) || !isset($_GET['studentID'])) {
 $instructorID = intval($_GET['instructorID']);
 $studentID = intval($_GET['studentID']);
 $message = '';
+$course_message = ''; // Separate message for course actions
 
 // Debug log function
 function logDebug($message) {
@@ -76,6 +77,28 @@ if ($stmt) {
     $message = "Error fetching enrolled courses.";
 }
 
+// Fetch available courses for the instructor (not enrolled by the student)
+$query = "SELECT c.courseID, c.courseName 
+          FROM oscord_course c 
+          JOIN oscord_instructorxcourse ic ON c.courseID = ic.courseID 
+          WHERE ic.instructorID = ? 
+          AND c.courseID NOT IN (
+              SELECT courseID 
+              FROM oscord_studentxcourse 
+              WHERE studentID = ?
+          )";
+$stmt = $conn->prepare($query);
+if ($stmt) {
+    $stmt->bind_param("ii", $instructorID, $studentID);
+    $stmt->execute();
+    $availableCourses = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+} else {
+    $error = "Failed to prepare available courses query: " . $conn->error;
+    logDebug($error);
+    $course_message = "Error fetching available courses.";
+}
+
 // Handle PIN verification via AJAX
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] == 'verify_pin') {
     $enteredPin = $_POST['pin'];
@@ -121,11 +144,136 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_approval']) && 
             logDebug($error);
             $message = "Error updating student approval status.";
         }
- 
     } else {
         $error = "Failed to prepare update query: " . $conn->error;
         logDebug($error);
         $message = "Error preparing update.";
+    }
+}
+
+// Handle course registration
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register_course']) && isset($_POST['pin_verified']) && $_POST['pin_verified'] == 'true') {
+    if (!empty($_POST['course_ids']) && is_array($_POST['course_ids'])) {
+        $success_count = 0;
+        $enrollDate = date('Y-m-d');
+        foreach ($_POST['course_ids'] as $courseID) {
+            $courseID = intval($courseID);
+            // Check instructor authorization
+            $query = "SELECT courseID FROM oscord_instructorxcourse WHERE courseID = ? AND instructorID = ?";
+            $stmt = $conn->prepare($query);
+            if ($stmt) {
+                $stmt->bind_param("ii", $courseID, $instructorID);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if ($result->num_rows > 0) {
+                    // Register course
+                    $query = "INSERT INTO oscord_studentxcourse (studentID, courseID, enrollDate) VALUES (?, ?, ?)";
+                    $stmt = $conn->prepare($query);
+                    if ($stmt) {
+                        $stmt->bind_param("iis", $studentID, $courseID, $enrollDate);
+                        if ($stmt->execute()) {
+                            $success_count++;
+                            logDebug("Course ID $courseID registered for student ID $studentID by instructor ID $instructorID");
+                        }
+                        $stmt->close();
+                    }
+                }
+            }
+        }
+        if ($success_count > 0) {
+            $course_message = "$success_count course(s) successfully registered for the student.";
+            // Refresh enrolled courses
+            $query = "SELECT c.courseID, c.courseName 
+                      FROM oscord_course c 
+                      JOIN oscord_studentxcourse sc ON c.courseID = sc.courseID 
+                      WHERE sc.studentID = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("i", $studentID);
+            $stmt->execute();
+            $enrolledCourses = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+            // Refresh available courses
+            $query = "SELECT c.courseID, c.courseName 
+                      FROM oscord_course c 
+                      JOIN oscord_instructorxcourse ic ON c.courseID = ic.courseID 
+                      WHERE ic.instructorID = ? 
+                      AND c.courseID NOT IN (
+                          SELECT courseID 
+                          FROM oscord_studentxcourse 
+                          WHERE studentID = ?
+                      )";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ii", $instructorID, $studentID);
+            $stmt->execute();
+            $availableCourses = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+        } else {
+            $course_message = "No courses registered. Check authorization or try again.";
+        }
+    } else {
+        $course_message = "Please select at least one course to register.";
+    }
+}
+
+// Handle course dropping
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['drop_course']) && isset($_POST['pin_verified']) && $_POST['pin_verified'] == 'true') {
+    $courseID = intval($_POST['course_id']);
+    $query = "SELECT courseID FROM oscord_instructorxcourse WHERE courseID = ? AND instructorID = ?";
+    $stmt = $conn->prepare($query);
+    if ($stmt) {
+        $stmt->bind_param("ii", $courseID, $instructorID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $query = "DELETE FROM oscord_studentxcourse WHERE studentID = ? AND courseID = ?";
+            $stmt = $conn->prepare($query);
+            if ($stmt) {
+                $stmt->bind_param("ii", $studentID, $courseID);
+                if ($stmt->execute()) {
+                    $course_message = "Course successfully dropped for the student.";
+                    logDebug("Course ID $courseID dropped for student ID $studentID by instructor ID $instructorID");
+                    // Refresh enrolled courses
+                    $query = "SELECT c.courseID, c.courseName 
+                              FROM oscord_course c 
+                              JOIN oscord_studentxcourse sc ON c.courseID = sc.courseID 
+                              WHERE sc.studentID = ?";
+                    $stmt = $conn->prepare($query);
+                    $stmt->bind_param("i", $studentID);
+                    $stmt->execute();
+                    $enrolledCourses = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $stmt->close();
+                    // Refresh available courses
+                    $query = "SELECT c.courseID, c.courseName 
+                              FROM oscord_course c 
+                              JOIN oscord_instructorxcourse ic ON c.courseID = ic.courseID 
+                              WHERE ic.instructorID = ? 
+                              AND c.courseID NOT IN (
+                                  SELECT courseID 
+                                  FROM oscord_studentxcourse 
+                                  WHERE studentID = ?
+                              )";
+                    $stmt = $conn->prepare($query);
+                    $stmt->bind_param("ii", $instructorID, $studentID);
+                    $stmt->execute();
+                    $availableCourses = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+                    $stmt->close();
+                } else {
+                    $error = "Failed to drop course: " . $stmt->error;
+                    logDebug($error);
+                    $course_message = "Error dropping course.";
+                }
+            } else {
+                $error = "Failed to prepare drop course query: " . $conn->error;
+                logDebug($error);
+                $course_message = "Error preparing course drop.";
+            }
+        } else {
+            $course_message = "You are not authorized to drop this course.";
+        }
+    } else {
+        $error = "Failed to prepare course authorization query: " . $conn->error;
+        logDebug($error);
+        $course_message = "Error checking course authorization.";
     }
 }
 
@@ -353,6 +501,34 @@ $conn->close();
                 font-size: 1.5rem;
             }
         }
+        .cyber-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .cyber-table th, .cyber-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 20, 147, 0.3);
+        }
+        .cyber-table th {
+            background: rgba(255, 20, 147, 0.2);
+            color: #00ffea;
+            font-weight: 700;
+        }
+        .cyber-table tr:hover {
+            background: rgba(0, 255, 234, 0.1);
+        }
+        .cyber-table .btn-cyber {
+            padding: 0.5rem 1rem;
+            width: auto;
+        }
+        .cyber-table .checkbox-field {
+            accent-color: #00ffea;
+        }
     </style>
 </head>
 <body>
@@ -422,11 +598,71 @@ $conn->close();
             <?php if (empty($enrolledCourses)): ?>
                 <p class="text-gray-400 mb-4">This student is not enrolled in any courses.</p>
             <?php else: ?>
-                <div class="flex flex-wrap gap-4 mb-4">
-                    <?php foreach ($enrolledCourses as $course): ?>
-                        <div class="course-button"><?php echo htmlspecialchars($course['courseName']); ?></div>
-                    <?php endforeach; ?>
+                <table class="cyber-table mb-4">
+                    <thead>
+                        <tr>
+                            <th>Course ID</th>
+                            <th>Course Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($enrolledCourses as $course): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($course['courseID']); ?></td>
+                                <td><?php echo htmlspecialchars($course['courseName']); ?></td>
+                                <td>
+                                    <form id="dropForm_<?php echo $course['courseID']; ?>" method="POST" action="">
+                                        <input type="hidden" name="drop_course" value="true">
+                                        <input type="hidden" name="pin_verified" id="dropPinVerified_<?php echo $course['courseID']; ?>" value="false">
+                                        <input type="hidden" name="course_id" value="<?php echo $course['courseID']; ?>">
+                                        <button type="submit" class="btn-cyber" onclick="return showPinModal('dropForm_<?php echo $course['courseID']; ?>')">Drop</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php endif; ?>
+        </div>
+
+        <!-- Register New Course -->
+        <div class="cyber-card">
+            <h3 class="text-2xl font-bold text-white mb-6">Register New Course</h3>
+            <?php if (!empty($course_message)): ?>
+                <div class="alert-cyber">
+                    <span><?php echo htmlspecialchars($course_message); ?></span>
+                    <button onclick="this.parentElement.style.display='none'" class="hover:text-white">×</button>
                 </div>
+            <?php endif; ?>
+            <?php if (empty($availableCourses)): ?>
+                <p class="text-gray-400 mb-4">No available courses to register for this student.</p>
+            <?php else: ?>
+                <form id="registerForm" method="POST" action="">
+                    <input type="hidden" name="register_course" value="true">
+                    <input type="hidden" name="pin_verified" id="registerPinVerified" value="false">
+                    <table class="cyber-table mb-4">
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Course ID</th>
+                                <th>Course Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($availableCourses as $course): ?>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="course_ids[]" value="<?php echo $course['courseID']; ?>" class="checkbox-field">
+                                    </td>
+                                    <td><?php echo htmlspecialchars($course['courseID']); ?></td>
+                                    <td><?php echo htmlspecialchars($course['courseName']); ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                    <button type="submit" class="btn-cyber" onclick="return showPinModal('registerForm')">Register Selected Courses</button>
+                </form>
             <?php endif; ?>
         </div>
     </div>

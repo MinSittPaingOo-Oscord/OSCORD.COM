@@ -524,6 +524,9 @@
             .course-image {
                 margin-top: 25px;
             }
+            .video-card{
+                height : auto;
+            }
             .video-card .card-title {
                 font-size: 1.3rem;
             }

@@ -145,7 +145,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_review']) && is
             logDebug($error);
             $message = "Error updating review visibility.";
         }
-        
     } else {
         $error = "Failed to prepare update review query: " . $conn->error;
         logDebug($error);
@@ -202,7 +201,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_courses']) && isse
 // Handle dropping courses
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['drop_courses']) && isset($_POST['pin_verified']) && $_POST['pin_verified'] == 'true') {
     if (!empty($_POST['courses']) && is_array($_POST['courses'])) {
-        $stmt = $conn->prepare("DELETE FROM oscord_instructorxcourse WHERE instructorID = ? AND courseID = ?");
+        $stmt = $conn->prepare("DELETE FROM oscord_instructorxcourse WHERE instructorID = ? AND courseID = ?)");
         if ($stmt) {
             $stmt->bind_param("ii", $instructorID, $courseID);
             $success = true;
@@ -445,8 +444,8 @@ $conn->close();
             position: relative;
             margin-bottom: 1.75rem;
         }
-        #review{
-            line-height : 40px;
+        #review {
+            line-height: 40px;
         }
         .input-field {
             background: rgba(255, 255, 255, 0.05);
@@ -588,6 +587,41 @@ $conn->close();
             border-radius: 0.5rem;
             margin-bottom: 1rem;
         }
+        .cyber-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .cyber-table th, .cyber-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 20, 147, 0.3);
+        }
+        .cyber-table th {
+            background: rgba(255, 20, 147, 0.2);
+            color: #00ffea;
+            font-weight: 700;
+        }
+        .cyber-table tr:hover {
+            background: rgba(0, 255, 234, 0.1);
+        }
+        .table-link {
+            background: linear-gradient(45deg, #ff1493, #00ffea);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            display: inline-block;
+        }
+        .table-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(0, 255, 234, 0.7);
+        }
         @media (max-width: 640px) {
             .cyber-card {
                 padding: 1.5rem;
@@ -600,6 +634,10 @@ $conn->close();
                 width: 60px;
                 height: 60px;
                 font-size: 1.5rem;
+            }
+            .cyber-table th, .cyber-table td {
+                padding: 0.5rem;
+                font-size: 0.875rem;
             }
         }
     </style>
@@ -804,14 +842,31 @@ $conn->close();
                 <?php if (empty($students)): ?>
                     <p class="text-gray-400 mb-4">No students found.</p>
                 <?php else: ?>
-                    <?php foreach ($students as $student): ?>
-                        <a href="instructor_handleStudent.php?instructorID=<?php echo urlencode($instructorID); ?>&studentID=<?php echo urlencode($student['studentID']); ?>" 
-                           class="btn-cyber">
-                            <?php echo htmlspecialchars($student['studentName']); ?> 
-                            <?php echo htmlspecialchars($student['studentEmail']); ?> 
-                            (<?php echo $student['studentApprove'] ? '✓' : '✗'; ?>)
-                        </a>
-                    <?php endforeach; ?>
+                    <table class="cyber-table mb-4">
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Approval Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($students as $student): ?>
+                                <tr>
+                                    <td><?php echo htmlspecialchars($student['studentID']); ?></td>
+                                    <td><?php echo htmlspecialchars($student['studentName']); ?></td>
+                                    <td><?php echo htmlspecialchars($student['studentEmail']); ?></td>
+                                    <td><?php echo $student['studentApprove'] ? '✓' : '✗'; ?></td>
+                                    <td>
+                                        <a href="instructor_handleStudent.php?instructorID=<?php echo urlencode($instructorID); ?>&studentID=<?php echo urlencode($student['studentID']); ?>" 
+                                           class="table-link">Manage</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
                 <?php endif; ?>
             </div>
 
