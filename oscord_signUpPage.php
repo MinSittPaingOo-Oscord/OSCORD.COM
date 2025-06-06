@@ -19,6 +19,7 @@ $result2 = $conn->query($query2);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
     <style>
         body {
@@ -29,6 +30,17 @@ $result2 = $conn->query($query2);
             color: #e0e0e0;
             overflow-x: hidden;
             margin: 0;
+            position: relative;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: transparent;
         }
 
         @keyframes gradientShift {
@@ -46,6 +58,8 @@ $result2 = $conn->query($query2);
             justify-content: space-between;
             padding: 40px 20px;
             min-height: 100vh;
+            position: relative;
+            z-index: 1;
         }
 
         .left-content {
@@ -296,6 +310,7 @@ $result2 = $conn->query($query2);
     </style>
 </head>
 <body>
+<div id="particles-js"></div>
 <div class="container">
     <div class="left-content main">
         <h1>Register Now</h1><br>
@@ -481,7 +496,7 @@ $result2 = $conn->query($query2);
                     <div>သင်တန်းစည်းကမ်းများ</div>
                     <ul>
                         <li>Zoom meeting ချိန်အတွင်း အသံ Mute ထားလိုမရပါဖူး</li>
-                        <li>Telegram private channel နှင့် Website ပေါ်တွင်ပေးထားသော သင်ခန်းစာ, Video record  များ ကို မိမိတစ်ဦးတည်းသာဝင်ရောက်ပီး သင်ခန်းလေ့လာလိုရပါမယ်
+                        <li>Telegram private channel နှင့် Website ပေါ်တွင်ပေးထားသော သင်ခန်းစာ, Video record  များ ကို မိမိတစ်ဦးတည်းသာဝင်ရောက်ပီး လေ့လာလိုရပါမယ်
                             မည်သူတစ်ဦးတစ်ယောက်ကိုမှ မျှဝေခြင်းကိုခွင့်မပြုပါ</li>
                         <li>အတန်းစမည့်အချိန်မှာ အမြဲတမ်း Zoom ID & passcode  သိုမဟုတ် Meeting Link ပိုပေးသွားမှာဖြစ်ပြီး 30 minutes အတွင်းဝင်ရောက်လာခြင်းမရှိပါက ပျက်ကွက်သည်ဟုယူဆပြီး Meeting အားရုတ်သိမ်းမှာဖြစ်ပါတယ်</li>
                     </ul>
@@ -497,6 +512,110 @@ $result2 = $conn->query($query2);
 </div>
 
 <script>
+    // Particle.js configuration
+    particlesJS('particles-js', {
+        "particles": {
+            "number": {
+                "value": 80,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
+            },
+            "color": {
+                "value": ["#00ff15", "#8000ff", "#ffffff"]
+            },
+            "shape": {
+                "type": "circle",
+                "stroke": {
+                    "width": 0,
+                    "color": "#000000"
+                }
+            },
+            "opacity": {
+                "value": 0.5,
+                "random": true,
+                "anim": {
+                    "enable": true,
+                    "speed": 1,
+                    "opacity_min": 0.1,
+                    "sync": false
+                }
+            },
+            "size": {
+                "value": 3,
+                "random": true,
+                "anim": {
+                    "enable": true,
+                    "speed": 2,
+                    "size_min": 0.5,
+                    "sync": false
+                }
+            },
+            "line_linked": {
+                "enable": true,
+                "distance": 150,
+                "color": "#00ff15",
+                "opacity": 0.4,
+                "width": 1
+            },
+            "move": {
+                "enable": true,
+                "speed": 2,
+                "direction": "none",
+                "random": true,
+                "straight": false,
+                "out_mode": "out",
+                "bounce": false,
+                "attract": {
+                    "enable": false,
+                    "rotateX": 600,
+                    "rotateY": 1200
+                }
+            }
+        },
+        "interactivity": {
+            "detect_on": "canvas",
+            "events": {
+                "onhover": {
+                    "enable": true,
+                    "mode": "repulse"
+                },
+                "onclick": {
+                    "enable": true,
+                    "mode": "push"
+                },
+                "resize": true
+            },
+            "modes": {
+                "grab": {
+                    "distance": 400,
+                    "line_linked": {
+                        "opacity": 1
+                    }
+                },
+                "bubble": {
+                    "distance": 400,
+                    "size": 40,
+                    "duration": 2,
+                    "opacity": 8,
+                    "speed": 3
+                },
+                "repulse": {
+                    "distance": 100,
+                    "duration": 0.4
+                },
+                "push": {
+                    "particles_nb": 4
+                },
+                "remove": {
+                    "particles_nb": 2
+                }
+            }
+        },
+        "retina_detect": true
+    });
+
     document.getElementById("role").addEventListener("change", function() {
         const role = this.value;
         document.getElementById("instructorFields").classList.add("hidden");

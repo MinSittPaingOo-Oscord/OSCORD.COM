@@ -15,6 +15,18 @@ $result_students = $conn->query($query_students);
 
 $query_courses = "SELECT courseID, courseName FROM oscord_course";
 $result_courses = $conn->query($query_courses);
+
+$query_course_count = "SELECT COUNT(*) as course_count FROM oscord_course";
+$result_course_count = $conn->query($query_course_count);
+$course_count = $result_course_count->fetch_assoc()['course_count'];
+
+$query_student_count = "SELECT COUNT(DISTINCT studentID) as student_count FROM oscord_studentxcourse";
+$result_student_count = $conn->query($query_student_count);
+$student_count = $result_student_count->fetch_assoc()['student_count'];
+
+$query_content_count = "SELECT (SELECT COUNT(*) FROM oscord_vidlec) + (SELECT COUNT(*) FROM file) as content_count";
+$result_content_count = $conn->query($query_content_count);
+$content_count = $result_content_count->fetch_assoc()['content_count'];
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +37,9 @@ $result_courses = $conn->query($query_courses);
     <title>Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -39,6 +53,18 @@ $result_courses = $conn->query($query_courses);
             color: #e6e6e6;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: transparent;
         }
 
         /* Animations */
@@ -52,9 +78,20 @@ $result_courses = $conn->query($query_courses);
             50% { box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 40px #00f2ff; }
         }
 
+        @keyframes neonPulse {
+            0%, 100% { text-shadow: 0 0 5px #00f2ff, 0 0 10px #00f2ff, 0 0 15px #00f2ff; }
+            50% { text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 30px #00f2ff; }
+        }
+
         @keyframes slideIn {
             from { transform: translateX(-100%); }
             to { transform: translateX(0); }
+        }
+
+        @keyframes logoSpin {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.05); }
+            100% { transform: rotate(360deg) scale(1); }
         }
 
         /* Navigation */
@@ -67,6 +104,20 @@ $result_courses = $conn->query($query_courses);
             padding: 15px 25px;
             box-shadow: 0 4px 12px rgba(0, 242, 255, 0.15);
             animation: slideIn 0.5s ease-out;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+            animation: logoSpin 8s infinite linear;
         }
 
         .nav-link {
@@ -127,9 +178,10 @@ $result_courses = $conn->query($query_courses);
             display: flex;
             align-items: center;
             padding: 50px 5%;
- POSITION: relative;
+            position: relative;
             overflow: hidden;
             animation: fadeIn 1s ease-out;
+            z-index: 1;
         }
 
         .welcome-container::before {
@@ -160,7 +212,7 @@ $result_courses = $conn->query($query_courses);
             font-size: 3.5rem;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 1.2rem;
+            margin-bottom: 0px;
             text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
             animation: fadeIn 0.8s ease-out;
         }
@@ -189,6 +241,90 @@ $result_courses = $conn->query($query_courses);
             box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
         }
 
+        /* Stats Section */
+        .stats-section {
+            background: rgba(20, 20, 20, 0.9);
+            padding: 40px 0;
+            margin-top: 0px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-out;
+            text-align: center;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #ffffff;
+            text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
+            animation: neonPulse 2s infinite;
+        }
+
+        .stats-content {
+            max-width: 1200px;
+            width: 100%;
+            padding: 0 15px;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stats-item {
+            text-align: center;
+            padding: 20px;
+            background: #1c2526;
+            border-radius: 10px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
+            animation: neonGlow 2s infinite;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+        }
+
+        .stats-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.6);
+        }
+
+        .stats-item h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #00f2ff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            animation: neonPulse 2s infinite;
+        }
+
+        .stats-item p {
+            font-size: 1.1rem;
+            color: #d0d0d0;
+            margin: 0;
+            text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
+        }
+
+        .stats-item i {
+            font-size: 1.5rem;
+            color: #00f2ff;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
         #titleCourse {
             font-family: 'Orbitron', sans-serif;
             font-size: 3rem;
@@ -199,20 +335,24 @@ $result_courses = $conn->query($query_courses);
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
             animation: fadeIn 0.8s ease-out;
+            position: relative;
+            z-index: 1;
         }
 
         .card {
-            background: #2a2a2a;
-            border: none;
+            background: transparent;
+            border: 1px;
             border-radius: 15px;
             padding: 20px;
             margin: 15px auto;
             transition: all 0.4s ease;
             color: #e6e6e6;
             max-width: 400px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 5px rgba(0, 242, 255, 0.5);
             animation: fadeIn 1s ease-out;
-            height : 1300px;
+            height: 1200px;
+            position: relative;
+            z-index: 1;
         }
 
         .card:hover {
@@ -227,7 +367,7 @@ $result_courses = $conn->query($query_courses);
             margin-bottom: 30px;
             color: #ffffff;
             text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
-            line-height : 40px;
+            line-height: 40px;
         }
 
         #courseDescription {
@@ -277,8 +417,8 @@ $result_courses = $conn->query($query_courses);
             animation: neonGlow 2s infinite;
             display: block;
             text-align: center;
-            margin-top : 20px;
-            margin-bottom : 30px;
+            margin-top: 20px;
+            margin-bottom: 30px;
         }
 
         .btn-course-detail:hover {
@@ -288,7 +428,7 @@ $result_courses = $conn->query($query_courses);
         }
 
         .course-details-content {
-            background: #2a2a2a;
+            background: transparent;
             border-radius: 8px;
             padding: 10px 15px;
             margin-bottom: 30px;
@@ -318,11 +458,12 @@ $result_courses = $conn->query($query_courses);
         .review-section {
             margin: 60px 0;
             padding: 40px;
-            background: rgba(20, 20, 20, 0.9);
+            background: transparent;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
             animation: fadeIn 1s ease-out;
-            
+            position: relative;
+            z-index: 1;
         }
 
         .review-section h2 {
@@ -333,7 +474,7 @@ $result_courses = $conn->query($query_courses);
             margin-bottom: 40px;
             color: #ffffff;
             text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
-            
+            line-height: 40px;
         }
 
         .review-item h1 {
@@ -352,14 +493,22 @@ $result_courses = $conn->query($query_courses);
             color: #d0d0d0;
         }
 
+        .review-item i {
+            font-size: 1.2rem;
+            color: #00f2ff;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
         .form-container {
-            background: #2a2a2a;
+            background: transparent;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
             margin: 30px auto;
             width: 100%;
             animation: fadeIn 1s ease-out;
+            position: relative;
+            z-index: 1;
         }
 
         .form-container h2 {
@@ -412,6 +561,8 @@ $result_courses = $conn->query($query_courses);
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
             animation: fadeIn 1s ease-out;
+            position: relative;
+            z-index: 1;
         }
 
         .contact-form h2 {
@@ -471,10 +622,12 @@ $result_courses = $conn->query($query_courses);
         /* Footer */
         #homeConclusion {
             background: rgba(10, 10, 10, 0.95);
-            padding)」: 40px 0;
+            padding: 40px 0;
             color: #e6e6e6;
             animation: fadeIn 1s ease-out;
-            padding-top : 30px;
+            padding-top: 30px;
+            position: relative;
+            z-index: 1;
         }
 
         #homeConclusion h4 {
@@ -484,6 +637,13 @@ $result_courses = $conn->query($query_courses);
             margin-bottom: 20px;
             color: #ffffff;
             text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
+        }
+
+        #homeConclusion h4 i {
+            font-size: 1.2rem;
+            color: #00f2ff;
+            margin-right: 8px;
+            vertical-align: middle;
         }
 
         #homeConclusion a {
@@ -503,10 +663,12 @@ $result_courses = $conn->query($query_courses);
             padding: 20px 0;
             font-size: 0.9rem;
             color: #d0d0d0;
+            position: relative;
+            z-index: 1;
         }
 
         /* Responsive Design */
-        @media (max-width: 768px) {
+        @media (max-width: 820px) {
             .welcome-container {
                 min-height: 70vh;
                 padding: 30px 5%;
@@ -522,6 +684,7 @@ $result_courses = $conn->query($query_courses);
 
             .circularImage {
                 margin-top: 25px;
+                border-radius: 330px;
             }
 
             .middle {
@@ -534,26 +697,77 @@ $result_courses = $conn->query($query_courses);
             }
 
             .card {
-                max-width: 100%;
-                height: auto;
+                max-width: 300px;
+                height: 1000px;
+                padding: 15px;
+                margin: 10px auto;
+                border-radius: 12px;
+            }
+
+            .card-title {
+                font-size: 1.6rem;
+                line-height: 1.4;
+                margin-bottom: 20px;
+            }
+
+            #courseDescription {
+                font-size: 0.95rem;
+                line-height: 1.7;
+                margin-bottom: 20px;
+            }
+
+            .card-text .detail-item {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
             }
 
             .btn-course-detail {
-                padding: 10px 25px;
-                font-size: 1rem;
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                margin-top: 15px;
+                margin-bottom: 20px;
+            }
+
+            .course-details-content {
+                max-height: 150px;
+                padding: 8px 12px;
+                margin-bottom: 20px;
+            }
+
+            .course-details-content .course-detail-item {
+                font-size: 0.85rem;
+                padding: 4px 8px;
             }
 
             #titleCourse {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
+                margin: 40px 0 20px;
+            }
+
+            .review-section {
+                padding: 30px 20px;
             }
 
             .review-section h2 {
                 font-size: 1.8rem;
+                line-height: 1.4;
             }
 
             .contact-form {
-                padding: 20px;
+                padding: 30px 20px;
                 max-width: 100%;
+            }
+
+            .stats-section h2 {
+                font-size: 2rem;
+            }
+
+            .stats-item h3 {
+                font-size: 1.8rem;
+            }
+
+            .stats-item p {
+                font-size: 1rem;
             }
         }
 
@@ -567,20 +781,78 @@ $result_courses = $conn->query($query_courses);
                 font-size: 0.8rem;
             }
 
+            .card {
+                max-width: 85%;
+                height: auto;
+                padding: 12px;
+                border-radius: 10px;
+                margin-bottom: 30px;
+            }
+
             .card-title {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
+                line-height: 1.3;
+                margin-bottom: 15px;
+            }
+
+            #courseDescription {
+                font-size: 0.9rem;
+                line-height: 1.6;
+                margin-bottom: 15px;
+            }
+
+            .card-text .detail-item {
+                font-size: 0.85rem;
+                margin-bottom: 6px;
+            }
+
+            .btn-course-detail {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+                margin-top: 10px;
+                margin-bottom: 15px;
+            }
+
+            .course-details-content {
+                max-height: 120px;
+                padding: 6px 10px;
+                margin-bottom: 15px;
+            }
+
+            .course-details-content .course-detail-item {
+                font-size: 0.8rem;
+                padding: 3px 6px;
             }
 
             .form-container h2 {
                 font-size: 1.5rem;
             }
 
-            .card {
-                height: auto;
+            .stats-section h2 {
+                font-size: 1.8rem;
             }
 
-            .course-detail-item {
-                font-size: 0.8rem;
+            .stats-item h3 {
+                font-size: 1.5rem;
+            }
+
+            .stats-item p {
+                font-size: 0.9rem;
+            }
+
+            .stats-item {
+                min-width: 200px;
+            }
+
+            .review-section {
+                max-width: 90%;
+                padding: 20px;
+                margin-left: 20px;
+            }
+
+            .logo-img {
+                width: 40px;
+                height: 40px;
             }
         }
 
@@ -591,23 +863,24 @@ $result_courses = $conn->query($query_courses);
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
     <ul class="nav nav-pills navbar-custom">
-        <li class="nav-item">
+        <li class="nav-item logo-container">
             <a class="nav-link" aria-current="page" href="oscord_home.php">OSCORD - Programming & Computer Science</a>
         </li>
         <form method='post' action='oscord_specificCoursePage.php'>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Courses</a>
-            <ul class="dropdown-menu">
-                <?php
-                    if ($result1 && $result1->num_rows > 0) {
-                        while ($row = $result1->fetch_assoc()) {
-                            echo "<li><button class='dropdown-item' type='submit' name='courseID' value='".htmlspecialchars($row['courseID'])."'>".htmlspecialchars($row['courseName'])."</button></li>";
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Courses</a>
+                <ul class="dropdown-menu">
+                    <?php
+                        if ($result1 && $result1->num_rows > 0) {
+                            while ($row = $result1->fetch_assoc()) {
+                                echo "<li><button class='dropdown-item' type='submit' name='courseID' value='".htmlspecialchars($row['courseID'])."'>".htmlspecialchars($row['courseName'])."</button></li>";
+                            }
                         }
-                    }
-                ?>
-            </ul>
-        </li>
+                    ?>
+                </ul>
+            </li>
         </form>
         
         <li class="nav-item dropdown">
@@ -628,22 +901,20 @@ $result_courses = $conn->query($query_courses);
             </ul>
         </li>
         
-        <?php
-            echo "<li class='nav-item ms-auto'>
-                    <a class='nav-link' aria-current='page' href='oscord_signUpPage.php'>Sign Up</a>
-                </li>";
-        ?>
+        <li class="nav-item ms-auto">
+            <a class="nav-link" href="oscord_signUpPage.php">Sign Up</a>
+        </li>
     </ul>
-        
+
     <div class="welcome-container">
         <div class='container middle row'>
             <div class='col' id="wel">
                 <h2>Welcome to Oscord</h2>
                 <br>
-                <p>Study programming & Compute Science subjects basic to software development level at OSCORD. 
-                Online students can join both <b> by one VIP class</b> and group class(if available).
-                For all by one classes, students <b> can negotiate </b>the class schedule.
-                The video records and lecture files are usually sent in the private telegram channel daily right after the class.</p> 
+                <p>Study programming & Computer Science subjects from basic to software development level at OSCORD. 
+                Online students can join both <b>by one VIP class</b> and group class (if available).
+                For all by one classes, students <b>can negotiate</b> the class schedule.
+                The video records and lecture files are usually sent in the private Telegram channel daily right after the class.</p>
             </div>
             <div class='col'>
                 <img src='./OSCORD.jpg' class='circularImage'>
@@ -651,58 +922,76 @@ $result_courses = $conn->query($query_courses);
         </div>
     </div>   
         
+    <div class="stats-section">
+        <h2>Our Impact</h2>
+        <div class="stats-content">
+            <div class="stats-row">
+                <div class="stats-item animate-on-scroll">
+                    <h3><i class="fas fa-book"></i> <?php echo htmlspecialchars($course_count); ?></h3>
+                    <p>Courses Offered</p>
+                </div>
+                <div class="stats-item animate-on-scroll">
+                    <h3><i class="fas fa-users"></i> <?php echo htmlspecialchars($student_count); ?></h3>
+                    <p>Students Enrolled</p>
+                </div>
+                <div class="stats-item animate-on-scroll">
+                    <h3><i class="fas fa-video"></i> <?php echo htmlspecialchars($content_count); ?></h3>
+                    <p>Video Lectures & Files</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <h1 id="titleCourse">Courses from OSCORD</h1>
         <div class="row">
             <?php
             while ($row2 = $result2->fetch_assoc()) {
                 echo "<div class='col-md-6 col-lg-4'>";
-                echo "<form method='post' action='oscord_specificCoursePage.php'>
-                    <div class='card animate-on-scroll'>
-                        <div class='card-body'>
-                            <h5 class='card-title'>".htmlspecialchars($row2['courseName'])."</h5>
-                            <div id='courseDescription'>".htmlspecialchars($row2['courseDescription'])."</div>
-                            <div class='card-text'>
-                                <div class='detail-item'><b>Course Fee</b> : ".htmlspecialchars($row2['courseFee'])."</div>
-                                <div class='detail-item'><b>Course Period</b> : ".htmlspecialchars($row2['coursePeriod'])."</div>";
-                if (!empty($row2['courseFbLink'])) {
-                    echo "<div class='detail-item'><a class='fb-link' href='".htmlspecialchars($row2['courseFbLink'])."' target='_blank'>View on Facebook</a></div>";
-                }
-                echo "            </div>
-                            <button class='btn btn-course-detail' type='button' data-bs-toggle='collapse' data-bs-target='#courseDetails".htmlspecialchars($row2['courseID'])."' aria-expanded='false' aria-controls='courseDetails".htmlspecialchars($row2['courseID'])."'>
-                                Course Details
-                            </button>
-                            <div class='collapse course-details-content' id='courseDetails".htmlspecialchars($row2['courseID'])."'>";
-                                
-                                $courseID = $row2['courseID'];
-                                $query3 = "SELECT * FROM oscord_coursedetail WHERE courseID = ?";
-                                $stmt3 = $conn->prepare($query3);
-                                $stmt3->bind_param("i", $courseID);
-                                $stmt3->execute();
-                                $result3 = $stmt3->get_result();
+                echo "<form method='post' action='oscord_specificCoursePage.php'>";
+                echo "<div class='card animate-on-scroll'>";
+                echo "<div class='card-body'>";
+                    echo "<h5 class='card-title'>".htmlspecialchars($row2['courseName'])."</h5>";
+                    echo "<div id='courseDescription'>".htmlspecialchars($row2['courseDescription'])."</div>";
+                    echo "<div class='card-text'>";
+                        echo "<div class='detail-item'><b>Course Fee</b>: ".htmlspecialchars($row2['courseFee'])."</div>";
+                        echo "<div class='detail-item'><b>Course Period</b>: ".htmlspecialchars($row2['coursePeriod'])."</div>";
+                        if (!empty($row2['courseFbLink'])) {
+                            echo "<div class='detail-item'><a class='fb-link' href='".htmlspecialchars($row2['courseFbLink'])."' target='_blank'>View on Facebook</a></div>";
+                        }
+                    echo "</div>";
+                    echo "<button class='btn btn-course-detail' type='button' data-bs-toggle='collapse' data-bs-target='#courseDetails".htmlspecialchars($row2['courseID'])."' aria-expanded='false' aria-controls='courseDetails".htmlspecialchars($row2['courseID'])."'>Course Details</button>";
+                    echo "<div class='collapse course-details-content' id='courseDetails".htmlspecialchars($row2['courseID'])."'>";
+                    
+                    $courseID = $row2['courseID'];
+                    $query3 = "SELECT * FROM oscord_coursedetail WHERE courseID = ?";
+                    $stmt3 = $conn->prepare($query3);
+                    $stmt3->bind_param("i", $courseID);
+                    $stmt3->execute();
+                    $result3 = $stmt3->get_result();
 
-                                while ($row3 = $result3->fetch_assoc()) {
-                                    echo "<div class='course-detail-item'>".htmlspecialchars($row3['coursedetailName'])."</div>";
-                                }
+                    while ($row3 = $result3->fetch_assoc()) {
+                        echo "<div class='course-detail-item'>".htmlspecialchars($row3['coursedetailName'])."</div>";
+                    }
 
-                echo "        </div>
-                            <button class='btn btn-course-detail' type='submit' name='courseID' value='".htmlspecialchars($row2['courseID'])."'>Start Learning</button>
-                        </div>
-                    </div>
-                </form>";
-                echo "</div>"; 
+                    echo "</div>";
+                    echo "<button class='btn btn-course-detail' type='submit' name='courseID' value='".htmlspecialchars($row2['courseID'])."'>Start Learning</button>";
+                echo "</div>";
+                echo "</div>";
+                echo "</form>";
+                echo "</div>";
             }
             ?>
         </div>
 
-        <!-- Student Review Session -->
+        <!-- Student Review Section -->
         <div class="review-section">
             <h2>Student Reviews</h2>
             <?php
             if ($result_reviews && $result_reviews->num_rows > 0) {
                 while ($row_review = $result_reviews->fetch_assoc()) {
                     echo "<div class='review-item animate-on-scroll'>";
-                    echo "<h1 id='student_name'>Student Name - ".htmlspecialchars($row_review['studentName'])."</h1>";
+                    echo "<h3 id='studentName'><i class='fas fa-user-graduate'></i> ".htmlspecialchars($row_review['studentName'])."</h3>";
                     echo "<p id='review'>".htmlspecialchars($row_review['studentreview'])."</p>";
                     echo "<hr>";
                     echo "</div>";
@@ -734,7 +1023,6 @@ $result_courses = $conn->query($query_courses);
                             <option value="">Select</option>
                             <?php
                             if ($result_courses && $result_courses->num_rows > 0) {
-                                
                                 while ($row_course = $result_courses->fetch_assoc()) {
                                     echo "<option value='".htmlspecialchars($row_course['courseID'])."'>".htmlspecialchars($row_course['courseName'])."</option>";
                                 }
@@ -766,7 +1054,7 @@ $result_courses = $conn->query($query_courses);
                             <input type="email" id="contact_email" name="email" required>
 
                             <label for="message">Your Message:</label>
-                            <textarea id="message" name="message" required></textarea>
+                            <textarea id="message" name="content" required></textarea>
 
                             <button type="submit" class="btn">Send Message</button>
                         </form>
@@ -774,23 +1062,127 @@ $result_courses = $conn->query($query_courses);
                 </div>
 
                 <div class="col">
-                    <h4>Quick Links</h4>
+                    <h4><i class="fas fa-link"></i> Quick Links</h4>
                     <ul class="list-unstyled">
                         <li><a href="https://www.facebook.com/share/19u16vW5KQ/">Facebook Page</a></li><br>
-                        <li><a href="https://t.me/oscord_cs">Telegram Acc</a></li><br>
+                        <li><a href="https://t.me/oscord_cs">Telegram</a></li><br>
                         <li><a href="https://t.me/oscord_ProgrammingClass">Telegram Channel</a></li><br>
                         <li><a href="https://drive.google.com/file/d/1obR7QrzHTh7cldw-QFf_P82ijd_VkTDI/view?usp=sharing">Viber</a></li><br>
                     </ul>
                 </div>
             </div>
         </div>
-        
+
         <div class="text-center bg-dark w-100">
             <p class='text-light' id="last">© Oscord Programming Class All Rights Reserved 2022-2025</p>
         </div>
     </footer>
 
     <script>
+        // Particle.js configuration
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": ["#00f2ff", "#ff00ff", "#ffffff"]
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.5,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00f2ff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "repulse"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 400,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 100,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
         // Scroll-triggered animations
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
@@ -801,7 +1193,7 @@ $result_courses = $conn->query($query_courses);
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.card, .review-item, .form-container, .contact-form').forEach(el => {
+            document.querySelectorAll('.card, .review-item, .form-container, .contact-form, .stats-item').forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(20px)';
                 el.classList.add('animate-on-scroll');

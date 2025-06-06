@@ -31,6 +31,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -44,6 +45,18 @@
             color: #e6e6e6;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Particle Background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            background: transparent;
         }
 
         /* Animations */
@@ -135,6 +148,7 @@
             position: relative;
             overflow: hidden;
             animation: fadeIn 1s ease-out;
+            z-index: 1;
         }
 
         .welcome-container::before {
@@ -308,7 +322,7 @@
             overflow: hidden;
             transition: all 0.4s ease;
             animation: fadeIn 1s ease-out;
-            height : 360px;
+            height: 360px;
         }
 
         .video-card:hover {
@@ -351,7 +365,7 @@
             margin-bottom: 20px;
             color: #ffffff;
             text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
-            line-height : 30px;
+            line-height: 30px;
         }
 
         .video-details {
@@ -524,8 +538,8 @@
             .course-image {
                 margin-top: 25px;
             }
-            .video-card{
-                height : auto;
+            .video-card {
+                height: auto;
             }
             .video-card .card-title {
                 font-size: 1.3rem;
@@ -544,6 +558,7 @@
     </style>
 </head>
 <body>
+    <div id="particles-js"></div>
     <div class='upper'>
         <ul class="nav nav-pills navbar-custom">
             <li class="nav-item">
@@ -780,6 +795,110 @@
                 </div>
 
                 <script>
+                    // Particle.js configuration
+                    particlesJS('particles-js', {
+                        "particles": {
+                            "number": {
+                                "value": 80,
+                                "density": {
+                                    "enable": true,
+                                    "value_area": 800
+                                }
+                            },
+                            "color": {
+                                "value": ["#00f2ff", "#ff00ff", "#ffffff"]
+                            },
+                            "shape": {
+                                "type": "circle",
+                                "stroke": {
+                                    "width": 0,
+                                    "color": "#000000"
+                                }
+                            },
+                            "opacity": {
+                                "value": 0.5,
+                                "random": true,
+                                "anim": {
+                                    "enable": true,
+                                    "speed": 1,
+                                    "opacity_min": 0.1,
+                                    "sync": false
+                                }
+                            },
+                            "size": {
+                                "value": 3,
+                                "random": true,
+                                "anim": {
+                                    "enable": true,
+                                    "speed": 2,
+                                    "size_min": 0.5,
+                                    "sync": false
+                                }
+                            },
+                            "line_linked": {
+                                "enable": true,
+                                "distance": 150,
+                                "color": "#00f2ff",
+                                "opacity": 0.4,
+                                "width": 1
+                            },
+                            "move": {
+                                "enable": true,
+                                "speed": 2,
+                                "direction": "none",
+                                "random": true,
+                                "straight": false,
+                                "out_mode": "out",
+                                "bounce": false,
+                                "attract": {
+                                    "enable": false,
+                                    "rotateX": 600,
+                                    "rotateY": 1200
+                                }
+                            }
+                        },
+                        "interactivity": {
+                            "detect_on": "canvas",
+                            "events": {
+                                "onhover": {
+                                    "enable": true,
+                                    "mode": "repulse"
+                                },
+                                "onclick": {
+                                    "enable": true,
+                                    "mode": "push"
+                                },
+                                "resize": true
+                            },
+                            "modes": {
+                                "grab": {
+                                    "distance": 400,
+                                    "line_linked": {
+                                        "opacity": 1
+                                    }
+                                },
+                                "bubble": {
+                                    "distance": 400,
+                                    "size": 40,
+                                    "duration": 2,
+                                    "opacity": 8,
+                                    "speed": 3
+                                },
+                                "repulse": {
+                                    "distance": 100,
+                                    "duration": 0.4
+                                },
+                                "push": {
+                                    "particles_nb": 4
+                                },
+                                "remove": {
+                                    "particles_nb": 2
+                                }
+                            }
+                        },
+                        "retina_detect": true
+                    });
+
                     // Debug iframe sources
                     document.addEventListener('DOMContentLoaded', () => {
                         document.querySelectorAll('.video-wrapper iframe').forEach(iframe => {
