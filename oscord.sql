@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2025 at 05:35 PM
+-- Generation Time: Jun 06, 2025 at 03:54 PM
 -- Server version: 8.0.33
 -- PHP Version: 8.2.4
 
@@ -20,6 +20,53 @@ SET time_zone = "+00:00";
 --
 -- Database: `oscord`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coursecategory`
+--
+
+CREATE TABLE `coursecategory` (
+  `categoryID` int NOT NULL,
+  `categoryName` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `coursecategory`
+--
+
+INSERT INTO `coursecategory` (`categoryID`, `categoryName`) VALUES
+(1, 'Popular'),
+(2, 'Web Development'),
+(3, 'Beginner');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coursexcategory`
+--
+
+CREATE TABLE `coursexcategory` (
+  `coursexcategoryID` int NOT NULL,
+  `courseID` int NOT NULL,
+  `categoryID` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `coursexcategory`
+--
+
+INSERT INTO `coursexcategory` (`coursexcategoryID`, `courseID`, `categoryID`) VALUES
+(1, 9, 2),
+(2, 4, 2),
+(3, 5, 2),
+(4, 1, 3),
+(5, 2, 3),
+(6, 7, 3),
+(7, 1, 1),
+(8, 2, 1),
+(9, 9, 1);
 
 -- --------------------------------------------------------
 
@@ -343,11 +390,28 @@ INSERT INTO `oscord_vidlec` (`videoID`, `videoName`, `videoLink`, `courseID`, `v
 (10, '3. Variables and Datatypes - Part 2', 'https://youtu.be/jnhRq-_QXCg', 1, 1),
 (11, '14. Utility & Collection Class in Java', 'https://youtu.be/RcBFKwTF3BI', 1, 1),
 (12, '6. User Input in Java', 'https://youtu.be/AMw6_h0EFF0', 1, 1),
-(14, '8. Loopings in Java - Part 1', 'https://youtu.be/HbVgRRyF_eE', 1, 1);
+(14, '8. Loopings in Java - Part 1', 'https://youtu.be/HbVgRRyF_eE', 1, 1),
+(15, '9. Loopings in Java - Part 2', 'https://youtu.be/Vt01n8jv4JY', 1, 0),
+(16, '2. Introduction to Python Programming', 'https://youtu.be/6RSaT6Qr5NM', 2, 1),
+(17, '8. List, Tuple and Set - Part 1', 'https://youtu.be/yNTOE92OLb4', 2, 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `coursecategory`
+--
+ALTER TABLE `coursecategory`
+  ADD PRIMARY KEY (`categoryID`);
+
+--
+-- Indexes for table `coursexcategory`
+--
+ALTER TABLE `coursexcategory`
+  ADD PRIMARY KEY (`coursexcategoryID`),
+  ADD KEY `courseID` (`courseID`),
+  ADD KEY `categoryID` (`categoryID`);
 
 --
 -- Indexes for table `file`
@@ -417,6 +481,18 @@ ALTER TABLE `oscord_vidlec`
 --
 
 --
+-- AUTO_INCREMENT for table `coursecategory`
+--
+ALTER TABLE `coursecategory`
+  MODIFY `categoryID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `coursexcategory`
+--
+ALTER TABLE `coursexcategory`
+  MODIFY `coursexcategoryID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `file`
 --
 ALTER TABLE `file`
@@ -468,11 +544,18 @@ ALTER TABLE `oscord_studentxcourse`
 -- AUTO_INCREMENT for table `oscord_vidlec`
 --
 ALTER TABLE `oscord_vidlec`
-  MODIFY `videoID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `videoID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `coursexcategory`
+--
+ALTER TABLE `coursexcategory`
+  ADD CONSTRAINT `coursexcategory_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `oscord_course` (`courseID`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `coursexcategory_ibfk_2` FOREIGN KEY (`categoryID`) REFERENCES `coursecategory` (`categoryID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Constraints for table `file`
