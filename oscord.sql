@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 06, 2025 at 03:54 PM
--- Server version: 8.0.33
--- PHP Version: 8.2.4
+-- Host: localhost:3306
+-- Generation Time: Jun 25, 2025 at 01:00 AM
+-- Server version: 8.0.36-cll-lve
+-- PHP Version: 8.3.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `oscord`
+-- Database: `zuhpszwh_oscord`
 --
 
 -- --------------------------------------------------------
@@ -120,15 +120,16 @@ CREATE TABLE `oscord_course` (
 --
 
 INSERT INTO `oscord_course` (`courseID`, `courseName`, `courseDescription`, `courseFee`, `coursePeriod`, `courseFbLink`) VALUES
-(1, 'Java Programming (Basic to Advanced)', 'Learn programming with Java from basic level to application development level with Database. In this course, we focus on understanding the programming concept with J2SE, building desktop application with GUI Frameworks, CRUD operations with Database(My SQL).', '500000 MMK', '4 months to 5 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02LByymgT3wQkUYPq3TgYuDn1xWsJFhdQqEziunA5JdgCPrqWLnnQ6gMNQQkiKr5Hal&id=100088520077343'),
-(2, 'Python Programming (Basic to Advanced)', 'Learn Python Programming (Basic to CRUD Application Development Level with Database) where the industries of Data Science, Machine Learning, Artificial Intelligence, Computer Vision and Web Developement, are mainly working on.', '500000 MMK', '4 months to 5 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02X8iFCML5nQcaMUjRDY1A1jmRrs8R7wcRpzsDyDCz41iyzfXn3GreXqaBrrgWbH7Ml&id=100088520077343'),
+(1, 'Java Programming (Basic to Advanced)', 'Kick off your Java programming adventure with our engaging course! Master core Java (J2SE) to craft robust programs, design sleek user interfaces with Java Swing, and build a real-world CRUD (Create, Read, Update, Delete) project using MySQL. Through hands-on projects, you’ll gain skills to develop dynamic applications and for creating your own software.', '500000 MMK', '4 months to 5 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02LByymgT3wQkUYPq3TgYuDn1xWsJFhdQqEziunA5JdgCPrqWLnnQ6gMNQQkiKr5Hal&id=100088520077343'),
+(2, 'Python Programming (Basic to Advanced)', 'Dive into Python programming with our engaging course, spanning from basics to advanced skills! Master Python’s syntax, data structures, and advanced concepts like object-oriented programming, while building a real-world CRUD (Create, Read, Update, Delete) project with a database.', '450000 MMK', '4 months to 5 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02X8iFCML5nQcaMUjRDY1A1jmRrs8R7wcRpzsDyDCz41iyzfXn3GreXqaBrrgWbH7Ml&id=100088520077343'),
 (3, 'Database Systems and Design(MY SQL)', 'Learn how the database management system works , how to design a physical database starting from Conceptual database design and Logical database design, using it in application', '280000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02gCEMFb7b6oKMxVq3rtYEri8ku7VoS3yDuTJvUSC6kDwtZV3TSEej9MV4eNkf7Hggl&id=100088520077343'),
-(4, 'Frontend Web Development', 'Learn how to design a web page with HTML, CSS, Javascript, Bootstrap and JQuery. ', '280000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343'),
-(5, 'Backend Web Development', 'In backend web development, we will use mainly PHP programming as the backend algorithms will mainly work with Database Management Systems and CRUD operation.', '350000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343'),
-(6, 'Desktop Application Developmet with C#.Net(Basic to Advanced)', 'C#.Net is the most popular framework to develop desktop application. In this course, we will focus on building window forms with Graphical User Interface using C#.Net.', '450000 MMK', '3 months to 4 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02rcAQALoGyxp8Scgoq5BXURbWFzJcXyx1trkgbiHbQQkjTPArP92EGE6Gy8Kp7unLl&id=100088520077343'),
-(7, 'Programming with C', 'Learning programming with C from basic easily and focusing on basic programming concepts', '200000 MMK', '2 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02TWvJGG88DyowR5KFWbU1C5TEWi6nWpHXaRQxVfpGpPxwHGmosLWv11L1qNotvGCvl&id=100088520077343'),
-(8, 'Programming with C++', 'In this course, you will learn the basic programming concepts with C++ Programming', '200000 MMK', '2 months', ''),
-(9, 'Full Stack Web Development', 'A package class of both Frontend Class and Backend Class. In this class, we\'ll train you to be a full stack web developer from basic to developing level. Take database class free whoever join this class.', '550000 MMK', '6 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343');
+(4, 'Frontend Web Development', 'Kickstart your front-end web development journey with our beginner-friendly course! Learn to create stunning, interactive websites using HTML, CSS, Bootstrap and JavaScript. Through hands-on projects, you’ll build responsive web pages that shine on any device, gaining skills to launch a tech career or bring your ideas to life. All you need is basic computer knowledge and a passion for design!', '280000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343'),
+(5, 'Backend Web Development', 'Launch your backend web development career with our beginner-friendly course! Learn to build powerful, secure server-side applications using tools like PHP and databases like MY SQL. Through hands-on projects, you’ll  manage data to power dynamic websites, gaining skills for a tech job or your own projects. As for the requirement you will need frontend web skills and a curiosity for how websites work behind the scenes!', '400000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343'),
+(6, 'Desktop Application Developmet with C#.Net(Basic to Advanced)', 'Join Our C#.NET Fundamentals Course!  Master C# programming from scratch and build practical desktop apps for businesses, like POS or inventory systems, in just 3-4 months! With one-on-one Zoom or in-person classes, hands-on projects, this course is perfect for beginners and aspiring developers.', '399000 MMK', '3 months to 4 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02ThCMZRhZKc6FVGLxRqAvkobq8mgSGCrqB38514VfmLGaTBn2jf4eidAAvxLi8MXzl&id=100088520077343'),
+(7, 'C Programming', 'Learning programming with C from basic easily and focusing on basic programming concepts', '200000 MMK', '2 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid0oEoGYLkMEKYjoNwxUfg9MRuUdZWhBBv1qbRopK4EWj7AsAiJMnDnXGPCFNWDKrqGl&id=100088520077343'),
+(8, 'C ++ Programming', 'In this course, you will learn the basic programming concepts with C++ Programming', '200000 MMK', '2 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid0oEoGYLkMEKYjoNwxUfg9MRuUdZWhBBv1qbRopK4EWj7AsAiJMnDnXGPCFNWDKrqGl&id=100088520077343'),
+(9, 'Full Stack Web Development', 'Jumpstart your journey to becoming a full stack web developer with our beginner-friendly course! Learn to build dynamic, user-friendly websites from mastering front-end tools like HTML, CSS, Bootstrap and JavaScript, and back-end skills with PHP, databases, and CRUD project. Through hands-on projects, you’ll create real web apps, gaining the skills to build your own projects. All you need is basic computer knowledge and a passion for coding!', '600000 MMK', '6 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343'),
+(28, 'Data Structure and algorithms', 'Explore coding with our beginner-friendly Data Structures and Algorithms course! Learn to organize data, solve problems, and write efficient code through hands-on projects. Perfect for landing tech jobs or acing coding interviews. All you need is basic programming knowledge!', '270000 MMK', '3 months', 'https://web.facebook.com/permalink.php?story_fbid=pfbid02mUS2Vn7ABUoaYEp6pnPrxbcaZaJoJxJ1UoTSKorxisBVp5SzWiiE1a3vuPCF58fl&id=100088520077343');
 
 -- --------------------------------------------------------
 
@@ -203,9 +204,8 @@ INSERT INTO `oscord_coursedetail` (`coursedetailID`, `coursedetailName`, `course
 (55, 'Function in PHP', 5),
 (56, 'OOP', 5),
 (57, 'Exception Handling', 5),
-(58, 'Extra codes', 5),
-(59, 'Database design(MY SQL)', 5),
-(60, 'Final CRUD Web Application Project', 5),
+(59, 'Database Systems and Design (MY SQL)', 5),
+(60, 'Laravel Framework', 5),
 (61, 'Complete C# Language', 6),
 (62, 'Introduction to C#.Net Framework - adding control to a blank form', 6),
 (63, 'Adding C# code to a button', 6),
@@ -240,11 +240,25 @@ INSERT INTO `oscord_coursedetail` (`coursedetailID`, `coursedetailName`, `course
 (101, 'HTML', 9),
 (102, 'CSS', 9),
 (103, 'JavaScript', 9),
-(104, 'PHP', 9),
-(105, 'Database Systems and Design(MYSQL)', 9),
-(106, 'CRUD web application project', 9),
+(104, 'Boostrap', 9),
+(105, 'PHP Programming', 9),
+(106, 'Database Systems and Design (MY SQL)', 9),
 (114, 'CRUD Final Project', 1),
-(115, 'CRUD Final Project', 2);
+(115, 'CRUD Final Project', 2),
+(117, 'Introduction to DSA', 28),
+(118, 'Array and Linked List', 28),
+(119, 'Stack and Queues', 28),
+(120, 'Binary Trees and Binary Search Trees', 28),
+(121, 'AVL and B-Trees', 28),
+(122, 'Graph Algorithms', 28),
+(123, 'Algorithm Design Techniques', 28),
+(124, 'Sorting and Searching Algorithms', 28),
+(125, 'Hash Table', 28),
+(126, 'Laravel Framework', 9),
+(127, 'Final CRUD Web Application Project', 5),
+(128, 'CRUD web application project', 9),
+(129, 'Physical Database Design', 6),
+(130, 'CRUD Project with Database', 6);
 
 -- --------------------------------------------------------
 
@@ -268,7 +282,9 @@ CREATE TABLE `oscord_instructor` (
 --
 
 INSERT INTO `oscord_instructor` (`instructorID`, `instructorName`, `instructorEmail`, `instructorPassword`, `instructorApprove`, `instructorBirthday`, `instructorPhone`, `instructorPin`) VALUES
-(12, 'Min Sitt Paing Oo', 'minsittmandalay137@gmail.com', '$2y$10$JFRNzEuByXBDKXDh8cSTb.AyoUTk99ApZlk0AzamSqh/sY88q3zaO', 1, '2004-06-30', '0823059272', 198989);
+(12, 'Min Sitt Paing Oo', 'minsittmandalay137@gmail.com', '$2y$10$JFRNzEuByXBDKXDh8cSTb.AyoUTk99ApZlk0AzamSqh/sY88q3zaO', 1, '2004-06-30', '0823059272', 198989),
+(15, 'Lin Khant', 'linkhant1092003@gmail.com', '$2y$10$vXw8lPL7dN4jXub5An54dOHULNuFdlfDxSTh6SYrtIc8oaIHuxq4W', 1, '2003-09-10', '09259662272', 112233),
+(16, 'Iris Everly', 'asheijidaiharuwin@gmail.com', '$2y$10$x/ihHjYCInXLWb5Jqe1KYuiIRXbnP9L/Ws9ukdU8kkIOeDde1sO.a', 1, '2002-09-27', '09757220152', 272799);
 
 -- --------------------------------------------------------
 
@@ -294,7 +310,11 @@ INSERT INTO `oscord_instructorxcourse` (`instrucorxcourseID`, `instructorID`, `c
 (32, 12, 6),
 (35, 12, 9),
 (36, 12, 7),
-(37, 12, 8);
+(37, 12, 8),
+(48, 15, 4),
+(49, 15, 9),
+(53, 16, 28),
+(54, 16, 6);
 
 -- --------------------------------------------------------
 
@@ -322,7 +342,50 @@ CREATE TABLE `oscord_student` (
 --
 
 INSERT INTO `oscord_student` (`studentID`, `studentName`, `studentCountry`, `studentBirthday`, `studentEmail`, `studentPassword`, `studentTelegram`, `studentPhone`, `studentApprove`, `question1`, `question2`, `registrationDate`) VALUES
-(10, 'Aeint', 'Myanmar', '2004-06-15', 'minsitt.p67@rsu.ac.th', '$2y$10$GMQKW4SSGevdLiHffT8iu.GdEnqYUVHpb8wrfOcHGdDUgaDlx1NLq', '@Aeint', '09952090401', 1, 'No', 'I want to be a software developer', '2025-05-28');
+(10, 'Aeint', 'Myanmar', '2005-04-10', 'aeintthinzarzawmyint@gmail.com', '$2y$10$OR7K/U3EdP/BOcbx7vsGqOCa9UQkq1wKXwFYgslF/mJfMVIEMg7Hq', '@n_iaeintmm', '09408811141', 1, 'No', 'I want to be a software developer', '2025-05-28'),
+(15, 'Phyu Phyu Thant', 'Myanmar', '2004-09-29', 'phyuphyut119@gmail.com', '$2y$10$kEpauazSkHHm0FYnxPrfFukUWt5AMTxZRSR9vqn4MYgL.T1Rw3dyG', '@t92nt', '09886058500', 1, 'Java & web development course', 'Aimed to understand the basic knowledge in computer science.', '2025-06-12'),
+(16, 'NAING NINE', 'Japan', '2002-05-25', 'naingosaka121212@gmail.com', '$2y$10$9.5xgNBS4nr6c6.gTMHm/uoWAkUkWNTiQ1Nh/mMONe5BA/IAtD5Am', 'eccnn9898', '07091423223', 1, 'No', 'I’m going to an IT college next year.', '2025-06-14'),
+(17, 'Merry Moe', 'Thailand', '1984-01-13', 'merrymoe345@gmail.com', '$2y$10$CTtp2X.F/aQc0KnODzs5Ju5.0RjHqRlHEjzD/o/hXs1wtnr7itypG', '@merrymoe', '9952090401', 1, 'No', 'For my job', '2025-06-14'),
+(18, 'Naw The\' Phyu', 'Thailand', '1994-02-14', 'nawthephyu@gmail.com', '$2y$10$OFxjZtRj5Jj8IaMFU.WVwejJw47/MCaU4UZcp5zirLwhXQ8LPdY22', '@Charoen_Rasamee', '+66613607287', 1, 'No experience of learning the program', 'I intent to create or build up the pharamacy database and application for pharmacy management system of my organization.', '2025-06-14'),
+(19, 'Phoo Myat Thwe', 'Myanmar', '2004-06-14', 'phoomyatthwe@gmail.com', '$2y$10$Po4ZFqJqSL4AzgBG7K8GR.9OeRvD.cTitNE/r4gWlMosDHQUJJfR6', '@H_ffe9ef', '09778654804', 1, 'I used to learn C Programming', 'I am interested in software engineering I guess. Programming is a part of it and another fact is I like to code.', '2025-06-14'),
+(20, 'Janet', 'Sweden', '1996-09-06', 'nawjanet16@gmail.com', '$2y$10$w4kGsEvF0tLFk/lrnbNM/uEsSetwmMuyjvmh7zeLzF0yh4esw3HzG', 'NJ', '+46733620774', 1, 'Java basic', 'For career change', '2025-06-14'),
+(21, 'Phyo Zin May', 'Japan', '1996-01-15', 'phyozinmay@gmail.com', '$2y$10$LVKCg6moivg0J/4RogZVleq3qu29OlKeb2OtYpLIpHHs8V8.xQmiK', '@Snowie_e', '+959250269248', 0, 'No experience about learning java', 'Because want to get job', '2025-06-15'),
+(22, 'San Lin Bay', 'Thailand', '1995-06-15', 'sanlinbay@gmail.com', '$2y$10$KoKC6Gdw7YGXCIR6Wo2qoONbyxljlDX8bfmaxGcDTBgdsp8kQWQO6', '@Sanlinbay', '0656506242', 0, 'Never learned program before', 'To improve my IT skill. To promote my skills working with organization. Because I interest in IT programing.', '2025-06-15'),
+(23, 'Nyi Nyi Htet', 'Singapore', '1988-06-15', 'nyinyihtet@gmail.com', '$2y$10$QohiVYZ4XjRfg/gEvOXbkOCDXtaovmNfPCpi2S7cDASWM8EZnnfay', '@nyinyihtet', '+6581618011', 0, 'No', 'Interested in Programming', '2025-06-15'),
+(24, 'Hein Htet', 'Singapore', '1998-02-15', 'heinhtet@gmail.com', '$2y$10$pvFSLq2LF8jc65FbWxl7keYgnmT1NHPkGuE5WB0YVI5rddurEjYyO', '@henry845879', '+66824762618', 1, 'No', 'Interested and Want to try', '2025-06-15'),
+(25, 'Phoo Myat Thwe', 'Myanmar', '2004-06-15', 'phoomyatthwe@gmail.com', '$2y$10$jLoimAswxCcA0tt32Mo75OY0UsLApONF7ardePExYr47XFyJ8RHMS', '@H_ffe9ef', '09778654804', 0, 'I used to learn C Programming', 'I am interested in software engineering I guess. Programming is a part of it and another fact is I like to code.', '2025-06-15'),
+(26, 'Nay Lin Thar', 'Myanmar', '1998-06-10', 'naylinthar@gmail.com', '$2y$10$Z2USUVsB9ukyUjxV8iODGO1F/D45v4KGEuBkdaQhDgdIQDGUwb4wy', '@ellegigle', '09785925304', 0, 'No', 'Because I am interested', '2025-06-15'),
+(27, 'Nan May OO Myint', 'Singapore', '1990-06-15', 'naymayoomyint@gmail.com', '$2y$10$665I1P8ZBm5IPPHT0jmW4.bgnxzNNQUpyXgqJChpp0iR.bpPaqP42', '@nanmayoomyint', '+6591455714', 0, 'Totally Zero', 'wanna learn about the coding and recommended by friend', '2025-06-15'),
+(28, 'So Pyay', 'Singapore', '1990-06-22', 'sopyay@gmail.com', '$2y$10$eLXm0hyrzB0FyJOQAZRpUugRm/k1jR7LYi8bFYEcVMWGequBE0aSG', '@sopyay', '+6598613482', 0, 'No', 'Application for script programming automation machines', '2025-06-15'),
+(29, 'Zayar Oo', 'Singapore', '1979-06-18', 'zayaroo@gmail.com', '$2y$10$RlKD7Y1S03zEMnAs9a15JO3q.3puJfe.ecBnWC4Ts9XScenvN6/6y', '@zayaroo', '+6597247756', 0, 'not learn before programming.', 'null', '2025-06-15'),
+(30, 'Thaw Zin Latt', 'Myanmar', '2008-06-15', 'thawzinlatt@gmail.com', '$2y$10$SWfe3YE3sLzfQBhqpS8Fs.TCkJuldbas2WPd7OlyohFQQRCtDd53e', '@thawzinlatt', '+959967993562', 0, 'Programming not learn before', 'null', '2025-06-15'),
+(31, 'Pyae Hein', 'Kuweit', '1984-02-15', 'pyaehein@gmail.com', '$2y$10$6gzCqOxRfoMzECby8ANfXu4PuZQOj4ka5xxNxZQ/65bQslYCLma7W', '@pyaehein', '+96596645418', 0, 'Programming အတန်းတွေ တက်ဖူးပါတယ်။ Group အတန်းတွေမှာ စာမလိုက်နိုင်လို့ အစပိုင်းပဲတက်ပြီး ရေရှည် မတက်ဖြစ်ခဲ့ပါဘူး ဆရာ။ သင်တန်းတွေ Join ခဲ့ပေမဲ့ သေချာမလေ့လာခဲ့ပါဘူး ဆရာ။ အခြေခံတောင် နားမလည်သေးပါဘူး ဆရာ။', 'Programming ကို သေချာနားလည် တတ်ကျွမ်းဖို့ လိုအပ်နေလို့ပါ ဆရာ။', '2025-06-15'),
+(32, 'Aye Nadi Kyaw', 'Myanmar', '1984-06-15', 'ayenadikyaw@gmail.com', '$2y$10$s7KNa08u6SJ.RYVBpTW//uHSzIincQThpS1CyFHRgmaXYW2CHvxV.', '@ayenadikyaw', '09428939200', 0, 'Yes', 'I would like to work in Japan. I would like to know Java Advanced lavel and want one by one class.', '2025-06-15'),
+(33, 'Zaw Thura Soe', 'Myanmar', '2007-02-15', 'zawthurasoe@gmail.com', '$2y$10$waykhJsleh6cDFM1jNHTTe3tPZg3sBOz73tGYn1/YLqgSydyT0AOO', '@zatthuras', '09449536467', 0, 'Python Basic တွေ အကုန် သင်ဖူးပါတယ်ဗျ Jupyterနဲ့ပါ VsCode ကို မကျွမ်းကျင်သေးပါဘူး', 'စိတ်ဝင်စားလိုပါဗျ လုပ်နေရရင် မပျင်းတော့ဘူး GCSE ဖြေရင်လည်း Computer sci ယူမှာမလိုဗျ ခု လောလောဆယ် သင်နေတဲ့ Class က 4 လလောက် နားမှာမို တခြား အသစ်တွေ သင်ချင်လိုတက်တာပါဗျ', '2025-06-15'),
+(34, 'Christopher', 'America', '1989-06-21', 'christopher@gmail.com', '$2y$10$OhER14Ugyj9VBCErMParAuvE5gWGgf9VRJ4xfaRx.yl2EiJwjD/Ty', '@christopher', '+14435099545', 0, 'null', 'null', '2025-06-15'),
+(35, 'Bhone Wai Yan Moe', 'Vietnam', '2004-01-15', 'bhonewaiyan@gmail.com', '$2y$10$7dghyoC0UghyVcW56Yixbe6.Ik9XnYkx3HFR2a4XCkAAMkqWzQqU.', '@bhonewaiyan', '09420065505', 0, 'Programming fundamental with javaသင်ဖူးပါတယ်', 'ITနဲ့ပါတ်သတ်တဲ့ career နဲ့ ရှေ့ဆက်ချင်တာရယ် ဝါသနာပါတာရယ်ကြောင့်ပါ', '2025-06-15'),
+(36, 'Myat Min Thu', 'Myanmar', '1995-02-15', 'myatminthu@gmail.com', '$2y$10$2qznObz36sEN8lHfTQb9n.6nMgbH31dHnc09f0wu3eKrSVQ0jec.q', '@myatminthu', '09974102510', 0, 'Programming ကို YouTubeက  အခုမှလေ့လာခါစပဲ ရှိပါသေးတယ် တလတောင်မပြည့်သေးပါ', 'ငယ်ငယ်ထဲက IT ကို အရမ်းစိတ်ဝင်စားခဲ့တာပါ 10 တန်းအောင်တော့လဲ အမှတ်မမှီခဲ့လို POL က  Cyber City တက်ချင်ခဲ့တဲ့အိမ်မက်က မပြည့်ဝခဲ့ပါဘူး ကိုယ့်ဘဝ ရဲ့ Carrier ကိုလဲ IT နယ်ပယ်ထဲမာပဲ ဖြတ်သန်းချင်လိုပါဗျ', '2025-06-15'),
+(37, 'Hnin Kabyar Tun', 'Thailand', '2000-06-15', 'hninkabyartun@gmail.com', '$2y$10$CYwyfZIp5n6LnUXtQ6ePuOTZVIPj2GrIRDdBUw7exIM9ydVei.9RC', '@hninkabyartun', '+66949611269', 0, 'null', 'null', '2025-06-15'),
+(38, 'YaMin', 'Japan', '1989-06-15', 'yamin@gmail.com', '$2y$10$vsWNAmQ5RffcO9HanJgB.OfN8tGesIr9Qadw7ge9LLCPTxM/ZgUBi', '@yamin', '+817041269937', 0, 'null', 'null', '2025-06-15'),
+(39, 'Htoo Aung Cho', 'Korea', '1998-06-15', 'htooaungcho@gmail.com', '$2y$10$gBK9z6mGPKwxGAaa4DAVruCL6OU6iiqabvQnbzKGIRsPujByyu4Uq', '@HAungC', '+821073929907', 0, 'Yes', 'For school', '2025-06-15'),
+(40, 'Moe Theigi Kyaw', 'Myanmar', '2005-06-15', 'moetheigikyaw@gmail.com', '$2y$10$OJ1TC7Q2pfCLbt3VTriMau5mH3gyK7lcyFIFpfVkdEXkYMykYq08G', '@moetheigikyaw', '09954872198', 0, 'yes', 'ဒဂုံတက္ကသိုလ်မှာ computer science majorဖြင့်  2nd yearကျောင်းသူဖြစ်ပြီး javaကို ပိုမိုသေချာနားလည်သဘောပေါက်စေရန်', '2025-06-15'),
+(42, 'Naing Soe Ag', 'Thailand', '1997-06-15', 'naingsoeag@gmail.com', '$2y$10$SXnbkNJ0298I9SNTaI4gpOvBE89Gxn0NlshuDoKRt3PRqSW/8ZV9.', '@naingsoeag', '07091779006', 0, 'null', 'null', '2025-06-15'),
+(43, 'Thiha Min Htin', 'Myanmar', '2000-06-15', 'thiha@gmail.com', '$2y$10$jf9PUFiEPDkedTpkB6ze1OwriRoisxDineT4rpKaF1qxalm3M7uE6', '@thiha', '09957316840', 0, 'null', 'null', '2025-06-15'),
+(44, 'Aye Myat Mon', 'Myanmar', '2002-02-15', 'ayemyatmon@gmail.com', '$2y$10$blA40.5K7zAd1mwgHQIrqOdrHbIpYGaHCDjUt2B1XndMBrjoqYZkS', '@ayemyatmon', '09790341692', 0, 'I have learned the Programming Language', 'To become a professional programmer', '2025-06-15'),
+(45, 'Khin LaPyae Won', 'Thailand', '2003-02-15', 'khinlapyawwon@gmail.com', '$2y$10$B3bLvK7Qcy1uBKh2cWdXuuc9NaVM3Dg1E/UzVsgb4cloMSIaNwrNi', '@khinlapyae', 'null', 0, 'Yes', 'Want to study Java Programming well', '2025-06-15'),
+(46, 'YaMin Oo', 'Thailand', '2003-02-15', 'yaminoo@gmail.com', '$2y$10$.MUq0ju0Ls5t7U1Md9/5ze6nkTZQJ8/QvxTeqtHBH.3KZ.6MvJduC', '@yaminoo', 'null', 0, 'yes', 'Interested in Programming', '2025-06-15'),
+(47, 'Shwe Zin', 'Myanmar', '1997-06-15', 'shwezin@gmail.com', '$2y$10$8auo.corWoFJSPQlfZxxcO23hR3Glvs1Qw7BA01JIUQf4yGesDFIS', '@shwezin', 'null', 0, 'null', 'null', '2025-06-15'),
+(48, 'Sandah Aung', 'Thailand', '1977-06-15', 'sandahaung@gmail.com', '$2y$10$HR.zUV95M1Bq6QVAG0X7leVv8xsKa0uiPpoO47o4KP67NfyWRbX8C', '@sahdahaung', 'null', 0, 'yes', 'for job', '2025-06-15'),
+(49, 'Min Thant Wai', 'Thailand', '1999-06-15', 'minthantwai@gmail.com', '$2y$10$AMFvWSeR7o45lnmRbQX5SuD8dWVihIXTKxLaQMlwUyfcpqDL8RAHm', '@minthantwait', 'null', 0, 'null', 'null', '2025-06-15'),
+(50, 'Myat Min Thu', 'Singapore', '1986-02-15', 'myatminthu@gmail.com', '$2y$10$V4wkUiavP12GDxLl4mwb6ueYD4taIiBh2SbBs3X5IrBjKla.GhIfG', '@myatminthu2', '+65908773784', 0, 'a little', 'java programming ကို ပိုပီး နားလည်ပီး ရေးတတ်ချင်လိုပါ', '2025-06-15'),
+(51, 'N Seng', 'Thailand', '1989-06-15', 'nseng@gmail.com', '$2y$10$mcsvHXfEUWudqgn6vTlWWeZ4V8/cyVnwmlTHIu4jprtDfHiWHCLiS', '@nseng', 'null', 0, 'null', 'null', '2025-06-15'),
+(52, 'Thun Thiri Khin', 'Thailand', '2006-06-15', 'thunthirikhaing@gmail.com', '$2y$10$qZoJTPXLb6wOBk4xg36V1.3X23XywLeci5MDtKj3wFMcjAUli55O6', '@thunthirikhaing', '09769889233', 0, 'Has experienced in C and Java Programming', 'Want to be professional in JAva', '2025-06-15'),
+(53, 'Okkar Min', 'Thailand', '2001-02-15', 'okkarmin@gmail.com', '$2y$10$j/1nEq9/FtUbZGBgkU7ISOL21TAM5Henx9BAXSoKBzjxMTBGzkl..', '@okkarmin', '0960564932', 0, 'No', 'To know python very well/ to know basics of programming and to prepare for exam', '2025-06-15'),
+(54, 'Khon LaYaung Win', 'Myanmar', '2000-01-15', 'khonlayaungwin@gmail.com', '$2y$10$TVqvja46gxUgUZJgOcOMee0msFTSwhSTbqhUHiz/pMmrllORZFYFi', '@LeonLY7', 'null', 0, 'null', 'null', '2025-06-15'),
+(55, 'Honey Aye', 'Japan', '1993-06-15', 'honeyaye@gmail.com', '$2y$10$sqNEs5hRgrypSDSDaJUeRetst7jnGf2atYh47mcdZCIO/zzQ96iH2', '@honeyaye', '+817084522233', 0, 'no', 'အလုပ်အတွက်အထောက်အကူပြုရန်', '2025-06-15'),
+(56, 'Thet Oo Ag', 'Thailand', '2001-01-15', 'thetooag@gmail.com', '$2y$10$Vpx3/yDWeh1lgIXdjBdt1uvanp3SQ9VwXDFO63.E.JVy7bx9/jLlK', '@thetooag', '+959698949363', 0, 'no', 'for new career', '2025-06-15'),
+(57, 'Min Khant', 'Japan', '2004-01-15', 'minkhant@gmail.com', '$2y$10$REDPng1Ph2QDOx.FX59r/edwpnyosII6rZ/a0WycxZE.1F7AUjkoW', '@minkhant', '09070057005', 0, 'အရင်ကprogramming မလေ့လာဘူးပါဖူးခင်ဗျ', 'College ၄လပိုင်းစတက်ရတော့မှာမလိုprogramming အထိတွေ့မရှိတာကြောင့်သင်တန်းကောင်းကောင်းနဲ့ကြိုသင်ထားချင်တာနဲ့ဆရာ့ဆီရောက်လာတာပါ', '2025-06-15'),
+(58, 'Htay Linn Kyaw', 'Myanmar', '2002-03-30', 'htaylinaung.wka@gmail.com', '$2y$10$yPlt5v5p4sL2Zw25d.Zr3eLtQ2zFHpkcXwqBtIRfb7AFsUEtYqMZe', '경수', '01084209991', 0, 'Yes', 'Python', '2025-06-18');
 
 -- --------------------------------------------------------
 
@@ -332,7 +395,7 @@ INSERT INTO `oscord_student` (`studentID`, `studentName`, `studentCountry`, `stu
 
 CREATE TABLE `oscord_studentreview` (
   `studentreviewID` int NOT NULL,
-  `studentreview` varchar(500) NOT NULL,
+  `studentreview` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `courseID` int NOT NULL,
   `studentID` int NOT NULL,
   `isShown` tinyint NOT NULL
@@ -344,7 +407,15 @@ CREATE TABLE `oscord_studentreview` (
 
 INSERT INTO `oscord_studentreview` (`studentreviewID`, `studentreview`, `courseID`, `studentID`, `isShown`) VALUES
 (11, 'ဆရာက စေတနာပါပါနဲ့ အားလုံးကို နားလည်လွယ်‌အောင် ရှင်းပြပေးပါတယ်\r\nExercise တွေနဲ့ နားမလည်တာတွေကို စိတ်ရှည်ရှည်နဲ့ရှင်းပြပြီး ရှင်းပြထားတဲ့notes တွေကို\r\nအမြဲပိုပေးတဲ့အတွက် စာပြန်ကြည့်တဲ့အခါအရမ်းကို အထောက်အကူဖြစ်စေပီး အဆင်ပြေပါတယ်', 1, 10, 1),
-(19, 'dddd', 9, 10, 0);
+(19, 'dddd', 9, 10, 0),
+(20, 'သင်တန်းကို Facebook ကနေတွေ့ခဲ့တာပါ one by one သင်ပေးတာရယ် ၊ သင်တန်းကြေးက သင့်တင့်တာရယ် ၊ အချိန်လည်း သေချာလေး ညှိနှိင်းသင်ပေးတာရယ်ကြောင့်တက်ရောက်ဖြစ်ခဲ့ပါတယ်။ အရင်က ဘာမှမရေးတတ်ဘူး၊ အဓိကက ဆရာနဲ့ တက်လိုက်တာ တွေးတတ်သွားတယ်။ program/coding ရဲ့ အသွားအလာကို တွေးတတ်လာတယ်၊ ဒီနေရာမှာ ဒါလေး မရဘူးလား၊ ဒီအကြောင်း ဖြုတ်လိုက်ရင်ရော၊ အပေါ်အောက်ချိန်းလိုက်ရင်ရော အစရှိသဖြင့် အတွေးတွေက coding ကို သပ်သပ်ရပ်ရပ် ရေးတတ်လာစေတယ်။', 1, 21, 1),
+(21, 'ဆရာ့ သင်တန်းတက်ပီးတော့မှ Java programming နဲ့ ပတ်သတ်ပီး class, function တွေကို သေချာ ရှင်းလင်း နားလည်အောင် သိရှိလာရတဲ့ အတွက် အရမ်းကို အဆင်ပြေပါတယ်။ exercise တွေ နဲ့သေချာ လေ့ကျင့်ရတဲ့ အတွက်\r\njava ကိုပိုပီး အကျွမ်းတဝင်ရှိလာစေပါတယ်။ java နဲ့ပတ်သတ်ရင် Oscord ကို recommends ပေးပါတယ်။', 1, 50, 1),
+(22, 'To my dear Java programing tutor Saya, I am thrilled to share my experience with the programming training provided by you (a talented tutor from Myanmar) to those who interested in programing language. You have a remarkable ability to assess the student\'s level and tailor the teaching materials accordingly even I\'m a starter. I truly appreciate your kindness, passion, time management skills, and commitment to your work. One thing that stood out to me was the reasonable fee that charged for your programming tutorial even you don\'t get enough electronic service all the time. The tutor provided me with plenty of teaching tools,making it easy for me to comprehend the lessons. Furthermore, when I faced any difficulties in understanding a concept, you patiently revised the lesson until I fully grasped it. Thanks to the programming training provided by Saya MS. I am confident that my dream of becoming proficient in programming will soon come true. I would highly recommend anyone interested in programming to join this training program. Once again, thank you, for your invaluable guidance and support.', 1, 22, 1),
+(23, 'စာသင်တဲ့အခါ တစ်ယောက်ချင်း ရှင်းရှင်းလင်းလင်းနဲ့ သင်ပေးတဲ့အပြင် သင်တန်းချိန်ကို အဆင်ပြေအောင်ညှိပေးတာကို သဘောကျပါတယ် နားမလည်တာတွေကို သေချာပြန်ရှင်းပြတဲ့အပြင်သတ်မှတ်ထားတဲ့ Course တွေများတာကိုလည်းသဘောကျပါတယ် အစက ဒီအတိုင်းအချိန်ပိုနေလိုတတ်မယ် စဉ်းစားထားရာကနေ Programming ကိုအမှန်တကယ်တတ်ကျွမ်းချင်လာပါတယ်', 1, 26, 1),
+(24, 'Programming ကိုအခြေခံကနေစပြီးလေ့လာချင်လို ခု  Programming သင်ပေးနေတဲ့ဆရာလေးဆီမှာတက်ဖြစ်ပါတယ်\r\nသင်ကြားပေးတဲ့စနစ်က စနစ်တကျရှိတော့သင်ယူရတာအဆင်ပြေပါတယ် သင်ခန်းစာအခန်းတိုင်းအတွက် မေးခွန်းလေးတွေလေ့ကျင့်ခန်းတွေနဲ့မိုစာပြန်လုပ်ဖြစ်စေပါတယ်နားလည်လွယ်အောင်စိတ်ရှည်ရှည်နဲ့ရှင်းပြပေးလ်ု နားလည်လွယ်စေပါတယ်\r\nပြီးတော့ additional resources တွေနဲ့ recommended books တွေကိုဝေမျှပေးတဲ့အတွက်လည်းတော်တော်အဆင်ပြေပါတယ်OOP ကိုလည်းရှင်းပြပေးတဲ့အတွက်လည်းတော်တော်လေးအကျိုးရှိပါတယ်', 1, 23, 1),
+(25, 'ကျောင်းတက်တုန်းက Programming ကိုသင်ရပေမယ့် ဘာမှန်းမသိသလို ဘာမှလဲမလုပ်ဖူးခဲ့ပါဖူး အိမ်ကသားကိုတက်စေချင်တာရယ် ကိုယ်တိုင်လည်း သိချင်စိတ်ရှိသေးတာရယ်နဲ့ ခု Programming သင်ပေးနေတဲ့ဆရာလေးဆီမှာတက်ဖြစ်ခဲ့ပါတယ် သူ့ကိုစင်ကာပူမှာအလုပ်လုပ်နေတဲ့ ညီလေးတစ်ယောက်ဆီကသိခွင့်ရတာပါ ငယ်သေးပေမယ့်တော်တော် တော်ပါတယ် သင်ကြားပေးတဲ့စနစ်ကစနစ်တကျရှိတော့သင်ယူရတာအဆင်ပြေပါတယ် သင်ခန်းစာအခန်းတိုင်းအတွက် မေးခွန်းလေးတွေလေ့ကျင့်ခန်းတွေနဲ့မိုစာပြန်လုပ်ဖြစ်စေပါတယ် နားလည်လွယ်အောင်စိတ်ရှည်ရှည်နဲ့ရှင်းပြပေးလိုကျွန်တော်လိုအသက်ကြီးသူရော သားငယ်လိုအသက်ငယ်သေးသူရောအတွက်အဆင်ပြေပါတယ်', 1, 29, 1),
+(26, 'ဆရာနဲ့သင်ရတာတော်တော်အားရပါတယ် ပြီးတော့ ဆရာကနားမလည်တဲ့စာတွေကိုလဲသေသေချာချာပြန်ရှင်းပြပါတယ်\r\nအရင်တုန်းကကျွန်တော် computer programming skill ကတော်တော်ဆိုးပါတယ် ဆိုးတယ်ဆိုလုပ်ကိုမလုပ်တတ်တာပါ\r\nခုတော့ဆရာ့ကျေးဇူးနဲ့ကျွမ်းကျွမ်းကျင်ကျင်လုပ်တတ်သွားပါပြီ ဒါကြောင့်ဆရာ့ကိုတော်တော်ကျေးဇူးတင်ပါတယ်ဆရာရေ', 1, 30, 1),
+(27, 'Oscord က ဆရာတွေက စိတ်ရှည်ပြီးတော့ စာရှင်းရင်လည်း နားလည်လွယ်ပါတယ်။ Course တစ်ခုပြီးတိုင်း mini project လေးတွေလုပ်ရတာတော့ သဘောအကျဆုံးပါပဲ။ အချိန်တိုအတွင်းထိထိရောက်ရောက်နဲ့ programming ကို သင်ယူချင်ရင်တော့ Oscord ကို highly recommend ပါနော်', 9, 15, 1);
 
 -- --------------------------------------------------------
 
@@ -365,7 +436,53 @@ CREATE TABLE `oscord_studentxcourse` (
 
 INSERT INTO `oscord_studentxcourse` (`studentxcourseID`, `studentID`, `courseID`, `enrollDate`) VALUES
 (1, 10, 1, '2025-05-31'),
-(2, 10, 9, '2025-05-31');
+(2, 10, 9, '2025-05-31'),
+(35, 15, 1, '2025-06-12'),
+(36, 15, 9, '2025-06-12'),
+(37, 16, 1, '2025-06-14'),
+(38, 17, 6, '2025-06-14'),
+(39, 18, 1, '2025-06-14'),
+(40, 19, 1, '2025-06-14'),
+(41, 20, 1, '2025-06-14'),
+(42, 21, 1, '2025-06-15'),
+(43, 22, 1, '2025-06-15'),
+(44, 22, 4, '2025-06-15'),
+(45, 23, 1, '2025-06-15'),
+(46, 24, 1, '2025-06-15'),
+(47, 25, 1, '2025-06-15'),
+(48, 26, 1, '2025-06-15'),
+(49, 27, 1, '2025-06-15'),
+(50, 28, 7, '2025-06-15'),
+(51, 29, 1, '2025-06-15'),
+(52, 30, 1, '2025-06-15'),
+(53, 31, 1, '2025-06-15'),
+(54, 32, 1, '2025-06-15'),
+(55, 33, 1, '2025-06-15'),
+(56, 34, 1, '2025-06-15'),
+(57, 35, 1, '2025-06-15'),
+(58, 36, 1, '2025-06-15'),
+(59, 37, 1, '2025-06-15'),
+(60, 38, 1, '2025-06-15'),
+(61, 39, 7, '2025-06-15'),
+(62, 40, 1, '2025-06-15'),
+(64, 42, 1, '2025-06-15'),
+(65, 43, 1, '2025-06-15'),
+(66, 44, 1, '2025-06-15'),
+(67, 45, 1, '2025-06-15'),
+(68, 46, 1, '2025-06-15'),
+(69, 47, 1, '2025-06-15'),
+(70, 48, 4, '2025-06-15'),
+(71, 49, 1, '2025-06-15'),
+(72, 49, 9, '2025-06-15'),
+(73, 50, 1, '2025-06-15'),
+(74, 51, 9, '2025-06-15'),
+(75, 52, 1, '2025-06-15'),
+(76, 53, 2, '2025-06-15'),
+(77, 54, 1, '2025-06-15'),
+(78, 55, 2, '2025-06-15'),
+(79, 56, 1, '2025-06-15'),
+(80, 57, 1, '2025-06-15'),
+(81, 58, 2, '2025-06-18');
 
 -- --------------------------------------------------------
 
@@ -393,7 +510,28 @@ INSERT INTO `oscord_vidlec` (`videoID`, `videoName`, `videoLink`, `courseID`, `v
 (14, '8. Loopings in Java - Part 1', 'https://youtu.be/HbVgRRyF_eE', 1, 1),
 (15, '9. Loopings in Java - Part 2', 'https://youtu.be/Vt01n8jv4JY', 1, 0),
 (16, '2. Introduction to Python Programming', 'https://youtu.be/6RSaT6Qr5NM', 2, 1),
-(17, '8. List, Tuple and Set - Part 1', 'https://youtu.be/yNTOE92OLb4', 2, 1);
+(17, '8. List, Tuple and Set - Part 1', 'https://youtu.be/yNTOE92OLb4', 2, 1),
+(19, '5. Conditional Statement & Decision Making in Python', 'https://youtu.be/-yqKMJDcw9E', 2, 1),
+(20, '9. List, Tuple and Set - Part 2', 'https://youtu.be/lUj6GrtgMnc', 2, 1),
+(21, '1. Introduction to Database Design', 'https://youtu.be/Z4QG6skyk9Y', 3, 1),
+(22, '5. Normalization Project', 'https://youtu.be/rVOsK_aM6T4', 3, 1),
+(23, '10. Querying Multiple Tables in SQL', 'https://youtu.be/Rjd52zne6I8', 3, 1),
+(24, '1. Introduction to PHP Programming', 'https://youtu.be/kmu1MlCZj2E?list=PLunggmB-HckVbtTf38oo9Oi1M1BnFz0Ke', 5, 1),
+(25, '10. Introduction to Database Design', 'https://youtu.be/Z4QG6skyk9Y?si=ZWiZQY_4tmhmP3nG', 5, 1),
+(26, '14. Normalization Project', 'https://youtu.be/rVOsK_aM6T4?si=HsnX6AR4KI8BsEeO', 5, 1),
+(27, '19. Querying Multiple Tables', 'https://youtu.be/Rjd52zne6I8?si=ohn4B2OvTf5sw7o4', 5, 1),
+(28, '3. Use of $_GET and $_POST in PHP', 'https://youtu.be/ZjJFiFfQqP0', 5, 1),
+(29, '1. Introduction to Web Design', 'https://youtu.be/e6FvYOLC1Ak', 4, 1),
+(30, '7. CSS Episode - 1', 'https://youtu.be/xmw8Fr28m84', 4, 1),
+(31, '13. Javascript Episode - 1', 'https://youtu.be/WF_7SnfFZ98', 4, 1),
+(32, '1. Introduction to Web Design', 'https://youtu.be/e6FvYOLC1Ak?si=yPgkto6sS_L2PlZ6', 9, 1),
+(33, '7. CSS Episode - 1', 'https://youtu.be/xmw8Fr28m84?si=Hz-XnBGKEmXb1c18', 9, 1),
+(34, '13. Javascript Episode - 1', 'https://youtu.be/WF_7SnfFZ98?si=If5lJ6T1nHacs20i', 9, 1),
+(35, '33. Introduction to PHP Programming', 'https://youtu.be/kmu1MlCZj2E?si=yEI77VCjn4fjxfUg', 9, 1),
+(36, '35. Use of $_GET and $_POST in PHP', 'https://youtu.be/ZjJFiFfQqP0?si=8W7wpX6mOlH7EoRn', 9, 1),
+(37, '42. Introduction to Database Design', 'https://youtu.be/Z4QG6skyk9Y?si=7ajN-XFt2nGpON5Z', 9, 1),
+(38, '46. Normalization Project', 'https://youtu.be/rVOsK_aM6T4?si=6tQTgm2Ucwuz7-V8', 9, 1),
+(39, '51. Querying Multiple Tables', 'https://youtu.be/Rjd52zne6I8?si=uab8JimTjdezWXCQ', 9, 1);
 
 --
 -- Indexes for dumped tables
@@ -502,49 +640,49 @@ ALTER TABLE `file`
 -- AUTO_INCREMENT for table `oscord_course`
 --
 ALTER TABLE `oscord_course`
-  MODIFY `courseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `courseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `oscord_coursedetail`
 --
 ALTER TABLE `oscord_coursedetail`
-  MODIFY `coursedetailID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+  MODIFY `coursedetailID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=131;
 
 --
 -- AUTO_INCREMENT for table `oscord_instructor`
 --
 ALTER TABLE `oscord_instructor`
-  MODIFY `instructorID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `instructorID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `oscord_instructorxcourse`
 --
 ALTER TABLE `oscord_instructorxcourse`
-  MODIFY `instrucorxcourseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `instrucorxcourseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `oscord_student`
 --
 ALTER TABLE `oscord_student`
-  MODIFY `studentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `studentID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `oscord_studentreview`
 --
 ALTER TABLE `oscord_studentreview`
-  MODIFY `studentreviewID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `studentreviewID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `oscord_studentxcourse`
 --
 ALTER TABLE `oscord_studentxcourse`
-  MODIFY `studentxcourseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `studentxcourseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `oscord_vidlec`
 --
 ALTER TABLE `oscord_vidlec`
-  MODIFY `videoID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `videoID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- Constraints for dumped tables
