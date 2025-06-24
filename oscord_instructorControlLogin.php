@@ -213,6 +213,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             100% { transform: rotate(360deg); }
         }
         @media (max-width: 640px) {
+            body{
+                background : black;
+            }
             .cyber-card {
                 padding: 1.5rem;
                 max-width: 90%;

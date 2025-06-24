@@ -345,6 +345,9 @@ $step = isset($_SESSION['reset_step']) ? $_SESSION['reset_step'] : 0;
             cursor: not-allowed;
         }
         @media (max-width: 640px) {
+            body{
+                background:black;
+            }
             .cyber-card {
                 padding: 1.5rem;
                 max-width: 90%;

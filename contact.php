@@ -4,9 +4,6 @@ require 'vendor/autoload.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function sanitizeInput($data) {
-    return htmlspecialchars(strip_tags(trim($data)));
-}
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -16,17 +13,17 @@ ini_set('log_errors', 1);
 // ini_set('error_log', 'C:\xamppp\htdocs\PHP\OSCORD.COM\);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = sanitizeInput($_POST['name']);
-    $email = sanitizeInput($_POST['email']);
-    $message = sanitizeInput($_POST['message']);
-
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $message = $_POST['message'];
+   
     if (empty($name) || empty($email) || empty($message)) {
-        echo "<script>alert('All fields are required!'); window.location.href='contact.php';</script>";
+        echo "<script>alert('All fields are required!');window.location.href='oscord_home.php'</script>";
         exit;
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('Invalid email format!'); window.location.href='contact.php';</script>";
+        echo "<script>alert('Invalid email format!'); window.location.href='oscord_home.php';</script>";
         exit;
     }
 
@@ -34,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $mail->SMTPDebug = 2; 
         $mail->Debugoutput = function($str, $level) {
-            file_put_contents('C:\xamppp\htdocs\PHP\DSA Project\mail_debug.log', gmdate('Y-m-d H:i:s') . "\t$level\t$str\n", FILE_APPEND);
+            file_put_contents('mail_debug.log', gmdate('Y-m-d H:i:s') . "\t$level\t$str\n", FILE_APPEND);
         };
 
         $mail->isSMTP();

@@ -1,20 +1,14 @@
 <?php
 include "connectdb.php";
 
-$query1 = "SELECT courseID,courseName FROM oscord_course";
-$result1 = $conn->query($query1);
+$query_courses = "SELECT courseID, courseName FROM oscord_course";
+$result_courses = $conn->query($query_courses);
 
-$query2 = "SELECT * FROM oscord_course";
-$result2 = $conn->query($query2);
-
-$query_reviews = "SELECT sr.*, s.studentName FROM oscord_studentreview sr JOIN oscord_student s ON sr.studentID = s.studentID WHERE sr.isShown=1";
-$result_reviews = $conn->query($query_reviews);
+$query_course_details = "SELECT * FROM oscord_course";
+$result_course_details = $conn->query($query_course_details);
 
 $query_students = "SELECT studentID, studentName FROM oscord_student";
 $result_students = $conn->query($query_students);
-
-$query_courses = "SELECT courseID, courseName FROM oscord_course";
-$result_courses = $conn->query($query_courses);
 
 $query_course_count = "SELECT COUNT(*) as course_count FROM oscord_course";
 $result_course_count = $conn->query($query_course_count);
@@ -27,6 +21,19 @@ $student_count = $result_student_count->fetch_assoc()['student_count'];
 $query_content_count = "SELECT (SELECT COUNT(*) FROM oscord_vidlec) + (SELECT COUNT(*) FROM file) as content_count";
 $result_content_count = $conn->query($query_content_count);
 $content_count = $result_content_count->fetch_assoc()['content_count'];
+
+// Student Reviews Query
+$sql_reviews = "SELECT sr.studentreviewID, sr.studentreview, sr.courseID, sr.studentID, sr.isShown, 
+               s.studentName, c.courseName
+        FROM oscord_studentreview sr
+        JOIN oscord_student s ON sr.studentID = s.studentID
+        JOIN oscord_course c ON sr.courseID = c.courseID
+        WHERE sr.isShown = 1
+        ORDER BY sr.studentreviewID DESC"; // No LIMIT to fetch all reviews
+$result_reviews_section = $conn->query($sql_reviews);
+
+$query_students_reviews = "SELECT studentID, studentName FROM oscord_student";
+$result_students_reviews = $conn->query($query_students_reviews);
 ?>
 
 <!DOCTYPE html>
@@ -39,13 +46,13 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
+         
         }
 
         body {
@@ -56,18 +63,6 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
             position: relative;
         }
 
-        /* Particle Background */
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            background: transparent;
-        }
-
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -94,7 +89,6 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        /* Navigation */
         .navbar-custom {
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(12px);
@@ -171,10 +165,9 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
             transform: translateX(5px);
         }
 
-        /* Welcome Section */
         .welcome-container {
             background: linear-gradient(145deg, rgba(0, 242, 255, 0.12), rgba(200, 0, 255, 0.12));
-            min-height: 85vh;
+            min-height: 120vh;
             display: flex;
             align-items: center;
             padding: 50px 5%;
@@ -215,12 +208,13 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
             margin-bottom: 0px;
             text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
             animation: fadeIn 0.8s ease-out;
+            text-align: center;
         }
 
         .welcome-container p {
             font-size: 1.2rem;
             color: #d0d0d0;
-            line-height: 1.9;
+            line-height: 50px;
             max-width: 600px;
             margin: 0 auto 30px;
             animation: fadeIn 1s ease-out 0.2s both;
@@ -241,7 +235,6 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
             box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
         }
 
-        /* Stats Section */
         .stats-section {
             background: rgba(20, 20, 20, 0.9);
             padding: 40px 0;
@@ -455,51 +448,6 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
             transform: translateX(5px);
         }
 
-        .review-section {
-            margin: 60px 0;
-            padding: 40px;
-            background: transparent;
-            border-radius: 15px;
-            box-shadow: 0 0 25px rgba(0, 242, 255, 0.5);
-            animation: fadeIn 1s ease-out;
-            position: relative;
-            z-index: 1;
-        }
-
-        .review-section h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 40px;
-            color: #ffffff;
-            text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
-            line-height: 40px;
-        }
-
-        .review-item h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #ffffff;
-            text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
-        }
-
-        .review-item p {
-            font-size: 1rem;
-            line-height: 40px;
-            margin-bottom: 20px;
-            color: #d0d0d0;
-        }
-
-        .review-item i {
-            font-size: 1.2rem;
-            color: #00f2ff;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
         .form-container {
             background: transparent;
             padding: 30px;
@@ -619,7 +567,6 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
             transform: scale(1.05);
         }
 
-        /* Footer */
         #homeConclusion {
             background: rgba(10, 10, 10, 0.95);
             padding: 40px 0;
@@ -667,6 +614,216 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
             z-index: 1;
         }
 
+        /* Student Reviews CSS */
+        #studentReview {
+            font-family: 'Inter', sans-serif;
+        }
+
+        @keyframes studentReviewFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes studentReviewNeonGlow {
+            0%, 100% { box-shadow: 0 0 5px #00f2ff, 0 0 15px #00f2ff, 0 0 30px #00f2ff; }
+            50% { box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 40px #00f2ff; }
+        }
+
+        @keyframes studentReviewNeonPulse {
+            0%, 100% { text-shadow: 0 0 5px #00f2ff, 0 0 10px #00f2ff, 0 0 15px #00f2ff; }
+            50% { text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 30px #00f2ff; }
+        }
+
+        #studentReview .review-section {
+            margin: 60px auto;
+            padding: 40px 20px;
+            background: transparent;
+            border-radius: 15px;
+            animation: studentReviewFadeIn 1s ease-out;
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 1200px;
+            height: auto;
+            overflow: hidden;
+        }
+
+        #studentReview .review-section h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #00f2ff;
+            text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 30px #00f2ff;
+            animation: studentReviewNeonPulse 2s infinite;
+        }
+
+        #studentReview .review-container {
+            display: flex;
+            flex-wrap: nowrap;
+            will-change: transform;
+            padding: 20px 0;
+        }
+
+        #studentReview .review-item {
+            background: transparent;
+            border: 2px solid #00f2ff;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+            animation: studentReviewFadeIn 1s ease-out;
+            width: 800px;
+            margin-right: 20px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            flex-shrink: 0;
+            line-height: 40px;
+            text-align: left;
+        }
+
+        #studentReview .review-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.6);
+        }
+
+        #studentReview .review-item::before {
+            content: '';
+            font-size: 2.5rem;
+            color: #00f2ff;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        #studentReview .review-item::after {
+            content: '';
+            font-size: 2.5rem;
+            color: #00f2ff;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+
+        #studentReview .review-item h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #00f2ff;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px #00f2ff;
+        }
+
+        #studentReview .review-item p {
+            font-size: 1rem;
+            line-height: 40px;
+            color: #d0d0d0;
+            margin-bottom: 10px;
+            flex-grow: 1;
+            overflow-x: auto;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        #studentReview .review-item p::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #studentReview .review-item p::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        #studentReview .review-item p::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #00f2ff, #ff00ff);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        #studentReview .review-item p::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #ff00ff, #00f2ff);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+        }
+
+        #studentReview .review-item p {
+            scrollbar-width: thin;
+            scrollbar-color: #00f2ff rgba(0, 0, 0, 0.5);
+        }
+
+        #studentReview .form-container {
+            background: transparent;
+            padding: 0px;
+            border-radius: 15px;
+            margin: 30px auto;
+            width: 100%;
+            max-width: 100%;
+            animation: studentReviewFadeIn 1s ease-out;
+            position: relative;
+            z-index: 1;
+        }
+
+        #studentReview .form-container h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
+            text-align: center;
+        }
+
+        #studentReview .form-select,
+        #studentReview .form-control {
+            background: #333;
+            border: 1px solid #555;
+            color: #e6e6e6;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        #studentReview .form-select:focus,
+        #studentReview .form-control:focus {
+            border-color: #ff00ff;
+            box-shadow: 0 0 0 4px rgba(255, 0, 255, 0.3);
+        }
+
+        #studentReview .form-container .btn {
+            background: #ff00ff;
+            border: none;
+            padding: 12px;
+            border-radius: 50px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            animation: studentReviewNeonGlow 2s infinite;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        #studentReview .form-container .btn:hover {
+            background: #00f2ff;
+            color: #0a0a0a;
+            transform: scale(1.05);
+        }
+
+        #studentReview .error-message {
+            text-align: center;
+            color: #ff00ff;
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        #niiki{
+              text-decoration : none;
+            }
+
         /* Responsive Design */
         @media (max-width: 820px) {
             .welcome-container {
@@ -680,6 +837,7 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
 
             .welcome-container p {
                 font-size: 1.1rem;
+                text-align: left;
             }
 
             .circularImage {
@@ -744,37 +902,60 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
                 margin: 40px 0 20px;
             }
 
-            .review-section {
-                padding: 30px 20px;
+            #studentReview {
+                padding: 20px 10px;
+                margin: 30px 0;
+                height: auto;
+                margin-left: 55px;
             }
 
-            .review-section h2 {
-                font-size: 1.8rem;
-                line-height: 1.4;
+            #studentReview .review-section {
+                padding: 30px 15px;
+                margin: 40px 0;
+                height: auto;
             }
 
-            .contact-form {
-                padding: 30px 20px;
-                max-width: 100%;
+            #studentReview .review-section h2 {
+                font-size: 2.2rem;
             }
 
-            .stats-section h2 {
-                font-size: 2rem;
+            #studentReview .review-item {
+                width: 350px;
             }
 
-            .stats-item h3 {
-                font-size: 1.8rem;
+            #studentReview .review-item h3 {
+                font-size: 1.1rem;
             }
 
-            .stats-item p {
-                font-size: 1rem;
+            #studentReview .review-item p {
+                font-size: 0.95rem;
+            }
+
+            #studentReview .form-container h2 {
+                font-size: 1.6rem;
             }
         }
 
         @media (max-width: 576px) {
+            #studentReview {
+                padding: 20px 10px;
+                margin: 30px 0;
+                height: auto;
+                margin-left: 10px;
+                margin-right: 20px;
+            }
+
             .navbar-custom .nav-link {
                 font-size: 0.9rem;
                 padding: 8px 15px;
+            }
+
+            .welcome-container h2 {
+                line-height: 80px;
+            }
+
+            .welcome-container p {
+                text-align: left;
             }
 
             .dropdown-item {
@@ -800,6 +981,9 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
                 line-height: 1.6;
                 margin-bottom: 15px;
             }
+
+
+           
 
             .card-text .detail-item {
                 font-size: 0.85rem;
@@ -844,15 +1028,52 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
                 min-width: 200px;
             }
 
-            .review-section {
-                max-width: 90%;
-                padding: 20px;
-                margin-left: 20px;
-            }
-
             .logo-img {
                 width: 40px;
                 height: 40px;
+            }
+
+            #studentReview .review-section {
+                padding: 20px 10px;
+                margin: 30px 0;
+                height: auto;
+                margin-left: 22px;
+            }
+
+            #studentReview .review-section h2 {
+                font-size: 1.8rem;
+            }
+
+            #studentReview .review-item {
+                width: 280px;
+                padding: 15px;
+            }
+
+            #studentReview .review-item h3 {
+                font-size: 1rem;
+            }
+
+            #studentReview .review-item p {
+                font-size: 0.9rem;
+            }
+
+            #studentReview .form-container {
+                padding: 20px;
+                max-width: 100%;
+            }
+
+            #studentReview .form-container h2 {
+                font-size: 1.4rem;
+            }
+
+            #studentReview .form-select,
+            #studentReview .form-control {
+                font-size: 0.9rem;
+            }
+
+            #studentReview .form-container .btn {
+                padding: 10px;
+                font-size: 0.9rem;
             }
         }
 
@@ -860,10 +1081,13 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
         .animate-on-scroll.animate {
             animation: fadeIn 0.8s ease-out forwards;
         }
+
+        #studentReview .animate-on-scroll.animate {
+            animation: studentReviewFadeIn 0.8s ease-out forwards;
+        }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
     <ul class="nav nav-pills navbar-custom">
         <li class="nav-item logo-container">
             <a class="nav-link" aria-current="page" href="oscord_home.php">OSCORD - Programming & Computer Science</a>
@@ -873,8 +1097,9 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Courses</a>
                 <ul class="dropdown-menu">
                     <?php
-                        if ($result1 && $result1->num_rows > 0) {
-                            while ($row = $result1->fetch_assoc()) {
+                        if ($result_courses && $result_courses->num_rows > 0) {
+                            $result_courses->data_seek(0);
+                            while ($row = $result_courses->fetch_assoc()) {
                                 echo "<li><button class='dropdown-item' type='submit' name='courseID' value='".htmlspecialchars($row['courseID'])."'>".htmlspecialchars($row['courseName'])."</button></li>";
                             }
                         }
@@ -911,13 +1136,11 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
             <div class='col' id="wel">
                 <h2>Welcome to Oscord</h2>
                 <br>
-                <p>Study programming & Computer Science subjects from basic to software development level at OSCORD. 
-                Online students can join both <b>by one VIP class</b> and group class (if available).
-                For all by one classes, students <b>can negotiate</b> the class schedule.
-                The video records and lecture files are usually sent in the private Telegram channel daily right after the class.</p>
-            </div>
-            <div class='col'>
-                <img src='./OSCORD.jpg' class='circularImage'>
+                <p>Programming နှင့် Computer Science ဘာသာရပ်များကို OSCORD မှာ ဆရာ ဆရာမများဖြင့် Online မှ By One Class များဖြင့်လည်းကောင်း
+Group Class များဖြင့်လည်းကောင်းသင်ကြားပေးနေပါတယ် နမူနာသင်ခန်းစာ video lecture များကို သက်ဆိုင်ရာ course အောက်မှာဝင်ရောက်လေ့လာနိုင်ပါတယ် By One အတန်းများအတွက် အချိန်ညှိနှိုင်းနိုင်ပါတယ်
+(တက်ရောက်မည့် Course အပေါ်မူတည်၍ Face to Face အပြင်မှာသင်ယူနိုင်ဖိုအတွက်လည်း လျောက်ထားနိုင်ပါတယ်)
+နေ့စဉ်သင်ကြားထားသော Lecture File များနှင့် Video Record များကို Telegram Private Channel နှင့် Website မှာပြန်လည် Upload ပေးမှာဖြစ်ပါတယ်
+တက်ရောက်လိုပါက Sign Up မှာ ပေးထားသော Instruction များကိုသေချာစွာဖတ်ရူပြီး အတန်းအပ်နိုင်ပါတယ်</p>
             </div>
         </div>
     </div>   
@@ -931,7 +1154,7 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
                     <p>Courses Offered</p>
                 </div>
                 <div class="stats-item animate-on-scroll">
-                    <h3><i class="fas fa-users"></i> <?php echo htmlspecialchars($student_count); ?></h3>
+                    <h3><i class="fas fa-users"></i> <?php echo htmlspecialchars($student_count+60); ?></h3>
                     <p>Students Enrolled</p>
                 </div>
                 <div class="stats-item animate-on-scroll">
@@ -946,71 +1169,89 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
         <h1 id="titleCourse">Courses from OSCORD</h1>
         <div class="row">
             <?php
-            while ($row2 = $result2->fetch_assoc()) {
-                echo "<div class='col-md-6 col-lg-4'>";
-                echo "<form method='post' action='oscord_specificCoursePage.php'>";
-                echo "<div class='card animate-on-scroll'>";
-                echo "<div class='card-body'>";
-                    echo "<h5 class='card-title'>".htmlspecialchars($row2['courseName'])."</h5>";
-                    echo "<div id='courseDescription'>".htmlspecialchars($row2['courseDescription'])."</div>";
-                    echo "<div class='card-text'>";
-                        echo "<div class='detail-item'><b>Course Fee</b>: ".htmlspecialchars($row2['courseFee'])."</div>";
-                        echo "<div class='detail-item'><b>Course Period</b>: ".htmlspecialchars($row2['coursePeriod'])."</div>";
-                        if (!empty($row2['courseFbLink'])) {
-                            echo "<div class='detail-item'><a class='fb-link' href='".htmlspecialchars($row2['courseFbLink'])."' target='_blank'>View on Facebook</a></div>";
+            if ($result_course_details && $result_course_details->num_rows > 0) {
+                while ($row2 = $result_course_details->fetch_assoc()) {
+                    echo "<div class='col-md-6 col-lg-4'>";
+                    echo "<form method='post' action='oscord_specificCoursePage.php'>";
+                    echo "<div class='card animate-on-scroll'>";
+                    echo "<div class='card-body'>";
+                        echo "<h5 class='card-title'>".htmlspecialchars($row2['courseName'])."</h5>";
+                        echo "<div id='courseDescription'>".htmlspecialchars($row2['courseDescription'])."</div>";
+                        echo "<div class='card-text'>";
+                            echo "<div class='detail-item'><b>Course Fee</b>: ".htmlspecialchars($row2['courseFee'])."</div>";
+                            echo "<div class='detail-item'><b>Course Period</b>: ".htmlspecialchars($row2['coursePeriod'])."</div>";
+                            if (!empty($row2['courseFbLink'])) {
+                                echo "<div class='detail-item'><a class='fb-link' href='".htmlspecialchars($row2['courseFbLink'])."' target='_blank'>View on Facebook</a></div>";
+                            }
+                        echo "</div>";
+                        echo "<button class='btn btn-course-detail' type='button' data-bs-toggle='collapse' data-bs-target='#courseDetails".htmlspecialchars($row2['courseID'])."' aria-expanded='false' aria-controls='courseDetails".htmlspecialchars($row2['courseID'])."'>Course Details</button>";
+                        echo "<div class='collapse course-details-content' id='courseDetails".htmlspecialchars($row2['courseID'])."'>";
+                        
+                        $courseID = $row2['courseID'];
+                        $query3 = "SELECT * FROM oscord_coursedetail WHERE courseID = ?";
+                        $stmt3 = $conn->prepare($query3);
+                        $stmt3->bind_param("i", $courseID);
+                        $stmt3->execute();
+                        $result3 = $stmt3->get_result();
+
+                        while ($row3 = $result3->fetch_assoc()) {
+                            echo "<div class='course-detail-item'>".htmlspecialchars($row3['coursedetailName'])."</div>";
                         }
+
+                        echo "</div>";
+                        echo "<button class='btn btn-course-detail' type='submit' name='courseID' value='".htmlspecialchars($row2['courseID'])."'>Start Learning</button>";
                     echo "</div>";
-                    echo "<button class='btn btn-course-detail' type='button' data-bs-toggle='collapse' data-bs-target='#courseDetails".htmlspecialchars($row2['courseID'])."' aria-expanded='false' aria-controls='courseDetails".htmlspecialchars($row2['courseID'])."'>Course Details</button>";
-                    echo "<div class='collapse course-details-content' id='courseDetails".htmlspecialchars($row2['courseID'])."'>";
-                    
-                    $courseID = $row2['courseID'];
-                    $query3 = "SELECT * FROM oscord_coursedetail WHERE courseID = ?";
-                    $stmt3 = $conn->prepare($query3);
-                    $stmt3->bind_param("i", $courseID);
-                    $stmt3->execute();
-                    $result3 = $stmt3->get_result();
-
-                    while ($row3 = $result3->fetch_assoc()) {
-                        echo "<div class='course-detail-item'>".htmlspecialchars($row3['coursedetailName'])."</div>";
-                    }
-
                     echo "</div>";
-                    echo "<button class='btn btn-course-detail' type='submit' name='courseID' value='".htmlspecialchars($row2['courseID'])."'>Start Learning</button>";
-                echo "</div>";
-                echo "</div>";
-                echo "</form>";
-                echo "</div>";
-            }
-            ?>
-        </div>
-
-        <!-- Student Review Section -->
-        <div class="review-section">
-            <h2>Student Reviews</h2>
-            <?php
-            if ($result_reviews && $result_reviews->num_rows > 0) {
-                while ($row_review = $result_reviews->fetch_assoc()) {
-                    echo "<div class='review-item animate-on-scroll'>";
-                    echo "<h3 id='studentName'><i class='fas fa-user-graduate'></i> ".htmlspecialchars($row_review['studentName'])."</h3>";
-                    echo "<p id='review'>".htmlspecialchars($row_review['studentreview'])."</p>";
-                    echo "<hr>";
+                    echo "</form>";
                     echo "</div>";
                 }
-            } else {
-                echo "<p>No reviews available yet.</p>";
             }
             ?>
+        </div>     
+    </div>
+
+    <!-- Student Reviews Section -->
+    <div id="studentReview">
+        <div class="review-section">
+         <h2>Student Reviews</h2>
+            <?php 
+            // Diagnostic: Check number of reviews fetched
+            $num_reviews = $result_reviews_section ? $result_reviews_section->num_rows : 0;
+            if (!$result_reviews_section) { ?>
+                <p class="error-message">Error: <?php echo htmlspecialchars($conn->error); ?></p>
+            <?php } elseif ($num_reviews > 0) { ?>
+          
+                <div class="review-container">
+                    <?php
+                    $result_reviews_section->data_seek(0);
+                    while ($row = $result_reviews_section->fetch_assoc()) {
+                        $student_name = htmlspecialchars($row['studentName']);
+                        $course_name = htmlspecialchars($row['courseName']);
+                        $review_text = htmlspecialchars($row['studentreview']);
+                        ?>
+                        <div class="review-item animate-on-scroll">
+                            <h3><i class="fas fa-user-graduate"></i> <?php echo $student_name; ?></h3>
+                            <p><?php echo nl2br($review_text); ?></p>
+                          
+                        </div>
+                        <?php
+                    }
+                    ?>
+                </div>
+            <?php } else { ?>
+                <p class="error-message">No reviews available yet. (Found <?php echo $num_reviews; ?> reviews.)</p>
+            <?php } ?>
 
             <div class="form-container animate-on-scroll">
-                <h2 class="text-center mb-4 w-100" id='titlereviewform'>Review a Course</h2>
-                <form class='form' action='oscord_savereview.php' method='post'>
+                <h2>Review a Course</h2>
+                <form class="form" action="oscord_savereview.php" method="post">
                     <div class="mb-3">
                         <label for="student_name" class="form-label">Select Your Name</label>
                         <select class="form-select" id="student_name" name="student_name" required>
                             <option value="">Select</option>
                             <?php
-                            if ($result_students && $result_students->num_rows > 0) {
-                                while ($row_student = $result_students->fetch_assoc()) {
+                            if ($result_students_reviews && $result_students_reviews->num_rows > 0) {
+                                while ($row_student = $result_students_reviews->fetch_assoc()) {
                                     echo "<option value='".htmlspecialchars($row_student['studentID'])."'>".htmlspecialchars($row_student['studentName'])."</option>";
                                 }
                             }
@@ -1023,6 +1264,7 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
                             <option value="">Select</option>
                             <?php
                             if ($result_courses && $result_courses->num_rows > 0) {
+                                $result_courses->data_seek(0);
                                 while ($row_course = $result_courses->fetch_assoc()) {
                                     echo "<option value='".htmlspecialchars($row_course['courseID'])."'>".htmlspecialchars($row_course['courseName'])."</option>";
                                 }
@@ -1034,7 +1276,7 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
                         <label for="textarea_review" class="form-label">Your Review Here</label>
                         <textarea class="form-control" id="textarea_review" rows="5" placeholder="Type your review here" name="review_text" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-dark w-100">Submit</button>
+                    <button type="submit" class="btn">Submit</button>
                 </form>
             </div>
         </div>
@@ -1054,7 +1296,7 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
                             <input type="email" id="contact_email" name="email" required>
 
                             <label for="message">Your Message:</label>
-                            <textarea id="message" name="content" required></textarea>
+                            <textarea id="message" name="message" required></textarea>
 
                             <button type="submit" class="btn">Send Message</button>
                         </form>
@@ -1065,7 +1307,9 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
                     <h4><i class="fas fa-link"></i> Quick Links</h4>
                     <ul class="list-unstyled">
                         <li><a href="https://www.facebook.com/share/19u16vW5KQ/">Facebook Page</a></li><br>
-                        <li><a href="https://t.me/oscord_cs">Telegram</a></li><br>
+                        <li><a href="https://youtube.com/@oscord.io.technology?si=nGPUu3EYtcK7wHkS">Youtube</a></li><br>
+                        <li><a href="https://www.instagram.com/oscord.io?igsh=ZDg1czV6NHNuN282&utm_source=qr">Instagram</a></li><br>
+                        <li><a href="https://t.me/oscord_cs">Telegram Contact</a></li><br>
                         <li><a href="https://t.me/oscord_ProgrammingClass">Telegram Channel</a></li><br>
                         <li><a href="https://drive.google.com/file/d/1obR7QrzHTh7cldw-QFf_P82ijd_VkTDI/view?usp=sharing">Viber</a></li><br>
                     </ul>
@@ -1079,111 +1323,6 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
     </footer>
 
     <script>
-        // Particle.js configuration
-        particlesJS('particles-js', {
-            "particles": {
-                "number": {
-                    "value": 80,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": ["#00f2ff", "#ff00ff", "#ffffff"]
-                },
-                "shape": {
-                    "type": "circle",
-                    "stroke": {
-                        "width": 0,
-                        "color": "#000000"
-                    }
-                },
-                "opacity": {
-                    "value": 0.5,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.1,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 3,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 2,
-                        "size_min": 0.5,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#00f2ff",
-                    "opacity": 0.4,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 2,
-                    "direction": "none",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false,
-                        "rotateX": 600,
-                        "rotateY": 1200
-                    }
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "repulse"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 400,
-                        "line_linked": {
-                            "opacity": 1
-                        }
-                    },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
-                    },
-                    "repulse": {
-                        "distance": 100,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
-                    }
-                }
-            },
-            "retina_detect": true
-        });
-
-        // Scroll-triggered animations
         document.addEventListener('DOMContentLoaded', () => {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1193,12 +1332,66 @@ $content_count = $result_content_count->fetch_assoc()['content_count'];
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.card, .review-item, .form-container, .contact-form, .stats-item').forEach(el => {
+            document.querySelectorAll('.card, #studentReview .review-item, #studentReview .form-container, .contact-form, .stats-item').forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(20px)';
                 el.classList.add('animate-on-scroll');
                 observer.observe(el);
             });
+
+            // Student Reviews dynamic infinite scrolling
+            const reviewContainer = document.querySelector('#studentReview .review-container');
+            if (reviewContainer && reviewContainer.querySelectorAll('.review-item').length > 0) {
+                const reviewItems = reviewContainer.querySelectorAll('.review-item');
+                const originalWidth = Array.from(reviewItems).reduce((sum, item) => sum + item.offsetWidth + 20, 0);
+                console.log(`Original reviews: ${reviewItems.length}, Total width: ${originalWidth}px`);
+
+                // Clone items dynamically to fill at least 3x viewport width for seamless looping
+                const viewportWidth = window.innerWidth;
+                const clonesNeeded = Math.ceil((viewportWidth * 3) / originalWidth);
+                console.log(`Clones needed: ${clonesNeeded}`);
+                for (let i = 0; i < clonesNeeded; i++) {
+                    reviewItems.forEach(item => {
+                        const clone = item.cloneNode(true);
+                        reviewContainer.appendChild(clone);
+                    });
+                }
+                console.log(`Total items after cloning: ${reviewContainer.querySelectorAll('.review-item').length}`);
+
+                // Animation variables
+                let scrollPosition = 0;
+                const scrollSpeed = 1.5; // Pixels per frame (adjust for speed)
+                let isPaused = false;
+                let animationFrameId;
+
+                // Animation loop
+                function animateScroll() {
+                    if (!isPaused) {
+                        scrollPosition -= scrollSpeed;
+                        if (-scrollPosition >= originalWidth) {
+                            scrollPosition += originalWidth; // Reset to start of original reviews
+                        }
+                        reviewContainer.style.transform = `translateX(${scrollPosition}px)`;
+                    }
+                    animationFrameId = requestAnimationFrame(animateScroll);
+                }
+
+                // Start animation
+                animateScroll();
+
+                // Pause/resume on hover
+                reviewContainer.addEventListener('mouseenter', () => {
+                    isPaused = true;
+                });
+                reviewContainer.addEventListener('mouseleave', () => {
+                    isPaused = false;
+                });
+
+                // Cleanup on page unload
+                window.addEventListener('unload', () => {
+                    cancelAnimationFrame(animationFrameId);
+                });
+            }
         });
     </script>
 

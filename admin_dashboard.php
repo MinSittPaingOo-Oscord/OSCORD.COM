@@ -201,7 +201,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['add_courses']) && isse
 // Handle dropping courses
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['drop_courses']) && isset($_POST['pin_verified']) && $_POST['pin_verified'] == 'true') {
     if (!empty($_POST['courses']) && is_array($_POST['courses'])) {
-        $stmt = $conn->prepare("DELETE FROM oscord_instructorxcourse WHERE instructorID = ? AND courseID = ?)");
+        $stmt = $conn->prepare("DELETE FROM oscord_instructorxcourse WHERE (instructorID = ? AND courseID = ?)");
         if ($stmt) {
             $stmt->bind_param("ii", $instructorID, $courseID);
             $success = true;
@@ -373,6 +373,9 @@ $conn->close();
             width: 100%;
             height: 100%;
             z-index: -1;
+        }
+        .cyber-table{
+            width: 100%;
         }
         .cyber-card {
             background: rgba(20, 20, 40, 0.3);
@@ -622,24 +625,114 @@ $conn->close();
             transform: scale(1.05);
             box-shadow: 0 0 10px rgba(0, 255, 234, 0.7);
         }
+
         @media (max-width: 640px) {
-            .cyber-card {
-                padding: 1.5rem;
-            }
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-            }
-            .profile-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
-            .cyber-table th, .cyber-table td {
-                padding: 0.5rem;
-                font-size: 0.875rem;
-            }
-        }
+    body {
+        background: black;
+        font-size: 0.999999999rem !important;
+    }
+
+    .cyber-card {
+        padding: 1.5rem;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    /* Table-specific styles for responsiveness */
+    .cyber-table {
+        width: 100%;
+        max-width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 0.5rem;
+            overflow: hidden;
+            display: inline-block;
+            overflow-x: auto;
+            font-size: smaller;
+            white-space: nowrap;
+    }
+
+    .cyber-table th,
+    .cyber-table td {
+        padding: 0.3rem;
+        font-size: 0.75em;
+        min-width: 80px;
+    }
+
+    .cyber-table th:nth-child(3),
+    .cyber-table td:nth-child(3) {
+        display: none;
+    }
+
+    /* Button-specific styles for mobile */
+    .btn-cyber {
+        padding: 0.4rem;
+        font-size: 0.7em;
+        width: 100%;
+        max-width: 250px;
+        display: inline-block;
+        margin: 0 auto 0.3rem;
+        line-height: 1.2;
+        text-align: center;
+        margin-left : 0px;
+        margin-right : 0px;
+    }
+
+    /* Unified flex container styling for all buttons */
+    .flex.space-x-4 {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        width: 100%;
+        margin-top: 0; /* Remove default margin to align with dashboard */
+    }
+
+    /* Remove mt-4 from profile buttons on mobile */
+    .btn-cyber.mt-4 {
+        margin-top: 0 !important; /* Override Tailwind mt-4 */
+    }
+
+    .course-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.7em;
+        width: 100%;
+        max-width: 250px;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    .table-link {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.7em;
+        width: 100;
+        max-width: 100px;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    /* Modal button adjustments */
+    .modal-content .btn-cyber {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.7em;
+        width: auto;
+        line-height: 1.2;
+        text-align: center;
+    }
+}
+
+
+
     </style>
 </head>
 <body>
@@ -671,8 +764,11 @@ $conn->close();
             </div>
             <div class="flex space-x-4">
                 <a href="oscord_home.php" class="btn-cyber mt-4 inline-block text-center">Back to Home</a>
+                <a href="chart.php" class="btn-cyber mt-4 inline-block text-center">Insights</a>
                 <button onclick="toggleEditForm()" class="btn-cyber mt-4 inline-block text-center">Edit Profile</button>
             </div>
+
+         
 
             <!-- Edit Profile Form (Hidden by default) -->
             <div id="editForm" class="mt-6 hidden">
@@ -725,6 +821,8 @@ $conn->close();
                 <button onclick="toggleNewCourseForm()" class="btn-cyber">Add New Course</button>
                 <button onclick="toggleStudents()" class="btn-cyber">Manage Students</button>
                 <button onclick="toggleReviews()" class="btn-cyber">Manage Reviews</button>
+             
+              
             </div>
 
             <!-- Add New Course Form (Hidden by default) -->
@@ -837,7 +935,7 @@ $conn->close();
             </div>
 
             <!-- Students List (Hidden by default) -->
-            <div id="studentsSection" class="hidden">
+            <div id="studentsSection" class="hidden table-container">
                 <h4 class="text-xl font-semibold text-cyan-400 mb-4">Manage Students</h4>
                 <?php if (empty($students)): ?>
                     <p class="text-gray-400 mb-4">No students found.</p>
@@ -906,6 +1004,13 @@ $conn->close();
             </div>
         </div>
     </div>
+
+    <?php 
+
+                        // include 'chart.php';
+                        // $conn->close();
+?>
+  
 
     <script>
         // Particle animation
@@ -1142,3 +1247,4 @@ $conn->close();
     </script>
 </body>
 </html>
+

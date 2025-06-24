@@ -225,6 +225,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             .input-label {
                 top: 0.6rem;
             }
+            body{
+                background : black;
+            }
         }
     </style>
 </head>

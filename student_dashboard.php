@@ -472,6 +472,18 @@ $conn->close();
             margin: 0.5rem;
         }
         @media (max-width: 640px) {
+            body{
+                background:black;
+                width : 89%;
+               margin: 0 auto;
+                
+            }
+
+            *{
+                font-size : 0.999999999em;
+                margin-left : 0px;
+            }
+
             .cyber-card {
                 padding: 1.5rem;
             }

@@ -1,25 +1,23 @@
 <?php
     include "connectdb.php";
 
-    #selecting course name
     $query1 = "SELECT courseID,courseName FROM oscord_course";
     $result1 = $conn->query($query1);
 
-    $id = 1; // Default to courseID=1 if not set
+    $id = 1; 
     if (isset($_POST['courseID'])) {
         $id = $_POST['courseID'];
     }
     $query2 = "SELECT * FROM oscord_course WHERE courseID = ".$id;
     $result2 = $conn->query($query2);
 
-    # Function to convert YouTube URLs to embed format
     function convertToEmbed($url) {
         if (preg_match('/youtube\.com\/watch\?v=([^\&\?]+)/i', $url, $match)) {
             return "https://www.youtube.com/embed/" . $match[1];
         } elseif (preg_match('/youtu\.be\/([^\&\?]+)/i', $url, $match)) {
             return "https://www.youtube.com/embed/" . $match[1];
         }
-        return $url; // Return original if not a YouTube URL
+        return $url; 
     }
 ?>
 <!DOCTYPE html>
@@ -48,7 +46,6 @@
             position: relative;
         }
 
-        /* Particle Background */
         #particles-js {
             position: absolute;
             width: 100%;
@@ -59,7 +56,6 @@
             background: transparent;
         }
 
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -75,7 +71,6 @@
             to { transform: translateX(0); }
         }
 
-        /* Navigation */
         .navbar-custom {
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(12px);
@@ -138,7 +133,6 @@
             transform: translateX(5px);
         }
 
-        /* Welcome Section */
         .welcome-container {
             background: linear-gradient(145deg, rgba(0, 242, 255, 0.12), rgba(200, 0, 255, 0.12));
             min-height: 85vh;
@@ -182,12 +176,13 @@
             margin-bottom: 1.2rem;
             text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
             animation: fadeIn 0.8s ease-out;
+            line-height : 90px;
         }
 
         #courseDesc {
             font-size: 1.2rem;
             color: #d0d0d0;
-            line-height: 1.9;
+            line-height: 50px;
             max-width: 750px;
             margin-bottom: 2rem;
             animation: fadeIn 1s ease-out 0.2s both;
@@ -264,7 +259,6 @@
             transform: translateX(5px);
         }
 
-        /* Tabs Section */
         .intro2 {
             background: #2a2a2a;
             color: #ffffff;
@@ -314,7 +308,6 @@
             animation: fadeIn 1s ease-out;
         }
 
-        /* Video Cards */
         .video-card {
             background: #2a2a2a;
             border-radius: 15px;
@@ -322,7 +315,7 @@
             overflow: hidden;
             transition: all 0.4s ease;
             animation: fadeIn 1s ease-out;
-            height: 360px;
+            height: 370px;
         }
 
         .video-card:hover {
@@ -393,6 +386,7 @@
             border-radius: 50px;
             transition: all 0.3s ease;
             animation: neonGlow 2s infinite;
+        
         }
 
         .details-btn:hover {
@@ -401,7 +395,6 @@
             transform: scale(1.05);
         }
 
-        /* Lecture Files */
         .fileBox {
             background: #2a2a2a;
             border-radius: 15px;
@@ -457,7 +450,6 @@
             animation: neonGlow 2s infinite;
         }
 
-        /* Login Modal */
         .modal-content {
             background: #1c2526;
             border-radius: 15px;
@@ -608,11 +600,11 @@
                         <div class='welcome-container'>
                             <div class='container'>
                                 <div class='row align-items-center'>
-                                    <div class='col-lg-6 main'>
+                                    <div class='main'>
                                         <h1 id='titleCourseTitle'>".htmlspecialchars($row2['courseName'])."</h1>
                                         <p id='courseDesc'>".htmlspecialchars($row2['courseDescription'])."</p>
                                         <div class='course-info'>
-                                            <b>Course Fee</b>: ".htmlspecialchars($row2['courseFee'])."<br>
+                                            <b>Course Fee</b>: ".htmlspecialchars($row2['courseFee'])."<br><br>
                                             <b>Course Period</b>: ".htmlspecialchars($row2['coursePeriod'])."<br>";
                     if (!empty($row2['courseFbLink'])) {
                         echo "<br><a class='fb-link' href='".htmlspecialchars($row2['courseFbLink'])."' target='_blank'>View on Facebook</a><br>";
@@ -672,7 +664,7 @@
                             if ($result4 && $result4->num_rows > 0) {
                                 while ($row4 = $result4->fetch_assoc()) {
                                     $videoLink = convertToEmbed(htmlspecialchars($row4['videoLink']));
-                                    $videoId = md5($videoLink); // Unique ID for collapse
+                                    $videoId = md5($videoLink); 
                                     if (!empty($videoLink) && filter_var($videoLink, FILTER_VALIDATE_URL)) {
                                         echo "
                                             <div class='col-12 col-md-6 col-lg-4'>
@@ -899,13 +891,11 @@
                         "retina_detect": true
                     });
 
-                    // Debug iframe sources
                     document.addEventListener('DOMContentLoaded', () => {
                         document.querySelectorAll('.video-wrapper iframe').forEach(iframe => {
                             console.log('Iframe src:', iframe.src);
                         });
 
-                        // Scroll-triggered animations
                         const observer = new IntersectionObserver((entries) => {
                             entries.forEach(entry => {
                                 if (entry.isIntersecting) {
@@ -922,7 +912,6 @@
                         });
                     });
 
-                    // Unlock tab login check
                     document.getElementById("unlock").addEventListener("click", function(event) {
                         const isLoggedIn = false; // Replace with actual login check if available
                         if (!isLoggedIn) {
@@ -932,7 +921,7 @@
                         }
                     });
 
-                    // Login form submission
+                 
                     document.getElementById("loginForm").addEventListener("submit", function(event) {
                         event.preventDefault();
                         const email = document.getElementById("email").value;
@@ -950,7 +939,7 @@
                                     const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
                                     loginModal.hide();
                                     document.getElementById("unlockedcontent").style.display = "block";
-                                    // Trigger tab content refresh
+                                    
                                     const unlockTab = new bootstrap.Tab(document.getElementById('unlock'));
                                     unlockTab.show();
                                 } else if (loginApprove === "false") {
@@ -963,7 +952,6 @@
                         xhr.send("email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password) + "&courseID=" + encodeURIComponent(courseID));
                     });
 
-                    // Animation for scroll-triggered elements
                     const style = document.createElement('style');
                     style.innerHTML = `
                         .animate-on-scroll.animate {
@@ -974,6 +962,11 @@
                 </script>
             </div>
         </div>
-    </div>      
+    </div>   
+    
 </body>
 </html>
+
+<?php
+        include "footer.php";
+?>

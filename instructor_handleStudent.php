@@ -321,6 +321,9 @@ $conn->close();
             padding: 2rem;
             margin-bottom: 2rem;
         }
+        .cyber-table{
+            width :100%;
+        }
         .cyber-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
@@ -500,20 +503,35 @@ $conn->close();
                 height: 60px;
                 font-size: 1.5rem;
             }
-        }
-        .cyber-table {
+            body{
+                background : black;
+            }
+            .cyber-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 0.5rem;
             overflow: hidden;
+            display: block;
+            overflow-x: auto;
+            font-size: smaller;
+            white-space: nowrap;
         }
+
+      
+  
+
+ 
+        }
+
+
         .cyber-table th, .cyber-table td {
             padding: 0.75rem;
             text-align: left;
             border-bottom: 1px solid rgba(255, 20, 147, 0.3);
         }
+
         .cyber-table th {
             background: rgba(255, 20, 147, 0.2);
             color: #00ffea;
@@ -529,6 +547,8 @@ $conn->close();
         .cyber-table .checkbox-field {
             accent-color: #00ffea;
         }
+
+        
     </style>
 </head>
 <body>

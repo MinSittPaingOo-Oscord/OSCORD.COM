@@ -1,4 +1,9 @@
 <?php
+// $servername		= "ps04.zwhosting.com";
+// $username 		= "zuhpszwh_mspo";
+// $password 		= "Thanoswasright@1989";
+// $databasename 	= "zuhpszwh_oscord";
+
 $servername		= "localhost";
 $username 		= "root";
 $password 		= "Thanoswasright@1989";

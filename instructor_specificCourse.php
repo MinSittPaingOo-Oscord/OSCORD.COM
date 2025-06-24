@@ -697,6 +697,9 @@ $conn->close();
             text-decoration: underline;
         }
         @media (max-width: 640px) {
+            body{
+                background : black;
+            }
             .cyber-card {
                 padding: 1.5rem;
             }
@@ -709,9 +712,16 @@ $conn->close();
                 height: 60px;
                 font-size: 1.5rem;
             }
+
+            .btn-group{
+                flex-direction: column;
+
+            }
+
             .btn-cyber {
                 padding: 0.4rem 0.8rem;
                 font-size: 0.8rem;
+                margin-bottom : 20px;
             }
             .btn-group {
                 gap: 0.3rem;

@@ -10,7 +10,7 @@ ini_set('error_log', 'php_errors.log');
 // Note: Ensure oscord_instructor.instructorPassword and oscord_student.studentPassword are VARCHAR(500) to store hashed passwords correctly.
 
 function isValidPasscode($passcode) {
-    if (strlen($passcode) < 8) {
+    /*if (strlen($passcode) < 8) {
         return false;
     }
     if (!preg_match('/[A-Z]/', $passcode)) {
@@ -22,9 +22,9 @@ function isValidPasscode($passcode) {
     if (!preg_match('/[0-9]/', $passcode)) {
         return false;
     }
-    if (!preg_match('/[@$!%*?&]/', $passcode)) {
+    if (!preg_match('/[@$!%*_?&]/', $passcode)) {
         return false;
-    }
+    }*/
     return true;
 }
 
