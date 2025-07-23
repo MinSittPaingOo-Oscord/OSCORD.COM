@@ -247,7 +247,7 @@
         .coursedetail {
             font-size: 0.95rem;
             color: #ffffff;
-            background: #2a2a2a;
+            background: #2a2a roses;
             padding: 10px 15px;
             border-radius: 8px;
             transition: all 0.3s ease;
@@ -315,7 +315,7 @@
             overflow: hidden;
             transition: all 0.4s ease;
             animation: fadeIn 1s ease-out;
-            height: 370px;
+            height: auto;
         }
 
         .video-card:hover {
@@ -386,12 +386,11 @@
             border-radius: 50px;
             transition: all 0.3s ease;
             animation: neonGlow 2s infinite;
-        
         }
 
         .details-btn:hover {
             background: #ff00ff;
-            color: #ffffff;
+ckeditor            color: #ffffff;
             transform: scale(1.05);
         }
 
@@ -650,7 +649,10 @@
                     <button class="nav-link active" id="simpleLectureVideo" data-bs-toggle="tab" data-bs-target="#simple_lecture_video" type="button" role="tab" aria-controls="simple_lecture_video">Free Lecture Videos</button>
                 </li>  
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="unlock" data-bs-toggle="tab" data-bs-target="#unlock_" type="button" role="tab" aria-controls="unlock_">Unlock</button>
+                    <button class="nav-link" id="documents" data-bs-toggle="tab" data-bs-target="#documents_" type="button" role="tab" aria-controls="documents_">Documents</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="privateLectureVideo" data-bs-toggle="tab" data-bs-target="#private_lecture_video" type="button" role="tab" aria-controls="private_lecture_video">Private Video Lectures</button>
                 </li>
             </ul>
 
@@ -695,8 +697,8 @@
                     </div>
                 </div>
 
-                <div class="tab-pane fade" id="unlock_" role="tabpanel" aria-labelledby="unlock">
-                    <div id='unlockedcontent' style='display: none;'>
+                <div class="tab-pane fade" id="documents_" role="tabpanel" aria-labelledby="documents">
+                    <div id='unlockeddocuments' style='display: none;'>
                         <div class="mt-4">
                             <?php
                                 $sql = "SELECT * FROM file WHERE courseID = ".$id;
@@ -704,7 +706,7 @@
 
                                 if ($result && $result->num_rows > 0) {
                                     echo "<div class='fileBox'>";
-                                    echo "<h2>Lecture Files</h2>";
+                                    echo "<h2>Course Documents</h2>";
                                     echo "<ul class='list-group mt-3'>";
                                     while ($row = $result->fetch_assoc()) {
                                         echo "<li class='list-group-item'>";
@@ -715,48 +717,54 @@
                                     echo "</ul>";
                                     echo "</div>";
                                 } else {
-                                    echo "<div class='alert alert-info mt-3 text-center'>No lecture files uploaded yet.</div>";
+                                    echo "<div class='alert alert-info mt-3 text-center'>No documents available.</div>";
                                 }
                             ?>
                         </div>
-                        
-                        <h2 class="text-white mt-4 mb-3">Video Lectures</h2>
-                        <div class="row">
-                            <?php 
-                                $query9 = "SELECT * FROM oscord_vidlec WHERE courseID = ".$id." ORDER BY CAST(SUBSTRING_INDEX(videoName, '.', 1) AS UNSIGNED)";
-                                $result9 = $conn->query($query9);
+                    </div>
+                </div>
 
-                                if ($result9 && $result9->num_rows > 0) {
-                                    while ($row9 = $result9->fetch_assoc()) {
-                                        $videoLink = convertToEmbed(htmlspecialchars($row9['videoLink']));
-                                        $videoId = md5($videoLink);
-                                        if (!empty($videoLink) && filter_var($videoLink, FILTER_VALIDATE_URL)) {
-                                            echo "
-                                                <div class='col-12 col-md-6 col-lg-4'>
-                                                    <div class='video-card'>
-                                                        <div class='video-wrapper'>
-                                                            <iframe src='$videoLink' title='".htmlspecialchars($row9['videoName'])."' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen loading='lazy'></iframe>
-                                                        </div>
-                                                        <div class='card-body'>
-                                                            <h5 class='card-title'>".htmlspecialchars($row9['videoName'])."</h5>
-                                                            <button class='details-btn' type='button' data-bs-toggle='collapse' data-bs-target='#details-$videoId' aria-expanded='false' aria-controls='details-$videoId'>
-                                                                Show Details
-                                                            </button> 
-                                                            <div class='collapse video-details mt-2' id='details-$videoId'>
-                                                                <p>If the video doesn't load, <a href='$videoLink' target='_blank'>watch here</a>.</p>
+                <div class="tab-pane fade" id="private_lecture_video" role="tabpanel" aria-labelledby="privateLectureVideo">
+                    <div id='unlockedcontent' style='display: none;'>
+                        <div class="mt-4">
+                            <!-- <h2 class="text-white mt-4 mb-3">Video Lectures</h2> -->
+                            <div class="row">
+                                <?php 
+                                    $query9 = "SELECT * FROM oscord_vidlec WHERE courseID = ".$id." ORDER BY CAST(SUBSTRING_INDEX(videoName, '.', 1) AS UNSIGNED)";
+                                    $result9 = $conn->query($query9);
+
+                                    if ($result9 && $result9->num_rows > 0) {
+                                        while ($row9 = $result9->fetch_assoc()) {
+                                            $videoLink = convertToEmbed(htmlspecialchars($row9['videoLink']));
+                                            $videoId = md5($videoLink);
+                                            if (!empty($videoLink) && filter_var($videoLink, FILTER_VALIDATE_URL)) {
+                                                echo "
+                                                    <div class='col-12 col-md-6 col-lg-4'>
+                                                        <div class='video-card'>
+                                                            <div class='video-wrapper'>
+                                                                <iframe src='$videoLink' title='".htmlspecialchars($row9['videoName'])."' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen loading='lazy'></iframe>
+                                                            </div>
+                                                            <div class='card-body'>
+                                                                <h5 class='card-title'>".htmlspecialchars($row9['videoName'])."</h5>
+                                                                <button class='details-btn' type='button' data-bs-toggle='collapse' data-bs-target='#details-$videoId' aria-expanded='false' aria-controls='details-$videoId'>
+                                                                    Show Details
+                                                                </button> 
+                                                                <div class='collapse video-details mt-2' id='details-$videoId'>
+                                                                    <p>If the video doesn't load, <a href='$videoLink' target='_blank'>watch here</a>.</p>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            ";
-                                        } else {
-                                            echo "<p class='video-error'>Invalid video link for: ".htmlspecialchars($row9['videoName'])."</p>";
+                                                ";
+                                            } else {
+                                                echo "<p class='video-error'>Invalid video link for: ".htmlspecialchars($row9['videoName'])."</p>";
+                                            }
                                         }
+                                    } else {
+                                        echo "<p class='text-center text-white mt-3'>No video lectures available.</p>";
                                     }
-                                } else {
-                                    echo "<p class='text-center text-white mt-3'>No video lectures available.</p>";
-                                }
-                            ?>  
+                                ?>  
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -778,6 +786,7 @@
                                         <label for="password" class="form-label">Passcode</label>
                                         <input type="password" class="form-control" id="password" required>
                                         <input type="hidden" id="courseID" name="courseID" value="<?php echo htmlspecialchars($id); ?>">
+                                        <input type="hidden" id="targetTab" name="targetTab" value="">
                                     </div>
                                     <button type="submit" class="btn btn-dark w-100">Login</button>
                                 </form>
@@ -912,21 +921,32 @@
                         });
                     });
 
-                    document.getElementById("unlock").addEventListener("click", function(event) {
+                    document.getElementById("privateLectureVideo").addEventListener("click", function(event) {
                         const isLoggedIn = false; // Replace with actual login check if available
                         if (!isLoggedIn) {
                             event.preventDefault();
+                            document.getElementById("targetTab").value = "privateLectureVideo";
                             const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
                             loginModal.show();
                         }
                     });
 
-                 
+                    document.getElementById("documents").addEventListener("click", function(event) {
+                        const isLoggedIn = false; // Replace with actual login check if available
+                        if (!isLoggedIn) {
+                            event.preventDefault();
+                            document.getElementById("targetTab").value = "documents";
+                            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                            loginModal.show();
+                        }
+                    });
+
                     document.getElementById("loginForm").addEventListener("submit", function(event) {
                         event.preventDefault();
                         const email = document.getElementById("email").value;
                         const password = document.getElementById("password").value;
                         const courseID = document.getElementById("courseID").value;
+                        const targetTab = document.getElementById("targetTab").value;
 
                         const xhr = new XMLHttpRequest();
                         xhr.open("POST", "oscord_login.php", true);
@@ -938,14 +958,15 @@
                                     alert("Login successful!");
                                     const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
                                     loginModal.hide();
-                                    document.getElementById("unlockedcontent").style.display = "block";
-                                    
-                                    const unlockTab = new bootstrap.Tab(document.getElementById('unlock'));
-                                    unlockTab.show();
-                                } else if (loginApprove === "false") {
-                                    alert("Invalid email or passcode.");
-                                } else {
-                                    alert("Server error: " + loginApprove);
+                                    if (targetTab === "documents") {
+                                        document.getElementById("unlockeddocuments").style.display = "block";
+                                        const documentsTab = new bootstrap.Tab(document.getElementById('documents'));
+                                        documentsTab.show();
+                                    } else if (targetTab === "privateLectureVideo") {
+                                        document.getElementById("unlockedcontent").style.display = "block";
+                                        const privateLectureTab = new bootstrap.Tab(document.getElementById('privateLectureVideo'));
+                                        privateLectureTab.show();
+                                    }
                                 }
                             }
                         };
@@ -968,5 +989,5 @@
 </html>
 
 <?php
-        include "footer.php";
+    include "footer.php";
 ?>
