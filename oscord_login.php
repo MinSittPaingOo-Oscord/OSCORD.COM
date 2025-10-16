@@ -1,17 +1,14 @@
 <?php
 include "connectdb.php";
 
-$loginStudent    = false;
-$loginInstructor = false;
-
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     echo "false";
     $conn->close();
     exit;
 }
 
-$email    = trim($_POST['email']    ?? '');
-$password =             $_POST['password'] ?? '';
+$email = trim($_POST['email'] ?? '');
+$password = $_POST['password'] ?? '';
 $courseID = isset($_POST['courseID']) ? (int)$_POST['courseID'] : 0;
 
 $email = filter_var($email, FILTER_SANITIZE_EMAIL);
@@ -21,77 +18,59 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($password) || $courseID 
     exit;
 }
 
-$query8 = "SELECT studentID FROM oscord_studentxcourse WHERE courseID = ?";
-if ($stmt8 = $conn->prepare($query8)) {
-    $stmt8->bind_param("i", $courseID);
-    $stmt8->execute();
-    $result8 = $stmt8->get_result();
+// Check student login
+$query_student = "
+    SELECT s.studentPassword, s.studentApprove
+    FROM oscord_student s
+    JOIN oscord_studentxcourse sx ON s.studentID = sx.studentID
+    WHERE sx.courseID = ? AND s.studentEmail = ? AND s.studentApprove = 1
+    LIMIT 1
+";
+$stmt_student = $conn->prepare($query_student);
+$stmt_student->bind_param("is", $courseID, $email);
+$stmt_student->execute();
+$result_student = $stmt_student->get_result();
+$loginStudent = false;
 
-    while ($row8 = $result8->fetch_assoc()) {
-        $query9 = "
-            SELECT studentEmail, studentPassword, studentApprove
-            FROM oscord_student
-            WHERE studentID = ?
-        ";
-        if ($stmt9 = $conn->prepare($query9)) {
-            $stmt9->bind_param("i", $row8['studentID']);
-            $stmt9->execute();
-            $result9 = $stmt9->get_result();
+if ($row_student = $result_student->fetch_assoc()) {
+    if (password_verify($password, $row_student['studentPassword'])) {
+        $loginStudent = true;
+    }
+}
+$stmt_student->close();
 
-            while ($row9 = $result9->fetch_assoc()) {
-                $pwdOk = password_verify($password, $row9['studentPassword'])
-                       || ($password === $row9['studentPassword']);
+$loginInstructor = false;
+if (!$loginStudent) {
+    // Check instructor login only if student login fails
+    $query_instructor = "
+        SELECT i.instructorPassword, i.instructorApprove
+        FROM oscord_instructor i
+        JOIN oscord_instructorxcourse ix ON i.instructorID = ix.instructorID
+        WHERE ix.courseID = ? AND i.instructorEmail = ? AND i.instructorApprove = 1
+        LIMIT 1
+    ";
+    $stmt_instructor = $conn->prepare($query_instructor);
+    $stmt_instructor->bind_param("is", $courseID, $email);
+    $stmt_instructor->execute();
+    $result_instructor = $stmt_instructor->get_result();
 
-                if (strcasecmp($row9['studentEmail'], $email) === 0
-                    && $pwdOk
-                    && $row9['studentApprove'] == 1) {
-                    $loginStudent = true;
-                    break 2;  // exit both loops
-                }
-            }
-            $stmt9->close();
+    if ($row_instructor = $result_instructor->fetch_assoc()) {
+        if (password_verify($password, $row_instructor['instructorPassword'])) {
+            $loginInstructor = true;
         }
     }
-    $stmt8->close();
+    $stmt_instructor->close();
 }
 
-$query10 = "SELECT instructorID FROM oscord_instructorxcourse WHERE courseID = ?";
-if ($stmt10 = $conn->prepare($query10)) {
-    $stmt10->bind_param("i", $courseID);
-    $stmt10->execute();
-    $result10 = $stmt10->get_result();
-
-    while ($row10 = $result10->fetch_assoc()) {
-        $query11 = "
-            SELECT instructorEmail, instructorPassword, instructorApprove
-            FROM oscord_instructor
-            WHERE instructorID = ?
-        ";
-        if ($stmt11 = $conn->prepare($query11)) {
-            $stmt11->bind_param("i", $row10['instructorID']);
-            $stmt11->execute();
-            $result11 = $stmt11->get_result();
-
-            while ($row11 = $result11->fetch_assoc()) {
-                $pwdOk = password_verify($password, $row11['instructorPassword'])
-                       || ($password === $row11['instructorPassword']);
-
-                if (strcasecmp($row11['instructorEmail'], $email) === 0
-                    && $pwdOk
-                    && $row11['instructorApprove'] == 1) {
-                    $loginInstructor = true;
-                    break 2;
-                }
-            }
-            $stmt11->close();
-        }
-    }
-    $stmt10->close();
-}
-
-$login = $loginStudent || $loginInstructor;
-echo $login ? "true" : "false";
-
+echo ($loginStudent || $loginInstructor) ? "true" : "false";
 $conn->close();
 exit;
 ?>
+
+<!-- Database Index Recommendations -->
+<!--
+CREATE INDEX idx_studentxcourse_course_id ON oscord_studentxcourse(courseID);
+CREATE INDEX idx_instructorxcourse_course_id ON oscord_instructorxcourse(courseID);
+CREATE INDEX idx_student_email_approve ON oscord_student(studentEmail, studentApprove);
+CREATE INDEX idx_instructor_email_approve ON oscord_instructor(instructorEmail, instructorApprove);
+-->

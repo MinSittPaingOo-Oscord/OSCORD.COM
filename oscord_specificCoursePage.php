@@ -1,15 +1,10 @@
 <?php
     include "connectdb.php";
 
-    $query1 = "SELECT courseID,courseName FROM oscord_course";
-    $result1 = $conn->query($query1);
-
-    $id = 1; 
+    $id = 1;
     if (isset($_POST['courseID'])) {
-        $id = $_POST['courseID'];
+        $id = (int)$_POST['courseID'];
     }
-    $query2 = "SELECT * FROM oscord_course WHERE courseID = ".$id;
-    $result2 = $conn->query($query2);
 
     function convertToEmbed($url) {
         if (preg_match('/youtube\.com\/watch\?v=([^\&\?]+)/i', $url, $match)) {
@@ -17,7 +12,7 @@
         } elseif (preg_match('/youtu\.be\/([^\&\?]+)/i', $url, $match)) {
             return "https://www.youtube.com/embed/" . $match[1];
         }
-        return $url; 
+        return $url;
     }
 ?>
 <!DOCTYPE html>
@@ -25,11 +20,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="public, max-age=86400">
+    <meta http-equiv="Expires" content="Wed, 29 Jul 2025 00:00:00 GMT">
     <title>Course</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
     <style>
         * {
             margin: 0;
@@ -44,93 +40,6 @@
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
-        }
-
-        #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            background: transparent;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes neonGlow {
-            0%, 100% { box-shadow: 0 0 5px #00f2ff, 0 0 15px #00f2ff, 0 0 30px #00f2ff; }
-            50% { box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 40px #00f2ff; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-
-        .navbar-custom {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 15px 25px;
-            box-shadow: 0 4px 12px rgba(0, 242, 255, 0.15);
-            animation: slideIn 0.5s ease-out;
-        }
-
-        .nav-link {
-            color: #e6e6e6 !important;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            font-size: 1.1rem;
-            padding: 10px 20px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: #00f2ff;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-link:hover {
-            color: #00f2ff !important;
-            transform: translateY(-2px);
-        }
-
-        .dropdown-menu {
-            background: #1c2526;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 242, 255, 0.2);
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .dropdown-item {
-            color: #e6e6e6;
-            font-size: 0.95rem;
-            padding: 12px 20px;
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-item:hover {
-            background: #00f2ff;
-            color: #0a0a0a;
-            transform: translateX(5px);
         }
 
         .welcome-container {
@@ -176,7 +85,7 @@
             margin-bottom: 1.2rem;
             text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
             animation: fadeIn 0.8s ease-out;
-            line-height : 90px;
+            line-height: 90px;
         }
 
         #courseDesc {
@@ -247,7 +156,7 @@
         .coursedetail {
             font-size: 0.95rem;
             color: #ffffff;
-            background: #2a2a roses;
+            background: #2a2a2a;
             padding: 10px 15px;
             border-radius: 8px;
             transition: all 0.3s ease;
@@ -329,6 +238,7 @@
             padding-bottom: 56.25%;
             border-radius: 15px 15px 0 0;
             overflow: hidden;
+            background: #000;
         }
 
         .video-wrapper iframe {
@@ -338,6 +248,16 @@
             width: 100%;
             height: 100%;
             border: none;
+        }
+
+        .video-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000 url('https://via.placeholder.com/640x360?text=Click+to+Load+Video') no-repeat center;
+            cursor: pointer;
         }
 
         .video-error {
@@ -390,7 +310,7 @@
 
         .details-btn:hover {
             background: #ff00ff;
-ckeditor            color: #ffffff;
+            color: #ffffff;
             transform: scale(1.05);
         }
 
@@ -549,445 +469,15 @@ ckeditor            color: #ffffff;
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
-    <div class='upper'>
-        <ul class="nav nav-pills navbar-custom">
-            <li class="nav-item">
-                <a class="nav-link" href="oscord_home.php">OSCORD - Programming & Computer Science</a>
-            </li>
-            <form method='post' action='oscord_specificCoursePage.php'>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Courses</a>
-                    <ul class="dropdown-menu">
-                        <?php
-                            if ($result1 && $result1->num_rows > 0) {
-                                while ($row = $result1->fetch_assoc()) {
-                                    echo "<li><button class='dropdown-item' type='submit' name='courseID' value='".htmlspecialchars($row['courseID'])."'>".htmlspecialchars($row['courseName'])."</button></li>";
-                                }
-                            }
-                        ?>
-                    </ul>
-                </li>
-            </form>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Knowledge Sharing</a>
-                <ul class="dropdown-menu">
-                    <li><a class='dropdown-item' href="oscord_startLearningProgramming.php">Start Learning Programming</a></li>
-                    <li><a class='dropdown-item' href="oscord_webDevelopment.php">Web Development</a></li>
-                    <li><a class='dropdown-item' href="oscord_database.php">What is Database?</a></li>
-                    <li><a class='dropdown-item' href="oscord_AI.php">Data Science & AI</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Control</a>
-                <ul class="dropdown-menu">
-                    <li><a class='dropdown-item' href="oscord_instructorControlLogin.php">Instructor</a></li>
-                    <li><a class='dropdown-item' href="oscord_studentControlLogin.php">Student</a></li>
-                </ul>
-            </li>
-            <li class='nav-item ms-auto'>
-                <a class='nav-link' href='oscord_signUpPage.php'>Sign Up</a>
-            </li>
-        </ul>    
-    </div>
-        
-    <div class='intro'>
-        <?php
-            if ($result2 && $result2->num_rows > 0) {
-                while ($row2 = $result2->fetch_assoc()) {
-                    echo "
-                        <div class='welcome-container'>
-                            <div class='container'>
-                                <div class='row align-items-center'>
-                                    <div class='main'>
-                                        <h1 id='titleCourseTitle'>".htmlspecialchars($row2['courseName'])."</h1>
-                                        <p id='courseDesc'>".htmlspecialchars($row2['courseDescription'])."</p>
-                                        <div class='course-info'>
-                                            <b>Course Fee</b>: ".htmlspecialchars($row2['courseFee'])."<br><br>
-                                            <b>Course Period</b>: ".htmlspecialchars($row2['coursePeriod'])."<br>";
-                    if (!empty($row2['courseFbLink'])) {
-                        echo "<br><a class='fb-link' href='".htmlspecialchars($row2['courseFbLink'])."' target='_blank'>View on Facebook</a><br>";
-                    }
-                    echo "        </div>
-                                        <div class='btn-group dropend'>
-                                            <button type='button' class='btn btn-course-detail dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false'>
-                                                Course Details
-                                            </button>
-                                            <ul class='dropdown-menu'>";
-                            
-                            $courseID = $row2['courseID'];
-                            $query3 = "SELECT * FROM oscord_coursedetail WHERE courseID = ?";
-                            $stmt3 = $conn->prepare($query3);
-                            $stmt3->bind_param("i", $courseID);
-                            $stmt3->execute();
-                            $result3 = $stmt3->get_result();
-
-                            while ($row3 = $result3->fetch_assoc()) {
-                                echo "<li><a class='dropdown-item coursedetail' href='#'>".htmlspecialchars($row3['coursedetailName'])."</a></li>";
-                            }
-
-                    echo "        </ul>
-                                        </div>
-                                    </div>
-                                   
-                                </div>
-                            </div>
-                        </div>";
-                }
-            } else {
-                echo "<p class='text-center'>Course not found.</p>";
-            }
-        ?>
-    </div>
-        
+    <?php include "nav.php"; ?>
+    <?php include "course_details.php"; ?>
     <div class='intro2'>Start Learning</div>
-        
-    <div class='intro3 container'>
-        <div class='tab'>
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="simpleLectureVideo" data-bs-toggle="tab" data-bs-target="#simple_lecture_video" type="button" role="tab" aria-controls="simple_lecture_video">Free Lecture Videos</button>
-                </li>  
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="documents" data-bs-toggle="tab" data-bs-target="#documents_" type="button" role="tab" aria-controls="documents_">Documents</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="privateLectureVideo" data-bs-toggle="tab" data-bs-target="#private_lecture_video" type="button" role="tab" aria-controls="private_lecture_video">Private Video Lectures</button>
-                </li>
-            </ul>
-
-            <div class="tab-content under" id="myTabContent">
-                <div class="tab-pane fade show active" id="simple_lecture_video" role="tabpanel" aria-labelledby="simpleLectureVideo">
-                    <div class="row">
-                        <?php 
-                            $query4 = "SELECT * FROM oscord_vidlec  WHERE videoFree = 1 AND courseID = ".$id." ORDER BY CAST(SUBSTRING_INDEX(videoName, '.', 1) AS UNSIGNED)";
-                            $result4 = $conn->query($query4);
-
-                            if ($result4 && $result4->num_rows > 0) {
-                                while ($row4 = $result4->fetch_assoc()) {
-                                    $videoLink = convertToEmbed(htmlspecialchars($row4['videoLink']));
-                                    $videoId = md5($videoLink); 
-                                    if (!empty($videoLink) && filter_var($videoLink, FILTER_VALIDATE_URL)) {
-                                        echo "
-                                            <div class='col-12 col-md-6 col-lg-4'>
-                                                <div class='video-card'>
-                                                    <div class='video-wrapper'>
-                                                        <iframe src='$videoLink' title='".htmlspecialchars($row4['videoName'])."' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen loading='lazy'></iframe>
-                                                    </div>
-                                                    <div class='card-body'>
-                                                        <h5 class='card-title'>".htmlspecialchars($row4['videoName'])."</h5>
-                                                        <button class='details-btn' type='button' data-bs-toggle='collapse' data-bs-target='#details-$videoId' aria-expanded='false' aria-controls='details-$videoId'>
-                                                            Show Details
-                                                        </button>
-                                                        <div class='collapse video-details mt-2' id='details-$videoId'>
-                                                            <p>If the video doesn't load, <a href='$videoLink' target='_blank'>watch here</a>.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ";
-                                    } else {
-                                        echo "<p class='video-error'>Invalid video link for: ".htmlspecialchars($row4['videoName'])."</p>";
-                                    }
-                                }
-                            } else {
-                                echo "<p class='text-center text-white mt-3'>No free lecture videos available.</p>";
-                            }
-                        ?>  
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="documents_" role="tabpanel" aria-labelledby="documents">
-                    <div id='unlockeddocuments' style='display: none;'>
-                        <div class="mt-4">
-                            <?php
-                                $sql = "SELECT * FROM file WHERE courseID = ".$id;
-                                $result = $conn->query($sql);
-
-                                if ($result && $result->num_rows > 0) {
-                                    echo "<div class='fileBox'>";
-                                    echo "<h2>Course Documents</h2>";
-                                    echo "<ul class='list-group mt-3'>";
-                                    while ($row = $result->fetch_assoc()) {
-                                        echo "<li class='list-group-item'>";
-                                        echo "<a href='download.php?id=".htmlspecialchars($row['fileID'])."'>".htmlspecialchars($row['fileName'])."</a>";
-                                        echo "<span class='badge'>Download</span>";
-                                        echo "</li>";
-                                    }
-                                    echo "</ul>";
-                                    echo "</div>";
-                                } else {
-                                    echo "<div class='alert alert-info mt-3 text-center'>No documents available.</div>";
-                                }
-                            ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="private_lecture_video" role="tabpanel" aria-labelledby="privateLectureVideo">
-                    <div id='unlockedcontent' style='display: none;'>
-                        <div class="mt-4">
-                            <!-- <h2 class="text-white mt-4 mb-3">Video Lectures</h2> -->
-                            <div class="row">
-                                <?php 
-                                    $query9 = "SELECT * FROM oscord_vidlec WHERE courseID = ".$id." ORDER BY CAST(SUBSTRING_INDEX(videoName, '.', 1) AS UNSIGNED)";
-                                    $result9 = $conn->query($query9);
-
-                                    if ($result9 && $result9->num_rows > 0) {
-                                        while ($row9 = $result9->fetch_assoc()) {
-                                            $videoLink = convertToEmbed(htmlspecialchars($row9['videoLink']));
-                                            $videoId = md5($videoLink);
-                                            if (!empty($videoLink) && filter_var($videoLink, FILTER_VALIDATE_URL)) {
-                                                echo "
-                                                    <div class='col-12 col-md-6 col-lg-4'>
-                                                        <div class='video-card'>
-                                                            <div class='video-wrapper'>
-                                                                <iframe src='$videoLink' title='".htmlspecialchars($row9['videoName'])."' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen loading='lazy'></iframe>
-                                                            </div>
-                                                            <div class='card-body'>
-                                                                <h5 class='card-title'>".htmlspecialchars($row9['videoName'])."</h5>
-                                                                <button class='details-btn' type='button' data-bs-toggle='collapse' data-bs-target='#details-$videoId' aria-expanded='false' aria-controls='details-$videoId'>
-                                                                    Show Details
-                                                                </button> 
-                                                                <div class='collapse video-details mt-2' id='details-$videoId'>
-                                                                    <p>If the video doesn't load, <a href='$videoLink' target='_blank'>watch here</a>.</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                ";
-                                            } else {
-                                                echo "<p class='video-error'>Invalid video link for: ".htmlspecialchars($row9['videoName'])."</p>";
-                                            }
-                                        }
-                                    } else {
-                                        echo "<p class='text-center text-white mt-3'>No video lectures available.</p>";
-                                    }
-                                ?>  
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                    
-                <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="loginModalLabel">Login Required</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="loginForm">
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email address</label>
-                                        <input type="email" class="form-control" id="email" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Passcode</label>
-                                        <input type="password" class="form-control" id="password" required>
-                                        <input type="hidden" id="courseID" name="courseID" value="<?php echo htmlspecialchars($id); ?>">
-                                        <input type="hidden" id="targetTab" name="targetTab" value="">
-                                    </div>
-                                    <button type="submit" class="btn btn-dark w-100">Login</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                    // Particle.js configuration
-                    particlesJS('particles-js', {
-                        "particles": {
-                            "number": {
-                                "value": 80,
-                                "density": {
-                                    "enable": true,
-                                    "value_area": 800
-                                }
-                            },
-                            "color": {
-                                "value": ["#00f2ff", "#ff00ff", "#ffffff"]
-                            },
-                            "shape": {
-                                "type": "circle",
-                                "stroke": {
-                                    "width": 0,
-                                    "color": "#000000"
-                                }
-                            },
-                            "opacity": {
-                                "value": 0.5,
-                                "random": true,
-                                "anim": {
-                                    "enable": true,
-                                    "speed": 1,
-                                    "opacity_min": 0.1,
-                                    "sync": false
-                                }
-                            },
-                            "size": {
-                                "value": 3,
-                                "random": true,
-                                "anim": {
-                                    "enable": true,
-                                    "speed": 2,
-                                    "size_min": 0.5,
-                                    "sync": false
-                                }
-                            },
-                            "line_linked": {
-                                "enable": true,
-                                "distance": 150,
-                                "color": "#00f2ff",
-                                "opacity": 0.4,
-                                "width": 1
-                            },
-                            "move": {
-                                "enable": true,
-                                "speed": 2,
-                                "direction": "none",
-                                "random": true,
-                                "straight": false,
-                                "out_mode": "out",
-                                "bounce": false,
-                                "attract": {
-                                    "enable": false,
-                                    "rotateX": 600,
-                                    "rotateY": 1200
-                                }
-                            }
-                        },
-                        "interactivity": {
-                            "detect_on": "canvas",
-                            "events": {
-                                "onhover": {
-                                    "enable": true,
-                                    "mode": "repulse"
-                                },
-                                "onclick": {
-                                    "enable": true,
-                                    "mode": "push"
-                                },
-                                "resize": true
-                            },
-                            "modes": {
-                                "grab": {
-                                    "distance": 400,
-                                    "line_linked": {
-                                        "opacity": 1
-                                    }
-                                },
-                                "bubble": {
-                                    "distance": 400,
-                                    "size": 40,
-                                    "duration": 2,
-                                    "opacity": 8,
-                                    "speed": 3
-                                },
-                                "repulse": {
-                                    "distance": 100,
-                                    "duration": 0.4
-                                },
-                                "push": {
-                                    "particles_nb": 4
-                                },
-                                "remove": {
-                                    "particles_nb": 2
-                                }
-                            }
-                        },
-                        "retina_detect": true
-                    });
-
-                    document.addEventListener('DOMContentLoaded', () => {
-                        document.querySelectorAll('.video-wrapper iframe').forEach(iframe => {
-                            console.log('Iframe src:', iframe.src);
-                        });
-
-                        const observer = new IntersectionObserver((entries) => {
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    entry.target.classList.add('animate');
-                                }
-                            });
-                        }, { threshold: 0.1 });
-
-                        document.querySelectorAll('.video-card, .fileBox').forEach(el => {
-                            el.style.opacity = '0';
-                            el.style.transform = 'translateY(20px)';
-                            el.classList.add('animate-on-scroll');
-                            observer.observe(el);
-                        });
-                    });
-
-                    document.getElementById("privateLectureVideo").addEventListener("click", function(event) {
-                        const isLoggedIn = false; // Replace with actual login check if available
-                        if (!isLoggedIn) {
-                            event.preventDefault();
-                            document.getElementById("targetTab").value = "privateLectureVideo";
-                            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-                            loginModal.show();
-                        }
-                    });
-
-                    document.getElementById("documents").addEventListener("click", function(event) {
-                        const isLoggedIn = false; // Replace with actual login check if available
-                        if (!isLoggedIn) {
-                            event.preventDefault();
-                            document.getElementById("targetTab").value = "documents";
-                            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-                            loginModal.show();
-                        }
-                    });
-
-                    document.getElementById("loginForm").addEventListener("submit", function(event) {
-                        event.preventDefault();
-                        const email = document.getElementById("email").value;
-                        const password = document.getElementById("password").value;
-                        const courseID = document.getElementById("courseID").value;
-                        const targetTab = document.getElementById("targetTab").value;
-
-                        const xhr = new XMLHttpRequest();
-                        xhr.open("POST", "oscord_login.php", true);
-                        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                        xhr.onreadystatechange = function() {
-                            if (xhr.readyState === 4 && xhr.status === 200) {
-                                const loginApprove = xhr.responseText;
-                                if (loginApprove === "true") {
-                                    alert("Login successful!");
-                                    const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-                                    loginModal.hide();
-                                    if (targetTab === "documents") {
-                                        document.getElementById("unlockeddocuments").style.display = "block";
-                                        const documentsTab = new bootstrap.Tab(document.getElementById('documents'));
-                                        documentsTab.show();
-                                    } else if (targetTab === "privateLectureVideo") {
-                                        document.getElementById("unlockedcontent").style.display = "block";
-                                        const privateLectureTab = new bootstrap.Tab(document.getElementById('privateLectureVideo'));
-                                        privateLectureTab.show();
-                                    }
-                                }
-                            }
-                        };
-                        xhr.send("email=" + encodeURIComponent(email) + "&password=" + encodeURIComponent(password) + "&courseID=" + encodeURIComponent(courseID));
-                    });
-
-                    const style = document.createElement('style');
-                    style.innerHTML = `
-                        .animate-on-scroll.animate {
-                            animation: fadeIn 0.8s ease-out forwards;
-                        }
-                    `;
-                    document.head.appendChild(style);
-                </script>
-            </div>
-        </div>
-    </div>   
-    
+    <?php include "tabs_content.php"; ?>
+    <?php include "login_modal.php"; ?>
 </body>
 </html>
-
 <?php
     include "footer.php";
+    $conn->close();
 ?>
+

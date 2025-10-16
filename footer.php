@@ -195,7 +195,7 @@ include "connectdb.php";
         </div>
 
         <div class="text-center bg-dark w-100">
-            <p class="text-light" id="footer-last">© Oscord Programming Class All Rights Reserved 2022-2025</p>
+            <p class="text-light" id="footer-last">© Oscord Programming Class All Rights Reserved 2022-present</p>
         </div>
     </footer>
 </div>

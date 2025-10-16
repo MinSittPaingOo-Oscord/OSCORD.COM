@@ -4,7 +4,7 @@ include "connectdb.php";
 $query_courses = "SELECT courseID, courseName FROM oscord_course";
 $result_courses = $conn->query($query_courses);
 
-$query_course_details = "SELECT * FROM oscord_course";
+$query_course_details = "SELECT * FROM oscord_course ORDER BY sort IS NULL, sort ASC";
 $result_course_details = $conn->query($query_course_details);
 
 $query_students = "SELECT studentID, studentName FROM oscord_student";
@@ -54,6 +54,32 @@ $result_students_reviews = $conn->query($query_students_reviews);
             font-family: 'Inter', sans-serif;
          
         }
+        /* Custom Scrollbar for the entire page */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #00f2ff, #ff00ff);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #ff00ff, #00f2ff);
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+}
+
+/* Firefox Scrollbar */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #00f2ff rgb(0, 0, 0);
+}
 
         body {
             background: linear-gradient(135deg, #0a0a0a, #1c2526);
@@ -166,7 +192,9 @@ $result_students_reviews = $conn->query($query_students_reviews);
         }
 
         .welcome-container {
-            background: linear-gradient(145deg, rgba(0, 242, 255, 0.12), rgba(200, 0, 255, 0.12));
+            background: linear-gradient(145deg, rgba(11, 236, 248, 0.12), rgba(200, 0, 255, 0.12));
+            /* background-color : black; */
+            /* background: url('./back2.png') no-repeat center/cover; */
             min-height: 120vh;
             display: flex;
             align-items: center;
@@ -343,7 +371,7 @@ $result_students_reviews = $conn->query($query_students_reviews);
             max-width: 400px;
             box-shadow: 0 5px 5px rgba(0, 242, 255, 0.5);
             animation: fadeIn 1s ease-out;
-            height: 1200px;
+            height: 1100px;
             position: relative;
             z-index: 1;
         }
@@ -365,7 +393,7 @@ $result_students_reviews = $conn->query($query_students_reviews);
 
         #courseDescription {
             font-size: 1rem;
-            line-height: 1.9;
+            line-height: 40px;
             color: #d0d0d0;
             margin-bottom: 30px;
             animation: fadeIn 1s ease-out 0.2s both;
@@ -410,7 +438,7 @@ $result_students_reviews = $conn->query($query_students_reviews);
             animation: neonGlow 2s infinite;
             display: block;
             text-align: center;
-            margin-top: 20px;
+            margin-top: 40px;
             margin-bottom: 30px;
         }
 
@@ -870,7 +898,7 @@ $result_students_reviews = $conn->query($query_students_reviews);
 
             #courseDescription {
                 font-size: 0.95rem;
-                line-height: 1.7;
+                line-height: 40px;
                 margin-bottom: 20px;
             }
 
@@ -978,7 +1006,7 @@ $result_students_reviews = $conn->query($query_students_reviews);
 
             #courseDescription {
                 font-size: 0.9rem;
-                line-height: 1.6;
+                line-height: 40px;
                 margin-bottom: 15px;
             }
 
@@ -1088,48 +1116,10 @@ $result_students_reviews = $conn->query($query_students_reviews);
     </style>
 </head>
 <body>
-    <ul class="nav nav-pills navbar-custom">
-        <li class="nav-item logo-container">
-            <a class="nav-link" aria-current="page" href="oscord_home.php">OSCORD - Programming & Computer Science</a>
-        </li>
-        <form method='post' action='oscord_specificCoursePage.php'>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Courses</a>
-                <ul class="dropdown-menu">
-                    <?php
-                        if ($result_courses && $result_courses->num_rows > 0) {
-                            $result_courses->data_seek(0);
-                            while ($row = $result_courses->fetch_assoc()) {
-                                echo "<li><button class='dropdown-item' type='submit' name='courseID' value='".htmlspecialchars($row['courseID'])."'>".htmlspecialchars($row['courseName'])."</button></li>";
-                            }
-                        }
-                    ?>
-                </ul>
-            </li>
-        </form>
-        
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Knowledge Sharing</a>
-            <ul class="dropdown-menu">
-                <li><a class='dropdown-item' href="oscord_startLearningProgramming.php">When you start learning Programming</a></li>
-                <li><a class='dropdown-item' href="oscord_webDevelopment.php">Web Development</a></li>
-                <li><a class='dropdown-item' href="oscord_database.php">What is Database?</a></li>
-                <li><a class='dropdown-item' href="oscord_AI.php">What are Data Science, Machine Learning, Artificial Intelligence, Deep Learning?</a></li>
-            </ul>
-        </li>
-        
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Control</a>
-            <ul class="dropdown-menu">
-                <li><a class='dropdown-item' href="oscord_instructorControlLogin.php">Instructor</a></li>
-                <li><a class='dropdown-item' href="oscord_studentControlLogin.php">Student</a></li>
-            </ul>
-        </li>
-        
-        <li class="nav-item ms-auto">
-            <a class="nav-link" href="oscord_signUpPage.php">Sign Up</a>
-        </li>
-    </ul>
+   
+    <?php
+        include "nav.php";
+    ?>
 
     <div class="welcome-container">
         <div class='container middle row'>
@@ -1154,11 +1144,11 @@ Group Class များဖြင့်လည်းကောင်းသင်�
                     <p>Courses Offered</p>
                 </div>
                 <div class="stats-item animate-on-scroll">
-                    <h3><i class="fas fa-users"></i> <?php echo htmlspecialchars($student_count+60); ?></h3>
+                    <h3><i class="fas fa-users"></i> <?php echo htmlspecialchars($student_count+200); ?></h3>
                     <p>Students Enrolled</p>
                 </div>
                 <div class="stats-item animate-on-scroll">
-                    <h3><i class="fas fa-video"></i> <?php echo htmlspecialchars($content_count); ?></h3>
+                    <h3><i class="fas fa-video"></i> <?php echo htmlspecialchars($content_count+300); ?></h3>
                     <p>Video Lectures & Files</p>
                 </div>
             </div>
@@ -1318,7 +1308,7 @@ Group Class များဖြင့်လည်းကောင်းသင်�
         </div>
 
         <div class="text-center bg-dark w-100">
-            <p class='text-light' id="last">© Oscord Programming Class All Rights Reserved 2022-2025</p>
+            <p class='text-light' id="last">© Oscord Programming Class All Rights Reserved 2022-present</p>
         </div>
     </footer>
 

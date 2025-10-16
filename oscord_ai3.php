@@ -33,112 +33,16 @@
             overflow-x: hidden;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes neonGlow {
-            0%, 100% { box-shadow: 0 0 5px #00f2ff, 0 0 15px #00f2ff, 0 0 30px #00f2ff; }
-            50% { box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 40px #00f2ff; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-
-        .navbar-custom {
-            background: rgba(10, 10, 10, 0);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 15px 25px;
-            box-shadow: 0 4px 12px rgba(0, 242, 255, 0);
-            animation: slideIn 0.5s ease-out;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-custom .nav {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: nowrap;
-        }
-
-        .nav-item {
-            flex: 1;
-            text-align: center;
-        }
-
-        .nav-item.ms-auto {
-            flex: 0 1 auto;
-        }
-
-        .nav-link {
-            color: #e6e6e6 !important;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            font-size: 1.1rem;
-            padding: 10px 20px;
-            position: relative;
-            transition: all 0.3s ease;
-            display: block;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: #00f2ff;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-link:hover {
-            color: #00f2ff !important;
-            transform: translateY(-2px);
-        }
-
-        .dropdown-menu {
-            background: #1c2526;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 242, 255, 0);
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .dropdown-item {
-            color: #e6e6e6;
-            font-size: 0.95rem;
-            padding: 12px 20px;
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-item:hover {
-            background: #00f2ff;
-            color: #0a0a0a;
-            transform: translateX(5px);
-        }
-
         .main {
-            background: rgba(20, 20, 20, 0);
-            border-radius: 15px;
-            padding: 40px;
-            margin: 30px auto;
-            max-width: 900px;
-            box-shadow: 0 10px 20px rgba(0, 242, 255, 0);
+            background : transparent;
+            /* border-radius: 15px; */
+            margin-top : 50px;
+            padding: 10px;
+            margin-left : 50px;
+            margin-right : 50px;
+            margin-bottom : 50px;
+            max-width: 1000px;
+            /* box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2); */
             animation: fadeIn 1s ease-out;
         }
 
@@ -250,49 +154,9 @@
     </style>
 </head>
 <body>
-    <ul class="nav nav-pills navbar-custom">
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="oscord_home.php">OSCORD - Programming & Computer Science</a>
-        </li>
-        <form method='post' action='oscord_specificCoursePage.php'>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Courses</a>
-            <ul class="dropdown-menu">
-                <?php
-                    if ($result1 && $result1->num_rows > 0) {
-                        while ($row = $result1->fetch_assoc()) {
-                            echo "<li><button class='dropdown-item' type='submit' name='courseID' value='".htmlspecialchars($row['courseID'])."'>".htmlspecialchars($row['courseName'])."</button></li>";
-                        }
-                    }
-                ?>
-            </ul>
-        </li>
-        </form>
-        
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Knowledge Sharing</a>
-            <ul class="dropdown-menu">
-                <li><a class='dropdown-item' href="oscord_startLearningProgramming.php">When you start learning Programming</a></li>
-                <li><a class='dropdown-item' href="oscord_webDevelopment.php">Web Development</a></li>
-                <li><a class='dropdown-item' href="oscord_database.php">What is Database?</a></li>
-                <li><a class='dropdown-item' href="oscord_AI.php">What are Data Science, Machine Learning, Artificial Intelligence, Deep Learning?</a></li>
-            </ul>
-        </li>
-        
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Control</a>
-            <ul class="dropdown-menu">
-                <li><a class='dropdown-item' href="oscord_instructorControlLogin.php">Instructor</a></li>
-                <li><a class='dropdown-item' href="oscord_studentControlLogin.php">Student</a></li>
-            </ul>
-        </li>
-        
-        <?php
-            echo "<li class='nav-item ms-auto'>
-                    <a class='nav-link' aria-current='page' href='oscord_signUpPage.php'>Sign Up</a>
-                </li>";
-        ?>
-    </ul>
+<?php
+        include "nav.php";
+    ?>
     
     <div class="container main animate-on-scroll">
         <div><h4>What Is Machine Learning? Artificial Intelligence နဲ့ဘယ်လိုဆက်စပ်နေသလဲ</h4></div>
@@ -332,13 +196,13 @@
             Input သည် Output အပေါ်မှာမူတည်တယ်
             ဘာအပေါ်မှာလိုက်ပြီးမူတည်မှာလဲဆိုတော့ Function အပေါ်မှာလိုက်ပြီး တွက်ချက်အဖြေထုတ်သွားတာပါ
             ဒါက Traditional Programming ပါ
-            Machine Learning မှာကတော့ စက်ကို
-            Input(x)------Output(y)
-            1 ------------ 2
-            2 ------------ 4
-            3 ------------ 6
-            4 ------------ 8
-            5 ------------ 10
+            Machine Learning မှာကတော့ စက်ကို<br>
+            Input(x) ------> Output(y)<br>
+            1 ------> 2<br>
+            2 ------> 4<br>
+            3 ------> 6<br>
+            4 ------> 8<br>
+            5 ------> 10<br>
             ဒီလိုမျိုး Trillion ချီတဲ့အစုံလိုက်အစုံလိုက် Input ရယ် Output ရယ်ကိုပေးလိုက်တဲ့အခါမှာ
             ဒီ Input တွေက ဒီ Output ထွက်ဖို့ကို တူညီတဲ့ Function တစ်ခုထွက်ဖို့ကို
             အကြိမ်ပေါင်းများစွာ တွက်ချက်စဉ်းစားပြီးတော့ နောက်ဆုံး Function တစ်ခုကိုထုတ်နိုင်သွားပါတယ်

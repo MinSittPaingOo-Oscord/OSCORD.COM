@@ -33,112 +33,16 @@
             overflow-x: hidden;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes neonGlow {
-            0%, 100% { box-shadow: 0 0 5px #00f2ff, 0 0 15px #00f2ff, 0 0 30px #00f2ff; }
-            50% { box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 40px #00f2ff; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-
-        .navbar-custom {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 15px 25px;
-            box-shadow: 0 4px 12px rgba(0, 242, 255, 0.15);
-            animation: slideIn 0.5s ease-out;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-custom .nav {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: nowrap;
-        }
-
-        .nav-item {
-            flex: 1;
-            text-align: center;
-        }
-
-        .nav-item.ms-auto {
-            flex: 0 1 auto;
-        }
-
-        .nav-link {
-            color: #e6e6e6 !important;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            font-size: 1.1rem;
-            padding: 10px 20px;
-            position: relative;
-            transition: all 0.3s ease;
-            display: block;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: #00f2ff;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-link:hover {
-            color: #00f2ff !important;
-            transform: translateY(-2px);
-        }
-
-        .dropdown-menu {
-            background: #1c2526;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 242, 255, 0.2);
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .dropdown-item {
-            color: #e6e6e6;
-            font-size: 0.95rem;
-            padding: 12px 20px;
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-item:hover {
-            background: #00f2ff;
-            color: #0a0a0a;
-            transform: translateX(5px);
-        }
-
         .main {
-            background: rgba(20, 20, 20, 0.9);
-            border-radius: 15px;
-            padding: 40px;
-            margin: 30px auto;
-            max-width: 900px;
-            box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
+            background : transparent;
+            /* border-radius: 15px; */
+            margin-top : 50px;
+            padding: 10px;
+            margin-left : 50px;
+            margin-right : 50px;
+            margin-bottom : 50px;
+            max-width: 1000px;
+            /* box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2); */
             animation: fadeIn 1s ease-out;
         }
 
@@ -250,49 +154,10 @@
     </style>
 </head>
 <body>
-    <ul class="nav nav-pills navbar-custom">
-        <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="oscord_home.php">OSCORD - Programming & Computer Science</a>
-        </li>
-        <form method='post' action='oscord_specificCoursePage.php'>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Courses</a>
-            <ul class="dropdown-menu">
-                <?php
-                    if ($result1 && $result1->num_rows > 0) {
-                        while ($row = $result1->fetch_assoc()) {
-                            echo "<li><button class='dropdown-item' type='submit' name='courseID' value='".htmlspecialchars($row['courseID'])."'>".htmlspecialchars($row['courseName'])."</button></li>";
-                        }
-                    }
-                ?>
-            </ul>
-        </li>
-        </form>
-        
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Knowledge Sharing</a>
-            <ul class="dropdown-menu">
-                <li><a class='dropdown-item' href="oscord_startLearningProgramming.php">When you start learning Programming</a></li>
-                <li><a class='dropdown-item' href="oscord_webDevelopment.php">Web Development</a></li>
-                <li><a class='dropdown-item' href="oscord_database.php">What is Database?</a></li>
-                <li><a class='dropdown-item' href="oscord_AI.php">What are Data Science, Machine Learning, Artificial Intelligence, Deep Learning?</a></li>
-            </ul>
-        </li>
-        
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Control</a>
-            <ul class="dropdown-menu">
-                <li><a class='dropdown-item' href="oscord_instructorControlLogin.php">Instructor</a></li>
-                <li><a class='dropdown-item' href="oscord_studentControlLogin.php">Student</a></li>
-            </ul>
-        </li>
-        
-        <?php
-            echo "<li class='nav-item ms-auto'>
-                    <a class='nav-link' aria-current='page' href='oscord_signUpPage.php'>Sign Up</a>
-                </li>";
-        ?>
-    </ul>
+   
+    <?php
+        include "nav.php";
+    ?>
     
     <div class="container main animate-on-scroll">
         <div><h3>How to be an AI engineer? What is AI?</h3></div>
@@ -311,24 +176,31 @@
         <hr>
         <div><h4>So What Is Data Science?</h4></div>
         <div class="content-section">
-            Data Science နဲ့ပတ်သက်ပြီးအရင်ရှင်းပြပါမယ်
-            အားလုံးမြင်တွေ့လှုပ်ရှားသွားလာနေတဲ့ လူ့အဖွဲအစည်းထဲမှာ လူတစ်ဦးတစ်ယောက်ချင်းစီ အသက်မွေးလုပ်ကိုင်နေကြတဲ့ လုပ်ငန်းတစ်ခုချင်းစီရှိကြပါတယ်
-            ဘယ်လုပ်ငန်းမှာမဆိုသည် လုပ်ငန်းကြီးရင်ကြီးသလောက် သူတိုလုပ်ငန်းစဉ်မှာရှိတဲ့ အချက်အလက် Data တွေကို ကောင်းကောင်းမွန်မွန် Handle လုပ်နိုင်ဖိုလိုအပ်ပါတယ်
-            ဥပမာ ဈေးဆိုင်တစ်ခုမှာဆိုရင် ထားရှိတဲ့ကုန်ပစ္စည်းအချက်အလက်တွေ ဈေးနှုန်းတွေ Customer အချက်အလက်တွေ အရူံးအမြတ်စာရင်းတွေ စသဖြင့် Data တွေကို Systematically Store လုပ်ပြီး Handle နိုင်ဖိုလိုအပ်ပါတယ်
-            ဒီလို Data Handle တဲ့နေရာမှာ လုပ်ငန်းသေးရင်တော့ စာအုပ်ပေါ်ချမှတ်တာဖြစ်ဖြစ် IT နဲ့အကျွမ်းတဝင်ရှိတဲ့လူဆိုရင် excel ကိုအသုံးပြုတာပဲဖြစ်ဖြစ် ဆိုရင်အဆင်ပြေပါတယ်
-            လုပ်ငန်းအနည်းငယ်ပိုပြီး operation ကကြီးမားလာတဲ့အခါ database ကိုအသုံးပြုပြီး ရေးထားတဲ့ Software တွေကိုအသုံးပြုလာကြပါတယ်
-            Business Operation ကအရမ်းအရမ်းကိုကြီးမားသွားပြီးဆိုရင်တော့ Data Science ပညာကိုတတ်မြောက်ထားတဲ့ Data Scientist တွေရဲ့အကူအညီကိုလိုအပ်လာပြီဖြစ်ပါတယ်
-            Data Scientist တွေဟာ ဘာကိုအဆင့်ဆင့်လုပ်ဆောင်သွားရလဲဆိုတာရှင်းပြပါမယ်
-            ပထမဦးဆုံးမှာ Operation မှာဖြစ်နေတဲ့ Business Problem ကိုသိအောင်လုပ်ရပါတယ် ပြီးရင် လုပ်ငန်မှာရှိနေတဲ့ Data တွေကို Collection လိုက်စုစည်းရပါတယ်
-            စုစည်းထားတဲ့ Data တွေဟာအရမ်းကိုများပြားတဲ့တဲ့အတွက်ကြောင့် စနစ်တကျမရှိနေနိုင်ပါဖူး Duplicate ဖြစ်နေတာတွေ နေရာတလွဲဖြစ်နေတာတွေ စသဖြင့်ပွစကြဲနေတတ်ကြပါတဖယ်
-            ပွစကြဲနေတဲ့ Data တွေကို Collect လုပ်တဲ့အပြီးမှာ Data Cleaning လုပ်ပေးရပါတယ်
-            အဲဒါပြီးရင် Data Analysis လိုဆိုတဲ့ Data တွေကိုခွဲခြမ်းစိတ်ဖြာပေးရပါတယ် ဒီနေရာမှာ Data Analyst လိုခေါ်တဲ့ Job တစ်ခုကထပ်ပြီးတိုးလာပါတယ်
-            Analysis ပိုင်းပြီးသွားရင်တော့ Data Science နည်းပညာတွေဖြစ်တဲ့ Statistics(စာရင်းအင်းပညာ), Mathematics စတာတွေကိုအသုံးပြုပြီး Data တွေကို ကိုယ်လိုချင်တဲ့ Format အတိုင်း ဖန်တီးထုတ်လုပ်ပါတော့တယ်
-            ဒီအတွက် Data Scientist တွေသည် Business point of view မှာပိုပြီး အားသာကြပါတယ် Statistics, Mathematics ဒါတွေကိုပိုပြီး ကျွမ်းကျင်တတ်မြောက်ဖိုလိုပါတယ်
-            ဒါဆိုရ AI Engineer နဲ့ရောဘာဆိုင်တာလဲ
-            - AI Enginner တစ်ယောက်ဖြစ်လာဖိုဆိုရင်အပေါ်မှာပြောခဲ့တဲ့ Data Science ကို တစ်ဖက်ကမ်းထိတတ်မြောက်ထားဖိုတော့မလိုအပ်ပါဖူး
-            - Data Science မှာလေ့လာဖိုလိုအပ်တာတွေကို အခြေအနေတစ်ခုအထိတတ်မြောက်ပြီးရင် Machine Learning, Programming ဘက်ကိုဦးစားပေးလေ့လာရမှာဖြစ်ပါတယ်
-            ဘာလို့ Machine Learning, Data Science တွေက AI engineering နဲ့ဆက်စပ်နေတာလဲဆိုတာ နားလည်ဖို့ Deep Learning ဆိုတာဘာလဲ Machine Learning ဆိုတာဘာလဲဆိုတာတွေကိုဆက်လက်ဖတ်ရှုပေးပါ
+            Data Science နဲ့ပတ်သက်ပြီးအရင်ရှင်းပြပါမယ် <br>
+            Data Science မှာအဓိက အရေးကြီးဆုံးကတော့ data preprocessing (Data တွေကိုပြန်လည်ပြင်ဆင်ခြင်း) ဖြစ်ပါတယ်
+<br>
+ဥပမာ - ကျောင်းတစ်ကျောင်းမှာရှိတဲ့ ကျောင်းသား dataset တွေကို ကျောင်းမှာရှိတဲ့ office အစုံ နေရာအစုံ လူအစုံကနေ မေးမြန်း data ကောက်လာပြီးရလာတယ်ထားပါတော့
+<br>
+Data တွေသည် တခါတရံမှာ noisy လို့ခေါ်တဲ့ ရူပ်ပွနေတာမျိုးတွေ, Data မှားနေတာမျိုးတွေ, Null Value အပေါက်တွေဖြစ်နေတာမျိုးတွေ, Data Duplicate(data ထပ်နေတာမျိုးတွေ), Format မကျတာမျိုးတွေ, ကိုယ်အသုံးပြုမယ့်ရည်ရွယ်ချက်ကနေသွေဖယ်နေတဲ့မလိုအပ်တဲ့ data တွေ, တွက်လို့ချက်လို့မရတဲ့စာအရှည်ကြီးတွေ စသဖြင့်ဒါမျိုးတွေပါလာနိုင်ပါတယ်
+<br>
+ဒီလိုမျိုး ဖြစ်ချင်တိုင်း ပရန်းပတာဖြစ်နေတဲ့ data တွေကိုသုံးပြီးတော့ ဘာမှလုပ်လို့မရပါဖူး
+<br>
+ဒီအတွက် data science နည်းပညာဟာအရေးပါလာတာဖြစ်ပါတယ်
+<br>
+Data science မှာဆိုရင် အပေါ်မှာပြောခဲ့တဲ့
+ပွစတက်နေတဲ့ raw data တွေကို
+<br>
+No 1 - selection (ကိုယ်အသုံးလိုမယ့် Target Data ကိုပဲရွေးထုတ်) မယ်<br>
+No 2 - Preprocess ( Null အပေါက်ဖြစ်နေတဲ့ data တွေကို Data science နည်းပညာတစ်ခုခုကိုသုံးပြီး ခန့်မှန်းပြီးဖြည့်တာမျိုးတွေ ခန့်မှန်းလို့မရတော့ရင် ဖယ်ပစ်တာမျိုး Duplicate ဖြစ်နေတာမျိုးတွေဖယ်ပစ်တာမျိုးတွေ) လုပ်မယ်<br>
+No 3 - Data တွေကို တွက်လို့ချက်လို့ရအောင် Transform Data တွေကိုပုံစံပြောင်းပစ်တာမျိုးတွေ<br>
+No 4 - မညီတဲ့ Data တွေကို clustering လို့ခေါ်တဲ့ အုပ်စုတစ်စုဆီ တစ်စုဆီ Cluster ခွဲတာမျိုးတွေ<br>
+No 5 - နောက်ဆုံးရလာတဲ့ data တွေကို ပြန်ပြီး စစ်ဆေးတာမျိုးတွေ<br>
+ဒါတွေကိုအဆင့်ဆင့်တွက်ချက်ပြီးလုပ်ကိုင်ရပါတယ်<br>
+ဒါ့အပြင် data science မှာ<br>
+- association rule mining ဆိုတဲ့ ဥပမာ - online shop တစ်ခုမှာ ဘယ်သူကဘာဝယ်ရင် ဘာတွေနဲ့တွဲပြီးဝယ်လို့ရှိလဲဆိုတာမျိုးတွေကိုတွက်ချက်တာ<br>
+- Supervised Machine Learning - ရှိနှင့်နေပြီးသား Data တွေကိုသုံးပြီး နောက်ကြရင် ဘာဖြစ်ရင် ဘာထွက်လာမလဲဆိုတဲ့ Rule တွေ ကိုခန့်မှန်းတွက်ချက်တာ<br>
+စသဖြင့် နည်းပညာတွေ theory တွေအများကြီးရှိပါတယ်
+<br>  ဘာလို့ Machine Learning, Data Science တွေက AI engineering နဲ့ဆက်စပ်နေတာလဲဆိုတာ နားလည်ဖို့ Deep Learning ဆိုတာဘာလဲ Machine Learning ဆိုတာဘာလဲဆိုတာတွေကိုဆက်လက်ဖတ်ရှုပေးပါ
         </div>
         <div class="content-section">
             <div class='row'>
