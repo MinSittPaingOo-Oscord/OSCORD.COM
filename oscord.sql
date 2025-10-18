@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2025 at 12:42 PM
+-- Generation Time: Oct 18, 2025 at 11:37 AM
 -- Server version: 8.0.33
 -- PHP Version: 8.2.4
 
@@ -96,27 +96,28 @@ CREATE TABLE `oscord_course` (
   `courseFee` varchar(100) NOT NULL,
   `coursePeriod` varchar(100) NOT NULL,
   `courseFbLink` varchar(300) NOT NULL,
-  `sort` int DEFAULT NULL
+  `sort` int DEFAULT NULL,
+  `coursePhoto` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `oscord_course`
 --
 
-INSERT INTO `oscord_course` (`courseID`, `courseName`, `courseDescription`, `courseFee`, `coursePeriod`, `courseFbLink`, `sort`) VALUES
-(1, 'Java Programming (Basic to Advanced)', 'Kick off your Java programming adventure with our engaging course! Master core Java (J2SE) to craft robust programs, design sleek user interfaces with Java Swing, and build a real-world CRUD (Create, Read, Update, Delete) project using MySQL. Through hands-on projects, you’ll gain skills to develop dynamic applications and for creating your own software.', '500000 MMK', '4 months to 5 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02LByymgT3wQkUYPq3TgYuDn1xWsJFhdQqEziunA5JdgCPrqWLnnQ6gMNQQkiKr5Hal&id=100088520077343', 1),
-(2, 'Python Programming (Basic to Advanced)', 'Dive into Python programming with our engaging course, spanning from basics to advanced skills! Master Python’s syntax, data structures, and advanced concepts like object-oriented programming, while building a real-world CRUD (Create, Read, Update, Delete) project with a database.', '500000 MMK', '4 months to 5 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02X8iFCML5nQcaMUjRDY1A1jmRrs8R7wcRpzsDyDCz41iyzfXn3GreXqaBrrgWbH7Ml&id=100088520077343', 2),
-(3, 'Database Systems and Design(MY SQL)', 'Learn how the database management system works , how to design a physical database starting from Conceptual database design and Logical database design, using it in application', '280000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02gCEMFb7b6oKMxVq3rtYEri8ku7VoS3yDuTJvUSC6kDwtZV3TSEej9MV4eNkf7Hggl&id=100088520077343', 5),
-(4, 'Frontend Web Development', 'Kickstart your front-end web development journey with our beginner-friendly course! Learn to create stunning, interactive websites using HTML, CSS, Bootstrap and JavaScript. Through hands-on projects, you’ll build responsive web pages that shine on any device, gaining skills to launch a tech career or bring your ideas to life. All you need is basic computer knowledge and a passion for design!', '280000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343', NULL),
-(5, 'Backend Web Development', 'Launch your backend web development career with our beginner-friendly course! Learn to build powerful, secure server-side applications using tools like PHP and databases like MY SQL. Through hands-on projects, you’ll  manage data to power dynamic websites, gaining skills for a tech job or your own projects. As for the requirement you will need frontend web skills and a curiosity for how websites work behind the scenes!', '400000 MMK', '3 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343', NULL),
-(6, 'Desktop Application Developmet with C#.Net(Basic to Advanced)', 'Join Our C#.NET Fundamentals Course!  Master C# programming from scratch and build practical desktop apps for businesses, like POS or inventory systems, in just 3-4 months! With one-on-one Zoom or in-person classes, hands-on projects, this course is perfect for beginners and aspiring developers.', '399000 MMK', '3 months to 4 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02ThCMZRhZKc6FVGLxRqAvkobq8mgSGCrqB38514VfmLGaTBn2jf4eidAAvxLi8MXzl&id=100088520077343', 6),
-(7, 'C Programming', 'Learning programming with C from basic easily and focusing on basic programming concepts', '250000 MMK', '2 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid0oEoGYLkMEKYjoNwxUfg9MRuUdZWhBBv1qbRopK4EWj7AsAiJMnDnXGPCFNWDKrqGl&id=100088520077343', NULL),
-(8, 'C ++ Programming', 'In this course, you will learn the basic programming concepts with C++ Programming', '200000 MMK', '2 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid0oEoGYLkMEKYjoNwxUfg9MRuUdZWhBBv1qbRopK4EWj7AsAiJMnDnXGPCFNWDKrqGl&id=100088520077343', NULL),
-(9, 'Full Stack Web Developer Class', 'Web Development ကိုအခြေခံ Frontend Level မှစ၍ Backend Development Level မှာ Database ဖြင့် လုပ်ငန်းခွင်မှာအသုံးပြုနေတဲ့ Web Project များရေးသားနိုင်သည်အထိ Core Theory များနှင့်တကွ လက်တွေ့သင်ခန်းစာများကိုပါထည့်သွင်းသင်ကြားသွားမှာဖြစ်ပါတယ်', '570000 MMK', '6 months', 'https://www.facebook.com/permalink.php?story_fbid=pfbid02eWAGvq15GJ2g78icbLRmxuXyvq5N6bXwndWSxcrZ7kcGYMzpm5g1qH8Y2fmd4x6wl&id=100088520077343', 3),
-(28, 'Data Structure and algorithms', 'Explore coding with our beginner-friendly Data Structures and Algorithms course! Learn to organize data, solve problems, and write efficient code through hands-on projects. Perfect for landing tech jobs or acing coding interviews. All you need is basic programming knowledge!', '270000 MMK', '3 months', 'https://web.facebook.com/permalink.php?story_fbid=pfbid02mUS2Vn7ABUoaYEp6pnPrxbcaZaJoJxJ1UoTSKorxisBVp5SzWiiE1a3vuPCF58fl&id=100088520077343', 5),
-(29, 'Applied Mathematics for Data Science & Machine Learning with Python', 'Data Science/ Machine Learning နှင့် AI နည်းပညာတွေကို အဓိက ကူညီပံ့ပို့းပေးနေတဲ့ သင်္ချာပညာ Theoryတွေကို Computer Science ရူထောင့်ကနေ သင်ကြားမှာဖြစ်ပါတယ်\r\nModule တစ်ခုပြီးတိုင်း theory များကို Python Programming ကိုအသုံးပြုပြီးတော့ လက်တွေ့အသုံးချသွားမှာဖြစ်ပါတယ်\r\nဒီ Course မှာ သင်္ချာပညာရပ်ဟာ Computer Science နယ်ပယ်မှာဘယ်လောက်ထိအရေးပါလဲဆိုတာကို လက်တွေ့ Code ရေးပြီးသင်ကြားသွားမှာဖြစ်ပါတယ်', '330000 MMK', '4 months to 5 months', 'https://www.facebook.com/share/1FBHjxTTt1/?mibextid=wwXIfr', 4),
-(30, 'Full Stack Revolution with React & Laravel', 'Master full-stack development with React and Laravel in this hands-on course. Learn React fundamentals, hooks, Redux, and API integration, paired with Laravel’s MVC, Eloquent ORM, and RESTful APIs. Build a task management system while exploring security with Sanctum, JWT, and role-based access. Ideal for advanced learners aiming to create modern, scalable web applications.', '440000 MMK', '3 months', 'https://web.facebook.com/share/p/1CGobDu3ty/', 4),
-(31, 'Data Science Essential', 'Data Science ကိုစတင်လေ့လာမည့်သူများအတွက် Data Science ကိုအခြေခံမှစ၍ သိသင့်သိထိုက်သော Foundational Core Theory များကို ဒီ Course မှာသင်ကြားသွားမှာဖြစ်ပါတယ်\r\n Machine Learning / Aritificial Intelligence သင်ယူမယ့်သူတွေအနေနဲ့လည်းအထူးသင့်တော်ပါတယ်', '270000 MMK', '3 months', 'https://www.facebook.com/share/p/1C11cvDCYc/?mibextid=wwXIfr', 4);
+INSERT INTO `oscord_course` (`courseID`, `courseName`, `courseDescription`, `courseFee`, `coursePeriod`, `courseFbLink`, `sort`, `coursePhoto`) VALUES
+(1, 'Java Programming (Basic to Advanced)', 'Kick off your Java programming adventure with our engaging course! Master core Java (J2SE) to craft robust programs, design sleek user interfaces with Java Swing, and build a real-world CRUD (Create, Read, Update, Delete) project using MySQL. Through hands-on projects, you’ll gain skills to develop dynamic applications and for creating your own software.', '500000 MMK', '4 months to 5 months', 'https://www.facebook.com/share/p/1FaCuNq5Ry/', 1, 'java.png'),
+(2, 'Python Programming (Basic to Advanced)', 'Dive into Python programming with our engaging course, spanning from basics to advanced skills! Master Python’s syntax, data structures, and advanced concepts like object-oriented programming, while building a real-world CRUD (Create, Read, Update, Delete) project with a database.', '450,000 MMK', '4 months to 5 months', 'https://www.facebook.com/share/p/1BqQw7hadQ/', 2, 'python.png'),
+(3, 'Database Systems and Design(MY SQL)', 'Learn how the database management system works , how to design a physical database starting from Conceptual database design and Logical database design, using it in application', '280000 MMK', '3 months', 'https://www.facebook.com/share/p/1KHJnBkWwA/', 5, 'database.png'),
+(4, 'Frontend Web Development', 'Kickstart your front-end web development journey with our beginner-friendly course! Learn to create stunning, interactive websites using HTML, CSS, Bootstrap and JavaScript. Through hands-on projects, you’ll build responsive web pages that shine on any device, gaining skills to launch a tech career or bring your ideas to life. All you need is basic computer knowledge and a passion for design!', '280000 MMK', '3 months', 'https://www.facebook.com/share/p/179GHoiCVL/', NULL, 'frontend.png'),
+(5, 'Backend Web Development', 'Launch your backend web development career with our beginner-friendly course! Learn to build powerful, secure server-side applications using tools like PHP and databases like MY SQL. Through hands-on projects, you’ll  manage data to power dynamic websites, gaining skills for a tech job or your own projects. As for the requirement you will need frontend web skills and a curiosity for how websites work behind the scenes!', '400000 MMK', '3 months', 'https://www.facebook.com/share/p/179GHoiCVL/', NULL, 'backend.png'),
+(6, 'Desktop Application Developmet with C#.Net(Basic to Advanced)', 'Join Our C#.NET Fundamentals Course!  Master C# programming from scratch and build practical desktop apps for businesses, like POS or inventory systems, in just 3-4 months! With one-on-one Zoom or in-person classes, hands-on projects, this course is perfect for beginners and aspiring developers.', '399000 MMK', '3 months to 4 months', 'https://www.facebook.com/share/p/1AQNx1RBEt/', 6, 'chref.png'),
+(7, 'C Programming', 'Learning programming with C from basic easily and focusing on basic programming concepts', '250000 MMK', '2 months', 'https://www.facebook.com/share/p/1D5W1k541w/', NULL, 'c.png'),
+(8, 'C ++ Programming', 'In this course, you will learn the basic programming concepts with C++ Programming', '200000 MMK', '2 months', 'https://www.facebook.com/share/p/1D5W1k541w/', NULL, 'c++.png'),
+(9, 'Full Stack Web Developer Class', 'Web Development ကိုအခြေခံ Frontend Level မှစ၍ Backend Development Level မှာ Database ဖြင့် လုပ်ငန်းခွင်မှာအသုံးပြုနေတဲ့ Web Project များရေးသားနိုင်သည်အထိ Core Theory များနှင့်တကွ လက်တွေ့သင်ခန်းစာများကိုပါထည့်သွင်းသင်ကြားသွားမှာဖြစ်ပါတယ်', '570000 MMK', '6 months', 'https://www.facebook.com/share/p/179GHoiCVL/', 3, 'fullStack.png'),
+(28, 'Data Structure and algorithms', 'Explore coding with our beginner-friendly Data Structures and Algorithms course! Learn to organize data, solve problems, and write efficient code through hands-on projects. Perfect for landing tech jobs or acing coding interviews. All you need is basic programming knowledge!', '270000 MMK', '3 months', 'https://web.facebook.com/permalink.php?story_fbid=pfbid02mUS2Vn7ABUoaYEp6pnPrxbcaZaJoJxJ1UoTSKorxisBVp5SzWiiE1a3vuPCF58fl&id=100088520077343', 5, 'dsa.png'),
+(29, 'Applied Mathematics for Data Science & Machine Learning with Python', 'Data Science/ Machine Learning နှင့် AI နည်းပညာတွေကို အဓိက ကူညီပံ့ပို့းပေးနေတဲ့ သင်္ချာပညာ Theoryတွေကို Computer Science ရူထောင့်ကနေ သင်ကြားမှာဖြစ်ပါတယ်\r\nModule တစ်ခုပြီးတိုင်း theory များကို Python Programming ကိုအသုံးပြုပြီးတော့ လက်တွေ့အသုံးချသွားမှာဖြစ်ပါတယ်\r\nဒီ Course မှာ သင်္ချာပညာရပ်ဟာ Computer Science နယ်ပယ်မှာဘယ်လောက်ထိအရေးပါလဲဆိုတာကို လက်တွေ့ Code ရေးပြီးသင်ကြားသွားမှာဖြစ်ပါတယ်', '330000 MMK', '4 months to 5 months', 'https://www.facebook.com/share/p/1ZGd7qTMAR/', 4, 'math.png'),
+(30, 'Full Stack Revolution with React & Laravel', 'Master full-stack development with React and Laravel in this hands-on course. Learn React fundamentals, hooks, Redux, and API integration, paired with Laravel’s MVC, Eloquent ORM, and RESTful APIs. Build a task management system while exploring security with Sanctum, JWT, and role-based access. Ideal for advanced learners aiming to create modern, scalable web applications.', '440000 MMK', '3 months', 'https://www.facebook.com/share/p/1EsM6VaMvQ/', 4, 'revolution.png'),
+(31, 'Data Science Essential', 'Data Science ကိုစတင်လေ့လာမည့်သူများအတွက် Data Science ကိုအခြေခံမှစ၍ သိသင့်သိထိုက်သော Foundational Core Theory များကို ဒီ Course မှာသင်ကြားသွားမှာဖြစ်ပါတယ်\r\n Machine Learning / Aritificial Intelligence သင်ယူမယ့်သူတွေအနေနဲ့လည်းအထူးသင့်တော်ပါတယ်', '270000 MMK', '3 months', 'https://www.facebook.com/share/p/1DHff8nssF/', 4, 'dataScience.png');
 
 -- --------------------------------------------------------
 
@@ -377,7 +378,10 @@ INSERT INTO `oscord_instructorxcourse` (`instrucorxcourseID`, `instructorID`, `c
 (55, 17, 5),
 (56, 17, 9),
 (58, 12, 29),
-(60, 12, 31);
+(60, 12, 31),
+(62, 12, 4),
+(63, 12, 28),
+(64, 12, 30);
 
 -- --------------------------------------------------------
 
@@ -766,7 +770,7 @@ ALTER TABLE `oscord_instructor`
 -- AUTO_INCREMENT for table `oscord_instructorxcourse`
 --
 ALTER TABLE `oscord_instructorxcourse`
-  MODIFY `instrucorxcourseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `instrucorxcourseID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `oscord_student`
