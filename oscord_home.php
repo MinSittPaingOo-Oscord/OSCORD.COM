@@ -4,6 +4,7 @@ include "connectdb.php";
 $query_courses = "SELECT courseID, courseName FROM oscord_course";
 $result_courses = $conn->query($query_courses);
 
+#IMPORTANT !!
 $query_course_details = "SELECT * FROM oscord_course ORDER BY sort IS NULL, sort ASC";
 $result_course_details = $conn->query($query_course_details);
 
@@ -22,14 +23,13 @@ $query_content_count = "SELECT (SELECT COUNT(*) FROM oscord_vidlec) + (SELECT CO
 $result_content_count = $conn->query($query_content_count);
 $content_count = $result_content_count->fetch_assoc()['content_count'];
 
-// Student Reviews Query
 $sql_reviews = "SELECT sr.studentreviewID, sr.studentreview, sr.courseID, sr.studentID, sr.isShown, 
                s.studentName, c.courseName
         FROM oscord_studentreview sr
         JOIN oscord_student s ON sr.studentID = s.studentID
         JOIN oscord_course c ON sr.courseID = c.courseID
         WHERE sr.isShown = 1
-        ORDER BY sr.studentreviewID DESC"; // No LIMIT to fetch all reviews
+        ORDER BY sr.studentreviewID DESC"; 
 $result_reviews_section = $conn->query($sql_reviews);
 
 $query_students_reviews = "SELECT studentID, studentName FROM oscord_student";
@@ -41,7 +41,7 @@ $result_students_reviews = $conn->query($query_students_reviews);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home  </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -51,18 +51,16 @@ $result_students_reviews = $conn->query($query_students_reviews);
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-         
         }
-        /* Custom Scrollbar for the entire page */
-::-webkit-scrollbar {
-    width: 10px;
-}
+     
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
 
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-}
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+    }
 
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, #00f2ff, #ff00ff);
@@ -75,7 +73,6 @@ $result_students_reviews = $conn->query($query_students_reviews);
     box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
 }
 
-/* Firefox Scrollbar */
 html {
     scrollbar-width: thin;
     scrollbar-color: #00f2ff rgb(0, 0, 0);
@@ -89,190 +86,35 @@ html {
             position: relative;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes neonGlow {
-            0%, 100% { box-shadow: 0 0 5px #00f2ff, 0 0 15px #00f2ff, 0 0 30px #00f2ff; }
-            50% { box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 40px #00f2ff; }
-        }
-
-        @keyframes neonPulse {
-            0%, 100% { text-shadow: 0 0 5px #00f2ff, 0 0 10px #00f2ff, 0 0 15px #00f2ff; }
-            50% { text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 30px #00f2ff; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-
-        @keyframes logoSpin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.05); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
-
-        .navbar-custom {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 15px 25px;
-            box-shadow: 0 4px 12px rgba(0, 242, 255, 0.15);
-            animation: slideIn 0.5s ease-out;
-        }
-
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            width: 50px;
-            height: 50px;
-            margin-right: 15px;
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
-            animation: logoSpin 8s infinite linear;
-        }
-
-        .nav-link {
-            color: #e6e6e6 !important;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            font-size: 1.1rem;
-            padding: 10px 20px;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background: #00f2ff;
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        .nav-link:hover {
-            color: #00f2ff !important;
-            transform: translateY(-2px);
-        }
-
-        .dropdown-menu {
-            background: #1c2526;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 242, 255, 0.2);
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .dropdown-item {
-            color: #e6e6e6;
-            font-size: 0.95rem;
-            padding: 12px 20px;
-            transition: all 0.3s ease;
-        }
-
-        .dropdown-item:hover {
-            background: #00f2ff;
-            color: #0a0a0a;
-            transform: translateX(5px);
-        }
-
         .welcome-container {
-            background: linear-gradient(145deg, rgba(11, 236, 248, 0.12), rgba(200, 0, 255, 0.12));
-            /* background-color : black; */
-            /* background: url('./back2.png') no-repeat center/cover; */
-            min-height: 120vh;
-            display: flex;
-            align-items: center;
-            padding: 50px 5%;
-            position: relative;
-            overflow: hidden;
-            animation: fadeIn 1s ease-out;
-            z-index: 1;
-        }
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    overflow: hidden;
+    z-index: 1;
+}
 
-        .welcome-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('./back2.jpg') no-repeat center/cover;
-            opacity: 0.1;
-            z-index: 0;
-            animation: pulse 10s infinite ease-in-out;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.15; }
-        }
-
-        .middle {
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome-container h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 0px;
-            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
-            animation: fadeIn 0.8s ease-out;
-            text-align: center;
-        }
-
-        .welcome-container p {
-            font-size: 1.2rem;
-            color: #d0d0d0;
-            line-height: 50px;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            animation: fadeIn 1s ease-out 0.2s both;
-        }
-
-        .circularImage {
-            max-width: 100%;
-            height: auto;
-            border-radius: 240px;
-            border: 2px solid #00f2ff;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
-            transition: all 0.3s ease;
-            animation: fadeIn 1s ease-out 0.6s both;
-        }
-
-        .circularImage:hover {
-            transform: scale(1.08) rotate(2deg);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
-        }
+.welcome-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the video covers the entire container without distortion */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
 
         .stats-section {
             background: rgba(20, 20, 20, 0.9);
             padding: 40px 0;
             margin-top: 0px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
             animation: fadeIn 1s ease-out;
             text-align: center;
             width: 100%;
+            height : auto;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -282,25 +124,25 @@ html {
 
         .stats-section h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 40px;
+            font-size: 1.7rem;
+            font-weight: 500;
+            margin-bottom: 20px;
             color: #ffffff;
             text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
             animation: neonPulse 2s infinite;
         }
 
         .stats-content {
-            max-width: 1200px;
+            max-width: 1000px;
             width: 100%;
-            padding: 0 15px;
+            padding: 0 10px;
         }
 
         .stats-row {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px;
         }
 
         .stats-item {
@@ -313,8 +155,10 @@ html {
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
             animation: neonGlow 2s infinite;
             flex: 1;
-            min-width: 250px;
-            max-width: 350px;
+            min-width: 100px;
+            max-width: 200px;
+            height : auto;
+            margin-bottom : 0px;
         }
 
         .stats-item:hover {
@@ -324,7 +168,7 @@ html {
 
         .stats-item h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: 1rem;
             font-weight: 600;
             color: #00f2ff;
             margin-bottom: 10px;
@@ -333,25 +177,25 @@ html {
         }
 
         .stats-item p {
-            font-size: 1.1rem;
+            font-size: 0.7rem;
             color: #d0d0d0;
             margin: 0;
             text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
         }
 
         .stats-item i {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #00f2ff;
             margin-right: 8px;
             vertical-align: middle;
         }
 
         #titleCourse {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
+            font-family: 'Helvetica', sans-serif;
+            font-size: 2rem;
+            font-weight: 500;
             text-align: center;
-            margin: 50px 0 30px;
+            margin: 30px 0 30px;
             color: #ffffff;
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
@@ -368,10 +212,10 @@ html {
             margin: 15px auto;
             transition: all 0.4s ease;
             color: #e6e6e6;
-            max-width: 400px;
+            max-width: 300px;
             box-shadow: 0 5px 5px rgba(0, 242, 255, 0.5);
             animation: fadeIn 1s ease-out;
-            height: 1100px;
+            height: 650px;
             position: relative;
             z-index: 1;
         }
@@ -382,26 +226,20 @@ html {
         }
 
         .card-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 30px;
+            font-family: 'Montserrat';
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top : 15px;
+            margin-bottom: 15px;
             color: #ffffff;
             text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
-            line-height: 40px;
-        }
-
-        #courseDescription {
-            font-size: 1rem;
-            line-height: 40px;
-            color: #d0d0d0;
-            margin-bottom: 30px;
-            animation: fadeIn 1s ease-out 0.2s both;
+            line-height: 35px;
         }
 
         .card-text .detail-item {
             margin-bottom: 10px;
             color: #d0d0d0;
+            line-height: 25px;
         }
 
         .card-text .detail-item b {
@@ -431,15 +269,14 @@ html {
             color: #00f2ff;
             padding: 12px 30px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 500;
-            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 400;
+            border-radius: 40px;
             transition: all 0.3s ease;
             animation: neonGlow 2s infinite;
             display: block;
             text-align: center;
-            margin-top: 40px;
-            margin-bottom: 30px;
+            margin-bottom: 0px;
         }
 
         .btn-course-detail:hover {
@@ -448,201 +285,6 @@ html {
             transform: scale(1.05);
         }
 
-        .course-details-content {
-            background: transparent;
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-bottom: 30px;
-            max-height: 200px;
-            overflow-y: auto;
-            animation: fadeIn 1s ease-out;
-        }
-
-        .course-details-content .course-detail-item {
-            color: #e6e6e6;
-            font-weight: 400;
-            padding: 5px 10px;
-            font-size: 0.95rem;
-            line-height: 1.2;
-            background: transparent;
-            border-radius: 4px;
-            margin-bottom: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .course-details-content .course-detail-item:hover {
-            background: #00f2ff;
-            color: #0a0a0a;
-            transform: translateX(5px);
-        }
-
-        .form-container {
-            background: transparent;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px auto;
-            width: 100%;
-            animation: fadeIn 1s ease-out;
-            position: relative;
-            z-index: 1;
-        }
-
-        .form-container h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 20px;
-            text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
-        }
-
-        .form-select, .form-control {
-            background: #333;
-            border: 1px solid #555;
-            color: #e6e6e6;
-            border-radius: 10px;
-            padding: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-select:focus, .form-control:focus {
-            border-color: #ff00ff;
-            box-shadow: 0 0 0 4px rgba(255, 0, 255, 0.3);
-        }
-
-        .form-container .btn {
-            background: #ff00ff;
-            border: none;
-            padding: 12px;
-            border-radius: 50px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            color: #ffffff;
-            transition: all 0.3s ease;
-            animation: neonGlow 2s infinite;
-        }
-
-        .form-container .btn:hover {
-            background: #00f2ff;
-            color: #0a0a0a;
-            transform: scale(1.05);
-        }
-
-        .contact-form {
-            background: #2a2a2a;
-            padding: 50px;
-            margin: 30px auto;
-            max-width: 700px;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
-            animation: fadeIn 1s ease-out;
-            position: relative;
-            z-index: 1;
-        }
-
-        .contact-form h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 20px;
-            color: #ffffff;
-            text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
-        }
-
-        .contact-form label {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 5px;
-            display: block;
-            color: #d0d0d0;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #555;
-            background: #333;
-            color: #e6e6e6;
-            margin-bottom: 15px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .contact-form input:focus, .contact-form textarea:focus {
-            border-color: #ff00ff;
-            box-shadow: 0 0 0 4px rgba(255, 0, 255, 0.3);
-        }
-
-        .contact-form .btn {
-            background: #ff00ff;
-            border: none;
-            padding: 12px;
-            border-radius: 50px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            color: #ffffff;
-            width: 100%;
-            transition: all 0.3s ease;
-            animation: neonGlow 2s infinite;
-        }
-
-        .contact-form .btn:hover {
-            background: #00f2ff;
-            color: #0a0a0a;
-            transform: scale(1.05);
-        }
-
-        #homeConclusion {
-            background: rgba(10, 10, 10, 0.95);
-            padding: 40px 0;
-            color: #e6e6e6;
-            animation: fadeIn 1s ease-out;
-            padding-top: 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        #homeConclusion h4 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #ffffff;
-            text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
-        }
-
-        #homeConclusion h4 i {
-            font-size: 1.2rem;
-            color: #00f2ff;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
-        #homeConclusion a {
-            color: #00f2ff;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        #homeConclusion a:hover {
-            color: #ffffff;
-            text-shadow: 0 0 10px #00f2ff;
-        }
-
-        #last {
-            background: #111;
-            padding: 20px 0;
-            font-size: 0.9rem;
-            color: #d0d0d0;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Student Reviews CSS */
         #studentReview {
             font-family: 'Inter', sans-serif;
         }
@@ -663,25 +305,25 @@ html {
         }
 
         #studentReview .review-section {
-            margin: 60px auto;
-            padding: 40px 20px;
+            margin: 50px auto;
+            padding: 30px 10px;
             background: transparent;
             border-radius: 15px;
             animation: studentReviewFadeIn 1s ease-out;
             position: relative;
             z-index: 1;
-            width: 90%;
-            max-width: 1200px;
+            width: 70%;
+            max-width: 800px;
             height: auto;
             overflow: hidden;
         }
 
         #studentReview .review-section h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 700;
+            font-size: 2.2rem;
+            font-weight: 500;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             color: #00f2ff;
             text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 30px #00f2ff;
             animation: studentReviewNeonPulse 2s infinite;
@@ -702,15 +344,15 @@ html {
             transition: all 0.3s ease;
             box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
             animation: studentReviewFadeIn 1s ease-out;
-            width: 800px;
+            width: 700px;
             margin-right: 20px;
-            height: 400px;
+            height: 300px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             position: relative;
             flex-shrink: 0;
-            line-height: 40px;
+            line-height: 30px;
             text-align: left;
         }
 
@@ -721,7 +363,7 @@ html {
 
         #studentReview .review-item::before {
             content: '';
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #00f2ff;
             position: absolute;
             top: 10px;
@@ -730,7 +372,7 @@ html {
 
         #studentReview .review-item::after {
             content: '';
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: #00f2ff;
             position: absolute;
             bottom: 10px;
@@ -738,9 +380,9 @@ html {
         }
 
         #studentReview .review-item h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 600;
+            font-family: 'Calibri', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 500;
             color: #00f2ff;
             margin-bottom: 10px;
             text-shadow: 0 0 5px #00f2ff;
@@ -787,8 +429,8 @@ html {
             padding: 0px;
             border-radius: 15px;
             margin: 30px auto;
-            width: 100%;
-            max-width: 100%;
+            width: 90%;
+            max-width: 90%;
             animation: studentReviewFadeIn 1s ease-out;
             position: relative;
             z-index: 1;
@@ -796,8 +438,8 @@ html {
 
         #studentReview .form-container h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 400;
             color: #ffffff;
             margin-bottom: 20px;
             text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
@@ -827,7 +469,7 @@ html {
             padding: 12px;
             border-radius: 50px;
             font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
+            font-weight: 400;
             color: #ffffff;
             transition: all 0.3s ease;
             animation: studentReviewNeonGlow 2s infinite;
@@ -852,35 +494,8 @@ html {
               text-decoration : none;
             }
 
-        /* Responsive Design */
         @media (max-width: 820px) {
-            .welcome-container {
-                min-height: 70vh;
-                padding: 30px 5%;
-            }
-
-            .welcome-container h2 {
-                font-size: 2.5rem;
-            }
-
-            .welcome-container p {
-                font-size: 1.1rem;
-                text-align: left;
-            }
-
-            .circularImage {
-                margin-top: 25px;
-                border-radius: 330px;
-            }
-
-            .middle {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .middle .col {
-                margin-bottom: 20px;
-            }
+            
 
             .card {
                 max-width: 300px;
@@ -978,16 +593,8 @@ html {
                 padding: 8px 15px;
             }
 
-            .welcome-container h2 {
-                line-height: 80px;
-            }
-
-            .welcome-container p {
-                text-align: left;
-            }
-
             .dropdown-item {
-                font-size: 0.8rem;
+                font-size: 0.6rem;
             }
 
             .card {
@@ -999,66 +606,52 @@ html {
             }
 
             .card-title {
-                font-size: 1.4rem;
-                line-height: 1.3;
+                font-size: 1.2rem;
+                line-height: 1.2;
                 margin-bottom: 15px;
             }
-
-            #courseDescription {
-                font-size: 0.9rem;
-                line-height: 40px;
-                margin-bottom: 15px;
-            }
-
-
-           
 
             .card-text .detail-item {
-                font-size: 0.85rem;
+                font-size: 0.82rem;
                 margin-bottom: 6px;
             }
 
             .btn-course-detail {
                 padding: 8px 15px;
-                font-size: 0.9rem;
+                font-size: 0.8rem;
                 margin-top: 10px;
                 margin-bottom: 15px;
             }
 
             .course-details-content {
-                max-height: 120px;
+                max-height: 110px;
                 padding: 6px 10px;
                 margin-bottom: 15px;
             }
 
             .course-details-content .course-detail-item {
-                font-size: 0.8rem;
+                font-size: 0.7rem;
                 padding: 3px 6px;
             }
 
             .form-container h2 {
-                font-size: 1.5rem;
+                font-size: 1.4rem;
             }
 
             .stats-section h2 {
-                font-size: 1.8rem;
-            }
-
-            .stats-item h3 {
                 font-size: 1.5rem;
             }
 
+            .stats-item h3 {
+                font-size: 1.3rem;
+            }
+
             .stats-item p {
-                font-size: 0.9rem;
+                font-size: 0.7rem;
             }
 
             .stats-item {
-                min-width: 200px;
-            }
-
-            .logo-img {
-                width: 40px;
-                height: 40px;
+                min-width: 180px;
             }
 
             #studentReview .review-section {
@@ -1105,7 +698,6 @@ html {
             }
         }
 
-        /* Scroll-triggered animations */
         .animate-on-scroll.animate {
             animation: fadeIn 0.8s ease-out forwards;
         }
@@ -1121,19 +713,12 @@ html {
         include "nav.php";
     ?>
 
-    <div class="welcome-container">
-        <div class='container middle row'>
-            <div class='col' id="wel">
-                <h2>Welcome to Oscord</h2>
-                <br>
-                <p>Programming နှင့် Computer Science ဘာသာရပ်များကို OSCORD မှာ ဆရာ ဆရာမများဖြင့် Online မှ By One Class များဖြင့်လည်းကောင်း
-Group Class များဖြင့်လည်းကောင်းသင်ကြားပေးနေပါတယ် နမူနာသင်ခန်းစာ video lecture များကို သက်ဆိုင်ရာ course အောက်မှာဝင်ရောက်လေ့လာနိုင်ပါတယ် By One အတန်းများအတွက် အချိန်ညှိနှိုင်းနိုင်ပါတယ်
-(တက်ရောက်မည့် Course အပေါ်မူတည်၍ Face to Face အပြင်မှာသင်ယူနိုင်ဖိုအတွက်လည်း လျောက်ထားနိုင်ပါတယ်)
-နေ့စဉ်သင်ကြားထားသော Lecture File များနှင့် Video Record များကို Telegram Private Channel နှင့် Website မှာပြန်လည် Upload ပေးမှာဖြစ်ပါတယ်
-တက်ရောက်လိုပါက Sign Up မှာ ပေးထားသော Instruction များကိုသေချာစွာဖတ်ရူပြီး အတန်းအပ်နိုင်ပါတယ်</p>
-            </div>
-        </div>
-    </div>   
+<div class="welcome-container">
+    <video class="welcome-video" autoplay loop muted playsinline>
+        <source src="video/wel.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
         
     <div class="stats-section">
         <h2>Our Impact</h2>
@@ -1156,7 +741,7 @@ Group Class များဖြင့်လည်းကောင်းသင်�
     </div>
 
     <div class="container">
-        <h1 id="titleCourse">Courses from OSCORD</h1>
+        <h1 id="titleCourse">Our Courses</h1>
         <div class="row">
             <?php
             if ($result_course_details && $result_course_details->num_rows > 0) {
@@ -1165,16 +750,17 @@ Group Class များဖြင့်လည်းကောင်းသင်�
                     echo "<form method='post' action='oscord_specificCoursePage.php'>";
                     echo "<div class='card animate-on-scroll'>";
                     echo "<div class='card-body'>";
-                        echo "<h5 class='card-title'>".htmlspecialchars($row2['courseName'])."</h5>";
-                        echo "<div id='courseDescription'>".htmlspecialchars($row2['courseDescription'])."</div>";
+                    echo "<img src='image/".htmlspecialchars($row2['coursePhoto'])."' alt='".htmlspecialchars($row2['courseName'])."' class='card-img-top' style='max-width: 100%; height: auto;'>";
+                        echo "<h6 class='card-title'>".htmlspecialchars($row2['courseName'])."</h6>";
+                        // echo "<div id='courseDescription'>".htmlspecialchars($row2['courseDescription'])."</div>";
                         echo "<div class='card-text'>";
-                            echo "<div class='detail-item'><b>Course Fee</b>: ".htmlspecialchars($row2['courseFee'])."</div>";
-                            echo "<div class='detail-item'><b>Course Period</b>: ".htmlspecialchars($row2['coursePeriod'])."</div>";
+                            echo "<div class='detail-item'><b>Course Fee</b> : ".htmlspecialchars($row2['courseFee'])."</div>";
+                            echo "<div class='detail-item'><b>Course Period</b> : ".htmlspecialchars($row2['coursePeriod'])."</div>";
                             if (!empty($row2['courseFbLink'])) {
                                 echo "<div class='detail-item'><a class='fb-link' href='".htmlspecialchars($row2['courseFbLink'])."' target='_blank'>View on Facebook</a></div>";
                             }
                         echo "</div>";
-                        echo "<button class='btn btn-course-detail' type='button' data-bs-toggle='collapse' data-bs-target='#courseDetails".htmlspecialchars($row2['courseID'])."' aria-expanded='false' aria-controls='courseDetails".htmlspecialchars($row2['courseID'])."'>Course Details</button>";
+                        // echo "<button class='btn btn-course-detail' type='button' data-bs-toggle='collapse' data-bs-target='#courseDetails".htmlspecialchars($row2['courseID'])."' aria-expanded='false' aria-controls='courseDetails".htmlspecialchars($row2['courseID'])."'>Course Details</button>";
                         echo "<div class='collapse course-details-content' id='courseDetails".htmlspecialchars($row2['courseID'])."'>";
                         
                         $courseID = $row2['courseID'];
@@ -1232,20 +818,20 @@ Group Class များဖြင့်လည်းကောင်းသင်�
                 <p class="error-message">No reviews available yet. (Found <?php echo $num_reviews; ?> reviews.)</p>
             <?php } ?>
 
-            <div class="form-container animate-on-scroll">
+            <!-- <div class="form-container animate-on-scroll">
                 <h2>Review a Course</h2>
                 <form class="form" action="oscord_savereview.php" method="post">
                     <div class="mb-3">
                         <label for="student_name" class="form-label">Select Your Name</label>
                         <select class="form-select" id="student_name" name="student_name" required>
                             <option value="">Select</option>
-                            <?php
-                            if ($result_students_reviews && $result_students_reviews->num_rows > 0) {
-                                while ($row_student = $result_students_reviews->fetch_assoc()) {
-                                    echo "<option value='".htmlspecialchars($row_student['studentID'])."'>".htmlspecialchars($row_student['studentName'])."</option>";
-                                }
-                            }
-                            ?>
+                            //<?php
+                           // if ($result_students_reviews && $result_students_reviews->num_rows > 0) {
+                                // while ($row_student = $result_students_reviews->fetch_assoc()) {
+                                   // echo "<option value='".htmlspecialchars($row_student['studentID'])."'>".htmlspecialchars($row_student['studentName'])."</option>";
+                                //}
+                            //}
+                           // ?>
                         </select>
                     </div>
                     <div class="mb-3">
@@ -1268,49 +854,13 @@ Group Class များဖြင့်လည်းကောင်းသင်�
                     </div>
                     <button type="submit" class="btn">Submit</button>
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
 
-    <footer id="homeConclusion" class='w-100'>
-        <div class="container">
-            <div class="row undermiddle">
-                <div class="col-9">
-                    <section class="contact-form animate-on-scroll">
-                        <h2>Contact Us</h2>
-                        <form id="contactForm" method="POST" action="contact.php">
-                            <label for="contact_name">Your Name:</label>
-                            <input type="text" id="contact_name" name="name" required>
-
-                            <label for="contact_email">Your Email:</label>
-                            <input type="email" id="contact_email" name="email" required>
-
-                            <label for="message">Your Message:</label>
-                            <textarea id="message" name="message" required></textarea>
-
-                            <button type="submit" class="btn">Send Message</button>
-                        </form>
-                    </section>
-                </div>
-
-                <div class="col">
-                    <h4><i class="fas fa-link"></i> Quick Links</h4>
-                    <ul class="list-unstyled">
-                        <li><a href="https://www.facebook.com/share/19u16vW5KQ/">Facebook Page</a></li><br>
-                        <li><a href="https://youtube.com/@oscord.io.technology?si=nGPUu3EYtcK7wHkS">Youtube</a></li><br>
-                        <li><a href="https://www.instagram.com/oscord.io?igsh=ZDg1czV6NHNuN282&utm_source=qr">Instagram</a></li><br>
-                        <li><a href="https://t.me/oscord_cs">Telegram Contact</a></li><br>
-                        <li><a href="https://t.me/oscord_ProgrammingClass">Telegram Channel</a></li><br>
-                        <li><a href="https://drive.google.com/file/d/1obR7QrzHTh7cldw-QFf_P82ijd_VkTDI/view?usp=sharing">Viber</a></li><br>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center bg-dark w-100">
-            <p class='text-light' id="last">© Oscord Programming Class All Rights Reserved 2022-present</p>
-        </div>
-    </footer>
+   <?php
+    include "footer.php";
+   ?>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1329,14 +879,13 @@ Group Class များဖြင့်လည်းကောင်းသင်�
                 observer.observe(el);
             });
 
-            // Student Reviews dynamic infinite scrolling
             const reviewContainer = document.querySelector('#studentReview .review-container');
             if (reviewContainer && reviewContainer.querySelectorAll('.review-item').length > 0) {
                 const reviewItems = reviewContainer.querySelectorAll('.review-item');
                 const originalWidth = Array.from(reviewItems).reduce((sum, item) => sum + item.offsetWidth + 20, 0);
                 console.log(`Original reviews: ${reviewItems.length}, Total width: ${originalWidth}px`);
 
-                // Clone items dynamically to fill at least 3x viewport width for seamless looping
+           
                 const viewportWidth = window.innerWidth;
                 const clonesNeeded = Math.ceil((viewportWidth * 3) / originalWidth);
                 console.log(`Clones needed: ${clonesNeeded}`);
@@ -1348,13 +897,11 @@ Group Class များဖြင့်လည်းကောင်းသင်�
                 }
                 console.log(`Total items after cloning: ${reviewContainer.querySelectorAll('.review-item').length}`);
 
-                // Animation variables
                 let scrollPosition = 0;
                 const scrollSpeed = 1.5; // Pixels per frame (adjust for speed)
                 let isPaused = false;
                 let animationFrameId;
 
-                // Animation loop
                 function animateScroll() {
                     if (!isPaused) {
                         scrollPosition -= scrollSpeed;
