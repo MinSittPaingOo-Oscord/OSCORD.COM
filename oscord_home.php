@@ -4,6 +4,7 @@ include "connectdb.php";
 $query_courses = "SELECT courseID, courseName FROM oscord_course";
 $result_courses = $conn->query($query_courses);
 
+#IMPORTANT !!
 $query_course_details = "SELECT * FROM oscord_course ORDER BY sort IS NULL, sort ASC";
 $result_course_details = $conn->query($query_course_details);
 
@@ -248,20 +249,7 @@ html {
             animation: fadeIn 1s ease-out 0.2s both;
         }
 
-        .circularImage {
-            max-width: 100%;
-            height: auto;
-            border-radius: 240px;
-            border: 2px solid #00f2ff;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
-            transition: all 0.3s ease;
-            animation: fadeIn 1s ease-out 0.6s both;
-        }
-
-        .circularImage:hover {
-            transform: scale(1.08) rotate(2deg);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
-        }
+      
 
         .stats-section {
             background: rgba(20, 20, 20, 0.9);
@@ -371,7 +359,7 @@ html {
             max-width: 400px;
             box-shadow: 0 5px 5px rgba(0, 242, 255, 0.5);
             animation: fadeIn 1s ease-out;
-            height: 1100px;
+            height: auto;
             position: relative;
             z-index: 1;
         }
@@ -1126,11 +1114,16 @@ html {
             <div class='col' id="wel">
                 <h2>Welcome to Oscord</h2>
                 <br>
-                <p>Programming နှင့် Computer Science ဘာသာရပ်များကို OSCORD မှာ ဆရာ ဆရာမများဖြင့် Online မှ By One Class များဖြင့်လည်းကောင်း
-Group Class များဖြင့်လည်းကောင်းသင်ကြားပေးနေပါတယ် နမူနာသင်ခန်းစာ video lecture များကို သက်ဆိုင်ရာ course အောက်မှာဝင်ရောက်လေ့လာနိုင်ပါတယ် By One အတန်းများအတွက် အချိန်ညှိနှိုင်းနိုင်ပါတယ်
-(တက်ရောက်မည့် Course အပေါ်မူတည်၍ Face to Face အပြင်မှာသင်ယူနိုင်ဖိုအတွက်လည်း လျောက်ထားနိုင်ပါတယ်)
-နေ့စဉ်သင်ကြားထားသော Lecture File များနှင့် Video Record များကို Telegram Private Channel နှင့် Website မှာပြန်လည် Upload ပေးမှာဖြစ်ပါတယ်
-တက်ရောက်လိုပါက Sign Up မှာ ပေးထားသော Instruction များကိုသေချာစွာဖတ်ရူပြီး အတန်းအပ်နိုင်ပါတယ်</p>
+                <p>
+                    Programming နှင့် Computer Science ဘာသာရပ်များကို OSCORD မှာ ဆရာ ဆရာမများဖြင့် 
+                    Online မှ By One Class များဖြင့်လည်းကောင်း Group Class များဖြင့်လည်းကောင်းသင်ကြားပေးနေပါတယ်
+                    နမူနာသင်ခန်းစာ video lecture များကို သက်ဆိုင်ရာ course အောက်မှာဝင်ရောက်လေ့လာနိုင်ပါတယ် 
+                    By One အတန်းများအတွက် အချိန်ညှိနှိုင်းနိုင်ပါတယ် (တက်ရောက်မည့် Course အပေါ်မူတည်၍ Face to Face
+                    အပြင်မှာသင်ယူနိုင်ဖိုအတွက်လည်း လျောက်ထားနိုင်ပါတယ်) နေ့စဉ်သင်ကြားထားသော 
+                    Lecture File များနှင့် Video Record များကို Telegram Private Channel နှင့် Website မှာ
+                    ပြန်လည် Upload ပေးမှာဖြစ်ပါတယ် တက်ရောက်လိုပါက Sign Up မှာ ပေးထားသော Instruction 
+                    များကိုသေချာစွာဖတ်ရူပြီး အတန်းအပ်နိုင်ပါတယ်
+                </p>
             </div>
         </div>
     </div>   
@@ -1165,16 +1158,17 @@ Group Class များဖြင့်လည်းကောင်းသင်�
                     echo "<form method='post' action='oscord_specificCoursePage.php'>";
                     echo "<div class='card animate-on-scroll'>";
                     echo "<div class='card-body'>";
-                        echo "<h5 class='card-title'>".htmlspecialchars($row2['courseName'])."</h5>";
-                        echo "<div id='courseDescription'>".htmlspecialchars($row2['courseDescription'])."</div>";
+                    echo "<img src='image/".htmlspecialchars($row2['coursePhoto'])."' alt='".htmlspecialchars($row2['courseName'])."' class='card-img-top' style='max-width: 100%; height: auto;'>";
+                        echo "<br><br><h6 class='card-title'>".htmlspecialchars($row2['courseName'])."</h6>";
+                        // echo "<div id='courseDescription'>".htmlspecialchars($row2['courseDescription'])."</div>";
                         echo "<div class='card-text'>";
                             echo "<div class='detail-item'><b>Course Fee</b>: ".htmlspecialchars($row2['courseFee'])."</div>";
-                            echo "<div class='detail-item'><b>Course Period</b>: ".htmlspecialchars($row2['coursePeriod'])."</div>";
+                            echo "<br><div class='detail-item'><b>Course Period</b>: ".htmlspecialchars($row2['coursePeriod'])."</div>";
                             if (!empty($row2['courseFbLink'])) {
-                                echo "<div class='detail-item'><a class='fb-link' href='".htmlspecialchars($row2['courseFbLink'])."' target='_blank'>View on Facebook</a></div>";
+                                echo "<br><div class='detail-item'><a class='fb-link' href='".htmlspecialchars($row2['courseFbLink'])."' target='_blank'>View on Facebook</a></div>";
                             }
                         echo "</div>";
-                        echo "<button class='btn btn-course-detail' type='button' data-bs-toggle='collapse' data-bs-target='#courseDetails".htmlspecialchars($row2['courseID'])."' aria-expanded='false' aria-controls='courseDetails".htmlspecialchars($row2['courseID'])."'>Course Details</button>";
+                        // echo "<button class='btn btn-course-detail' type='button' data-bs-toggle='collapse' data-bs-target='#courseDetails".htmlspecialchars($row2['courseID'])."' aria-expanded='false' aria-controls='courseDetails".htmlspecialchars($row2['courseID'])."'>Course Details</button>";
                         echo "<div class='collapse course-details-content' id='courseDetails".htmlspecialchars($row2['courseID'])."'>";
                         
                         $courseID = $row2['courseID'];
@@ -1231,6 +1225,8 @@ Group Class များဖြင့်လည်းကောင်းသင်�
             <?php } else { ?>
                 <p class="error-message">No reviews available yet. (Found <?php echo $num_reviews; ?> reviews.)</p>
             <?php } ?>
+
+
 
             <div class="form-container animate-on-scroll">
                 <h2>Review a Course</h2>
@@ -1329,14 +1325,13 @@ Group Class များဖြင့်လည်းကောင်းသင်�
                 observer.observe(el);
             });
 
-            // Student Reviews dynamic infinite scrolling
             const reviewContainer = document.querySelector('#studentReview .review-container');
             if (reviewContainer && reviewContainer.querySelectorAll('.review-item').length > 0) {
                 const reviewItems = reviewContainer.querySelectorAll('.review-item');
                 const originalWidth = Array.from(reviewItems).reduce((sum, item) => sum + item.offsetWidth + 20, 0);
                 console.log(`Original reviews: ${reviewItems.length}, Total width: ${originalWidth}px`);
 
-                // Clone items dynamically to fill at least 3x viewport width for seamless looping
+           
                 const viewportWidth = window.innerWidth;
                 const clonesNeeded = Math.ceil((viewportWidth * 3) / originalWidth);
                 console.log(`Clones needed: ${clonesNeeded}`);
@@ -1348,13 +1343,11 @@ Group Class များဖြင့်လည်းကောင်းသင်�
                 }
                 console.log(`Total items after cloning: ${reviewContainer.querySelectorAll('.review-item').length}`);
 
-                // Animation variables
                 let scrollPosition = 0;
                 const scrollSpeed = 1.5; // Pixels per frame (adjust for speed)
                 let isPaused = false;
                 let animationFrameId;
 
-                // Animation loop
                 function animateScroll() {
                     if (!isPaused) {
                         scrollPosition -= scrollSpeed;
