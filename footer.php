@@ -6,6 +6,8 @@ include "connectdb.php";
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
+
+   
     #footer-wrapper {
         margin-top : 90px;
         font-family: 'Inter', sans-serif;
@@ -31,9 +33,10 @@ include "connectdb.php";
 
     #footer-wrapper #footer-contact-form {
         background: #2a2a2a;
-        padding: 50px;
+        padding: 30px;
         margin: 30px auto;
-        max-width: 700px;
+        max-width: 400px;
+        height : auto;
         border-radius: 15px;
         box-shadow: 0 10px 20px rgba(0, 242, 255, 0.2);
         position: relative;
@@ -47,8 +50,8 @@ include "connectdb.php";
 
     #footer-wrapper #footer-contact-form h2 {
         font-family: 'Orbitron', sans-serif;
-        font-size: 2rem;
-        font-weight: 600;
+        font-size: 1.4rem;
+        font-weight: 400;
         text-align: center;
         margin-bottom: 20px;
         color: #ffffff;
@@ -57,7 +60,7 @@ include "connectdb.php";
 
     #footer-wrapper #footer-contact-form label {
         font-size: 1rem;
-        font-weight: 500;
+        font-weight: 300;
         margin-bottom: 5px;
         display: block;
         color: #d0d0d0;
@@ -65,7 +68,7 @@ include "connectdb.php";
 
     #footer-wrapper #footer-contact-form input,
     #footer-wrapper #footer-contact-form textarea {
-        width: 100%;
+        width: 90%;
         padding: 12px;
         border-radius: 10px;
         border: 1px solid #555;
@@ -89,9 +92,9 @@ include "connectdb.php";
         padding: 12px;
         border-radius: 50px;
         font-family: 'Orbitron', sans-serif;
-        font-weight: 500;
+        font-weight: 300;
         color: #ffffff;
-        width: 100%;
+        width: 90%;
         transition: background 0.3s ease, transform 0.3s ease;
         animation: footerNeonGlow 2s infinite;
     }
@@ -104,15 +107,15 @@ include "connectdb.php";
 
     #footer-wrapper #footer-quick-links {
         font-family: 'Orbitron', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 600;
+        font-size: 1.2rem;
+        font-weight: 400;
         margin-bottom: 20px;
         color: #ffffff;
         text-shadow: 0 0 5px rgba(0, 242, 255, 0.3);
     }
 
     #footer-wrapper #footer-quick-links i {
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: #00f2ff;
         margin-right: 8px;
         vertical-align: middle;
@@ -120,7 +123,7 @@ include "connectdb.php";
 
     #footer-wrapper #footer-links a {
         color: #00f2ff;
-        font-size: 1rem;
+        font-size: 0.9rem;
         text-decoration: none;
         transition: color 0.3s ease, text-shadow 0.3s ease;
     }
@@ -133,10 +136,11 @@ include "connectdb.php";
     #footer-wrapper #footer-last {
         background: #111;
         padding: 20px 0;
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         color: #d0d0d0;
         position: relative;
         z-index: 1;
+        margin-bottom:-40px;
     }
 
     /* Responsive Design */
@@ -162,7 +166,7 @@ include "connectdb.php";
     <footer id="homeConclusion" class="w-100">
         <div class="container">
             <div class="row undermiddle">
-                <div class="col-9">
+                <!-- <div class="col">
                     <section id="footer-contact-form" class="footer-animate">
                         <h2>Contact Us</h2>
                         <form id="footer-contactForm" method="POST" action="contact.php">
@@ -178,7 +182,7 @@ include "connectdb.php";
                             <button type="submit" id="footer-submit-btn">Send Message</button>
                         </form>
                     </section>
-                </div>
+                </div> -->
 
                 <div class="col">
                     <h4 id="footer-quick-links"><i class="fas fa-link"></i> Quick Links</h4>
@@ -186,11 +190,19 @@ include "connectdb.php";
                         <li><a href="https://www.facebook.com/share/19u16vW5KQ/">Facebook Page</a></li><br>
                         <li><a href="https://youtube.com/@oscord.io.technology?si=nGPUu3EYtcK7wHkS">Youtube</a></li><br>
                         <li><a href="https://www.instagram.com/oscord.io?igsh=ZDg1czV6NHNuN282&utm_source=qr">Instagram</a></li><br>
+                    </ul>
+                </div>
+
+                <div class="col">
+                    <h4 id="footer-quick-links"><i class="fas fa-link"></i></h4>
+                    <ul class="list-unstyled" id="footer-links">
                         <li><a href="https://t.me/oscord_cs">Telegram Contact</a></li><br>
                         <li><a href="https://t.me/oscord_ProgrammingClass">Telegram Channel</a></li><br>
                         <li><a href="https://drive.google.com/file/d/1obR7QrzHTh7cldw-QFf_P82ijd_VkTDI/view?usp=sharing">Viber</a></li><br>
                     </ul>
                 </div>
+
+
             </div>
         </div>
 

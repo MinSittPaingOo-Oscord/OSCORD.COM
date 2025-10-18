@@ -455,6 +455,7 @@ $conn->close();
     <title>Course Details - Oscord</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
+
         body {
             font-family: Calibri, Arial, sans-serif;
             background: linear-gradient(135deg, #0d0d2b 0%, #2a0a4e 100%);
@@ -463,6 +464,7 @@ $conn->close();
             position: relative;
             overflow-x: hidden;
             color: #e0e0ff;
+         
         }
         canvas#particles {
             position: absolute;

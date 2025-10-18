@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nav</title>
     <style>
-          /* Animations */
           @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -21,11 +20,11 @@
             to { transform: translateX(0); }
         }
 
-        /* Navigation */
         .navbar-custom {
             background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(12px);
             position: sticky;
+            height: auto;
             top: 0;
             z-index: 1000;
             padding: 15px 25px;
@@ -35,10 +34,9 @@
 
         .nav-link {
             color: #e6e6e6 !important;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 500;
-            font-size: 1.1rem;
-            padding: 10px 20px;
+            font-family: 'Calibri', sans-serif;
+            font-weight: 200;
+            font-size: 1rem;
             position: relative;
             transition: all 0.3s ease;
         }
@@ -73,8 +71,9 @@
 
         .dropdown-item {
             color: #e6e6e6;
-            font-size: 0.95rem;
-            padding: 12px 20px;
+            font-size: 1rem;
+            font-family : "Times New Roman", sans-serif;
+            padding: 10px 15px;
             transition: all 0.3s ease;
         }
 
@@ -101,7 +100,7 @@
 <div class='upper'>
     <ul class="nav nav-pills navbar-custom">
         <li class="nav-item">
-            <a class="nav-link" href="oscord_home.php">OSCORD - Programming & Computer Science</a>
+            <a class="nav-link" href="oscord_home.php">OSCORD Code Academy</a>
         </li>
         <form method='post' action='oscord_specificCoursePage.php'>
             <li class="nav-item dropdown">

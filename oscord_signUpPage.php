@@ -310,6 +310,8 @@ $result2 = $conn->query($query2);
     </style>
 </head>
 <body>
+    <?php 
+        include "nav.php";    ?>
 <div id="particles-js"></div>
 <div class="container">
     <div class="left-content main">
