@@ -82,6 +82,16 @@
             color: #0a0a0a;
             transform: translateX(5px);
         }
+
+        @media (max-width: 576px) {
+            .navbar-custom .nav-link {
+                font-size: 0.9rem;
+                padding: 8px 15px;
+            }
+            .dropdown-item {
+                font-size: 0.6rem;
+            }
+        }
     </style>
 </head>
 <body>
