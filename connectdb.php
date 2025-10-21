@@ -1,7 +1,7 @@
 <?php
 $servername		= "localhost";
 $username 		= "root";
-$password 		= "Thanoswasright@1989";
+$password 		= "";
 $databasename 	= "oscord";
 
 // $servername		= "localhost";

@@ -1,255 +1,60 @@
-[2025-05-31 18:14:15] Received POST data: courseName=Data Structure and algorithms, courseFee=hehe, courseDetails=["meow1","meow2","meow3","meow4"]
-[2025-05-31 18:14:15] Validation failed: Invalid course fee.
-[2025-05-31 18:14:51] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, courseDetails=["meow1","meow2","meow3","meow4"]
-[2025-05-31 18:14:51] Validation failed: Invalid course fee.
-[2025-05-31 18:19:08] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com, courseDetails=["meow1","meow2","meow3","meow4"]
-[2025-05-31 18:19:08] Course inserted successfully, courseID=14
-[2025-05-31 18:19:08] Error adding course: Unknown column 'details' in 'field list'
-[2025-05-31 18:19:55] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com, courseDetails=["meow1","meow2","meow3"]
-[2025-05-31 18:19:55] Course inserted successfully, courseID=15
-[2025-05-31 18:19:55] Error adding course: Unknown column 'details' in 'field list'
-[2025-05-31 18:25:55] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com, courseDetails=["meow1","meow2","meow3"]
-[2025-05-31 18:25:55] Course inserted successfully, courseID=16
-[2025-05-31 18:25:55] Error adding course: Unknown column 'detail' in 'field list'
-[2025-05-31 18:26:24] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com, courseDetails=["meow1","meow2","meow3"]
-[2025-05-31 18:26:24] Course inserted successfully, courseID=17
-[2025-05-31 18:26:24] Error adding course: Unknown column 'detail' in 'field list'
-[2025-05-31 18:37:40] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com
-[2025-05-31 18:37:40] Course inserted successfully, courseID=18
-[2025-05-31 18:37:40] Course added successfully.
-[2025-05-31 18:42:10] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com
-[2025-05-31 18:42:10] Course inserted successfully, courseID=19
-[2025-05-31 18:42:10] Course added successfully.
-[2025-05-31 18:42:49] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com
-[2025-05-31 18:42:49] Course inserted successfully, courseID=20
-[2025-05-31 18:42:49] Course added successfully.
-[2025-05-31 18:43:23] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com
-[2025-05-31 18:43:23] Course inserted successfully, courseID=21
-[2025-05-31 18:43:23] Course added successfully.
-[2025-05-31 18:46:41] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com
-[2025-05-31 18:46:41] Course inserted successfully, courseID=22
-[2025-05-31 18:46:41] Course added successfully.
-[2025-05-31 18:49:37] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com
-[2025-05-31 18:49:38] Course inserted successfully, courseID=23
-[2025-05-31 18:49:38] Course added successfully.
-[2025-05-31 18:50:00] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com
-[2025-05-31 18:50:00] Course inserted successfully, courseID=24
-[2025-05-31 18:50:00] Course added successfully.
-[2025-05-31 19:00:56] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com
-[2025-05-31 19:00:56] Course inserted successfully, courseID=25
-[2025-05-31 19:01:49] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com
-[2025-05-31 19:01:49] Course inserted successfully, courseID=26
-[2025-05-31 19:57:27] Received POST data: courseName=Data Structure and algorithms, courseFee=270000 MMK, coursePeriod=3 months, courseFblink=http://www.youtube.com
-[2025-05-31 19:57:27] Course inserted successfully, courseID=27
-[2025-06-01 12:39:55] Processing delete_course_detail action
-[2025-06-01 12:39:55] Incorrect PIN for deletion
-[2025-06-01 12:42:13] Processing update_course action
-[2025-06-01 12:42:13] Incorrect PIN for update
-[2025-06-01 12:42:32] Processing update_course action
-[2025-06-01 12:42:32] Incorrect PIN for update
-[2025-06-01 12:43:17] Processing update_course action
-[2025-06-01 12:43:17] Incorrect PIN for update
-[2025-06-01 12:54:25] Processing delete_course_detail action for instructorID: 12
-[2025-06-01 12:54:25] Received PIN: '198989', CourseDetailID: 17
-[2025-06-01 12:54:25] Database PIN: '198989' for instructorID: 12
-[2025-06-01 12:54:25] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 12:54:25] Course detail ID 17 deleted
-[2025-06-01 12:54:56] Processing update_course action for instructorID: 12
-[2025-06-01 12:54:56] Received PIN: '198989', CourseName: 'Java Programming (Basic to Advanced)', Fee: '550000 MMK'
-[2025-06-01 12:54:56] Database PIN: '198989' for instructorID: 12
-[2025-06-01 12:54:56] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 12:54:56] Course updated successfully for courseID: 1
-[2025-06-01 12:55:22] Processing delete_course_detail action for instructorID: 12
-[2025-06-01 12:55:22] Received PIN: '198989', CourseDetailID: 111
-[2025-06-01 12:55:22] Database PIN: '198989' for instructorID: 12
-[2025-06-01 12:55:22] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 12:55:22] Course detail ID 111 deleted
-[2025-06-01 12:55:27] Processing delete_course_detail action for instructorID: 12
-[2025-06-01 12:55:27] Received PIN: '198989', CourseDetailID: 112
-[2025-06-01 12:55:27] Database PIN: '198989' for instructorID: 12
-[2025-06-01 12:55:27] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 12:55:27] Course detail ID 112 deleted
-[2025-06-01 12:55:31] Processing delete_course_detail action for instructorID: 12
-[2025-06-01 12:55:31] Received PIN: '198989', CourseDetailID: 113
-[2025-06-01 12:55:31] Database PIN: '198989' for instructorID: 12
-[2025-06-01 12:55:31] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 12:55:31] Course detail ID 113 deleted
-[2025-06-01 12:56:03] Processing update_course action for instructorID: 12
-[2025-06-01 12:56:03] Received PIN: '198989', CourseName: 'Java Programming (Basic to Advanced)', Fee: '500000 MMK'
-[2025-06-01 12:56:03] Database PIN: '198989' for instructorID: 12
-[2025-06-01 12:56:03] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 12:56:04] Course updated successfully for courseID: 1
-[2025-06-01 13:51:26] Processing update_video_lectures action for instructorID: 12
-[2025-06-01 13:51:26] Received PIN: '198989'
-[2025-06-01 13:51:26] Database PIN: '198989' for instructorID: 12
-[2025-06-01 13:51:26] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 13:51:26] Video lectures updated successfully for courseID: 1
-[2025-06-01 13:53:26] Processing delete_video_lecture action for instructorID: 12
-[2025-06-01 13:53:26] Received PIN: '198989', VideoID: 9
-[2025-06-01 13:53:26] Database PIN: '198989' for instructorID: 12
-[2025-06-01 13:53:26] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 13:53:26] Video lecture ID 9 deleted
-[2025-06-01 13:54:10] Processing update_video_lectures action for instructorID: 12
-[2025-06-01 13:54:10] Received PIN: '198989'
-[2025-06-01 13:54:10] Database PIN: '198989' for instructorID: 12
-[2025-06-01 13:54:10] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 13:54:10] Video lectures updated successfully for courseID: 2
-[2025-06-01 14:12:48] Processing delete_file action for instructorID: 12
-[2025-06-01 14:12:48] Received PIN: '198989', FileID: 10
-[2025-06-01 14:12:48] Database PIN: '198989' for instructorID: 12
-[2025-06-01 14:12:48] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 14:12:48] File ID 10 deleted
-[2025-06-01 15:00:23] Processing update_course action for instructorID: 12
-[2025-06-01 15:00:24] Received PIN: '198989', CourseName: 'Python Programming (Basic to Advanced)', Fee: '500000 MMK'
-[2025-06-01 15:00:24] Database PIN: '198989' for instructorID: 12
-[2025-06-01 15:00:24] PIN comparison: input='198989' vs db='198989'
-[2025-06-01 15:00:24] Course updated successfully for courseID: 2
-[2025-06-01 15:38:52] Student ID 10 approval status updated to 0 by instructor ID 12
-[2025-06-01 15:39:38] Student ID 10 approval status updated to 1 by instructor ID 12
-[2025-06-02 09:19:08] Processing update_video_lectures action for instructorID: 12
-[2025-06-02 09:19:08] Received PIN: '198989'
-[2025-06-02 09:19:08] Database PIN: '198989' for instructorID: 12
-[2025-06-02 09:19:08] PIN comparison: input='198989' vs db='198989'
-[2025-06-02 09:19:08] Video lectures updated successfully for courseID: 1
-[2025-06-02 09:36:03] Processing update_video_lectures action for instructorID: 12
-[2025-06-02 09:36:03] Received PIN: '198989'
-[2025-06-02 09:36:03] Database PIN: '198989' for instructorID: 12
-[2025-06-02 09:36:03] PIN comparison: input='198989' vs db='198989'
-[2025-06-02 09:36:03] Video lectures updated successfully for courseID: 1
-[2025-06-02 09:36:36] Processing update_video_lectures action for instructorID: 12
-[2025-06-02 09:36:36] Received PIN: '198989'
-[2025-06-02 09:36:36] Database PIN: '198989' for instructorID: 12
-[2025-06-02 09:36:36] PIN comparison: input='198989' vs db='198989'
-[2025-06-02 09:36:36] Video lectures updated successfully for courseID: 1
-[2025-06-02 10:08:25] Processing update_course action for instructorID: 12
-[2025-06-02 10:08:25] Received PIN: '198989', CourseName: 'Java Programming (Basic to Advanced)', Fee: '500000 MMK <br> Teach Yourself : 120000 MMK'
-[2025-06-02 10:08:25] Database PIN: '198989' for instructorID: 12
-[2025-06-02 10:08:25] PIN comparison: input='198989' vs db='198989'
-[2025-06-02 10:08:26] Course updated successfully for courseID: 1
-[2025-06-02 10:09:04] Processing update_course action for instructorID: 12
-[2025-06-02 10:09:04] Received PIN: '198989', CourseName: 'Java Programming (Basic to Advanced)', Fee: '500000 MMK     Teach Yourself : 120000 MMK'
-[2025-06-02 10:09:04] Database PIN: '198989' for instructorID: 12
-[2025-06-02 10:09:04] PIN comparison: input='198989' vs db='198989'
-[2025-06-02 10:09:04] Course updated successfully for courseID: 1
-[2025-06-02 13:30:26] Student ID 10 approval status updated to 0 by instructor ID 14
-[2025-06-02 13:31:16] Processing update_course action for instructorID: 14
-[2025-06-02 13:31:16] Received PIN: '123456', CourseName: 'Programming with C++', Fee: '200000 MMK'
-[2025-06-02 13:31:16] Database PIN: '123456' for instructorID: 14
-[2025-06-02 13:31:16] PIN comparison: input='123456' vs db='123456'
-[2025-06-02 13:31:16] Course updated successfully for courseID: 8
-[2025-06-02 13:31:32] Processing delete_course_detail action for instructorID: 14
-[2025-06-02 13:31:32] Received PIN: '123456', CourseDetailID: 116
-[2025-06-02 13:31:32] Database PIN: '123456' for instructorID: 14
-[2025-06-02 13:31:32] PIN comparison: input='123456' vs db='123456'
-[2025-06-02 13:31:32] Course detail ID 116 deleted
-[2025-06-02 13:35:15] Student ID 10 approval status updated to 1 by instructor ID 14
-[2025-06-02 13:47:24] Student ID 13 approval status updated to 1 by instructor ID 12
-[2025-06-02 14:30:39] Student ID 13 approval status updated to 0 by instructor ID 12
-[2025-06-03 10:40:14] Course ID 7 dropped for student ID 10 by instructor ID 12
-[2025-06-03 10:40:14] Course ID 7 dropped for student ID 10 by instructor ID 12
-[2025-06-03 10:47:20] Course ID 7 dropped for student ID 10 by instructor ID 12
-[2025-06-03 10:47:41] Course ID 8 dropped for student ID 10 by instructor ID 12
-[2025-06-03 10:47:41] Course ID 8 dropped for student ID 10 by instructor ID 12
-[2025-06-03 11:06:42] Course ID 5 dropped for student ID 10 by instructor ID 12
-[2025-06-03 11:06:50] Course ID 2 dropped for student ID 10 by instructor ID 12
-[2025-06-03 11:06:56] Course ID 6 dropped for student ID 10 by instructor ID 12
-[2025-06-03 22:17:59] Processing delete_video_lecture action for instructorID: 12
-[2025-06-03 22:18:00] Received PIN: '198989', VideoID: 3
-[2025-06-03 22:18:00] Database PIN: '198989' for instructorID: 12
-[2025-06-03 22:18:00] PIN comparison: input='198989' vs db='198989'
-[2025-06-03 22:18:00] Video lecture ID 3 deleted
-[2025-06-03 22:18:07] Processing update_video_lectures action for instructorID: 12
-[2025-06-03 22:18:07] Received PIN: '198989'
-[2025-06-03 22:18:07] Database PIN: '198989' for instructorID: 12
-[2025-06-03 22:18:07] PIN comparison: input='198989' vs db='198989'
-[2025-06-03 22:18:07] Video lectures updated successfully for courseID: 1
-[2025-06-03 22:19:28] Processing update_video_lectures action for instructorID: 12
-[2025-06-03 22:19:28] Received PIN: '198989'
-[2025-06-03 22:19:28] Database PIN: '198989' for instructorID: 12
-[2025-06-03 22:19:28] PIN comparison: input='198989' vs db='198989'
-[2025-06-03 22:19:28] Video lectures updated successfully for courseID: 1
-[2025-06-03 22:23:27] Processing update_course action for instructorID: 12
-[2025-06-03 22:23:27] Received PIN: '198989', CourseName: 'Python Programming (Basic to Advanced)', Fee: '500000 MMK'
-[2025-06-03 22:23:27] Database PIN: '198989' for instructorID: 12
-[2025-06-03 22:23:27] PIN comparison: input='198989' vs db='198989'
-[2025-06-03 22:23:27] Course updated successfully for courseID: 2
-[2025-06-03 22:25:42] Processing update_course action for instructorID: 12
-[2025-06-03 22:25:42] Received PIN: '198989', CourseName: 'Python Programming (Basic to Advanced)', Fee: '500000 MMK'
-[2025-06-03 22:25:42] Database PIN: '198989' for instructorID: 12
-[2025-06-03 22:25:42] PIN comparison: input='198989' vs db='198989'
-[2025-06-03 22:25:42] Course updated successfully for courseID: 2
-[2025-06-03 23:25:16] Processing update_video_lectures action for instructorID: 12
-[2025-06-03 23:25:16] Received PIN: '198989'
-[2025-06-03 23:25:16] Database PIN: '198989' for instructorID: 12
-[2025-06-03 23:25:16] PIN comparison: input='198989' vs db='198989'
-[2025-06-03 23:25:16] Video lectures updated successfully for courseID: 1
-[2025-06-04 11:57:08] Processing update_video_lectures action for instructorID: 12
-[2025-06-04 11:57:08] Received PIN: '198989'
-[2025-06-04 11:57:08] Database PIN: '198989' for instructorID: 12
-[2025-06-04 11:57:08] PIN comparison: input='198989' vs db='198989'
-[2025-06-04 11:57:08] Failed to update video lectures: Field 'videoNumber' doesn't have a default value
-[2025-06-04 11:58:05] Processing update_video_lectures action for instructorID: 12
-[2025-06-04 11:58:05] Received PIN: '198989'
-[2025-06-04 11:58:05] Database PIN: '198989' for instructorID: 12
-[2025-06-04 11:58:05] PIN comparison: input='198989' vs db='198989'
-[2025-06-04 11:58:05] Failed to update video lectures: Field 'videoNumber' doesn't have a default value
-[2025-06-04 12:09:08] Processing update_video_lectures action for instructorID: 12
-[2025-06-04 12:09:08] Received PIN: '198989'
-[2025-06-04 12:09:08] Database PIN: '198989' for instructorID: 12
-[2025-06-04 12:09:08] PIN comparison: input='198989' vs db='198989'
-[2025-06-04 12:09:08] Video lectures updated successfully for courseID: 1
-[2025-06-04 12:16:35] Processing update_course action for instructorID: 12
-[2025-06-04 12:16:35] Received PIN: '198989', CourseName: 'Java Programming (Basic to Advanced)', Fee: '500000 MMK'
-[2025-06-04 12:16:35] Database PIN: '198989' for instructorID: 12
-[2025-06-04 12:16:35] PIN comparison: input='198989' vs db='198989'
-[2025-06-04 12:16:35] Course updated successfully for courseID: 1
-[2025-06-04 22:49:21] Processing update_video_lectures action for instructorID: 12
-[2025-06-04 22:49:21] Received PIN: '198989'
-[2025-06-04 22:49:21] Database PIN: '198989' for instructorID: 12
-[2025-06-04 22:49:21] PIN comparison: input='198989' vs db='198989'
-[2025-06-04 22:49:21] Video lectures updated successfully for courseID: 1
-[2025-06-04 22:49:21] Processing update_video_lectures action for instructorID: 12
-[2025-06-04 22:49:21] Received PIN: '198989'
-[2025-06-04 22:49:21] Database PIN: '198989' for instructorID: 12
-[2025-06-04 22:49:21] PIN comparison: input='198989' vs db='198989'
-[2025-06-04 22:49:21] Video lectures updated successfully for courseID: 1
-[2025-06-04 22:49:48] Processing delete_video_lecture action for instructorID: 12
-[2025-06-04 22:49:48] Received PIN: '198989', VideoID: 13
-[2025-06-04 22:49:48] Database PIN: '198989' for instructorID: 12
-[2025-06-04 22:49:48] PIN comparison: input='198989' vs db='198989'
-[2025-06-04 22:49:48] Video lecture ID 13 deleted
-[2025-06-05 01:02:11] Processing update_video_lectures action for instructorID: 12
-[2025-06-05 01:02:11] Received PIN: '198989'
-[2025-06-05 01:02:11] Database PIN: '198989' for instructorID: 12
-[2025-06-05 01:02:11] PIN comparison: input='198989' vs db='198989'
-[2025-06-05 01:02:11] Video lectures updated successfully for courseID: 1
-[2025-06-05 20:35:22] Processing update_video_lectures action for instructorID: 12
-[2025-06-05 20:35:22] Received PIN: '198989'
-[2025-06-05 20:35:22] Database PIN: '198989' for instructorID: 12
-[2025-06-05 20:35:22] PIN comparison: input='198989' vs db='198989'
-[2025-06-05 20:35:22] Video lectures updated successfully for courseID: 1
-[2025-06-05 21:51:51] Processing update_video_lectures action for instructorID: 12
-[2025-06-05 21:51:51] Received PIN: '198989'
-[2025-06-05 21:51:51] Database PIN: '198989' for instructorID: 12
-[2025-06-05 21:51:51] PIN comparison: input='198989' vs db='198989'
-[2025-06-05 21:51:51] Video lectures updated successfully for courseID: 2
-[2025-06-05 22:29:45] Processing update_video_lectures action for instructorID: 12
-[2025-06-05 22:29:45] Received PIN: '198989'
-[2025-06-05 22:29:45] Database PIN: '198989' for instructorID: 12
-[2025-06-05 22:29:45] PIN comparison: input='198989' vs db='198989'
-[2025-06-05 22:29:45] Video lectures updated successfully for courseID: 2
-[2025-06-05 22:29:45] Processing update_video_lectures action for instructorID: 12
-[2025-06-05 22:29:45] Received PIN: '198989'
-[2025-06-05 22:29:45] Database PIN: '198989' for instructorID: 12
-[2025-06-05 22:29:45] PIN comparison: input='198989' vs db='198989'
-[2025-06-05 22:29:45] Video lectures updated successfully for courseID: 2
-[2025-06-05 22:30:24] Processing delete_video_lecture action for instructorID: 12
-[2025-06-05 22:30:24] Received PIN: '198989', VideoID: 18
-[2025-06-05 22:30:24] Database PIN: '198989' for instructorID: 12
-[2025-06-05 22:30:24] PIN comparison: input='198989' vs db='198989'
-[2025-06-05 22:30:24] Video lecture ID 18 deleted
-[2025-06-06 00:17:32] Processing update_video_lectures action for instructorID: 12
-[2025-06-06 00:17:32] Received PIN: '198989'
-[2025-06-06 00:17:32] Database PIN: '198989' for instructorID: 12
-[2025-06-06 00:17:32] PIN comparison: input='198989' vs db='198989'
-[2025-06-06 00:17:32] Video lectures updated successfully for courseID: 1
+[2025-10-18 11:25:47] Processing update_course action for instructorID: 12
+[2025-10-18 11:25:47] Received PIN: '198989', CourseName: 'Java Programming (Basic to Advanced)', Fee: '500000 MMK'
+[2025-10-18 11:25:47] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:25:47] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:25:47] Course updated successfully for courseID: 1
+[2025-10-18 11:26:20] Processing update_course action for instructorID: 12
+[2025-10-18 11:26:20] Received PIN: '198989', CourseName: 'Python Programming (Basic to Advanced)', Fee: '450,000 MMK'
+[2025-10-18 11:26:20] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:26:20] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:26:20] Course updated successfully for courseID: 2
+[2025-10-18 11:26:55] Processing update_course action for instructorID: 12
+[2025-10-18 11:26:55] Received PIN: '198989', CourseName: 'Database Systems and Design(MY SQL)', Fee: '280000 MMK'
+[2025-10-18 11:26:55] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:26:55] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:26:55] Course updated successfully for courseID: 3
+[2025-10-18 11:27:24] Processing update_course action for instructorID: 12
+[2025-10-18 11:27:24] Received PIN: '198989', CourseName: 'Backend Web Development', Fee: '400000 MMK'
+[2025-10-18 11:27:24] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:27:24] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:27:24] Course updated successfully for courseID: 5
+[2025-10-18 11:27:44] Processing update_course action for instructorID: 12
+[2025-10-18 11:27:44] Received PIN: '198989', CourseName: 'Full Stack Web Developer Class', Fee: '570000 MMK'
+[2025-10-18 11:27:44] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:27:44] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:27:44] Course updated successfully for courseID: 9
+[2025-10-18 11:28:20] Processing update_course action for instructorID: 12
+[2025-10-18 11:28:20] Received PIN: '198989', CourseName: 'Desktop Application Developmet with C#.Net(Basic to Advanced)', Fee: '399000 MMK'
+[2025-10-18 11:28:20] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:28:20] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:28:20] Course updated successfully for courseID: 6
+[2025-10-18 11:28:42] Processing update_course action for instructorID: 12
+[2025-10-18 11:28:42] Received PIN: '198989', CourseName: 'C Programming', Fee: '250000 MMK'
+[2025-10-18 11:28:42] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:28:42] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:28:42] Course updated successfully for courseID: 7
+[2025-10-18 11:29:00] Processing update_course action for instructorID: 12
+[2025-10-18 11:29:00] Received PIN: '198989', CourseName: 'C ++ Programming', Fee: '200000 MMK'
+[2025-10-18 11:29:00] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:29:00] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:29:00] Course updated successfully for courseID: 8
+[2025-10-18 11:29:27] Processing update_course action for instructorID: 12
+[2025-10-18 11:29:27] Received PIN: '198989', CourseName: 'Applied Mathematics for Data Science & Machine Learning with Python', Fee: '330000 MMK'
+[2025-10-18 11:29:27] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:29:27] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:29:27] Course updated successfully for courseID: 29
+[2025-10-18 11:29:54] Processing update_course action for instructorID: 12
+[2025-10-18 11:29:54] Received PIN: '198989', CourseName: 'Data Science Essential', Fee: '270000 MMK'
+[2025-10-18 11:29:54] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:29:54] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:29:54] Course updated successfully for courseID: 31
+[2025-10-18 11:30:27] Processing update_course action for instructorID: 12
+[2025-10-18 11:30:27] Received PIN: '198989', CourseName: 'Full Stack Revolution with React & Laravel', Fee: '440000 MMK'
+[2025-10-18 11:30:27] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:30:27] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:30:27] Course updated successfully for courseID: 30
+[2025-10-18 11:33:02] Processing update_course action for instructorID: 12
+[2025-10-18 11:33:02] Received PIN: '198989', CourseName: 'Frontend Web Development', Fee: '280000 MMK'
+[2025-10-18 11:33:02] Database PIN: '198989' for instructorID: 12
+[2025-10-18 11:33:02] PIN comparison: input='198989' vs db='198989'
+[2025-10-18 11:33:02] Course updated successfully for courseID: 4

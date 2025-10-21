@@ -31,7 +31,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Times New Roman', sans-serif;
         }
 
         body {
@@ -78,9 +78,9 @@
         }
 
         #titleCourseTitle {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 700;
+            font-family: 'Calibri', sans-serif;
+            font-size: 3rem;
+            font-weight: 500;
             color: #ffffff;
             margin-bottom: 1.2rem;
             text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
@@ -89,7 +89,7 @@
         }
 
         #courseDesc {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: #d0d0d0;
             line-height: 50px;
             max-width: 750px;
@@ -98,28 +98,13 @@
         }
 
         .course-info {
-            margin-bottom: 2rem;
+            margin-bottom: 1.7rem;
             animation: fadeIn 1s ease-out 0.4s both;
         }
 
         .course-info b {
             color: #00f2ff;
-            font-weight: 600;
-        }
-
-        .course-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 15px;
-            border: 2px solid #00f2ff;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
-            transition: all 0.3s ease;
-            animation: fadeIn 1s ease-out 0.6s both;
-        }
-
-        .course-image:hover {
-            transform: scale(1.08) rotate(2deg);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+            font-weight: 500;
         }
 
         .fb-link {
@@ -138,10 +123,10 @@
             background: transparent;
             border: 2px solid #00f2ff;
             color: #00f2ff;
-            padding: 12px 30px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 500;
+            padding: 10px 26px;
+            font-family: 'Times New Roman', sans-serif;
+            font-size: 1rem;
+            font-weight: 400;
             border-radius: 50px;
             transition: all 0.3s ease;
             animation: neonGlow 2s infinite;
@@ -154,7 +139,7 @@
         }
 
         .coursedetail {
-            font-size: 0.95rem;
+            font-size: 0.7rem;
             color: #ffffff;
             background: #2a2a2a;
             padding: 10px 15px;
@@ -173,10 +158,10 @@
             color: #ffffff;
             text-align: center;
             padding: 20px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 30px;
+            font-family: 'Times New Roman', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 20px;
             border-radius: 10px;
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
             animation: fadeIn 0.8s ease-out;
