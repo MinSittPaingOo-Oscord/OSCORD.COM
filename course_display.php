@@ -39,10 +39,11 @@ $result_course_details = $conn->query($query_course_details);
             margin: 15px auto;
             transition: all 0.4s ease;
             color: #e6e6e6;
-            max-width: 300px;
+            /* max-width: 300px; */
+            width : 100%;
             box-shadow: 0 5px 5px rgba(0, 242, 255, 0.5);
             animation: fadeIn 1s ease-out;
-            height: 650px;
+            height: 600px;
             position: relative;
             z-index: 1;
         }
@@ -53,7 +54,7 @@ $result_course_details = $conn->query($query_course_details);
         }
 
         .card-title {
-            font-family: 'Montserrat';
+            font-family: 'Sancreek' !important;
             font-size: 1.5rem;
             font-weight: 500;
             margin-top : 15px;

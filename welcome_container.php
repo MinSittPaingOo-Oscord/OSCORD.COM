@@ -27,33 +27,38 @@
 <body>
 <div class="welcome-container">
     <video class="welcome-video" autoplay loop muted playsinline>
-        <source id="video-source" src="video/wel.mp4" type="video/mp4">
+        <source id="video-source" src="video/phone.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </div>
 
 <script>
-    function setVideoSource() {
-        const videoSource = document.getElementById('video-source');
-        const video = document.querySelector('.welcome-video');
-        const width = window.innerWidth;
-        let newSrc;
+   function setVideoSource() {
+    const videoSource = document.getElementById('video-source');
+    const video = document.querySelector('.welcome-video');
+    const width = window.innerWidth;
+    let newSrc;
 
-        if (width < 900) {
-            newSrc = 'video/phone.mp4';
-        } else if (width >= 900 && width <= 1024) {
-            newSrc = 'video/ipad.mp4';
-        } else {
-            newSrc = 'video/wel.mp4';
-        }
-
-        // Only reload the video if the source has changed
-        if (videoSource.src !== newSrc) {
-            videoSource.src = newSrc;
-            video.load();
-            video.play();
-        }
+    if (width < 900) {
+        newSrc = 'video/phone.mp4';
+    } else if (width >= 900 && width <= 1024) {
+        newSrc = 'video/ipad.mp4';
+    } else {
+        newSrc = 'video/wel.mp4';
     }
+
+    if (videoSource.src !== newSrc) {
+        const wasPlaying = !video.paused;
+        const currentTime = video.currentTime;
+        videoSource.src = newSrc;
+        video.load();
+        video.onloadeddata = () => {
+            video.currentTime = currentTime;
+            if (wasPlaying) video.play();
+            video.onloadeddata = null;
+        };
+    }
+}
 
     // Debounce function to limit how often setVideoSource is called
     function debounce(func, wait) {
@@ -69,23 +74,16 @@
     }
 
     // Toggle play/pause on video click/tap
-    function toggleVideoPlayback() {
-        const video = document.querySelector('.welcome-video');
-        if (video.paused) {
-            video.play();
-        } else {
-            video.pause();
-        }
-    }
+
 
     // Initialize video source on load
     window.onload = setVideoSource;
 
     // Debounced resize event
-    window.onresize = debounce(setVideoSource, 200);
+    window.addEventListener('resize', debounce(setVideoSource, 200));
 
     // Add click/tap event listener to toggle play/pause
-    document.querySelector('.welcome-video').addEventListener('click', toggleVideoPlayback);
+    //document.querySelector('.welcome-video').addEventListener('click', toggleVideoPlayback);
 </script>
 </body>
 </html>

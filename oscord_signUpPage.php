@@ -41,6 +41,7 @@ $result2 = $conn->query($query2);
             left: 0;
             z-index: 0;
             background: transparent;
+            color :  #00f2ff;
         }
 
         @keyframes gradientShift {
@@ -65,59 +66,61 @@ $result2 = $conn->query($query2);
         .left-content {
             flex: 1;
             padding: 40px;
-            color: #00ff15;
-            text-shadow: 0 0 10px rgba(0, 255, 21, 0.5);
+            color:   #00f2ff;
+            text-shadow: 0 0 10px   #00f2ff;
         }
 
         .left-content h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+            font-size: 2.4rem;
             font-weight: 700;
             margin-bottom: 20px;
             letter-spacing: 2px;
         }
 
         .left-content p, .left-content div {
-            font-size: 1.1rem;
-            line-height: 1.8;
+            font-size: 0.9rem;
+            line-height: 1.5;
             color: #e0e0e0;
         }
 
         .left-content a {
-            color: #00ff15;
+            color:   #00f2ff;
             text-decoration: none;
             transition: color 0.3s ease;
         }
 
         .left-content a:hover {
-            color: #8000ff;
-            text-shadow: 0 0 5px #8000ff;
+            /* color:rgb(252, 116, 248); */
+            /* text-shadow: 0 0 5px rgb(255, 254, 255); */
+            color: rgb(255, 0, 247) !important;
+            text-shadow: 0 0 15px rgba(255, 0, 247, 0.7);
         }
 
         .form-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05) !important;;
+            backdrop-filter: blur(1px);
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 255, 21, 0.2);
-            max-width: 500px;
+            /* max-width: 500px; */
             width: 100%;
             margin: 20px;
-            border: 1px solid rgba(0, 255, 21, 0.3);
+            border: 1px solid   #00f2ff;
         }
 
         .form-container h2 {
             font-family: 'Orbitron', sans-serif;
-            color: #00ff15;
+            color:   #00f2ff;
             text-align: center;
             margin-bottom: 30px;
             font-size: 2rem;
-            text-shadow: 0 0 10px rgba(0, 255, 21, 0.5);
+            text-shadow: 0 0 10px   #00f2ff;
         }
 
         .form-control, .form-select {
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #00ff15;
+            border: 1px solid   #00f2ff;
             color: #e0e0e0;
             transition: all 0.3s ease;
         }
@@ -130,14 +133,14 @@ $result2 = $conn->query($query2);
         }
 
         .form-label {
-            color: #00ff15;
+            color:   #00f2ff;
             font-size: 0.9rem;
             text-transform: uppercase;
         }
 
         .btn-light {
             background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #00ff15;
+            border: 1px solid  #00f2ff;
             color: #e0e0e0;
             transition: all 0.3s ease;
         }
@@ -149,43 +152,43 @@ $result2 = $conn->query($query2);
             box-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
         }
 
-        .btn-dark {
-            background: #00ff15;
-            color: #0d0d0d;
+        .form-container .btn.btn-dark {
+            background: #00f2ff !important;
+            color: #0d0d0d !important;
             border: none;
             font-weight: bold;
             transition: all 0.3s ease;
         }
-
-        .btn-dark:hover {
-            background: #8000ff;
-            box-shadow: 0 0 15px rgba(128, 0, 255, 0.7);
-            color: #fff;
+        
+        .form-container .btn.btn-dark:hover {
+            background: rgb(255, 0, 247) !important;
+            box-shadow: 0 0 15px rgba(255, 0, 247, 0.7);
+            color: #fff !important;
         }
 
         .form-check {
             background: black;
-            color: #00ff15;
+            color:   #00f2ff;
         }
 
         .aaa {
             background: rgb(70, 72, 70);
-            color: #00ff15;
+            color:  #00f2ff;
         }
 
         .dropdown-menu {
             background: rgb(70, 72, 70);
-            border: 1px solid #00ff15;
+            border: 1px solid   #00f2ff;
             color: #e0e0e0;
             padding-left: 10px;
         }
 
         .dropdown-menu .form-check-label {
-            color: #00ff15;
+            color:   #00f2ff;
         }
 
         .form-check-input {
-            border: 1px solid #00ff15;
+            border: 1px solid   #00f2ff;
         }
 
         .form-check-input:checked {
@@ -220,22 +223,23 @@ $result2 = $conn->query($query2);
             padding-left: 20px;
         }
 
-        .modal-content {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid #00ff15;
-            color: #e0e0e0;
-            border-radius: 15px;
+      
+        .modal-dialog .modal-content {
+            background: rgba(255, 255, 255, 0.05) !important; /* Transparent background with higher specificity */
+            backdrop-filter: blur(10px); /* Apply blur effect */
+            border: 1px solid #00f2ff; /* Neon cyan border */
+            color: #e0e0e0; /* Text color */
+            border-radius: 15px; /* Rounded corners */
         }
 
         .modal-header {
-            border-bottom: 1px solid #00ff15;
+            border-bottom: 1px solid   #00f2ff;
         }
 
         .modal-title {
             font-family: 'Orbitron', sans-serif;
-            color: #00ff15;
-            text-shadow: 0 0 10px rgba(0, 255, 21, 0.5);
+            color:   #00f2ff;
+            text-shadow: 0 0 10px   #00f2ff;
         }
 
         .modal-body {
@@ -244,26 +248,26 @@ $result2 = $conn->query($query2);
         }
 
         .modal-footer {
-            border-top: 1px solid #00ff15;
+            border-top: 1px solid   #00f2ff;
         }
 
         .btn-agree {
-            background: #00ff15;
-            color: #0d0d0d;
-            border: none;
+            background :  rgba(255, 255, 255, 0.05) !important;;
+            color: #00f2ff ;
+            border: 1px solid   #00f2ff;
             font-weight: bold;
         }
 
         .btn-agree:hover {
-            background: #8000ff;
+            background:rgb(249, 2, 200);
             color: #fff;
             box-shadow: 0 0 15px rgba(128, 0, 255, 0.7);
         }
 
         .btn-cancel {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid #00ff15;
-            color: #e0e0e0;
+            background:  rgba(255, 255, 255, 0.05) !important;;
+            border: 1px solid   #00f2ff;
+            color: #00f2ff;
         }
 
         .btn-cancel:hover {
@@ -295,18 +299,33 @@ $result2 = $conn->query($query2);
             }
 
             .form-container {
-                max-width: 100%;
+                width: 100%;
                 margin: 20px auto;
             }
 
             .left-content {
-                text-align: left;
+                text-align: center;
             }
 
             .left-content h1 {
                 font-size: 2rem;
             }
+
+            .form-container h2 {
+      
+            font-size: 1.7rem;
+   
+            }
+
+            .left-content h1 {
+            font-size: 2.2rem;
         }
+
+        .left-content p, .left-content div {
+            font-size: 0.7rem;
+        }
+        }
+   
     </style>
 </head>
 <body>
@@ -317,27 +336,26 @@ $result2 = $conn->query($query2);
     <div class="left-content main">
         <h1>Register Now</h1><br>
         <div id="seryayy">
-            Oscord မှ Instructor များသည် admin control များ ပြုလုပ်ရန်အတွက် Instructor Account ဖွင့်ရပါမည်
             Student များသည် ပထမဦးစွာတက်ရောက်မည့်အတန်းအတွက် OSCORD ADMIN TEAM ( <a href='https://www.facebook.com/share/19u16vW5KQ/?mibextid=wwXIfr'>Page Messanger </a> or <a href='https://t.me/oscord_cs'>Telegram </a>) ထံတွင် Official Class Schedule အား ညှိနှိုင်းရပါမည်
-(Teach Yourself အတန်းများအတွက် အချိန်ညှိနှိုင်းရန်မလိုအပ်ပါ)
-ထို့နောက်  Enrollment ပြုလုပ်ဖို့အတွက် ပေးထားသော Form တွင် ပြည့်စုံစွာဖြည့်စွက်ပါ
+            (Teach Yourself အတန်းများအတွက် အချိန်ညှိနှိုင်းရန်မလိုအပ်ပါ)
+                ထို့နောက်  Enrollment ပြုလုပ်ဖို့အတွက် ပေးထားသော Form တွင် ပြည့်စုံစွာဖြည့်စွက်ပါ
             သက်ဆိုင်ရာ Course Fee ကို Kpay - 09685417411  Min Sitt Paing Oo Account သိုသင်တန်းကြေးသွင်းပါ
             သင်တန်းကြေးသွင်းထားသောအထောက်အထားကို 
-            <a href='https://www.facebook.com/share/19u16vW5KQ/?mibextid=wwXIfr'>Oscord-programming & computer science</a> ရဲ့ messanger သိုမဟုတ်
+            <a href='https://www.facebook.com/share/19u16vW5KQ/?mibextid=wwXIfr'>Oscord Code Academy</a> ရဲ့ messanger သိုမဟုတ်
             <a href='https://t.me/oscord_cs'>Telegram Account</a> ကိုပေးပိုပါ
             Admin Approve ရလျှင် မိမိအပ်နှံထားသော Course အောက်မှ သင်ခန်းစာများစတင်လေ့လာလိုရပါပြီ
-            <br>
-            <a href='oscord_home.php'>HOME</a>
+            
+       
         </div>
     </div>
 
     <div class="col-md-6">
         <div class="form-container">
-            <h2 class="text-center mb-4">Sign Up</h2>
+            <h2 class="text-center mb-4">Register</h2>
             <form id="signupForm" action="oscord_signupProcess.php" method="POST" novalidate>
                 <div class="mb-3">
                     <label for="role" class="form-label">Select Role</label>
-                    <select class="form-select aaa" id="role" name="role" required>
+                    <select class="form-select" id="role" name="role" required>
                         <option value="" class='aaa'>Select</option>
                         <option value="instructor" class='aaa'>Instructor</option>
                         <option value="student" class='aaa'>Student</option>
@@ -455,7 +473,7 @@ $result2 = $conn->query($query2);
                             <button class="btn btn-light dropdown-toggle" type="button" id="studentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                 Select Courses
                             </button>
-                            <ul class="dropdown-menu courseDropDown aaa" aria-labelledby="studentDropdown">
+                            <ul class="dropdown-menu courseDropDown" aria-labelledby="studentDropdown">
                                 <?php
                                 if ($result2 && $result2->num_rows > 0) {
                                     while ($row2 = $result2->fetch_assoc()) {
@@ -476,10 +494,11 @@ $result2 = $conn->query($query2);
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-dark w-100">Sign Up</button>
+                <button type="submit" class="btn btn-dark w-100">Register</button>
             </form>
         </div>
     </div>
+
 </div>
 
 <!-- Terms and Conditions Modal -->
@@ -557,7 +576,7 @@ $result2 = $conn->query($query2);
             "line_linked": {
                 "enable": true,
                 "distance": 150,
-                "color": "#00ff15",
+                "color": "#00f2ff",
                 "opacity": 0.4,
                 "width": 1
             },
@@ -725,5 +744,9 @@ $result2 = $conn->query($query2);
         document.getElementById("signupForm").submit();
     });
 </script>
+
 </body>
 </html>
+<?php
+    include "footer.php";
+?>
