@@ -37,8 +37,8 @@ $result_courses = $conn->query($query_courses);
         }
 
         @keyframes neonGlow {
-            0%, 100% { box-shadow: 0 0 5px #00f2ff, 0 0 15px #00f2ff, 0 0 30px #00f2ff; }
-            50% { box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff, 0 0 40px #00f2ff; }
+            0%, 100% { box-shadow: 0 0 5px #BF00FF, 0 0 15px #BF00FF, 0 0 30px #BF00FF; }
+            50% { box-shadow: 0 0 10px #BF00FF, 0 0 20px #BF00FF, 0 0 40px #BF00FF; }
         }
 
         #titleCourse {

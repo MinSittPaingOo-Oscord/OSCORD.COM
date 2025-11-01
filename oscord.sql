@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `coursecategory` (
   `categoryID` int NOT NULL,
   `categoryName` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `coursecategory`
@@ -53,7 +53,7 @@ CREATE TABLE `coursexcategory` (
   `coursexcategoryID` int NOT NULL,
   `courseID` int NOT NULL,
   `categoryID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `coursexcategory`
@@ -81,7 +81,7 @@ CREATE TABLE `file` (
   `fileName` varchar(500) NOT NULL,
   `fileData` longblob NOT NULL,
   `courseID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -98,7 +98,7 @@ CREATE TABLE `oscord_course` (
   `courseFbLink` varchar(300) NOT NULL,
   `sort` int DEFAULT NULL,
   `coursePhoto` varchar(500) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `oscord_course`
@@ -129,7 +129,7 @@ CREATE TABLE `oscord_coursedetail` (
   `coursedetailID` int NOT NULL,
   `coursedetailName` varchar(200) NOT NULL,
   `courseID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `oscord_coursedetail`
@@ -329,12 +329,12 @@ CREATE TABLE `oscord_instructor` (
   `instructorID` int NOT NULL,
   `instructorName` varchar(50) NOT NULL,
   `instructorEmail` varchar(50) NOT NULL,
-  `instructorPassword` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `instructorPassword` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `instructorApprove` tinyint NOT NULL,
   `instructorBirthday` date NOT NULL,
   `instructorPhone` varchar(15) NOT NULL,
   `instructorPin` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `oscord_instructor`
@@ -356,7 +356,7 @@ CREATE TABLE `oscord_instructorxcourse` (
   `instrucorxcourseID` int NOT NULL,
   `instructorID` int NOT NULL,
   `courseID` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `oscord_instructorxcourse`
@@ -395,14 +395,14 @@ CREATE TABLE `oscord_student` (
   `studentCountry` varchar(50) NOT NULL,
   `studentBirthday` date NOT NULL,
   `studentEmail` varchar(100) NOT NULL,
-  `studentPassword` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `studentPassword` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `studentTelegram` varchar(100) NOT NULL,
   `studentPhone` varchar(50) NOT NULL,
   `studentApprove` tinyint(1) NOT NULL,
   `question1` longtext NOT NULL,
   `question2` longtext NOT NULL,
   `registrationDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `oscord_student`
@@ -483,11 +483,11 @@ INSERT INTO `oscord_student` (`studentID`, `studentName`, `studentCountry`, `stu
 
 CREATE TABLE `oscord_studentreview` (
   `studentreviewID` int NOT NULL,
-  `studentreview` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `studentreview` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `courseID` int NOT NULL,
   `studentID` int NOT NULL,
   `isShown` tinyint NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `oscord_studentreview`
@@ -515,7 +515,7 @@ CREATE TABLE `oscord_studentxcourse` (
   `studentID` int NOT NULL,
   `courseID` int NOT NULL,
   `enrollDate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `oscord_studentxcourse`
@@ -604,7 +604,7 @@ CREATE TABLE `oscord_vidlec` (
   `videoLink` varchar(200) NOT NULL,
   `courseID` int NOT NULL,
   `videoFree` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `oscord_vidlec`

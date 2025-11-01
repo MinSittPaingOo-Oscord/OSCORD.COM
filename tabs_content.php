@@ -42,7 +42,7 @@
                                                         <div class='play-button'></div>
                                                     </div>
                                                 </div>
-                                                <div class='card-body'>
+                                                <div class='card-body glassy-card-body'>
                                                     <h5 class='card-title'>".htmlspecialchars($row4['videoName'])."</h5>
                                                     <button class='details-btn' type='button' data-bs-toggle='collapse' data-bs-target='#details-$videoId' aria-expanded='false' aria-controls='details-$videoId'>
                                                         Show Details

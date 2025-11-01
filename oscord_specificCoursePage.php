@@ -1,22 +1,24 @@
 <?php
-    include "connectdb.php";
+include "connectdb.php";
 
-    $id = 1;
-    if (isset($_POST['courseID'])) {
-        $id = (int)$_POST['courseID'];
-    }
+$id = 1;
+if (isset($_POST['courseID'])) {
+    $id = (int)$_POST['courseID'];
+}
 
-    function convertToEmbed($url) {
-        if (preg_match('/youtube\.com\/watch\?v=([^\&\?]+)/i', $url, $match)) {
-            return "https://www.youtube.com/embed/" . $match[1];
-        } elseif (preg_match('/youtu\.be\/([^\&\?]+)/i', $url, $match)) {
-            return "https://www.youtube.com/embed/" . $match[1];
-        }
-        return $url;
+function convertToEmbed($url)
+{
+    if (preg_match('/youtube\.com\/watch\?v=([^\&\?]+)/i', $url, $match)) {
+        return "https://www.youtube.com/embed/" . $match[1];
+    } elseif (preg_match('/youtu\.be\/([^\&\?]+)/i', $url, $match)) {
+        return "https://www.youtube.com/embed/" . $match[1];
     }
+    return $url;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,8 +70,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.15; }
+
+            0%,
+            100% {
+                opacity: 0.1;
+            }
+
+            50% {
+                opacity: 0.15;
+            }
         }
 
         .main {
@@ -153,19 +162,71 @@
             transform: translateX(5px);
         }
 
+        /* --- START CORRECTED NEON SIGN EFFECT --- */
         .intro2 {
-            background: #2a2a2a;
+            /* Base Container Styling */
+            background: #0a0a0a;
+            /* Dark background */
             color: #ffffff;
             text-align: center;
-            padding: 20px;
-            font-family: 'Times New Roman', sans-serif;
-            font-size: 1.4rem;
-            font-weight: 400;
+            padding: 25px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 500;
             margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 242, 255, 0.3);
-            animation: fadeIn 0.8s ease-out;
+            border-radius: 5px;
+            cursor: pointer;
+
+            /* STATIC: Glowing box border (runs constantly) */
+            box-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
+
+            /* Text Glow (Initial state) */
+            text-shadow: 0 0 5px #fff, 0 0 10px #00f2ff;
+
+            /* Animation Properties: Flicker is ONLY applied to text-shadow */
+            animation:
+                neonTextFlicker 2s infinite alternate,
+                fadeIn 0.8s ease-out;
         }
+
+        /* Keyframe Animation for Text Flickering ONLY */
+        @keyframes neonTextFlicker {
+
+            0%,
+            100% {
+                /* Full brightness for the text */
+                text-shadow: 0 0 5px #fff, 0 0 10px #00f2ff, 0 0 20px #00f2ff;
+                opacity: 1;
+            }
+
+            1% {
+                /* Quick dim spot */
+                text-shadow: 0 0 1px #fff;
+                opacity: 0.9;
+            }
+
+            1.5%,
+            19.5% {
+                /* Quick off state */
+                text-shadow: none;
+                opacity: 0.85;
+            }
+
+            20%,
+            20.5% {
+                /* Quick flash back on */
+                text-shadow: 0 0 3px #fff;
+                opacity: 0.95;
+            }
+
+            60% {
+                /* Subtle dim for breathing */
+                text-shadow: 0 0 4px #fff, 0 0 8px #00f2ff;
+                opacity: 1;
+            }
+        }
+
+        /* --- END CORRECTED NEON SIGN EFFECT --- */
 
         .intro3 .nav-tabs {
             border-bottom: 2px solid #444;
@@ -419,33 +480,51 @@
             transform: scale(1.05);
         }
 
+        /* --- NEW CLASS: Glassy Card Body Style --- */
+        .glassy-card-body {
+            background-color:transparent;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 20px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
         /* Responsive */
         @media (max-width: 767px) {
             #titleCourseTitle {
                 font-size: 2.5rem;
             }
+
             #courseDesc {
                 font-size: 1.1rem;
             }
+
             .welcome-container {
                 padding: 30px 5%;
                 min-height: 70vh;
             }
+
             .course-image {
                 margin-top: 25px;
             }
+
             .video-card {
                 height: auto;
             }
+
             .video-card .card-title {
                 font-size: 1.3rem;
             }
+
             .fileBox {
                 padding: 20px;
             }
+
             .fileBox .list-group-item a {
                 font-size: 0.95rem;
             }
+
             .btn-course-detail {
                 padding: 10px 25px;
                 font-size: 1rem;
@@ -453,6 +532,7 @@
         }
     </style>
 </head>
+
 <body>
     <?php include "nav.php"; ?>
     <?php include "course_details.php"; ?>
@@ -460,9 +540,9 @@
     <?php include "tabs_content.php"; ?>
     <?php include "login_modal.php"; ?>
 </body>
+
 </html>
 <?php
-    include "footer.php";
-    $conn->close();
+include "footer.php";
+$conn->close();
 ?>
-
