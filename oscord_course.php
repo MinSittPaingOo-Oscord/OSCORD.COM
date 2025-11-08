@@ -6,7 +6,6 @@ $result_course_details = $conn->query($query_course_details);
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -67,14 +66,12 @@ $result_course_details = $conn->query($query_course_details);
         }
     </style>
     <style>
-        /* BASE STYLES & SCROLLBAR */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Custom OS Scrollbar (for page scroll) */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -95,7 +92,6 @@ $result_course_details = $conn->query($query_course_details);
             box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
         }
 
-        /* BODY & ANIMATIONS */
         body {
             background: linear-gradient(135deg, #0a0a0a, #1c2526);
             color: #e6e6e6;
@@ -114,10 +110,9 @@ $result_course_details = $conn->query($query_course_details);
             }
         }
 
-        /* LAYOUT & TITLE */
         #main-course-container {
             padding-bottom: 50px;
-            max-width: 1200px;
+            max-width: 86%;
         }
 
         #titleCourse {
@@ -130,10 +125,9 @@ $result_course_details = $conn->query($query_course_details);
             text-transform: uppercase;
             text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
             padding-top: 50px;
+            margin-top : 0px;
         }
 
-        /* CARD STYLING */
-        /* Use flex on the row to ensure cards stay aligned vertically */
         #course-grid-row {
             display: flex;
             flex-wrap: wrap;
@@ -142,23 +136,18 @@ $result_course_details = $conn->query($query_course_details);
         }
 
         .course-col {
-            /* Ensures each column has padding and space */
             padding: 10px;
-            /* border:2px solid blue;
-            display: flex; */
-            /* Makes sure the card inside stretches */
         }
 
         .neon-course-card {
             background: transparent;
             border: 1px;
-            border-radius: 15px;
+            border-radius: 40px;
             transition: all 0.4s ease;
             color: #e6e6e6;
             width: 100%;
-            /* Take up max available space in the column */
             min-width: 100%;
-            box-shadow: 0 5px 5px rgba(0, 242, 255, 0.5);
+            box-shadow: 0 1px 1px rgba(0, 242, 255, 0.5);
             animation: fadeIn 1s ease-out;
             min-height: 550px;
             position: relative;
@@ -168,7 +157,6 @@ $result_course_details = $conn->query($query_course_details);
             padding: 0;
             display: flex;
             flex-direction: column;
-
         }
 
         .neon-course-card:hover {
@@ -184,10 +172,10 @@ $result_course_details = $conn->query($query_course_details);
 
         .card-img-top {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
-            border-top-left-radius: 15px;
-            border-top-right-radius: 15px;
+            border-top-left-radius: 30px !important;
+            border-top-right-radius: 30px !important;
         }
 
         .neon-card-title {
@@ -221,6 +209,7 @@ $result_course_details = $conn->query($query_course_details);
 
         .fb-link {
             color: #ff00ff;
+            text-decoration : none;
         }
 
         .fb-link:hover {

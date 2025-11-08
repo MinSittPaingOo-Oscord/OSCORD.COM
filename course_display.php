@@ -105,7 +105,7 @@ $result_course_details = $conn->query($query_course_details);
 
         /* SWIPER CONTAINER STYLING */
         .swiper {
-            width: 100%;
+            width: 86%;
             padding: 20px 0;
             padding-bottom: 40px;
         }
@@ -181,9 +181,9 @@ $result_course_details = $conn->query($query_course_details);
             color: #e6e6e6;
             width: 100%;
             max-width: 380px;
-            box-shadow: 0 5px 5px rgba(0, 242, 255, 0.5);
+            box-shadow: 0 1px 1px rgba(0, 242, 255, 0.5);
             animation: fadeIn 1s ease-out;
-            min-height: 550px;
+            height: 550px;
             position: relative;
             z-index: 1;
             backdrop-filter: blur(15px) saturate(100%);
@@ -206,7 +206,7 @@ $result_course_details = $conn->query($query_course_details);
 
         .card-img-top {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
