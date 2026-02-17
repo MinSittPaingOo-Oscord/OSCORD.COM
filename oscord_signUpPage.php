@@ -275,6 +275,19 @@ $result2 = $conn->query($query2);
             color: #00f2ff;
         }
 
+        .btn-agree {
+            background: #00f2ff !important;
+            color: #0d0d0d !important;
+            border: 1px solid #00f2ff;
+        }
+
+        .btn-cancel {
+            background: rgba(255,255,255,0.1) !important;
+            color: #ff4d4d !important;
+            border: 1px solid #ff4d4d;
+        }
+
+        
         .btn-cancel:hover {
             background: #ff4d4d;
             border-color: #ff4d4d;
@@ -457,11 +470,64 @@ $result2 = $conn->query($query2);
                         <input type="date" class="form-control" name="student_birthday" required>
                         <div class="error-message">Please select your birthday.</div>
                     </div>
+
                     <div class="mb-3">
                         <label class="form-label">Telegram Account User Name</label>
                         <input type="text" class="form-control" name="student_telegram" required>
                         <div class="error-message">Please enter your Telegram username.</div>
                     </div>
+                    
+                    <!-- <select name="type" required>
+                            <option value='1'>Teach yourself with Video Lectures Only</option>
+                            <option value='2'>VIP By One Class</option>
+                            <option value='3'>Zoom Group Class</option>
+                            <option value='4'>Video Lectures + Zoom - By One</option>
+                            <option value='5'>Face to Face in Bangkok</option>
+                    </select> -->
+
+                    <div class="mb-3">
+                            <label class="form-label">Select Learning Type</label>
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" type="button" id="typeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select Type
+                                </button>
+                                <ul class="dropdown-menu courseDropDown aaa" aria-labelledby="typeDropdown">
+                                    <li class="aaa">
+                                        <div class="form-check aaa">
+                                            <input class="form-check-input aaa" type="radio" name="type" value="1" id="type_1">
+                                            <label class="form-check-label aaa" for="type_1">Teach yourself with Video Lectures Only</label>
+                                        </div>
+                                    </li>
+                                    <li class="aaa">
+                                        <div class="form-check aaa">
+                                            <input class="form-check-input aaa" type="radio" name="type" value="2" id="type_2">
+                                            <label class="form-check-label aaa" for="type_2">VIP By One Class</label>
+                                        </div>
+                                    </li>
+                                    <li class="aaa">
+                                        <div class="form-check aaa">
+                                            <input class="form-check-input aaa" type="radio" name="type" value="3" id="type_3">
+                                            <label class="form-check-label aaa" for="type_3">Zoom Group Class</label>
+                                        </div>
+                                    </li>
+                                    <li class="aaa">
+                                        <div class="form-check aaa">
+                                            <input class="form-check-input aaa" type="radio" name="type" value="4" id="type_4">
+                                            <label class="form-check-label aaa" for="type_4">Video Lectures + Zoom - By One</label>
+                                        </div>
+                                    </li>
+                                    <li class="aaa">
+                                        <div class="form-check aaa">
+                                            <input class="form-check-input aaa" type="radio" name="type" value="5" id="type_5">
+                                            <label class="form-check-label aaa" for="type_5">Face to Face in Bangkok</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div id="typeError" class="error-message">Please select a type.</div>
+                    </div>
+
+
                     <div class="mb-3">
                         <label class="form-label">Phone Number</label>
                         <input type="text" class="form-control" name="student_phone" required>

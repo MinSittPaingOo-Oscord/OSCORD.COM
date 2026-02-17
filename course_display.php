@@ -323,6 +323,23 @@ $result_course_details = $conn->query($query_course_details);
                 right: 0;
                 margin-right: 50px !important;
             }
+            .neon-course-card {
+                text-align: left !important; /* Overrides center */
+                width:340px !important;
+                height : 200px !important;
+                margin-left : 0px !important;
+            }
+            .neon-card-title,
+            .neon-card-details {
+                text-align: left; /* Specific to title and details */
+                padding: 0 1.5rem; /* Slightly more padding for breathing room */
+               
+            }
+            .swiper {
+                margin: 0 auto;
+                width: 95%;
+            }
+
         }
 
         /* Mobile adjustments <= 576px */
@@ -338,8 +355,8 @@ $result_course_details = $conn->query($query_course_details);
 
             .neon-card-title {
                 font-size: 1.2rem;
-                line-height: 1.2;
                 margin-bottom: 15px;
+                line-height : 30px !important;
             }
 
             .neon-card-details .detail-item {
@@ -360,6 +377,21 @@ $result_course_details = $conn->query($query_course_details);
             .btn-start-learning {
                 padding: 8px 15px;
                 font-size: 0.8rem;
+            }
+            .neon-course-card {
+                text-align: left !important; /* Overrides center */
+                width:340px !important;
+                height : 200px !important;
+                margin-left : 0px !important;
+            }
+            .neon-card-title,
+            .neon-card-details {
+                text-align: left; /* Specific to title and details */
+                padding: 0 1.5rem; /* Slightly more padding for breathing room */
+            }
+            .swiper {
+                margin: 0 auto;
+                width: 95%;
             }
         }
     </style>
@@ -382,7 +414,20 @@ $result_course_details = $conn->query($query_course_details);
                         echo "<h6 class='neon-card-title'>" . htmlspecialchars($row2['courseName']) . "</h6>";
 
                         echo "<div class='neon-card-details'>";
-                        echo "<div class='detail-item'><b>Course Fee</b> : " . htmlspecialchars($row2['courseFee']) . "</div>";
+
+                        
+                        $input = $row2['courseFee'];
+
+                        $amount_str = trim(str_replace("MMK", "", $input));
+                        
+                        $amount_str = str_replace(",", "", $amount_str);
+                        
+                        $courseFee = (double) $amount_str;
+
+                        echo "<div class='detail-item'><b>Course Fee</b> : " . number_format($courseFee * 0.15) . " MMK</div>";
+
+
+
                         echo "<div class='detail-item'><b>Course Period</b> : " . htmlspecialchars($row2['coursePeriod']) . "</div>";
                         if (!empty($row2['courseFbLink'])) {
                             echo "<div class='detail-item'><a class='fb-link' href='" . htmlspecialchars($row2['courseFbLink']) . "' target='_blank'>View on Facebook</a></div>";

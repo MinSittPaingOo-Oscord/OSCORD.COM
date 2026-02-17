@@ -2,7 +2,7 @@
 $servername		= "localhost";
 $username 		= "root";
 $password 		= "Thanoswasright@1989";
-$databasename 	= "oscord";
+$databasename 	= "oscord2.0";
 
 // $servername		= "localhost";
 // $username 		= "root";

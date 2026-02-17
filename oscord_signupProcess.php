@@ -146,7 +146,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             !empty(trim($_POST['student_phone'])) && 
             !empty(trim($_POST['student_question1'])) && 
             !empty(trim($_POST['student_question2'])) && 
-            !empty($_POST['studentCourse'])
+            !empty($_POST['studentCourse']) &&
+            !empty($_POST['type']) 
+
+
         ) {
             if (isValidPasscode($_POST['student_passcode'])) {
                 $name = trim($_POST['student_name']);
@@ -158,6 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $phone = trim($_POST['student_phone']);
                 $question1 = trim($_POST['student_question1']);
                 $question2 = trim($_POST['student_question2']);
+                $learningType = trim($_POST['type']);
                 $approve = 0; // Default value for studentApprove
                 $courses = $_POST['studentCourse'];
 
@@ -168,14 +172,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit;
                 }
 
-                $query3 = "INSERT INTO oscord_student (studentName, studentEmail, studentPassword, studentBirthday, studentPhone, studentCountry, studentTelegram, question1, question2, studentApprove, registrationDate) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                $query3 = "INSERT INTO oscord_student (studentName, studentEmail, studentPassword, studentBirthday, studentPhone, studentCountry, studentTelegram, question1, question2, studentApprove, registrationDate,learningType) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
                 $stmt3 = $conn->prepare($query3);
                 if (!$stmt3) {
                     error_log("Prepare failed: " . $conn->error);
                     echo "<script>alert('Database error: Unable to prepare statement.'); window.location.replace('oscord_signUpPage.php');</script>";
                     exit;
                 }
-                $stmt3->bind_param("sssssssssis", $name, $email, $passcode, $birthday, $phone, $country, $telegram, $question1, $question2, $approve, $today);
+                $stmt3->bind_param("sssssssssisi", $name, $email, $passcode, $birthday, $phone, $country, $telegram, $question1, $question2, $approve, $today,$learningType);
                 if (!$stmt3->execute()) {
                     error_log("Execute failed: " . $stmt3->error);
                     echo "<script>alert('Error registering student: " . addslashes($stmt3->error) . "'); window.location.replace('oscord_signUpPage.php');</script>";

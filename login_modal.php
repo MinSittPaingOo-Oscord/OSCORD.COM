@@ -137,6 +137,16 @@
             }
         });
 
+        document.getElementById("lectureLinks").addEventListener("click", function(event) {
+            const isLoggedIn = false; // Replace with actual login check if available
+            if (!isLoggedIn) {
+                event.preventDefault();
+                document.getElementById("targetTab").value = "lectureLinks";
+                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            }
+        });
+
         document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             const email = document.getElementById("email").value;
@@ -174,6 +184,11 @@
                         document.getElementById("unlockedcontent").style.display = "block";
                         const privateLectureTab = new bootstrap.Tab(document.getElementById('privateLectureVideo'));
                         privateLectureTab.show();
+                    }
+                    else if (targetTab === "lectureLinks") {
+                        document.getElementById("unlockedlecturelinks").style.display = "block";
+                        const lectureLinksTab = new bootstrap.Tab(document.getElementById('lectureLinks'));
+                        lectureLinksTab.show();
                     }
                 } else {
                     loginError.textContent = "Invalid email or password. Please try again.";

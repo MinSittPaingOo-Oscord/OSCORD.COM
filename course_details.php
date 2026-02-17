@@ -264,12 +264,66 @@ $result2 = $stmt2->get_result();
                     <div class="col-lg-7">
                         <h1 class="course-title"><?= htmlspecialchars($row2['courseName']) ?></h1>
                         <div class="course-meta-box">
+                        
+                            <?php
+                                $input = $row2['courseFee'];
+
+                                $amount_str = trim(str_replace("MMK", "", $input));
+                                
+                                $amount_str = str_replace(",", "", $amount_str);
+                                
+                                $courseFee = (double) $amount_str;
+                            ?>
+
+                    
                             <div class="meta-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c2.16-.43 3.5-1.66 3.5-3.6 0-2.31-1.91-3.46-4.7-4.13z"></path>
                                 </svg>
-                                <span><b>Fee:</b> <?= htmlspecialchars($row2['courseFee']) ?></span>
+                                <span><b>Course Fee</b></span>
                             </div>
+
+                            <div class="meta-item">
+                                <!-- VIP By ONE Class: Crown icon (premium/single) -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M5 16L3 5 8.5 10 12 4l3.5 6L21 5l-2 11H5zM19 19H5v2h14v-2z"/>
+                                </svg>
+                                <span><b>VIP By ONE Zoom Class :</b> <?= number_format($courseFee)?> MMK</span>
+                            </div>
+
+                            <div class="meta-item">
+                                <!-- Group Class: Group of people icon -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 2.24 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                                </svg>
+                                <span><b>Zoom Group Class : </b> <?= number_format($courseFee*0.8)?> MMK</span>
+                            </div>
+
+                            <div class="meta-item">
+                                <!-- Video Lectures + Zoom - By One: Video camera icon (for live/Zoom) -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                                </svg>
+                                <span><b> Video Lectures + Zoom - By One : </b> <?= number_format($courseFee*0.5)?> MMK</span>
+                            </div>
+
+                            <div class="meta-item">
+                                <!-- Video Lectures Only: Laptop/screen icon (for recorded/online lectures) -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H2v2h20v-2h-2z"/>
+                                </svg>
+                                <span><b> Video Lectures Only : </b><?= number_format($courseFee*0.15)?> MMK</span>
+                            </div>
+
+                            <div class="meta-item">
+                                <!-- Face to Face: Classroom/school icon (for in-person classes) -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z"/>
+                                </svg>
+                                <span><b> Face to Face in Bangkok : </b><?= number_format($courseFee*1.8)?> MMK</span>
+                            </div>
+
+
                             <div class="meta-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"></path>
@@ -289,7 +343,7 @@ $result2 = $stmt2->get_result();
 
                         <br><br>
                         <button class="btn-toggle-details" type="button" data-bs-toggle="collapse" data-bs-target="#courseSyllabus" aria-expanded="false" aria-controls="courseSyllabus">
-                            Course Details
+                            Modules
                         </button>
 
                         <div class="collapse" id="courseSyllabus">

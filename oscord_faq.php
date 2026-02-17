@@ -135,12 +135,12 @@
     .oscord-faq-question[aria-expanded="true"] {
     background-color: transparent !important;
     color: rgb(255, 255, 255) !important;
-}
+    }
 
-.oscord-faq-question[aria-expanded="true"]::after {
-    transform: translateY(-50%) rotate(180deg);
-    color: rgb(255, 255, 255) !important;
-}
+    .oscord-faq-question[aria-expanded="true"]::after {
+        transform: translateY(-50%) rotate(180deg);
+        color: rgb(255, 255, 255) !important;
+    }
 
     .oscord-faq-answer {
         padding: 0 15px 20px 15px;
@@ -167,11 +167,11 @@
         background-color: transparent;
     }
 
-#oscord-faq-accordion .accordion-item,
-#oscord-faq-accordion .accordion-body,
-#oscord-faq-accordion .accordion-button {
-    background-color: transparent !important;
-}
+    #oscord-faq-accordion .accordion-item,
+    #oscord-faq-accordion .accordion-body,
+    #oscord-faq-accordion .accordion-button {
+        background-color: transparent !important;
+    }
 
     @media (max-width: 768px) {
         #oscord-faq-title {

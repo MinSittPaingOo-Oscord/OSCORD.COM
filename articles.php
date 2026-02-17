@@ -66,13 +66,7 @@ include "connectdb.php";
     <?php
         include "nav.php";
         echo "<div id='homeDiv'>";
-        include "welcome_container.php";
-        include "our_impact.php";
-        include "course_display.php";
-        include "oscord_diversity.php";
-        include "oscord_certificate.php";
-        include "oscord_faq.php";
-        include "review.php";
+        include "article_detail.php";
         echo "</div>";
         include "footer.php";
 
