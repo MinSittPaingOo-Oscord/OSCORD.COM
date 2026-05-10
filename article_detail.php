@@ -304,7 +304,7 @@
 
               
                 <div class="accordion-item oscord-faq-item"
-                    data-search-term="Rest API">
+                    data-search-term="Rest API , Application Programming Interface">
                     <h2 class="accordion-header">
                         <a href="article_oscord_restapi.php" 
                         class="oscord-faq-question d-block"
@@ -314,9 +314,53 @@
                     </h2>
                 </div>
 
+                <div class="accordion-item oscord-faq-item"
+                    data-search-term="Vibe Coding Junior">
+                    <h2 class="accordion-header">
+                        <a href="article_oscord_vibecoding.php" 
+                        class="oscord-faq-question d-block"
+                        style="text-decoration:none; color:inherit; padding:15px 10px; display:block;">
+                        Junior တွေ Vibe Coding သုံးသင့်လား?
+                    </a>
+                    </h2>
+                </div>
+              
+
+                <div class="accordion-item oscord-faq-item"
+                    data-search-term="Proxy Server">
+                    <h2 class="accordion-header">
+                        <a href="article_oscord_proxy.php" 
+                        class="oscord-faq-question d-block"
+                        style="text-decoration:none; color:inherit; padding:15px 10px; display:block;">
+                        Proxy Server ဆိုတာ ဘာလဲ? 
+                    </a>
+                    </h2>
+                </div>
+
+                <div class="accordion-item oscord-faq-item"
+                    data-search-term="SSH">
+                    <h2 class="accordion-header">
+                        <a href="article_oscord_ssh.php" 
+                        class="oscord-faq-question d-block"
+                        style="text-decoration:none; color:inherit; padding:15px 10px; display:block;">
+                        SSH ဆိုတာ ဘာလဲ? 
+                    </a>
+                    </h2>
+                </div>
+
+                <div class="accordion-item oscord-faq-item"
+                    data-search-term="Cookie">
+                    <h2 class="accordion-header">
+                        <a href="article_oscord_cookie.php" 
+                        class="oscord-faq-question d-block"
+                        style="text-decoration:none; color:inherit; padding:15px 10px; display:block;">
+                        What is Cookie? 
+                    </a>
+                    </h2>
+                </div>
+
 
             </div>
-            <!-- ==================== END SINGLE ACCORDION ==================== -->
         </div>
 
     </div>

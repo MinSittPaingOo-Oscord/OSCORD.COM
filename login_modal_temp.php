@@ -69,6 +69,7 @@
             transform: scale(1.05);
         }
 
+        /* --- NEW CLASS: Glassy Card Body Style --- */
         .glassy-card-body {
             background-color:transparent;
             border-radius: 10px;
@@ -113,32 +114,38 @@
 </div>
 
 <script>
-
     document.addEventListener('DOMContentLoaded', () => {
-        let isLoggedIn = false; 
-        function showLoginModal(event, targetTabId) {
+        document.getElementById("privateLectureVideo").addEventListener("click", function(event) {
+            const isLoggedIn = false; // Replace with actual login check if available
             if (!isLoggedIn) {
                 event.preventDefault();
-                event.stopPropagation();
-                document.getElementById("targetTab").value = targetTabId;
+                document.getElementById("targetTab").value = "privateLectureVideo";
                 const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
                 loginModal.show();
             }
-    }
+        });
 
-    const privateLectureVideo = document.getElementById("privateLectureVideo");
-    if (privateLectureVideo) {
-        privateLectureVideo.addEventListener("click", (event) => showLoginModal(event, "privateLectureVideo"));
-    }
+        document.getElementById("documents").addEventListener("click", function(event) {
+            const isLoggedIn = false; // Replace with actual login check if available
+            if (!isLoggedIn) {
+                event.preventDefault();
+                document.getElementById("targetTab").value = "documents";
+                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            }
+        });
 
-    const documents = document.getElementById("documents");
-    if (documents) {
-        documents.addEventListener("click", (event) => showLoginModal(event, "documents"));
-    }
+        document.getElementById("lectureLinks").addEventListener("click", function(event) {
+            const isLoggedIn = false; // Replace with actual login check if available
+            if (!isLoggedIn) {
+                event.preventDefault();
+                document.getElementById("targetTab").value = "lectureLinks";
+                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+                loginModal.show();
+            }
+        });
 
-    const loginForm = document.getElementById("loginForm");
-    if (loginForm) {
-        loginForm.addEventListener("submit", async function(event) {
+        document.getElementById("loginForm").addEventListener("submit", async function(event) {
             event.preventDefault();
             const email = document.getElementById("email").value;
             const password = document.getElementById("password").value;
@@ -163,10 +170,8 @@
                 });
 
                 const loginApprove = await response.text();
-                if (loginApprove.trim() === "true") {
-                    isLoggedIn = true; // Update flag on success
-                    // Optional: Persist across reloads (uncomment if needed)
-                    // localStorage.setItem('isLoggedIn', 'true');
+                if (loginApprove === "true") {
+                    alert("Login successful!");
                     const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
                     loginModal.hide();
                     if (targetTab === "documents") {
@@ -177,7 +182,8 @@
                         document.getElementById("unlockedcontent").style.display = "block";
                         const privateLectureTab = new bootstrap.Tab(document.getElementById('privateLectureVideo'));
                         privateLectureTab.show();
-                    } else if (targetTab === "lectureLinks") {
+                    }
+                    else if (targetTab === "lectureLinks") {
                         document.getElementById("unlockedlecturelinks").style.display = "block";
                         const lectureLinksTab = new bootstrap.Tab(document.getElementById('lectureLinks'));
                         lectureLinksTab.show();
@@ -194,6 +200,5 @@
                 loginLoading.style.display = "none";
             }
         });
-    }
-});
+    });
 </script>

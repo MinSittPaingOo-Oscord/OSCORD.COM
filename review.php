@@ -15,6 +15,7 @@
     $query_students_reviews = "SELECT studentID, studentName FROM oscord_student";
     $result_students_reviews = $conn->query($query_students_reviews);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -344,9 +344,13 @@ $result2 = $conn->query($query2);
             font-size: 0.7rem;
         }
         #seryayy{
-            font-size : 1em !important;
+            font-size : 1.01em !important;
             line-height : 40px;
         }
+        }
+        #seryayy{
+            font-size : 1.2em !important;
+            line-height : 40px;
         }
    
     </style>
@@ -360,15 +364,8 @@ $result2 = $conn->query($query2);
         <h1>Register Now</h1><br>
         <div id="seryayy">
             Student များသည် ပထမဦးစွာတက်ရောက်မည့်အတန်းအတွက် OSCORD ADMIN TEAM ( <a href='https://www.facebook.com/share/19u16vW5KQ/?mibextid=wwXIfr'>Page Messanger </a> or <a href='https://t.me/oscord_cs'>Telegram </a>) ထံတွင် Official Class Schedule အား ညှိနှိုင်းရပါမည်
-            (Teach Yourself အတန်းများအတွက် အချိန်ညှိနှိုင်းရန်မလိုအပ်ပါ)
-                ထို့နောက်  Enrollment ပြုလုပ်ဖို့အတွက် ပေးထားသော Form တွင် ပြည့်စုံစွာဖြည့်စွက်ပါ
-            သက်ဆိုင်ရာ Course Fee ကို Kpay - 09685417411  Min Sitt Paing Oo Account သိုသင်တန်းကြေးသွင်းပါ
-            သင်တန်းကြေးသွင်းထားသောအထောက်အထားကို 
-            <a href='https://www.facebook.com/share/19u16vW5KQ/?mibextid=wwXIfr'>Oscord Code Academy</a> ရဲ့ messanger သိုမဟုတ်
-            <a href='https://t.me/oscord_cs'>Telegram Account</a> ကိုပေးပိုပါ
-            Admin Approve ရလျှင် မိမိအပ်နှံထားသော Course အောက်မှ သင်ခန်းစာများစတင်လေ့လာလိုရပါပြီ
-            
-       
+            (Video Lectures Only အတန်းများ နှင့် အတန်းချိန်ထုတ်ပြန်ပြီးသော Group Class များအတွက် အချိန်ညှိနှိုင်းရန်မလိုအပ်ပါ)
+            ထို့နောက်  Enrollment ပြုလုပ်ဖို့အတွက် ပေးထားသော Form တွင် ပြည့်စုံစွာဖြည့်စွက်ပါ
         </div>
     </div>
 
@@ -522,6 +519,12 @@ $result2 = $conn->query($query2);
                                             <label class="form-check-label aaa" for="type_5">Face to Face in Bangkok</label>
                                         </div>
                                     </li>
+                                    <li class="aaa">
+                                        <div class="form-check aaa">
+                                            <input class="form-check-input aaa" type="radio" name="type" value="6" id="type_6">
+                                            <label class="form-check-label aaa" for="type_6">Student-initiated group class</label>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                             <div id="typeError" class="error-message">Please select a type.</div>
@@ -590,16 +593,45 @@ $result2 = $conn->query($query2);
                     <div>သင်တန်းကြေးပေးသွင်းပြီးပါက သင်တန်းမတတ်ဖြစ်တော့သည်ဖြစ်စေ 
                     မည်သည့်အကြောင်းကြောင့်မှ ပြန်လည် Refund ပေးအပ်မည်မဟုတ်ပါ</div>
 
+                    <div>
+                        Video Lectures Only အတန်းမှ ကျောင်းသားများသည် Payment Successful ဖြစ်ပါက Admin မှ Approve ပေးမှာဖြစ်ပြီး သင်ခန်းစာများကို www.oscord.io website ရဲ့ သက်ဆိုင်ရာ Course အောက်မှာ ဝင်ရောက်လေ့လာလိုရပါပြီ
+                    </div>
+
+                    <hr>
+
+                    <div>
+                        Video Lectures Only အတန်းများ မှမဟုတ်သော ကျောင်းသားများသည်လည်း Website မှ Video Lectures များကို Lifetime access ရမှာဖြစ်ပါတယ်
+                        Video Lectures အတန်းများ မှမဟုတ်သော ကျောင်းသားများသည် သင်တန်းကြေးကို အတန်းစမမှီနှင့် အတန်းစပြီး 2 ပတ်ခန့်အတွင်း အဆင်ပြေတဲ့အချိန်မှာ ပေးသွင်းထားလိုရပါတယ်
+                    </div>
+
+                    <ul> 
+                       <li>Payment Successful ဖြစ်မှအတန်းစမည်မဟုတ်ပါ</li>
+                        
+                       <li>အတန်းစရန်ညှိနှိင်းထားသော သိုမဟုတ် ထုတ်ပြန်ထားသောအချိန်တွင် အတန်းစပေးမှာဖြစ်ပါတယ်</li>
+                       
+                       <li>သိုသော် Admin Approve ဖြစ်မှသာ Website မှသင်ခန်းစာများကို ဝင်ရောက်လေ့လာလိုရပါမယ်</li>
+
+                       <li>သင်တန်းကာလ 2 ပတ်ခန့်ကျော်လွန်ပြီး Payment Successful မဖြစ်သေးပါက အတန်းအားရပ်တန့်လိုက်မှာဖြစ်ပါတယ် </li>
+                        
+                       <li>Payment Successful ဖြစ်ပြီးမှသာ အတန်းအားဆက်လက် Continue လုပ်မှာဖြစ်ပါတယ်</li>
+
+                       <li>Payment Successful မဖြစ်သေးဘဲ သင်တန်းကာလ 2 ပတ်အပြီး သင်တန်းအား ဆက်လက်မတက်ရောက်ဖြစ်တော့ပါက ပြီးခဲ့သော အတန်းချိန်များအတွက် သက်ဆိုင်ရာ Course မှ သက်ဆိုင်ရာ Learning Type ရဲ့ သင်တန်းကြေးမှ 10% ကိုပေးသွင်းရမှာဖြစ်ပါတယ် </li>            
+                    </ul>
+                    <hr>
                     <div>သင်တန်းစည်းကမ်းများ</div>
                     <ul>
                         <li>Zoom meeting ချိန်အတွင်း အသံ Mute ထားလိုမရပါဖူး</li>
-                        <li>Telegram private channel နှင့် Website ပေါ်တွင်ပေးထားသော သင်ခန်းစာ, Video record  များ ကို မိမိတစ်ဦးတည်းသာဝင်ရောက်ပီး လေ့လာလိုရပါမယ်
+                        <li>Telegram private channel, Google Classroom နှင့် Website ပေါ်တွင်ပေးထားသော သင်ခန်းစာ, Video record  များကို မိမိတစ်ဦးတည်းသာဝင်ရောက်ပီး လေ့လာလိုရပါမယ်
                             မည်သူတစ်ဦးတစ်ယောက်ကိုမှ မျှဝေခြင်းကိုခွင့်မပြုပါ</li>
-                        <li>အတန်းစမည့်အချိန်မှာ အမြဲတမ်း Zoom ID & passcode  သိုမဟုတ် Meeting Link ပိုပေးသွားမှာဖြစ်ပြီး 30 minutes အတွင်းဝင်ရောက်လာခြင်းမရှိပါက ပျက်ကွက်သည်ဟုယူဆပြီး Meeting အားရုတ်သိမ်းမှာဖြစ်ပါတယ်</li>
+                        <li>
+                            အကယ်၍တွေ့ရှိပါက သင်တန်းမှအပြီးတိုင်ထုတ်ပယ်သွားမှာဖြစ်ပြီး ပေးသွင်းပြီးသင်တန်းကြေးအား ပြန်လည် Refund ပေးအပ်မည်မဟုတ်ပါ
+                        </li>
+                        <li>အတန်းစမည့်အချိန်မှာ အမြဲတမ်း Zoom ID & passcode  သိုမဟုတ် Meeting Link ပိုပေးသွားမှာဖြစ်ပြီး 20 minutes အတွင်းဝင်ရောက်လာခြင်းမရှိပါက ပျက်ကွက်သည်ဟုယူဆပြီး Meeting အားရုတ်သိမ်းမှာဖြစ်ပါတယ်</li>
                     </ul>
                 </div>
                 <p>By clicking "Agree", you confirm that you have read, understood, and agree to be bound by these terms.</p>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-cancel" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-agree" id="agreeTerms">Agree</button>

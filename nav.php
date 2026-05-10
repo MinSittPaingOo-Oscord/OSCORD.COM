@@ -1,6 +1,6 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<meta charset="UTF-8">
 <style>
 
             @keyframes fadeIn { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
@@ -144,13 +144,13 @@
                     <li class="nav-item"><a class="nav-link" href="articles.php">Articles</a></li>
 
                     
-                    <li class="nav-item dropdown">
+                    <!-- <li class="nav-item dropdown">
                         <a class="nav-link" id="settingDropdown">Setting</a>
                         <ul class="dropdown-menu" id="settingMenu">
                             <li><a class="dropdown-item" href="oscord_instructorControlLogin.php">Instructor</a></li>
                             <li><a class="dropdown-item" href="oscord_studentControlLogin.php">Student</a></li>
                         </ul>
-                    </li>
+                    </li> -->
                     <li class="nav-item"><a class="nav-link" href="oscord_signUpPage.php">Register</a></li>
                 </ul>
 
@@ -174,11 +174,11 @@
                         <a href="oscord_batch.php">Group Class Info</a>
                         <a href="articles.php">Articles</a>
 
-                        <button id="settingToggle" class="accordion-toggle">Settting <span class="accordion-chevron">▶</span></button>
+                        <!-- <button id="settingToggle" class="accordion-toggle">Settting <span class="accordion-chevron">▶</span></button>
                         <div id="settingPanel" class="accordion-panel">
                             <a href="oscord_instructorControlLogin.php">Instructor</a>
                             <a href="oscord_studentControlLogin.php">Student</a>
-                        </div>
+                        </div> -->
             
                         <a href="oscord_signUpPage.php">Register</a>
                     </nav>
